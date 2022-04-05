@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 #define ONLINE_JUDGE "online_judge";
 
@@ -8,11 +9,11 @@
 const u_int MAX_SYMBOLS_COUNT = 10001;
 const u_int MAX_LINES_COUNT = 10001;
 
-void initializeParagraph (t_line *, u_int *);
-void readInputParagraph (t_line *, u_int *, u_int *);
-void trimTrailingEndings (const u_int *, u_int *);
-void printTextAsIs (t_line *, const u_int *, const u_int *);
-void rotateAndPrintResult (t_line *, const u_int *, const u_int *);
+void initializeParagraph (t_line *);
+void readInputParagraph (t_line *, u_int *);
+void trimTrailingEndings (t_line *, u_int *);
+void printTextAsIs (t_line *, const u_int *);
+void rotateAndPrintResult (t_line *, const u_int *);
 
 int main()
 {
@@ -22,29 +23,27 @@ int main()
 #endif
 
     t_line input[MAX_LINES_COUNT];
-    u_int symbolsInLine [MAX_SYMBOLS_COUNT];
     u_int linesCount = -1;
 
-    initializeParagraph(input, symbolsInLine);  
-    readInputParagraph(input, symbolsInLine, &linesCount);
-    trimTrailingEndings(symbolsInLine, &linesCount);
+    initializeParagraph(input);  
+    readInputParagraph(input, &linesCount);
+    trimTrailingEndings(input, &linesCount);
 
-    //printTextAsIs(input, symbolsInLine, &linesCount);
+    //printTextAsIs(input, &linesCount);
 
-    rotateAndPrintResult(input, symbolsInLine, &linesCount);
+    rotateAndPrintResult(input, &linesCount);
 }
 
-void initializeParagraph (t_line * text, u_int * symbolsInLine)
+void initializeParagraph (t_line * text)
 {
     for (u_int i = 0; i < MAX_LINES_COUNT; i++)
     {
         text[i] = new char[MAX_SYMBOLS_COUNT];
         text[i][0] = '\0';
-        symbolsInLine[i] = 0;
     }
 }
 
-void readInputParagraph (t_line * text, u_int * symbolsInLine, u_int * linesCount)
+void readInputParagraph (t_line * text, u_int * linesCount)
 {
     (*linesCount) = 0;
     
@@ -60,7 +59,6 @@ void readInputParagraph (t_line * text, u_int * symbolsInLine, u_int * linesCoun
         if (currentSymbol == '\n')
         {
             text[currentLineIndex][currentLineLength] = '\0';
-            symbolsInLine[currentLineIndex] = currentLineLength;
 
             currentLineIndex++;
             currentLineLength = 0;
@@ -70,15 +68,14 @@ void readInputParagraph (t_line * text, u_int * symbolsInLine, u_int * linesCoun
 
         currentLineLength++;
         text[currentLineIndex][currentLineLength - 1] = currentSymbol;
-        symbolsInLine[currentLineIndex] = currentLineLength;
     }
 }
 
-void trimTrailingEndings (const u_int * symbolsInLine, u_int * linesCount)
+void trimTrailingEndings (t_line * text, u_int * linesCount)
 {
     for (u_int i = (*linesCount) - 1; i >= 0; i--)
     {
-        if (symbolsInLine[i] == 0)
+        if (strlen(text[i]) == 0)
         {
             (*linesCount) = i;
         }
@@ -89,11 +86,12 @@ void trimTrailingEndings (const u_int * symbolsInLine, u_int * linesCount)
     }
 }
 
-void printTextAsIs (t_line * text, const u_int * symbolsInLine, const u_int * linesCount)
+void printTextAsIs (t_line * text, const u_int * linesCount)
 {
     for (u_int i = 0; i < (*linesCount); i++)
     {
-        for (u_int j = 0; j < symbolsInLine[i]; j++)
+        u_int currentLineLength = strlen(text[i]);
+        for (u_int j = 0; j < currentLineLength; j++)
         {
             printf("%c", text[i][j]);   
         }
@@ -101,14 +99,15 @@ void printTextAsIs (t_line * text, const u_int * symbolsInLine, const u_int * li
     }
 }
 
-void rotateAndPrintResult (t_line * text, const u_int * symbolsInLine, const u_int * linesCount)
+void rotateAndPrintResult (t_line * text, const u_int * linesCount)
 {
     u_int maxLineLength = 0;
     for (u_int i = 0; i < (*linesCount); i++)
     {
-        if (maxLineLength < symbolsInLine[i])
+        u_int currentLineLength = strlen(text[i]);
+        if (maxLineLength < currentLineLength)
         {
-            maxLineLength = symbolsInLine[i];
+            maxLineLength = currentLineLength;
         }
     }
 
@@ -116,7 +115,7 @@ void rotateAndPrintResult (t_line * text, const u_int * symbolsInLine, const u_i
     {
         for (int lineIndex = (*linesCount) - 1; lineIndex >= 0; lineIndex--)
         {
-            if (symbolIndex < symbolsInLine[lineIndex])
+            if (symbolIndex < strlen(text[lineIndex]))
             {
                 printf("%c", text[lineIndex][symbolIndex]);
             }
