@@ -143,23 +143,54 @@ void omitLineEnding ()
 t_gridPosition searchWordInGrid (char * wordsGrid [g_MAX_WORD_LENGTH], u_int & rows, u_int & columns, const char * word)
 {
     t_gridPosition gridPosition (g_MAX_WORD_LENGTH + 1, g_MAX_WORD_LENGTH + 1), bufGridPosition(g_MAX_WORD_LENGTH + 1, g_MAX_WORD_LENGTH + 1);
-    bool matched = false;
  
     //lines left to right...
-    matched = searchLinesLeftToRight(wordsGrid, rows, columns, word, bufGridPosition);
-    if (matched)
+    if (searchLinesLeftToRight(wordsGrid, rows, columns, word, bufGridPosition))
+    {
+        compareAndUpdateClosestGridPosition(gridPosition, bufGridPosition);
+    }
+
+    //lines right to left...
+    if (searchLinesRightToLeft(wordsGrid, rows, columns, word, bufGridPosition))
     {
         compareAndUpdateClosestGridPosition(gridPosition, bufGridPosition);
     }
     
     //columns top to bottom...
-    matched = searchColumnsTopToBottom(wordsGrid, rows, columns, word, bufGridPosition);
-    if (matched)
+    if (searchColumnsTopToBottom(wordsGrid, rows, columns, word, bufGridPosition))
     {
         compareAndUpdateClosestGridPosition(gridPosition, bufGridPosition);
     }
 
-    //TODO: check other 6 directions in the grid...
+    //columns bottom to top...
+    if (searchColumnsBottomToTop(wordsGrid, rows, columns, word, bufGridPosition))
+    {
+        compareAndUpdateClosestGridPosition(gridPosition, bufGridPosition);
+    }
+
+    //primary diagonals
+    if (searchPrimaryDiagonals(wordsGrid, rows, columns, word, bufGridPosition))
+    {
+        compareAndUpdateClosestGridPosition(gridPosition, bufGridPosition);
+    }
+
+    //primary diagonals reversed
+    if (searchPrimaryDiagonalsReversed(wordsGrid, rows, columns, word, bufGridPosition))
+    {
+        compareAndUpdateClosestGridPosition(gridPosition, bufGridPosition);
+    }
+
+    //secondary diagonals
+    if (searchSecondaryDiagonals(wordsGrid, rows, columns, word, bufGridPosition))
+    {
+        compareAndUpdateClosestGridPosition(gridPosition, bufGridPosition);
+    }
+
+    //secondary diagonals reversed
+    if (searchSecondaryDiagonalsReversed(wordsGrid, rows, columns, word, bufGridPosition))
+    {
+        compareAndUpdateClosestGridPosition(gridPosition, bufGridPosition);
+    }
 
     return gridPosition;
 }
