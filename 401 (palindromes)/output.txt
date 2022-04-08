@@ -1,58 +1,58 @@
-AGA is not a palindrome.
+AGA is a regular palindrome.
 
 NOTAPALINDROME is not a palindrome.
 
-333 is not a palindrome.
+333 is a regular palindrome.
 
-ISAPALINILAPASI is not a palindrome.
+ISAPALINILAPASI is a regular palindrome.
 
 A3MEA is not a palindrome.
 
-8 is not a palindrome.
+8 is a regular palindrome.
 
-C is not a palindrome.
+C is a regular palindrome.
 
-ATOYOTA is not a palindrome.
+ATOYOTA is a regular palindrome.
 
-MADAMIMADAM is not a palindrome.
+MADAMIMADAM is a regular palindrome.
 
 STEPHENFAUSTIN is not a palindrome.
 
 MCNEESE is not a palindrome.
 
-MCNEESEESEENCM is not a palindrome.
+MCNEESEESEENCM is a regular palindrome.
 
 2SS22S is not a palindrome.
 
-ABCDEFGHIJJIHGFEDCBA is not a palindrome.
+ABCDEFGHIJJIHGFEDCBA is a regular palindrome.
 
-ABCDEFGHIJIHGFEDCBA is not a palindrome.
+ABCDEFGHIJIHGFEDCBA is a regular palindrome.
 
 NOTAPALINDROME is not a palindrome.
 
-ISAPALINILAPASI is not a palindrome.
+ISAPALINILAPASI is a regular palindrome.
 
 A3MEA is not a palindrome.
 
-8 is not a palindrome.
+8 is a regular palindrome.
 
-C is not a palindrome.
+C is a regular palindrome.
 
-ATOYOTA is not a palindrome.
+ATOYOTA is a regular palindrome.
 
-MADAMIMADAM is not a palindrome.
+MADAMIMADAM is a regular palindrome.
 
 STEPHENFAUSTIN is not a palindrome.
 
 MCNEESE is not a palindrome.
 
-MCNEESEESEENCM is not a palindrome.
+MCNEESEESEENCM is a regular palindrome.
 
 2SS22S is not a palindrome.
 
-ABCDEFGHIJJIHGFEDCBA is not a palindrome.
+ABCDEFGHIJJIHGFEDCBA is a regular palindrome.
 
-ABCDEFGHIJIHGFEDCBA is not a palindrome.
+ABCDEFGHIJIHGFEDCBA is a regular palindrome.
 
 558EUZJELA is not a palindrome.
 
@@ -66,7 +66,7 @@ UJ1ETAIV2EM8Z8HA is not a palindrome.
 
 HHZIX1MH8USW15E is not a palindrome.
 
-WE is not a palindrome.
+WE is a regular palindrome.
 
 UJ1MIEL5EM2SM3HOS2 is not a palindrome.
 
@@ -100,7 +100,7 @@ WOHLZVVJT3LLEO3V2Z1 is not a palindrome.
 
 V5S3 is not a palindrome.
 
-EU is not a palindrome.
+EU is a regular palindrome.
 
 IUHZZJ5 is not a palindrome.
 
@@ -124,7 +124,7 @@ V8MOAOALJMTT is not a palindrome.
 
 1OLU2VJJ3MWI is not a palindrome.
 
-MA is not a palindrome.
+MA is a regular palindrome.
 
 M12MAIJOITT is not a palindrome.
 
@@ -194,7 +194,7 @@ EZ2L8IEL is not a palindrome.
 
 31LYO is not a palindrome.
 
-XH is not a palindrome.
+XH is a regular palindrome.
 
 3822L1VIAJYTE is not a palindrome.
 
@@ -208,7 +208,7 @@ UYJHZA8AZ8VL1ATL1 is not a palindrome.
 
 UWSZET3EH is not a palindrome.
 
-OX is not a palindrome.
+OX is a regular palindrome.
 
 2LU28S23HY is not a palindrome.
 
@@ -218,11 +218,11 @@ MUOXXAVH is not a palindrome.
 
 AWJ5X1J5LVV2U8583YVE is not a palindrome.
 
-H is not a palindrome.
+H is a regular palindrome.
 
 Z8I is not a palindrome.
 
-UL is not a palindrome.
+UL is a regular palindrome.
 
 3LH8EX1JT5Z5 is not a palindrome.
 
@@ -240,7 +240,7 @@ LHAIY2XMLLSTMJ is not a palindrome.
 
 OS12VU is not a palindrome.
 
-T is not a palindrome.
+T is a regular palindrome.
 
 Y5WZ5 is not a palindrome.
 
@@ -266,7 +266,7 @@ V5HH8UEUUWL81ZYYYV is not a palindrome.
 
 HYLVOUS1SMUOZMT2 is not a palindrome.
 
-25 is not a palindrome.
+25 is a regular palindrome.
 
 MU3IIU32 is not a palindrome.
 
@@ -284,7 +284,7 @@ Z35IMEEX2HMMM is not a palindrome.
 
 V85H12JVJLOOW1OEXA5W is not a palindrome.
 
-JV is not a palindrome.
+JV is a regular palindrome.
 
 1OJ8XS5ISZ is not a palindrome.
 
@@ -304,9 +304,9 @@ WTT25OMWMSXAXHW8W is not a palindrome.
 
 X12 is not a palindrome.
 
-W is not a palindrome.
+W is a regular palindrome.
 
-5Y is not a palindrome.
+5Y is a regular palindrome.
 
 SHLHAWMW1YI2JLMJZ1 is not a palindrome.
 
@@ -334,7 +334,7 @@ LET5A31HI5VA1VH is not a palindrome.
 
 5IWULSIM1MJXYI is not a palindrome.
 
-3 is not a palindrome.
+3 is a regular palindrome.
 
 3YEZUE is not a palindrome.
 
@@ -342,7 +342,7 @@ SV1IE5 is not a palindrome.
 
 383SJITU5ZWUO is not a palindrome.
 
-5H is not a palindrome.
+5H is a regular palindrome.
 
 11ZSL2LVL5ZM25IYYT3 is not a palindrome.
 
@@ -400,13 +400,13 @@ MIIXI is not a palindrome.
 
 ZJL2 is not a palindrome.
 
-52 is not a palindrome.
+52 is a regular palindrome.
 
-VX is not a palindrome.
+VX is a regular palindrome.
 
 XZETYIY5ZVMVEM2 is not a palindrome.
 
-O is not a palindrome.
+O is a regular palindrome.
 
 IWHL12ZWVVHJAX is not a palindrome.
 
@@ -416,7 +416,7 @@ MYTHS5Y2513WW1V is not a palindrome.
 
 2JIVO is not a palindrome.
 
-ZW is not a palindrome.
+ZW is a regular palindrome.
 
 Y2YAJOM11TJWAAUY is not a palindrome.
 
@@ -430,11 +430,11 @@ HM2L2E8TVOILAIUOTI is not a palindrome.
 
 OSZ15E5JAEWOTZS is not a palindrome.
 
-A is not a palindrome.
+A is a regular palindrome.
 
 5M8LIE1 is not a palindrome.
 
-X is not a palindrome.
+X is a regular palindrome.
 
 H8HTOZIIZEOXE5 is not a palindrome.
 
@@ -454,19 +454,19 @@ SLTWT58H5O82YOV52Y is not a palindrome.
 
 XLY31JMJXMU is not a palindrome.
 
-2 is not a palindrome.
+2 is a regular palindrome.
 
 225581 is not a palindrome.
 
-8 is not a palindrome.
+8 is a regular palindrome.
 
-Z2 is not a palindrome.
+Z2 is a regular palindrome.
 
 Z228Z8 is not a palindrome.
 
 3812112 is not a palindrome.
 
-53 is not a palindrome.
+53 is a regular palindrome.
 
 3A8A is not a palindrome.
 
@@ -474,13 +474,13 @@ Z228Z8 is not a palindrome.
 
 2883 is not a palindrome.
 
-1 is not a palindrome.
+1 is a regular palindrome.
 
 AZA3 is not a palindrome.
 
-25 is not a palindrome.
+25 is a regular palindrome.
 
-21 is not a palindrome.
+21 is a regular palindrome.
 
 1883 is not a palindrome.
 
@@ -490,23 +490,23 @@ AZA3 is not a palindrome.
 
 8Z1 is not a palindrome.
 
-3 is not a palindrome.
+3 is a regular palindrome.
 
-Z1 is not a palindrome.
+Z1 is a regular palindrome.
 
-1 is not a palindrome.
+1 is a regular palindrome.
 
 23Z is not a palindrome.
 
-8 is not a palindrome.
+8 is a regular palindrome.
 
 22Z5A is not a palindrome.
 
-A is not a palindrome.
+A is a regular palindrome.
 
 AZ82A82 is not a palindrome.
 
-8Z8 is not a palindrome.
+8Z8 is a regular palindrome.
 
 A88111 is not a palindrome.
 
@@ -516,13 +516,13 @@ A31A2 is not a palindrome.
 
 8A3A is not a palindrome.
 
-A is not a palindrome.
+A is a regular palindrome.
 
-3 is not a palindrome.
+3 is a regular palindrome.
 
 3232AA2 is not a palindrome.
 
-2 is not a palindrome.
+2 is a regular palindrome.
 
 Z588 is not a palindrome.
 
@@ -530,29 +530,29 @@ Z588 is not a palindrome.
 
 5182A3 is not a palindrome.
 
-58 is not a palindrome.
+58 is a regular palindrome.
 
 1A23AZ5 is not a palindrome.
 
-3Z is not a palindrome.
+3Z is a regular palindrome.
 
 288 is not a palindrome.
 
 Z3A2A3 is not a palindrome.
 
-1 is not a palindrome.
+1 is a regular palindrome.
 
-2Z is not a palindrome.
+2Z is a regular palindrome.
 
 181Z is not a palindrome.
 
-2 is not a palindrome.
+2 is a regular palindrome.
 
 1Z3A is not a palindrome.
 
 AA2 is not a palindrome.
 
-81 is not a palindrome.
+81 is a regular palindrome.
 
 53583A8 is not a palindrome.
 
@@ -562,9 +562,9 @@ ZA3322 is not a palindrome.
 
 Z11 is not a palindrome.
 
-15 is not a palindrome.
+15 is a regular palindrome.
 
-8 is not a palindrome.
+8 is a regular palindrome.
 
 83Z1Z81 is not a palindrome.
 
@@ -578,11 +578,11 @@ AA333 is not a palindrome.
 
 883 is not a palindrome.
 
-25 is not a palindrome.
+25 is a regular palindrome.
 
 28115Z is not a palindrome.
 
-8 is not a palindrome.
+8 is a regular palindrome.
 
 AA8 is not a palindrome.
 
@@ -590,7 +590,7 @@ AA8 is not a palindrome.
 
 A8122 is not a palindrome.
 
-5 is not a palindrome.
+5 is a regular palindrome.
 
 8A1A is not a palindrome.
 
@@ -606,27 +606,27 @@ Z2851Z is not a palindrome.
 
 AZZZZ1 is not a palindrome.
 
-5 is not a palindrome.
+5 is a regular palindrome.
 
 2Z5511 is not a palindrome.
 
-35 is not a palindrome.
+35 is a regular palindrome.
 
-A is not a palindrome.
+A is a regular palindrome.
 
 851A1Z5 is not a palindrome.
 
-1Z1 is not a palindrome.
+1Z1 is a regular palindrome.
 
-A1 is not a palindrome.
+A1 is a regular palindrome.
 
 1185 is not a palindrome.
 
 A31Z8 is not a palindrome.
 
-53 is not a palindrome.
+53 is a regular palindrome.
 
-51 is not a palindrome.
+51 is a regular palindrome.
 
 33538Z is not a palindrome.
 
@@ -640,23 +640,23 @@ A31Z8 is not a palindrome.
 
 118 is not a palindrome.
 
-Z2 is not a palindrome.
+Z2 is a regular palindrome.
 
 1Z51152 is not a palindrome.
 
-313 is not a palindrome.
+313 is a regular palindrome.
 
 2Z52AA8 is not a palindrome.
 
 A8Z212 is not a palindrome.
 
-Z is not a palindrome.
+Z is a regular palindrome.
 
 35552A is not a palindrome.
 
 8Z8ZZZ is not a palindrome.
 
-32 is not a palindrome.
+32 is a regular palindrome.
 
 8235Z32 is not a palindrome.
 
@@ -682,7 +682,7 @@ A323 is not a palindrome.
 
 3A1 is not a palindrome.
 
-A is not a palindrome.
+A is a regular palindrome.
 
 81531AA is not a palindrome.
 
@@ -702,7 +702,7 @@ Z82518 is not a palindrome.
 
 815 is not a palindrome.
 
-3 is not a palindrome.
+3 is a regular palindrome.
 
 822 is not a palindrome.
 
@@ -722,15 +722,15 @@ A183321 is not a palindrome.
 
 83AAZ is not a palindrome.
 
-AZ is not a palindrome.
+AZ is a regular palindrome.
 
-1381 is not a palindrome.
+1381 is a regular palindrome.
 
-A is not a palindrome.
+A is a regular palindrome.
 
 831AAA is not a palindrome.
 
-1 is not a palindrome.
+1 is a regular palindrome.
 
 3325A83 is not a palindrome.
 
@@ -742,7 +742,7 @@ Z31Z1AA is not a palindrome.
 
 1853 is not a palindrome.
 
-2 is not a palindrome.
+2 is a regular palindrome.
 
 3811Z is not a palindrome.
 
@@ -754,13 +754,13 @@ A1A1183 is not a palindrome.
 
 5831 is not a palindrome.
 
-8Z28 is not a palindrome.
+8Z28 is a regular palindrome.
 
-A is not a palindrome.
+A is a regular palindrome.
 
 518Z is not a palindrome.
 
-151 is not a palindrome.
+151 is a regular palindrome.
 
 533 is not a palindrome.
 
@@ -770,9 +770,9 @@ A is not a palindrome.
 
 2581Z5 is not a palindrome.
 
-2A is not a palindrome.
+2A is a regular palindrome.
 
-3 is not a palindrome.
+3 is a regular palindrome.
 
 283 is not a palindrome.
 
@@ -788,17 +788,17 @@ A is not a palindrome.
 
 58ZA85Z is not a palindrome.
 
-22 is not a palindrome.
+22 is a regular palindrome.
 
 358 is not a palindrome.
 
-18 is not a palindrome.
+18 is a regular palindrome.
 
 8AAA is not a palindrome.
 
-2 is not a palindrome.
+2 is a regular palindrome.
 
-1 is not a palindrome.
+1 is a regular palindrome.
 
 A533ZZ is not a palindrome.
 
@@ -806,7 +806,7 @@ ZA3A8A is not a palindrome.
 
 Z1A5 is not a palindrome.
 
-12 is not a palindrome.
+12 is a regular palindrome.
 
 Z21AZ is not a palindrome.
 
@@ -830,13 +830,13 @@ A133 is not a palindrome.
 
 181AZ3 is not a palindrome.
 
-8 is not a palindrome.
+8 is a regular palindrome.
 
 AZ8AAZZ is not a palindrome.
 
 A58Z is not a palindrome.
 
-3 is not a palindrome.
+3 is a regular palindrome.
 
 A58223Z is not a palindrome.
 
@@ -850,23 +850,23 @@ Z81A is not a palindrome.
 
 Z5A2321 is not a palindrome.
 
-3A83 is not a palindrome.
+3A83 is a regular palindrome.
 
-8 is not a palindrome.
+8 is a regular palindrome.
 
-2 is not a palindrome.
+2 is a regular palindrome.
 
 225581 is not a palindrome.
 
-8 is not a palindrome.
+8 is a regular palindrome.
 
-Z2 is not a palindrome.
+Z2 is a regular palindrome.
 
 Z228Z8 is not a palindrome.
 
 3812112 is not a palindrome.
 
-53 is not a palindrome.
+53 is a regular palindrome.
 
 3A8A is not a palindrome.
 
@@ -874,13 +874,13 @@ Z228Z8 is not a palindrome.
 
 2883 is not a palindrome.
 
-1 is not a palindrome.
+1 is a regular palindrome.
 
 AZA3 is not a palindrome.
 
-25 is not a palindrome.
+25 is a regular palindrome.
 
-21 is not a palindrome.
+21 is a regular palindrome.
 
 1883 is not a palindrome.
 
@@ -890,23 +890,23 @@ AZA3 is not a palindrome.
 
 8Z1 is not a palindrome.
 
-3 is not a palindrome.
+3 is a regular palindrome.
 
-Z1 is not a palindrome.
+Z1 is a regular palindrome.
 
-1 is not a palindrome.
+1 is a regular palindrome.
 
 23Z is not a palindrome.
 
-8 is not a palindrome.
+8 is a regular palindrome.
 
 22Z5A is not a palindrome.
 
-A is not a palindrome.
+A is a regular palindrome.
 
 AZ82A82 is not a palindrome.
 
-8Z8 is not a palindrome.
+8Z8 is a regular palindrome.
 
 A88111 is not a palindrome.
 
@@ -916,13 +916,13 @@ A31A2 is not a palindrome.
 
 8A3A is not a palindrome.
 
-A is not a palindrome.
+A is a regular palindrome.
 
-3 is not a palindrome.
+3 is a regular palindrome.
 
 3232AA2 is not a palindrome.
 
-2 is not a palindrome.
+2 is a regular palindrome.
 
 Z588 is not a palindrome.
 
@@ -930,29 +930,29 @@ Z588 is not a palindrome.
 
 5182A3 is not a palindrome.
 
-58 is not a palindrome.
+58 is a regular palindrome.
 
 1A23AZ5 is not a palindrome.
 
-3Z is not a palindrome.
+3Z is a regular palindrome.
 
 288 is not a palindrome.
 
 Z3A2A3 is not a palindrome.
 
-1 is not a palindrome.
+1 is a regular palindrome.
 
-2Z is not a palindrome.
+2Z is a regular palindrome.
 
 181Z is not a palindrome.
 
-2 is not a palindrome.
+2 is a regular palindrome.
 
 1Z3A is not a palindrome.
 
 AA2 is not a palindrome.
 
-81 is not a palindrome.
+81 is a regular palindrome.
 
 53583A8 is not a palindrome.
 
@@ -962,9 +962,9 @@ ZA3322 is not a palindrome.
 
 Z11 is not a palindrome.
 
-15 is not a palindrome.
+15 is a regular palindrome.
 
-8 is not a palindrome.
+8 is a regular palindrome.
 
 83Z1Z81 is not a palindrome.
 
@@ -978,11 +978,11 @@ AA333 is not a palindrome.
 
 883 is not a palindrome.
 
-25 is not a palindrome.
+25 is a regular palindrome.
 
 28115Z is not a palindrome.
 
-8 is not a palindrome.
+8 is a regular palindrome.
 
 AA8 is not a palindrome.
 
@@ -990,7 +990,7 @@ AA8 is not a palindrome.
 
 A8122 is not a palindrome.
 
-5 is not a palindrome.
+5 is a regular palindrome.
 
 8A1A is not a palindrome.
 
@@ -1006,27 +1006,27 @@ Z2851Z is not a palindrome.
 
 AZZZZ1 is not a palindrome.
 
-5 is not a palindrome.
+5 is a regular palindrome.
 
 2Z5511 is not a palindrome.
 
-35 is not a palindrome.
+35 is a regular palindrome.
 
-A is not a palindrome.
+A is a regular palindrome.
 
 851A1Z5 is not a palindrome.
 
-1Z1 is not a palindrome.
+1Z1 is a regular palindrome.
 
-A1 is not a palindrome.
+A1 is a regular palindrome.
 
 1185 is not a palindrome.
 
 A31Z8 is not a palindrome.
 
-53 is not a palindrome.
+53 is a regular palindrome.
 
-51 is not a palindrome.
+51 is a regular palindrome.
 
 33538Z is not a palindrome.
 
@@ -1040,23 +1040,23 @@ A31Z8 is not a palindrome.
 
 118 is not a palindrome.
 
-Z2 is not a palindrome.
+Z2 is a regular palindrome.
 
 1Z51152 is not a palindrome.
 
-313 is not a palindrome.
+313 is a regular palindrome.
 
 2Z52AA8 is not a palindrome.
 
 A8Z212 is not a palindrome.
 
-Z is not a palindrome.
+Z is a regular palindrome.
 
 35552A is not a palindrome.
 
 8Z8ZZZ is not a palindrome.
 
-32 is not a palindrome.
+32 is a regular palindrome.
 
 8235Z32 is not a palindrome.
 
@@ -1082,7 +1082,7 @@ A323 is not a palindrome.
 
 3A1 is not a palindrome.
 
-A is not a palindrome.
+A is a regular palindrome.
 
 81531AA is not a palindrome.
 
@@ -1102,7 +1102,7 @@ Z82518 is not a palindrome.
 
 815 is not a palindrome.
 
-3 is not a palindrome.
+3 is a regular palindrome.
 
 822 is not a palindrome.
 
@@ -1122,15 +1122,15 @@ A183321 is not a palindrome.
 
 83AAZ is not a palindrome.
 
-AZ is not a palindrome.
+AZ is a regular palindrome.
 
-1381 is not a palindrome.
+1381 is a regular palindrome.
 
-A is not a palindrome.
+A is a regular palindrome.
 
 831AAA is not a palindrome.
 
-1 is not a palindrome.
+1 is a regular palindrome.
 
 3325A83 is not a palindrome.
 
@@ -1142,7 +1142,7 @@ Z31Z1AA is not a palindrome.
 
 1853 is not a palindrome.
 
-2 is not a palindrome.
+2 is a regular palindrome.
 
 3811Z is not a palindrome.
 
@@ -1154,13 +1154,13 @@ A1A1183 is not a palindrome.
 
 5831 is not a palindrome.
 
-8Z28 is not a palindrome.
+8Z28 is a regular palindrome.
 
-A is not a palindrome.
+A is a regular palindrome.
 
 518Z is not a palindrome.
 
-151 is not a palindrome.
+151 is a regular palindrome.
 
 533 is not a palindrome.
 
@@ -1170,9 +1170,9 @@ A is not a palindrome.
 
 2581Z5 is not a palindrome.
 
-2A is not a palindrome.
+2A is a regular palindrome.
 
-3 is not a palindrome.
+3 is a regular palindrome.
 
 283 is not a palindrome.
 
@@ -1188,17 +1188,17 @@ A is not a palindrome.
 
 58ZA85Z is not a palindrome.
 
-22 is not a palindrome.
+22 is a regular palindrome.
 
 358 is not a palindrome.
 
-18 is not a palindrome.
+18 is a regular palindrome.
 
 8AAA is not a palindrome.
 
-2 is not a palindrome.
+2 is a regular palindrome.
 
-1 is not a palindrome.
+1 is a regular palindrome.
 
 A533ZZ is not a palindrome.
 
@@ -1206,7 +1206,7 @@ ZA3A8A is not a palindrome.
 
 Z1A5 is not a palindrome.
 
-12 is not a palindrome.
+12 is a regular palindrome.
 
 Z21AZ is not a palindrome.
 
@@ -1230,13 +1230,13 @@ A133 is not a palindrome.
 
 181AZ3 is not a palindrome.
 
-8 is not a palindrome.
+8 is a regular palindrome.
 
 AZ8AAZZ is not a palindrome.
 
 A58Z is not a palindrome.
 
-3 is not a palindrome.
+3 is a regular palindrome.
 
 A58223Z is not a palindrome.
 
@@ -1250,97 +1250,97 @@ Z81A is not a palindrome.
 
 Z5A2321 is not a palindrome.
 
-3A83 is not a palindrome.
+3A83 is a regular palindrome.
 
-8 is not a palindrome.
+8 is a regular palindrome.
 
-A is not a palindrome.
+A is a regular palindrome.
 
-2A is not a palindrome.
+2A is a regular palindrome.
 
 113Z is not a palindrome.
 
-1 is not a palindrome.
+1 is a regular palindrome.
 
-A is not a palindrome.
+A is a regular palindrome.
 
 32A1 is not a palindrome.
 
-8Z is not a palindrome.
+8Z is a regular palindrome.
 
-1551 is not a palindrome.
+1551 is a regular palindrome.
 
-2 is not a palindrome.
+2 is a regular palindrome.
 
-33 is not a palindrome.
+33 is a regular palindrome.
 
-25 is not a palindrome.
+25 is a regular palindrome.
 
 88A is not a palindrome.
 
 A53 is not a palindrome.
 
-51 is not a palindrome.
+51 is a regular palindrome.
 
-8A is not a palindrome.
+8A is a regular palindrome.
 
 1AA2 is not a palindrome.
 
-2 is not a palindrome.
+2 is a regular palindrome.
 
-13 is not a palindrome.
+13 is a regular palindrome.
 
-1151 is not a palindrome.
+1151 is a regular palindrome.
 
 3ZA is not a palindrome.
 
-Z1Z is not a palindrome.
+Z1Z is a regular palindrome.
 
-32 is not a palindrome.
+32 is a regular palindrome.
 
-3 is not a palindrome.
+3 is a regular palindrome.
 
 31Z is not a palindrome.
 
-A8 is not a palindrome.
+A8 is a regular palindrome.
 
 AA2 is not a palindrome.
 
 385 is not a palindrome.
 
-5Z is not a palindrome.
+5Z is a regular palindrome.
 
-A is not a palindrome.
+A is a regular palindrome.
 
-8 is not a palindrome.
+8 is a regular palindrome.
 
-88 is not a palindrome.
+88 is a regular palindrome.
 
-3 is not a palindrome.
+3 is a regular palindrome.
 
 23A5 is not a palindrome.
 
-2382 is not a palindrome.
+2382 is a regular palindrome.
 
 A3Z2 is not a palindrome.
 
-8 is not a palindrome.
+8 is a regular palindrome.
 
-2 is not a palindrome.
+2 is a regular palindrome.
 
-83 is not a palindrome.
+83 is a regular palindrome.
 
-81 is not a palindrome.
+81 is a regular palindrome.
 
-5 is not a palindrome.
+5 is a regular palindrome.
 
 8532 is not a palindrome.
 
-Z2AZ is not a palindrome.
+Z2AZ is a regular palindrome.
 
-28 is not a palindrome.
+28 is a regular palindrome.
 
-18 is not a palindrome.
+18 is a regular palindrome.
 
 32ZZ is not a palindrome.
 
@@ -1348,71 +1348,71 @@ Z2AZ is not a palindrome.
 
 5A2 is not a palindrome.
 
-A1 is not a palindrome.
+A1 is a regular palindrome.
 
 322 is not a palindrome.
 
-515 is not a palindrome.
+515 is a regular palindrome.
 
 238 is not a palindrome.
 
-11 is not a palindrome.
+11 is a regular palindrome.
 
-2 is not a palindrome.
+2 is a regular palindrome.
 
-85 is not a palindrome.
+85 is a regular palindrome.
 
 A812 is not a palindrome.
 
 A35Z is not a palindrome.
 
-35 is not a palindrome.
+35 is a regular palindrome.
 
 813 is not a palindrome.
 
-8 is not a palindrome.
+8 is a regular palindrome.
 
-1Z is not a palindrome.
+1Z is a regular palindrome.
 
-52 is not a palindrome.
+52 is a regular palindrome.
 
 8882 is not a palindrome.
 
-Z2ZZ is not a palindrome.
+Z2ZZ is a regular palindrome.
 
-ZZZ is not a palindrome.
+ZZZ is a regular palindrome.
 
-A3 is not a palindrome.
+A3 is a regular palindrome.
 
-8 is not a palindrome.
+8 is a regular palindrome.
 
 88A is not a palindrome.
 
-2 is not a palindrome.
+2 is a regular palindrome.
 
 A5Z is not a palindrome.
 
 88A3 is not a palindrome.
 
-3 is not a palindrome.
+3 is a regular palindrome.
 
-3 is not a palindrome.
+3 is a regular palindrome.
 
-85 is not a palindrome.
+85 is a regular palindrome.
 
-A is not a palindrome.
+A is a regular palindrome.
 
 1558 is not a palindrome.
 
 113 is not a palindrome.
 
-1 is not a palindrome.
+1 is a regular palindrome.
 
-5A5 is not a palindrome.
+5A5 is a regular palindrome.
 
-ZZ is not a palindrome.
+ZZ is a regular palindrome.
 
-A1 is not a palindrome.
+A1 is a regular palindrome.
 
 231 is not a palindrome.
 
@@ -1420,79 +1420,79 @@ A1 is not a palindrome.
 
 8ZZ3 is not a palindrome.
 
-5 is not a palindrome.
+5 is a regular palindrome.
 
 ZZ1 is not a palindrome.
 
-2 is not a palindrome.
+2 is a regular palindrome.
 
 22A is not a palindrome.
 
-2A2 is not a palindrome.
+2A2 is a regular palindrome.
 
-1 is not a palindrome.
+1 is a regular palindrome.
 
 53A is not a palindrome.
 
-88 is not a palindrome.
+88 is a regular palindrome.
 
 2821 is not a palindrome.
 
 AA1 is not a palindrome.
 
-Z is not a palindrome.
+Z is a regular palindrome.
 
-82 is not a palindrome.
+82 is a regular palindrome.
 
-Z is not a palindrome.
+Z is a regular palindrome.
 
 52A is not a palindrome.
 
 315Z is not a palindrome.
 
-A is not a palindrome.
+A is a regular palindrome.
 
-5 is not a palindrome.
+5 is a regular palindrome.
 
-858 is not a palindrome.
+858 is a regular palindrome.
 
 ZZ8 is not a palindrome.
 
-8 is not a palindrome.
+8 is a regular palindrome.
 
-AZ is not a palindrome.
+AZ is a regular palindrome.
 
 51A3 is not a palindrome.
 
-5 is not a palindrome.
+5 is a regular palindrome.
 
 A121 is not a palindrome.
 
-3A3 is not a palindrome.
+3A3 is a regular palindrome.
 
 21A1 is not a palindrome.
 
-5 is not a palindrome.
+5 is a regular palindrome.
 
-A is not a palindrome.
+A is a regular palindrome.
 
 281 is not a palindrome.
 
-53 is not a palindrome.
+53 is a regular palindrome.
 
 A3Z is not a palindrome.
 
-ZA is not a palindrome.
+ZA is a regular palindrome.
 
 Z2A is not a palindrome.
 
-5 is not a palindrome.
+5 is a regular palindrome.
 
-Z8Z is not a palindrome.
+Z8Z is a regular palindrome.
 
-AZA is not a palindrome.
+AZA is a regular palindrome.
 
-2 is not a palindrome.
+2 is a regular palindrome.
 
 83A is not a palindrome.
 
@@ -1506,13 +1506,13 @@ AZA is not a palindrome.
 
 188Z is not a palindrome.
 
-81 is not a palindrome.
+81 is a regular palindrome.
 
-1A is not a palindrome.
+1A is a regular palindrome.
 
-3 is not a palindrome.
+3 is a regular palindrome.
 
-25 is not a palindrome.
+25 is a regular palindrome.
 
 58Z2 is not a palindrome.
 
@@ -1520,7 +1520,7 @@ AZA is not a palindrome.
 
 11Z is not a palindrome.
 
-AZ is not a palindrome.
+AZ is a regular palindrome.
 
 31A2 is not a palindrome.
 
@@ -1532,27 +1532,27 @@ Z53 is not a palindrome.
 
 81AA is not a palindrome.
 
-8 is not a palindrome.
+8 is a regular palindrome.
 
-15Z1 is not a palindrome.
+15Z1 is a regular palindrome.
 
-55 is not a palindrome.
+55 is a regular palindrome.
 
-5 is not a palindrome.
+5 is a regular palindrome.
 
-A is not a palindrome.
+A is a regular palindrome.
 
 228 is not a palindrome.
 
 312 is not a palindrome.
 
-8 is not a palindrome.
+8 is a regular palindrome.
 
-53 is not a palindrome.
+53 is a regular palindrome.
 
-Z is not a palindrome.
+Z is a regular palindrome.
 
-1281 is not a palindrome.
+1281 is a regular palindrome.
 
 318 is not a palindrome.
 
@@ -1566,7 +1566,7 @@ A131 is not a palindrome.
 
 2153 is not a palindrome.
 
-5 is not a palindrome.
+5 is a regular palindrome.
 
 8AZZ is not a palindrome.
 
@@ -1574,23 +1574,23 @@ A131 is not a palindrome.
 
 522 is not a palindrome.
 
-8A8 is not a palindrome.
+8A8 is a regular palindrome.
 
-83 is not a palindrome.
+83 is a regular palindrome.
 
-Z is not a palindrome.
+Z is a regular palindrome.
 
 A31 is not a palindrome.
 
 Z112 is not a palindrome.
 
-A1 is not a palindrome.
+A1 is a regular palindrome.
 
 851Z is not a palindrome.
 
-Z is not a palindrome.
+Z is a regular palindrome.
 
-53 is not a palindrome.
+53 is a regular palindrome.
 
 355A is not a palindrome.
 
@@ -1598,21 +1598,21 @@ Z is not a palindrome.
 
 8AA is not a palindrome.
 
-8 is not a palindrome.
+8 is a regular palindrome.
 
-3 is not a palindrome.
+3 is a regular palindrome.
 
 22A is not a palindrome.
 
-13 is not a palindrome.
+13 is a regular palindrome.
 
 Z88 is not a palindrome.
 
 322A is not a palindrome.
 
-Z is not a palindrome.
+Z is a regular palindrome.
 
-21 is not a palindrome.
+21 is a regular palindrome.
 
 8153 is not a palindrome.
 
@@ -1620,13 +1620,13 @@ A132 is not a palindrome.
 
 588 is not a palindrome.
 
-82 is not a palindrome.
+82 is a regular palindrome.
 
-5 is not a palindrome.
+5 is a regular palindrome.
 
 3Z35 is not a palindrome.
 
-35 is not a palindrome.
+35 is a regular palindrome.
 
 588 is not a palindrome.
 
@@ -1636,20 +1636,20 @@ A82Z is not a palindrome.
 
 ZA3 is not a palindrome.
 
-3 is not a palindrome.
+3 is a regular palindrome.
 
-A1A is not a palindrome.
+A1A is a regular palindrome.
 
 235 is not a palindrome.
 
-1 is not a palindrome.
+1 is a regular palindrome.
 
-25 is not a palindrome.
+25 is a regular palindrome.
 
-1 is not a palindrome.
+1 is a regular palindrome.
 
-2Z is not a palindrome.
+2Z is a regular palindrome.
 
-1 is not a palindrome.
+1 is a regular palindrome.
 
 A121 is not a palindrome.

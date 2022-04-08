@@ -26,12 +26,13 @@ const u_int g_VALID_NUMBERS_COUNT = 10;
 void initMirroredArrays (char * pMirroredLetters, char * pMirorredNumbers);
 char readWord (char * word);
 
-t_wordType defineWordType (const char * word);
+t_wordType defineWordType (const char * word, const char * mirroredLetters, const char * mirroredNumbers);
 bool isPalindrome (const char * word);
-bool isMirroredString (const char * word);
+bool isMirroredString (const char * word, const char * mirroredLetters, const char * mirroredNumbers);
 
 t_symbolType defineSymbolType (const char & symbol);
 u_int calculateMirroredLetterIndex (const char & letter);
+u_int calculateMirroredNumberIndex (const char & letter);
 
 void printWord (const char * word);
 void printWordType (const t_wordType & wordType);
@@ -43,14 +44,14 @@ int main ()
     freopen("output.txt", "wt", stdout);
 #endif
 
-    char * const pMirroredLetters = new char[g_VALID_LETTERS_COUNT];
-    char * const pMirroredNumbers = new char[g_VALID_NUMBERS_COUNT];
+    char * const pMirroredLetters = new char[g_VALID_LETTERS_COUNT + 1];
+    char * const pMirroredNumbers = new char[g_VALID_NUMBERS_COUNT + 1];
     initMirroredArrays(pMirroredLetters, pMirroredNumbers);
 
     char * const pCurrentWord = new char [g_MAX_WORD_LENGTH];
     if (readWord(pCurrentWord) != EOF)
     {
-        t_wordType resultWordType = defineWordType(pCurrentWord);
+        t_wordType resultWordType = defineWordType(pCurrentWord, pMirroredLetters, pMirroredNumbers);
 
         printWord(pCurrentWord);
         printWordType(resultWordType);
@@ -59,7 +60,7 @@ int main ()
     while (readWord(pCurrentWord) != EOF)
     {
         printf("\n");
-        t_wordType resultWordType = defineWordType(pCurrentWord);
+        t_wordType resultWordType = defineWordType(pCurrentWord, pMirroredLetters, pMirroredNumbers);
 
         printWord(pCurrentWord);
         printWordType(resultWordType);
@@ -89,11 +90,19 @@ void initMirroredArrays (char * pMirroredLetters, char * pMirroredNumbers)
     pMirroredLetters[calculateMirroredLetterIndex('W')] = 'W';
     pMirroredLetters[calculateMirroredLetterIndex('X')] = 'X';
     pMirroredLetters[calculateMirroredLetterIndex('Y')] = 'Y';
+    pMirroredLetters[calculateMirroredLetterIndex('Z')] = '5';
+    pMirroredLetters[g_VALID_LETTERS_COUNT] = '\0';
 
     for (u_int i = 0; i < g_VALID_NUMBERS_COUNT; i++)
     {
         pMirroredNumbers[i] = ' ';
     }
+    pMirroredNumbers[calculateMirroredNumberIndex('1')] = '1';
+    pMirroredNumbers[calculateMirroredNumberIndex('2')] = 'S';
+    pMirroredNumbers[calculateMirroredNumberIndex('3')] = 'E';
+    pMirroredNumbers[calculateMirroredNumberIndex('5')] = 'Z';
+    pMirroredNumbers[calculateMirroredNumberIndex('8')] = '8';
+    pMirroredNumbers[g_VALID_NUMBERS_COUNT] = '\0';
 }
 
 char readWord (char * word)
@@ -115,19 +124,48 @@ char readWord (char * word)
     return currentSymbol;
 }
 
-t_wordType defineWordType (const char * word)
+t_wordType defineWordType (const char * word, const char * mirroredLetters, const char * mirroredNumbers)
 {
-    return WORD_NOT_PALINDROME;
+    bool wordPalindrom = isPalindrome(word);
+    bool wordMirroredString = isMirroredString(word, mirroredLetters, mirroredNumbers);
+
+    if (wordPalindrom && wordMirroredString)
+    {
+        return WORD_MIRRORED_PALINDROME;
+    }
+    else if (wordPalindrom && !wordMirroredString)
+    {
+        return WORD_REGULAR_PALINDROME;
+    }
+    else if (!wordPalindrom && wordMirroredString)
+    {
+        return WORD_MIRRORED_STRING;
+    }
+    else
+    {
+        return WORD_NOT_PALINDROME;
+    }
 }
 
 bool isPalindrome (const char * word)
 {
+    int wordLength = strlen(word);
+    int middleIndex = (wordLength - 1) / 2;
+    int lastIndex = wordLength - 1;
+    for (int i = 0; i < middleIndex; i++)
+    {
+        if (word[i] != word[lastIndex - i])
+        {
+            return false;
+        }
+    }
 
+    return true;
 }
 
-bool isMirroredString (const char * word)
+bool isMirroredString (const char * word, const char * mirroredLetters, const char * mirroredNumbers)
 {
-
+    return false;
 }
 
 t_symbolType defineSymbolType (const char & symbol)
