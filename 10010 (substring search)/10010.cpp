@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <string.h>
 #include <cctype>
+#include <utility>
 
 //#define ONLINE_JUDGE 1
 
 #define u_int unsigned int
+#define t_gridPosition std::pair<u_int, u_int>
 
 const u_int g_MAX_WORD_LENGTH = 50;
 
@@ -15,6 +17,9 @@ void readWordsGrid (const u_int & rows, const u_int & columns, char * wordsGrid 
 void readGridRow (const u_int & wordLength, char * word);
 void readLookupWord (char * word);
 void omitLineEnding ();
+
+t_gridPosition searchWordInGrid (char * wordsGrid [g_MAX_WORD_LENGTH], const char * word);
+void printWordPosition (t_gridPosition & position);
 
 int main ()
 {
@@ -28,8 +33,13 @@ int main ()
 
     u_int testCases = 0;
     scanf("%u", &testCases);
-    for (u_int i = 0; i < testCases; i++)
+    if (testCases > 0)
     {
+        processTestCase(wordsGrid);
+    }
+    for (u_int i = 1; i < testCases; i++)
+    {
+        printf("\n\n");
         processTestCase(wordsGrid);
     }
 
@@ -56,12 +66,24 @@ void processTestCase (char * wordsGrid [g_MAX_WORD_LENGTH])
     scanf("%u", &lookupsCount);
     omitLineEnding();
 
-    for (u_int i = 0; i < lookupsCount; i++)
+    if (lookupsCount > 0)
     {
         char subString [g_MAX_WORD_LENGTH + 1];
         readLookupWord(subString);
 
-        //TODO...
+        t_gridPosition positionFound = searchWordInGrid(wordsGrid, subString);
+        printWordPosition(positionFound);
+    }
+
+    for (u_int i = 1; i < lookupsCount; i++)
+    {
+        printf("\n");
+
+        char subString [g_MAX_WORD_LENGTH + 1];
+        readLookupWord(subString);
+
+        t_gridPosition positionFound = searchWordInGrid(wordsGrid, subString);
+        printWordPosition(positionFound);
     }
 }
 
@@ -104,4 +126,15 @@ void omitLineEnding ()
             ((bufSymbol = getchar()) != '\n')
             && (bufSymbol != EOF)
         );
+}
+
+t_gridPosition searchWordInGrid (char * wordsGrid [g_MAX_WORD_LENGTH], const char * word)
+{
+    t_gridPosition gridPosition (0, 0);/*TODO...*/
+    return gridPosition;
+}
+
+void printWordPosition (t_gridPosition & position)
+{
+    printf("%u %u", position.first, position.second);
 }
