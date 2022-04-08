@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-//#define ONLINE_JUDGE 1
+#define ONLINE_JUDGE 1
 
 #define u_int unsigned int
 
@@ -48,22 +48,14 @@ int main ()
     char * const pMirroredNumbers = new char[g_VALID_NUMBERS_COUNT + 1];
     initMirroredArrays(pMirroredLetters, pMirroredNumbers);
 
-    char * const pCurrentWord = new char [g_MAX_WORD_LENGTH];
-    if (readWord(pCurrentWord) != EOF)
-    {
-        t_wordType resultWordType = defineWordType(pCurrentWord, pMirroredLetters, pMirroredNumbers);
-
-        printWord(pCurrentWord);
-        printWordType(resultWordType);
-    }
-
+    char * const pCurrentWord = new char [g_MAX_WORD_LENGTH + 1];
     while (readWord(pCurrentWord) != EOF)
     {
-        printf("\n");
         t_wordType resultWordType = defineWordType(pCurrentWord, pMirroredLetters, pMirroredNumbers);
 
         printWord(pCurrentWord);
         printWordType(resultWordType);
+        printf("\n");
     }
 
     return 0;
@@ -150,9 +142,14 @@ t_wordType defineWordType (const char * word, const char * mirroredLetters, cons
 bool isPalindrome (const char * word)
 {
     int wordLength = strlen(word);
+    if (wordLength < 2)
+    {
+        return true;
+    }
+
     int middleIndex = (wordLength - 1) / 2;
     int lastIndex = wordLength - 1;
-    for (int i = 0; i < middleIndex; i++)
+    for (int i = 0; i <= middleIndex; i++)
     {
         if (word[i] != word[lastIndex - i])
         {
@@ -165,7 +162,38 @@ bool isPalindrome (const char * word)
 
 bool isMirroredString (const char * word, const char * mirroredLetters, const char * mirroredNumbers)
 {
-    return false;
+    u_int wordLength = strlen(word);
+
+    char mirroredWord [g_MAX_WORD_LENGTH + 1];
+    mirroredWord[wordLength] = '\0';
+
+    for (u_int i = 0; i < wordLength; i++)
+    {
+        char symbol = word[wordLength - 1 - i];
+        t_symbolType symbolType = defineSymbolType(symbol);
+        if (symbolType == SYMBOL_LETTER)
+        {
+            mirroredWord[i] = mirroredLetters[calculateMirroredLetterIndex(symbol)];
+        }
+        else if (symbolType == SYMBOL_NUMBER)
+        {
+            mirroredWord[i] = mirroredNumbers[calculateMirroredNumberIndex(symbol)];
+        }
+        else
+        {
+            mirroredWord[i] = symbol;
+        }
+    }
+
+    for (u_int i = 0; i < wordLength; i++)
+    {
+        if (word[i] != mirroredWord[i])
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 t_symbolType defineSymbolType (const char & symbol)
@@ -218,16 +246,16 @@ void printWordType (const t_wordType & wordType)
     switch (wordType)
     {
     case WORD_NOT_PALINDROME:
-        printf(" is not a palindrome.\n");
+        printf(" -- is not a palindrome.\n");
         break;
     case WORD_REGULAR_PALINDROME:
-        printf(" is a regular palindrome.\n");
+        printf(" -- is a regular palindrome.\n");
         break;
     case WORD_MIRRORED_STRING:
-        printf(" is a mirrored string.\n");
+        printf(" -- is a mirrored string.\n");
         break;
     case WORD_MIRRORED_PALINDROME:
-        printf(" is a mirrored palindrome.\n");
+        printf(" -- is a mirrored palindrome.\n");
         break;
     default:
         //no action
