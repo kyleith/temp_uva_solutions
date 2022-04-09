@@ -309,17 +309,71 @@ bool matchedWordPrimaryDiagonal (CharGrid * const pWordsGrid, const char * word,
 
 bool matchedWordPrimaryDiagonalReversed (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j)
 {
-    return false;
+    t_gridPosition gridSizes = (*pWordsGrid).m_getGridDimensions();
+    if (
+            (i >= wordLength)
+            && (j >= wordLength)
+        )
+    {
+        for (u_int k = 0; k < wordLength; k++)
+        {
+            if (word[k] != (*pWordsGrid).m_getCellValue(i - k, j - k))
+            {
+                return false;//stop substring checking on a first mismatch
+            }
+        }
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 bool matchedWordSecondaryDiagonal (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j)
 {
-    return false;
+    t_gridPosition gridSizes = (*pWordsGrid).m_getGridDimensions();
+    if (
+            (i >= wordLength)
+            && (j + wordLength - 1 < gridSizes.f_Column)
+        )
+    {
+        for (u_int k = 0; k < wordLength; k++)
+        {
+            if (word[k] != (*pWordsGrid).m_getCellValue(i - k, j + k))
+            {
+                return false;//stop substring checking on a first mismatch
+            }
+        }
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 bool matchedWordSecondaryDiagonalReversed (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j)
 {
-    return false;
+    t_gridPosition gridSizes = (*pWordsGrid).m_getGridDimensions();
+    if (
+            (i + wordLength - 1 < gridSizes.f_Row)
+            && (j >= wordLength)
+        )
+    {
+        for (u_int k = 0; k < wordLength; k++)
+        {
+            if (word[k] != (*pWordsGrid).m_getCellValue(i + k, j - k))
+            {
+                return false;//stop substring checking on a first mismatch
+            }
+        }
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 void printWordPosition (const t_gridPosition & position)
