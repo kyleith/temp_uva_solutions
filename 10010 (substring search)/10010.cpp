@@ -4,7 +4,7 @@
 #include <utility>
 #include <algorithm>
 
-//#define ONLINE_JUDGE 1
+#define ONLINE_JUDGE 1
 
 #define u_int unsigned int
 #define t_gridPosition std::pair<u_int, u_int>
@@ -220,7 +220,7 @@ bool matchedWordLineRightToLeft (CharGrid * const pWordsGrid, const char * word,
     t_gridPosition gridSizes = (*pWordsGrid).m_getGridDimensions();
     if (
             (i < gridSizes.f_Row)
-            && (j >= wordLength)
+            && (j + 1 >= wordLength)
         )
     {
         for (u_int k = 0; k < wordLength; k++)
@@ -265,7 +265,7 @@ bool matchedWordColumnBottomToTop (CharGrid * const pWordsGrid, const char * wor
 {
     t_gridPosition gridSizes = (*pWordsGrid).m_getGridDimensions();
     if (
-            (i >= wordLength)
+            (i + 1 >= wordLength)
             && (j < gridSizes.f_Column)
         )
     {
@@ -311,8 +311,8 @@ bool matchedWordPrimaryDiagonalReversed (CharGrid * const pWordsGrid, const char
 {
     t_gridPosition gridSizes = (*pWordsGrid).m_getGridDimensions();
     if (
-            (i >= wordLength)
-            && (j >= wordLength)
+            (i + 1 >= wordLength)
+            && (j + 1 >= wordLength)
         )
     {
         for (u_int k = 0; k < wordLength; k++)
@@ -334,7 +334,7 @@ bool matchedWordSecondaryDiagonal (CharGrid * const pWordsGrid, const char * wor
 {
     t_gridPosition gridSizes = (*pWordsGrid).m_getGridDimensions();
     if (
-            (i >= wordLength)
+            (i + 1 >= wordLength)
             && (j + wordLength - 1 < gridSizes.f_Column)
         )
     {
@@ -358,7 +358,7 @@ bool matchedWordSecondaryDiagonalReversed (CharGrid * const pWordsGrid, const ch
     t_gridPosition gridSizes = (*pWordsGrid).m_getGridDimensions();
     if (
             (i + wordLength - 1 < gridSizes.f_Row)
-            && (j >= wordLength)
+            && (j + 1 >= wordLength)
         )
     {
         for (u_int k = 0; k < wordLength; k++)
