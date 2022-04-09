@@ -8,30 +8,79 @@
 
 #define u_int unsigned int
 #define t_gridPosition std::pair<u_int, u_int>
+#define f_Row first
+#define f_Column second
 
 const u_int g_MAX_WORD_LENGTH = 50;
 
-void initWordsGrid (char * wordsGrid [g_MAX_WORD_LENGTH]);
-void processTestCase (char * wordsGrid [g_MAX_WORD_LENGTH]);
+//char grid...
+class CharGrid
+{
+    public:
+        CharGrid ();
+        ~CharGrid ();
+        
+        t_gridPosition m_getGridDimensions () { return f_gridDimensions; };
+        void m_setGridDimensions (const t_gridPosition & gridPosition) { f_gridDimensions = gridPosition; };
 
-void readWordsGrid (const u_int & rows, const u_int & columns, char * wordsGrid [g_MAX_WORD_LENGTH]);
-void readGridRow (const u_int & wordLength, char * word);
+        const char m_getCellValue (const u_int & rowIndex, const u_int & columnIndex)
+        {
+            return f_wordsGrid[rowIndex][columnIndex];
+        };
+        void m_setCellValue (const u_int & rowIndex, const u_int & columnIndex, const char & cellValue)
+        {
+            f_wordsGrid[rowIndex][columnIndex] = cellValue;
+        };
+
+    private:
+        char ** f_wordsGrid;
+        t_gridPosition f_gridDimensions;
+};
+
+CharGrid :: CharGrid ()
+{
+    f_wordsGrid = new char * [g_MAX_WORD_LENGTH];
+    for (u_int i = 0; i < g_MAX_WORD_LENGTH; i++)
+    {
+        f_wordsGrid[i] = new char [g_MAX_WORD_LENGTH];
+    }
+
+    f_gridDimensions = std::make_pair(0, 0);
+} 
+
+CharGrid :: ~CharGrid ()
+{
+    for (u_int i = 0; i < g_MAX_WORD_LENGTH; i++)
+    {
+        delete [] f_wordsGrid[i];
+    }
+    delete [] f_wordsGrid;
+    f_wordsGrid = NULL;
+
+    f_gridDimensions.f_Row = 0;
+    f_gridDimensions.f_Column = 0;
+}
+//...char grid
+
+void processTestCase (CharGrid * const pWordsGrid);
+
+void readWordsGrid (CharGrid * const pWordsGrid);
 void readLookupWord (char * word);
 void omitLineEnding ();
 
-t_gridPosition searchWordInGrid (char * wordsGrid [g_MAX_WORD_LENGTH], u_int & rows, u_int & columns, const char * word);
-void compareAndUpdateClosestGridPosition (t_gridPosition & targetPosition, t_gridPosition & bufGridPosition);
+t_gridPosition searchWordInGrid (CharGrid * const wordsGrid, const char * word);
+void compareAndUpdateClosestGridPosition (const t_gridPosition & bufGridPosition, t_gridPosition & targetPosition);
 
-bool searchLinesLeftToRight(char * wordsGrid [g_MAX_WORD_LENGTH], u_int & rows, u_int & columns, const char * word, t_gridPosition & gridPosition);
-bool searchLinesRightToLeft(char * wordsGrid [g_MAX_WORD_LENGTH], u_int & rows, u_int & columns, const char * word, t_gridPosition & gridPosition);
-bool searchColumnsTopToBottom(char * wordsGrid [g_MAX_WORD_LENGTH], u_int & rows, u_int & columns, const char * word, t_gridPosition & gridPosition);
-bool searchColumnsBottomToTop(char * wordsGrid [g_MAX_WORD_LENGTH], u_int & rows, u_int & columns, const char * word, t_gridPosition & gridPosition);
-bool searchPrimaryDiagonals(char * wordsGrid [g_MAX_WORD_LENGTH], u_int & rows, u_int & columns, const char * word, t_gridPosition & gridPosition);
-bool searchPrimaryDiagonalsReversed(char * wordsGrid [g_MAX_WORD_LENGTH], u_int & rows, u_int & columns, const char * word, t_gridPosition & gridPosition);
-bool searchSecondaryDiagonals(char * wordsGrid [g_MAX_WORD_LENGTH], u_int & rows, u_int & columns, const char * word, t_gridPosition & gridPosition);
-bool searchSecondaryDiagonalsReversed(char * wordsGrid [g_MAX_WORD_LENGTH], u_int & rows, u_int & columns, const char * word, t_gridPosition & gridPosition);
+bool searchLinesLeftToRight(CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, t_gridPosition & gridPosition);
+bool searchLinesRightToLeft(CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, t_gridPosition & gridPosition);
+bool searchColumnsTopToBottom(CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, t_gridPosition & gridPosition);
+bool searchColumnsBottomToTop(CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, t_gridPosition & gridPosition);
+bool searchPrimaryDiagonals(CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, t_gridPosition & gridPosition);
+bool searchPrimaryDiagonalsReversed(CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, t_gridPosition & gridPosition);
+bool searchSecondaryDiagonals(CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, t_gridPosition & gridPosition);
+bool searchSecondaryDiagonalsReversed(CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, t_gridPosition & gridPosition);
 
-void printWordPosition (t_gridPosition & position);
+void printWordPosition (const t_gridPosition & position);
 
 int main ()
 {
@@ -40,39 +89,31 @@ int main ()
     freopen("output.txt", "wt", stdout);
 #endif
 
-    char * wordsGrid [g_MAX_WORD_LENGTH];
-    initWordsGrid(wordsGrid);
+    CharGrid * const pWordsGrid = new CharGrid ();
 
     u_int testCases = 0;
     scanf("%u", &testCases);
     if (testCases > 0)
     {
-        processTestCase(wordsGrid);
+        processTestCase(pWordsGrid);
     }
     for (u_int i = 1; i < testCases; i++)
     {
         printf("\n\n");
-        processTestCase(wordsGrid);
+        processTestCase(pWordsGrid);
     }
 
     return 0;
 }
 
-void initWordsGrid (char * wordsGrid [g_MAX_WORD_LENGTH])
+void processTestCase (CharGrid * const pWordsGrid)
 {
-    for (u_int i = 0; i < g_MAX_WORD_LENGTH; i++)
-    {
-        wordsGrid[i] = new char [g_MAX_WORD_LENGTH];
-    }
-}
-
-void processTestCase (char * wordsGrid [g_MAX_WORD_LENGTH])
-{
-    u_int rows = 0, columns = 0;
-    scanf("%u%u", &rows, &columns);
+    t_gridPosition gridSizes (0, 0);
+    scanf("%u%u", &gridSizes.f_Row, &gridSizes.f_Column);
     omitLineEnding();
     
-    readWordsGrid(rows, columns, wordsGrid);
+    (*pWordsGrid).m_setGridDimensions(gridSizes);
+    readWordsGrid(pWordsGrid);
 
     u_int lookupsCount = 0;
     scanf("%u", &lookupsCount);
@@ -83,7 +124,7 @@ void processTestCase (char * wordsGrid [g_MAX_WORD_LENGTH])
         char subString [g_MAX_WORD_LENGTH + 1];
         readLookupWord(subString);
 
-        t_gridPosition positionFound = searchWordInGrid(wordsGrid, rows, columns, subString);
+        t_gridPosition positionFound = searchWordInGrid(pWordsGrid, subString);
         printWordPosition(positionFound);
     }
 
@@ -94,26 +135,22 @@ void processTestCase (char * wordsGrid [g_MAX_WORD_LENGTH])
         char subString [g_MAX_WORD_LENGTH + 1];
         readLookupWord(subString);
 
-        t_gridPosition positionFound = searchWordInGrid(wordsGrid, rows, columns, subString);
+        t_gridPosition positionFound = searchWordInGrid(pWordsGrid, subString);
         printWordPosition(positionFound);
     }
 }
 
-void readWordsGrid (const u_int & rows, const u_int & columns, char * wordsGrid [g_MAX_WORD_LENGTH])
+void readWordsGrid (CharGrid * const pWordsGrid)
 {
-    for (u_int i = 0; i < rows; i++)
+    t_gridPosition gridSizes = (*pWordsGrid).m_getGridDimensions();
+    for (u_int i = 0; i < gridSizes.f_Row; i++)
     {
-        readGridRow(columns, wordsGrid[i]);
+        for (u_int j = 0; j < gridSizes.f_Column; j++)
+        {
+            (*pWordsGrid).m_setCellValue(i, j, tolower(getchar()));
+        }    
         omitLineEnding();
     }
-}
-
-void readGridRow (const u_int & wordLength, char * word)
-{
-    for (u_int i = 0; i < wordLength; i++)
-    {
-        word[i] = tolower(getchar());
-    }    
 }
 
 void readLookupWord (char * word)
@@ -140,62 +177,63 @@ void omitLineEnding ()
         );
 }
 
-t_gridPosition searchWordInGrid (char * wordsGrid [g_MAX_WORD_LENGTH], u_int & rows, u_int & columns, const char * word)
+t_gridPosition searchWordInGrid (CharGrid * const wordsGrid, const char * word)
 {
+    u_int wordLength = strlen(word);
     t_gridPosition gridPosition (g_MAX_WORD_LENGTH + 1, g_MAX_WORD_LENGTH + 1), bufGridPosition(g_MAX_WORD_LENGTH + 1, g_MAX_WORD_LENGTH + 1);
- 
+
     //lines left to right...
-    if (searchLinesLeftToRight(wordsGrid, rows, columns, word, bufGridPosition))
+    if (searchLinesLeftToRight(wordsGrid, word, wordLength, bufGridPosition))
     {
-        compareAndUpdateClosestGridPosition(gridPosition, bufGridPosition);
+        compareAndUpdateClosestGridPosition(bufGridPosition, gridPosition);
     }
 
     //lines right to left...
-    if (searchLinesRightToLeft(wordsGrid, rows, columns, word, bufGridPosition))
+    if (searchLinesRightToLeft(wordsGrid, word, wordLength, bufGridPosition))
     {
-        compareAndUpdateClosestGridPosition(gridPosition, bufGridPosition);
+        compareAndUpdateClosestGridPosition(bufGridPosition, gridPosition);
     }
     
     //columns top to bottom...
-    if (searchColumnsTopToBottom(wordsGrid, rows, columns, word, bufGridPosition))
+    if (searchColumnsTopToBottom(wordsGrid, word, wordLength, bufGridPosition))
     {
-        compareAndUpdateClosestGridPosition(gridPosition, bufGridPosition);
+        compareAndUpdateClosestGridPosition(bufGridPosition, gridPosition);
     }
 
     //columns bottom to top...
-    if (searchColumnsBottomToTop(wordsGrid, rows, columns, word, bufGridPosition))
+    if (searchColumnsBottomToTop(wordsGrid, word, wordLength, bufGridPosition))
     {
-        compareAndUpdateClosestGridPosition(gridPosition, bufGridPosition);
+        compareAndUpdateClosestGridPosition(bufGridPosition, gridPosition);
     }
 
     //primary diagonals
-    if (searchPrimaryDiagonals(wordsGrid, rows, columns, word, bufGridPosition))
+    if (searchPrimaryDiagonals(wordsGrid, word, wordLength, bufGridPosition))
     {
-        compareAndUpdateClosestGridPosition(gridPosition, bufGridPosition);
+        compareAndUpdateClosestGridPosition(bufGridPosition, gridPosition);
     }
 
     //primary diagonals reversed
-    if (searchPrimaryDiagonalsReversed(wordsGrid, rows, columns, word, bufGridPosition))
+    if (searchPrimaryDiagonalsReversed(wordsGrid, word, wordLength, bufGridPosition))
     {
-        compareAndUpdateClosestGridPosition(gridPosition, bufGridPosition);
+        compareAndUpdateClosestGridPosition(bufGridPosition, gridPosition);
     }
 
     //secondary diagonals
-    if (searchSecondaryDiagonals(wordsGrid, rows, columns, word, bufGridPosition))
+    if (searchSecondaryDiagonals(wordsGrid, word, wordLength, bufGridPosition))
     {
-        compareAndUpdateClosestGridPosition(gridPosition, bufGridPosition);
+        compareAndUpdateClosestGridPosition(bufGridPosition, gridPosition);
     }
 
     //secondary diagonals reversed
-    if (searchSecondaryDiagonalsReversed(wordsGrid, rows, columns, word, bufGridPosition))
+    if (searchSecondaryDiagonalsReversed(wordsGrid, word, wordLength, bufGridPosition))
     {
-        compareAndUpdateClosestGridPosition(gridPosition, bufGridPosition);
+        compareAndUpdateClosestGridPosition(bufGridPosition, gridPosition);
     }
 
     return gridPosition;
 }
 
-void compareAndUpdateClosestGridPosition (t_gridPosition & targetPosition, t_gridPosition & bufGridPosition)
+void compareAndUpdateClosestGridPosition (const t_gridPosition & bufGridPosition, t_gridPosition & targetPosition)
 {
     if (bufGridPosition.first < targetPosition.first)
     {
@@ -208,18 +246,18 @@ void compareAndUpdateClosestGridPosition (t_gridPosition & targetPosition, t_gri
     }
 }
 
-bool searchLinesLeftToRight(char * wordsGrid [g_MAX_WORD_LENGTH], u_int & rows, u_int & columns, const char * word, t_gridPosition & gridPosition)
+bool searchLinesLeftToRight(CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, t_gridPosition & gridPosition)
 {
-    u_int wordLength = strlen(word);
-    u_int lastColumnIndex = columns - wordLength;
-    for (u_int i = 0; i < rows; i++)
+    t_gridPosition gridSizes = (*pWordsGrid).m_getGridDimensions();
+    u_int lastColumnIndex = gridSizes.f_Column - wordLength;
+    for (u_int i = 0; i < gridSizes.f_Row; i++)
     {
         for (u_int j = 0; j <= lastColumnIndex; j++)
         {
             bool wordMatched = true;
             for (u_int k = 0; k < wordLength; k++)
             {
-                if (word[k] != wordsGrid[i][j + k])
+                if (word[k] != (*pWordsGrid).m_getCellValue(i, j + k))
                 {
                     wordMatched = false;
                     break;//stop substring checking on a first mismatch
@@ -236,23 +274,23 @@ bool searchLinesLeftToRight(char * wordsGrid [g_MAX_WORD_LENGTH], u_int & rows, 
     return false;
 }
 
-bool searchLinesRightToLeft(char * wordsGrid [g_MAX_WORD_LENGTH], u_int & rows, u_int & columns, const char * word, t_gridPosition & gridPosition)
+bool searchLinesRightToLeft(CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, t_gridPosition & gridPosition)
 {
     return false;/*TODO*/
 }
 
-bool searchColumnsTopToBottom(char * wordsGrid [g_MAX_WORD_LENGTH], u_int & rows, u_int & columns, const char * word, t_gridPosition & gridPosition)
+bool searchColumnsTopToBottom(CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, t_gridPosition & gridPosition)
 {
-    u_int wordLength = strlen(word);
-    u_int lastRowIndex = rows - wordLength;
-    for (u_int j = 0; j < columns; j++)
+    t_gridPosition gridSizes = (*pWordsGrid).m_getGridDimensions();
+    u_int lastRowIndex = gridSizes.f_Row - wordLength;
+    for (u_int j = 0; j < gridSizes.f_Column; j++)
     {
         for (u_int i = 0; i <= lastRowIndex; i++)
         {
             bool wordMatched = true;
             for (u_int k = 0; k < wordLength; k++)
             {
-                if (word[k] != wordsGrid[i + k][j])
+                if (word[k] != (*pWordsGrid).m_getCellValue(i + k, j))
                 {
                     wordMatched = false;
                     break;//stop substring checking on a first mismatch
@@ -269,32 +307,32 @@ bool searchColumnsTopToBottom(char * wordsGrid [g_MAX_WORD_LENGTH], u_int & rows
     return false;
 }
 
-bool searchColumnsBottomToTop(char * wordsGrid [g_MAX_WORD_LENGTH], u_int & rows, u_int & columns, const char * word, t_gridPosition & gridPosition)
+bool searchColumnsBottomToTop(CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, t_gridPosition & gridPosition)
 {
     return false;/*TODO*/
 }
 
-bool searchPrimaryDiagonals(char * wordsGrid [g_MAX_WORD_LENGTH], u_int & rows, u_int & columns, const char * word, t_gridPosition & gridPosition)
+bool searchPrimaryDiagonals(CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, t_gridPosition & gridPosition)
 {
     return false;/*TODO*/
 }
 
-bool searchPrimaryDiagonalsReversed(char * wordsGrid [g_MAX_WORD_LENGTH], u_int & rows, u_int & columns, const char * word, t_gridPosition & gridPosition)
+bool searchPrimaryDiagonalsReversed(CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, t_gridPosition & gridPosition)
 {
     return false;/*TODO*/
 }
 
-bool searchSecondaryDiagonals(char * wordsGrid [g_MAX_WORD_LENGTH], u_int & rows, u_int & columns, const char * word, t_gridPosition & gridPosition)
+bool searchSecondaryDiagonals(CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, t_gridPosition & gridPosition)
 {
     return false;/*TODO*/
 }
 
-bool searchSecondaryDiagonalsReversed(char * wordsGrid [g_MAX_WORD_LENGTH], u_int & rows, u_int & columns, const char * word, t_gridPosition & gridPosition)
+bool searchSecondaryDiagonalsReversed(CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, t_gridPosition & gridPosition)
 {
     return false;/*TODO*/
 }
 
-void printWordPosition (t_gridPosition & position)
+void printWordPosition (const t_gridPosition & position)
 {
     printf("%u %u", position.first, position.second);
 }
