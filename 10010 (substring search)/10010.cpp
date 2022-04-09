@@ -63,7 +63,6 @@ void readLookupWord (char * word);
 void omitLineEnding ();
 
 t_gridPosition searchWordInGrid (CharGrid * const wordsGrid, const char * word);
-bool compareAndUpdateClosestGridPosition (const u_int & row, const u_int & column, t_gridPosition & targetPosition);
 
 bool matchedWordLineLeftToRight (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j);
 bool matchedWordLineRightToLeft (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j);
@@ -183,30 +182,14 @@ t_gridPosition searchWordInGrid (CharGrid * const wordsGrid, const char * word)
             
             if (wordMatched)
             {
-                compareAndUpdateClosestGridPosition(i + 1, j + 1, gridPosition);
+                gridPosition.f_Row = i + 1;
+                gridPosition.f_Column = j + 1;
                 return gridPosition;
             }
         }
     }
 
     return gridPosition;
-}
-
-bool compareAndUpdateClosestGridPosition (const u_int & row, const u_int & column, t_gridPosition & targetPosition)
-{
-    bool updated = false;
-    if (row < targetPosition.f_Row)
-    {
-        targetPosition.f_Row = row;
-        targetPosition.f_Column = column;
-        updated = true;
-    }
-    else if (row == targetPosition.f_Row)
-    {
-        targetPosition.f_Column = std::min(targetPosition.f_Column, column);
-        updated = true;
-    }
-    return updated;
 }
 
 bool matchedWordLineLeftToRight (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j)
