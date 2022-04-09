@@ -64,6 +64,7 @@ void omitLineEnding ();
 
 t_gridPosition searchWordInGrid (CharGrid * const wordsGrid, const char * word);
 void compareAndUpdateClosestGridPosition (t_gridPosition & bufGridPosition, t_gridPosition & targetPosition);
+bool compareAndUpdateClosestGridPosition (const u_int & row, const u_int & column, t_gridPosition & targetPosition);
 
 bool searchLinesLeftToRight(CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, t_gridPosition & gridPosition);
 bool searchLinesRightToLeft(CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, t_gridPosition & gridPosition);
@@ -243,6 +244,23 @@ void compareAndUpdateClosestGridPosition (t_gridPosition & bufGridPosition, t_gr
     bufGridPosition.f_Column = g_MAX_WORD_LENGTH + 1;
 }
 
+bool compareAndUpdateClosestGridPosition (const u_int & row, const u_int & column, t_gridPosition & targetPosition)
+{
+    bool updated = false;
+    if (row < targetPosition.f_Row)
+    {
+        targetPosition.f_Row = row;
+        targetPosition.f_Column = column;
+        updated = true;
+    }
+    else if (row == targetPosition.f_Row)
+    {
+        targetPosition.f_Column = std::min(targetPosition.f_Column, column);
+        updated = true;
+    }
+    return updated;
+}
+
 bool searchLinesLeftToRight(CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, t_gridPosition & gridPosition)
 {
     t_gridPosition gridSizes = (*pWordsGrid).m_getGridDimensions();
@@ -267,8 +285,7 @@ bool searchLinesLeftToRight(CharGrid * const pWordsGrid, const char * word, cons
             }
             if (wordMatched)
             {
-                gridPosition.f_Row = i + 1;
-                gridPosition.f_Column = j + 1;
+                compareAndUpdateClosestGridPosition(i + 1, j + 1, gridPosition);
                 return true;/*first match is correct only for the toppest matched line*/
             }
         }
@@ -300,8 +317,7 @@ bool searchLinesRightToLeft(CharGrid * const pWordsGrid, const char * word, cons
             }
             if (wordMatched)
             {
-                gridPosition.f_Row = i + 1;
-                gridPosition.f_Column = j + 1;
+                compareAndUpdateClosestGridPosition(i + 1, j + 1, gridPosition);
                 return true;/*first match is correct only for the toppest matched line*/
             }
         }
@@ -332,15 +348,13 @@ bool searchColumnsTopToBottom(CharGrid * const pWordsGrid, const char * word, co
                     break;//stop substring checking on a first mismatch
                 }
             }
-            if (
-                    bufWordMatched
-                    && (i + 1 < gridPosition.f_Row)
-                )
+            if (bufWordMatched)
             {
-                wordMatched = true;
-                gridPosition.f_Row = i + 1;
-                gridPosition.f_Column = j + 1;
-                /*no return - all matches checking is required*/
+                bufWordMatched = compareAndUpdateClosestGridPosition(i + 1, j + 1, gridPosition);
+                if (bufWordMatched)
+                {
+                    wordMatched = true;
+                }
             }
         }
     }
@@ -370,15 +384,13 @@ bool searchColumnsBottomToTop(CharGrid * const pWordsGrid, const char * word, co
                     break;//stop substring checking on a first mismatch
                 }
             }
-            if (
-                    bufWordMatched
-                    && (i + 1 < gridPosition.f_Row)
-                )
+            if (bufWordMatched)
             {
-                wordMatched = true;
-                gridPosition.f_Row = i + 1;
-                gridPosition.f_Column = j + 1;
-                /*no return - all matches checking is required*/
+                bufWordMatched = compareAndUpdateClosestGridPosition(i + 1, j + 1, gridPosition);
+                if (bufWordMatched)
+                {
+                    wordMatched = true;
+                }
             }
         }
     }
@@ -387,7 +399,12 @@ bool searchColumnsBottomToTop(CharGrid * const pWordsGrid, const char * word, co
 
 bool searchPrimaryDiagonals(CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, t_gridPosition & gridPosition)
 {
-    return false;/*TODO*/
+    t_gridPosition gridSizes = (*pWordsGrid).m_getGridDimensions();
+    bool wordMatched = false;
+
+    
+   
+    return wordMatched;
 }
 
 bool searchPrimaryDiagonalsReversed(CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, t_gridPosition & gridPosition)
