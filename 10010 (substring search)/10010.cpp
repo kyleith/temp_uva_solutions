@@ -253,9 +253,9 @@ bool searchLinesLeftToRight(CharGrid * const pWordsGrid, const char * word, cons
 {
     t_gridPosition gridSizes = (*pWordsGrid).m_getGridDimensions();
     u_int lastColumnIndex = gridSizes.f_Column - wordLength;
-    for (u_int i = 0; i < gridSizes.f_Row; i++)
+    for (u_int i = 0; i < gridSizes.f_Row; i++)/*top to bottom*/
     {
-        for (u_int j = 0; j <= lastColumnIndex; j++)
+        for (u_int j = 0; j <= lastColumnIndex; j++)/*left to right*/
         {
             bool wordMatched = true;
             for (u_int k = 0; k < wordLength; k++)
@@ -280,15 +280,15 @@ bool searchLinesLeftToRight(CharGrid * const pWordsGrid, const char * word, cons
 bool searchLinesRightToLeft(CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, t_gridPosition & gridPosition)
 {
     t_gridPosition gridSizes = (*pWordsGrid).m_getGridDimensions();
-    u_int firstColumnIndex = gridSizes.f_Column - wordLength;/*TODO*/
-    for (u_int i = 0; i < gridSizes.f_Row; i++)
+    u_int firstColumnIndex = wordLength - 1;
+    for (u_int i = 0; i < gridSizes.f_Row; i++)/*top to bottom*/
     {
-        for (u_int j = firstColumnIndex; j < gridSizes.f_Column; j++)
+        for (u_int j = firstColumnIndex; j < gridSizes.f_Column; j++)/*left to right*/
         {
             bool wordMatched = true;
             for (u_int k = 0; k < wordLength; k++)
             {
-                if (word[k] != (*pWordsGrid).m_getCellValue(i, j + k))
+                if (word[k] != (*pWordsGrid).m_getCellValue(i, j - k))
                 {
                     wordMatched = false;
                     break;//stop substring checking on a first mismatch
