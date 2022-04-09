@@ -23,14 +23,8 @@ class CharGrid
         t_gridPosition m_getGridDimensions () { return f_gridDimensions; };
         void m_setGridDimensions (const t_gridPosition & gridPosition) { f_gridDimensions = gridPosition; };
 
-        const char m_getCellValue (const u_int & rowIndex, const u_int & columnIndex)
-        {
-            return f_wordsGrid[rowIndex][columnIndex];
-        };
-        void m_setCellValue (const u_int & rowIndex, const u_int & columnIndex, const char & cellValue)
-        {
-            f_wordsGrid[rowIndex][columnIndex] = cellValue;
-        };
+        const char m_getCellValue (const u_int & rowIndex, const u_int & columnIndex) { return f_wordsGrid[rowIndex][columnIndex]; };
+        void m_setCellValue (const u_int & rowIndex, const u_int & columnIndex, const char & cellValue) { f_wordsGrid[rowIndex][columnIndex] = cellValue; };
 
     private:
         char ** f_wordsGrid;
@@ -252,6 +246,11 @@ void compareAndUpdateClosestGridPosition (t_gridPosition & bufGridPosition, t_gr
 bool searchLinesLeftToRight(CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, t_gridPosition & gridPosition)
 {
     t_gridPosition gridSizes = (*pWordsGrid).m_getGridDimensions();
+    if (gridSizes.f_Column < wordLength)
+    {
+        return false;
+    }
+
     u_int lastColumnIndex = gridSizes.f_Column - wordLength;
     for (u_int i = 0; i < gridSizes.f_Row; i++)/*top to bottom*/
     {
@@ -280,6 +279,11 @@ bool searchLinesLeftToRight(CharGrid * const pWordsGrid, const char * word, cons
 bool searchLinesRightToLeft(CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, t_gridPosition & gridPosition)
 {
     t_gridPosition gridSizes = (*pWordsGrid).m_getGridDimensions();
+    if (gridSizes.f_Column < wordLength)
+    {
+        return false;
+    }
+
     u_int firstColumnIndex = wordLength - 1;
     for (u_int i = 0; i < gridSizes.f_Row; i++)/*top to bottom*/
     {
@@ -308,8 +312,12 @@ bool searchLinesRightToLeft(CharGrid * const pWordsGrid, const char * word, cons
 bool searchColumnsTopToBottom(CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, t_gridPosition & gridPosition)
 {
     t_gridPosition gridSizes = (*pWordsGrid).m_getGridDimensions();
+    if (gridSizes.f_Row < wordLength)
+    {
+        return false;
+    }
+
     u_int lastRowIndex = gridSizes.f_Row - wordLength;
-    
     bool wordMatched = false;
     for (u_int j = 0; j < gridSizes.f_Column; j++)/*left to right*/
     {
@@ -342,8 +350,12 @@ bool searchColumnsTopToBottom(CharGrid * const pWordsGrid, const char * word, co
 bool searchColumnsBottomToTop(CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, t_gridPosition & gridPosition)
 {
     t_gridPosition gridSizes = (*pWordsGrid).m_getGridDimensions();
+    if (gridSizes.f_Row < wordLength)
+    {
+        return false;
+    }
+
     u_int firstRowIndex = wordLength - 1;
-    
     bool wordMatched = false;
     for (u_int j = 0; j < gridSizes.f_Column; j++)/*left to right*/
     {
