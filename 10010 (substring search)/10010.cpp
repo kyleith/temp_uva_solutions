@@ -94,7 +94,7 @@ int main ()
     }
     for (u_int i = 1; i < testCases; i++)
     {
-        printf("\n\n");
+        printf("\n");
         processTestCase(pWordsGrid);
     }
 
@@ -114,19 +114,8 @@ void processTestCase (CharGrid * const pWordsGrid)
     scanf("%u", &lookupsCount);
     omitLineEnding();
 
-    if (lookupsCount > 0)
+    for (u_int i = 0; i < lookupsCount; i++)
     {
-        char subString [g_MAX_WORD_LENGTH + 1];
-        readLookupWord(subString);
-
-        t_gridPosition positionFound = searchWordInGrid(pWordsGrid, subString);
-        printWordPosition(positionFound);
-    }
-
-    for (u_int i = 1; i < lookupsCount; i++)
-    {
-        printf("\n");
-
         char subString [g_MAX_WORD_LENGTH + 1];
         readLookupWord(subString);
 
@@ -400,10 +389,42 @@ bool searchColumnsBottomToTop(CharGrid * const pWordsGrid, const char * word, co
 bool searchPrimaryDiagonals(CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, t_gridPosition & gridPosition)
 {
     t_gridPosition gridSizes = (*pWordsGrid).m_getGridDimensions();
-    bool wordMatched = false;
-
+    if (
+            gridSizes.f_Row < wordLength
+            || gridSizes.f_Column < wordLength
+        )
+    {
+        return false;
+    }
     
-   
+    bool wordMatched = false;
+    u_int lastColumnIndex = gridSizes.f_Column - wordLength;
+    u_int lastRowIndex = gridSizes.f_Row - wordLength;
+
+    for (u_int j = 0; j <= lastColumnIndex; j++)/*left to right*/
+    {
+        for (u_int i = 0; i <= lastRowIndex; i++)/*top to bottom*/
+        {
+            bool bufWordMatched = true;
+            for (u_int k = 0; k < wordLength; k++)
+            {
+                if (word[k] != (*pWordsGrid).m_getCellValue(i + k, j + k/*primary diagonals*/))
+                {
+                    bufWordMatched = false;
+                    break;//stop substring checking on a first mismatch
+                }
+            }
+            if (bufWordMatched)
+            {
+                bufWordMatched = compareAndUpdateClosestGridPosition(i + 1, j + 1, gridPosition);
+                if (bufWordMatched)
+                {
+                    wordMatched = true;
+                }
+            }
+        }
+    }
+
     return wordMatched;
 }
 
@@ -424,5 +445,5 @@ bool searchSecondaryDiagonalsReversed(CharGrid * const pWordsGrid, const char * 
 
 void printWordPosition (const t_gridPosition & position)
 {
-    printf("%u %u", position.f_Row, position.f_Column);
+    printf("%u %u\n", position.f_Row, position.f_Column);
 }
