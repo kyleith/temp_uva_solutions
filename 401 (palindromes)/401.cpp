@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define ONLINE_JUDGE 1
+//#define ONLINE_JUDGE 1
 
 #define u_int unsigned int
 
@@ -44,16 +44,16 @@ int main ()
     freopen("output.txt", "wt", stdout);
 #endif
 
-    char * const pMirroredLetters = new char[g_VALID_LETTERS_COUNT + 1];
-    char * const pMirroredNumbers = new char[g_VALID_NUMBERS_COUNT + 1];
-    initMirroredArrays(pMirroredLetters, pMirroredNumbers);
+    char mirroredLetters [g_VALID_LETTERS_COUNT + 1] = { 0 };
+    char mirroredNumbers [g_VALID_NUMBERS_COUNT + 1] = { 0 };
+    initMirroredArrays(mirroredLetters, mirroredNumbers);
 
-    char * const pCurrentWord = new char [g_MAX_WORD_LENGTH + 1];
-    while (readWord(pCurrentWord) != EOF)
+    char currentWord [g_MAX_WORD_LENGTH + 1] = { 0 };
+    while (readWord(currentWord) != EOF)
     {
-        t_wordType resultWordType = defineWordType(pCurrentWord, pMirroredLetters, pMirroredNumbers);
+        t_wordType resultWordType = defineWordType(currentWord, mirroredLetters, mirroredNumbers);
 
-        printWord(pCurrentWord);
+        printWord(currentWord);
         printWordType(resultWordType);
         printf("\n");
     }
@@ -63,10 +63,6 @@ int main ()
 
 void initMirroredArrays (char * pMirroredLetters, char * pMirroredNumbers)
 {
-    for (u_int i = 0; i < g_VALID_LETTERS_COUNT; i++)
-    {
-        pMirroredLetters[i] = ' ';
-    }
     pMirroredLetters[calculateMirroredLetterIndex('A')] = 'A';
     pMirroredLetters[calculateMirroredLetterIndex('E')] = '3';
     pMirroredLetters[calculateMirroredLetterIndex('H')] = 'H';
@@ -83,18 +79,12 @@ void initMirroredArrays (char * pMirroredLetters, char * pMirroredNumbers)
     pMirroredLetters[calculateMirroredLetterIndex('X')] = 'X';
     pMirroredLetters[calculateMirroredLetterIndex('Y')] = 'Y';
     pMirroredLetters[calculateMirroredLetterIndex('Z')] = '5';
-    pMirroredLetters[g_VALID_LETTERS_COUNT] = '\0';
 
-    for (u_int i = 0; i < g_VALID_NUMBERS_COUNT; i++)
-    {
-        pMirroredNumbers[i] = ' ';
-    }
     pMirroredNumbers[calculateMirroredNumberIndex('1')] = '1';
     pMirroredNumbers[calculateMirroredNumberIndex('2')] = 'S';
     pMirroredNumbers[calculateMirroredNumberIndex('3')] = 'E';
     pMirroredNumbers[calculateMirroredNumberIndex('5')] = 'Z';
     pMirroredNumbers[calculateMirroredNumberIndex('8')] = '8';
-    pMirroredNumbers[g_VALID_NUMBERS_COUNT] = '\0';
 }
 
 char readWord (char * word)
