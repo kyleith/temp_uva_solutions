@@ -2,15 +2,18 @@
 #include <string.h>
 #include <utility>
 
-//#define ONLINE_JUDGE 1 
+#define ONLINE_JUDGE 1 
 
 #define u_int unsigned int
 #define t_subInterval std::pair<int,int>
 
 const u_int g_MAX_SYMBOLS_IN_LINE = 100;
-const u_int g_SUBSTRINGS_COUNT = 5;
-const char * const g_POEM_ENDING = "...";
 
+const char * const g_SUBSTRING_DELIMITERS = "<><>";
+const u_int g_SUBSTRING_DELIMITERS_COUNT = strlen(g_SUBSTRING_DELIMITERS);
+const u_int g_SUBSTRINGS_COUNT = g_SUBSTRING_DELIMITERS_COUNT + 1;
+
+const char * const g_POEM_ENDING = "...";
 const u_int g_ENDING_PARTS_COUNT = 4;
 const u_int g_ENDING_SUBSTRINGS_PATTERN [g_ENDING_PARTS_COUNT] = {3, 2, 1, 4};
 
@@ -81,25 +84,19 @@ void readLine (char * line)
 
 void updateSubstringBorders (char * line, t_subInterval * borders)
 {
-    u_int firstOpeningBracket = strchr(&line[0], '<') - &line[0];
-    u_int firstClosingBracket = strchr(&line[firstOpeningBracket], '>') - &line[0];
-    u_int secondOpeningBracket = strchr(&line[firstClosingBracket], '<') - &line[0];
-    u_int secondClosingBracket = strchr(&line[secondOpeningBracket], '>') - &line[0];
-    
-    borders[0].first = 0;
-    borders[0].second = firstOpeningBracket - 1;
+    int previousIndex = -1;
+    for (u_int i = 0; i < g_SUBSTRING_DELIMITERS_COUNT; i++)
+    {
+        int currentIndex = strchr(&line[previousIndex + 1], g_SUBSTRING_DELIMITERS[i]) - &line[0];
+        
+        borders[i].first = previousIndex + 1;
+        borders[i].second = currentIndex - 1;
 
-    borders[1].first = firstOpeningBracket + 1;
-    borders[1].second = firstClosingBracket - 1;
+        previousIndex = currentIndex;
+    }
 
-    borders[2].first = firstClosingBracket + 1;
-    borders[2].second = secondOpeningBracket - 1;
-
-    borders[3].first = secondOpeningBracket + 1;
-    borders[3].second = secondClosingBracket - 1;
-
-    borders[4].first = secondClosingBracket + 1;
-    borders[4].second = strlen(line) - 1;
+    borders[g_SUBSTRING_DELIMITERS_COUNT].first = previousIndex + 1;
+    borders[g_SUBSTRING_DELIMITERS_COUNT].second = strlen(line) - 1;
 }
 
 void updateSecondLineBorders (char * line, t_subInterval & lineBorders)
