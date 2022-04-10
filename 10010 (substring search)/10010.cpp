@@ -12,6 +12,14 @@
 
 const u_int g_MAX_WORD_LENGTH = 50;
 
+enum t_wordSearchingDirection {
+    e_STATIC_DIMENSION = -1,
+    e_DIRECTION_UP,
+    e_DIRECTION_DOWN,
+    e_DIRECTION_LEFT,
+    e_DIRECTION_RIGHT
+};
+
 //char grid...
 class CharGrid
 {
@@ -47,6 +55,25 @@ bool matchedWordPrimaryDiagonal (CharGrid * const pWordsGrid, const char * word,
 bool matchedWordPrimaryDiagonalReversed (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j);
 bool matchedWordSecondaryDiagonal (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j);
 bool matchedWordSecondaryDiagonalReversed (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j);
+
+bool matchedWordInDirections (  CharGrid * const pWordsGrid,
+                                const char * word,
+                                const u_int & wordLength,
+                                const u_int & initialRow,
+                                const u_int & initialColumn,
+                                const t_wordSearchingDirection & verticalDirection,
+                                const t_wordSearchingDirection & horizontalDirection                       
+    );
+
+bool isWordSearchingOutOfRange (const t_gridPosition & gridSizes,
+                                const u_int & wordLength,
+                                const u_int & initialRow,
+                                const u_int & initialColumn,
+                                const t_wordSearchingDirection & verticalDirection,
+                                const t_wordSearchingDirection & horizontalDirection
+    );
+
+int moveInDirection (const u_int & initialIndex, const u_int & offset, const t_wordSearchingDirection & direction);
 
 void printWordPosition (const t_gridPosition & position);
 
@@ -169,186 +196,111 @@ t_gridPosition searchWordInGrid (CharGrid * const wordsGrid, const char * word)
 
 bool matchedWordLineLeftToRight (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j)
 {
-    t_gridPosition gridSizes = (*pWordsGrid).m_getGridDimensions();
-    if (
-            (i < gridSizes.f_Row)
-            && (j + wordLength - 1 < gridSizes.f_Column)
-        )
-    {
-        for (u_int k = 0; k < wordLength; k++)
-        {
-            if (word[k] != (*pWordsGrid).m_getCellValue(i, j + k))
-            {
-                return false;//stop substring checking on a first mismatch
-            }
-        }
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return matchedWordInDirections(pWordsGrid, word, wordLength, i, j, e_STATIC_DIMENSION, e_DIRECTION_RIGHT);
 }
 
 bool matchedWordLineRightToLeft (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j)
 {
-    t_gridPosition gridSizes = (*pWordsGrid).m_getGridDimensions();
-    if (
-            (i < gridSizes.f_Row)
-            && (j + 1 >= wordLength)
-        )
-    {
-        for (u_int k = 0; k < wordLength; k++)
-        {
-            if (word[k] != (*pWordsGrid).m_getCellValue(i, j - k))
-            {
-                return false;//stop substring checking on a first mismatch
-            }
-        }
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return matchedWordInDirections(pWordsGrid, word, wordLength, i, j, e_STATIC_DIMENSION, e_DIRECTION_LEFT);
 }
 
 bool matchedWordColumnTopToBottom (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j)
 {
-    t_gridPosition gridSizes = (*pWordsGrid).m_getGridDimensions();
-    if (
-            (i + wordLength - 1 < gridSizes.f_Row)
-            && (j < gridSizes.f_Column)
-        )
-    {
-        for (u_int k = 0; k < wordLength; k++)
-        {
-            if (word[k] != (*pWordsGrid).m_getCellValue(i + k, j))
-            {
-                return false;//stop substring checking on a first mismatch
-            }
-        }
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return matchedWordInDirections(pWordsGrid, word, wordLength, i, j, e_DIRECTION_DOWN, e_STATIC_DIMENSION);
 }
 
 bool matchedWordColumnBottomToTop (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j)
 {
-    t_gridPosition gridSizes = (*pWordsGrid).m_getGridDimensions();
-    if (
-            (i + 1 >= wordLength)
-            && (j < gridSizes.f_Column)
-        )
-    {
-        for (u_int k = 0; k < wordLength; k++)
-        {
-            if (word[k] != (*pWordsGrid).m_getCellValue(i - k, j))
-            {
-                return false;//stop substring checking on a first mismatch
-            }
-        }
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return matchedWordInDirections(pWordsGrid, word, wordLength, i, j, e_DIRECTION_UP, e_STATIC_DIMENSION);
 }
 
 bool matchedWordPrimaryDiagonal (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j)
 {
-    t_gridPosition gridSizes = (*pWordsGrid).m_getGridDimensions();
-    if (
-            (i + wordLength - 1 < gridSizes.f_Row)
-            && (j + wordLength - 1 < gridSizes.f_Column)
-        )
-    {
-        for (u_int k = 0; k < wordLength; k++)
-        {
-            if (word[k] != (*pWordsGrid).m_getCellValue(i + k, j + k))
-            {
-                return false;//stop substring checking on a first mismatch
-            }
-        }
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return matchedWordInDirections(pWordsGrid, word, wordLength, i, j, e_DIRECTION_DOWN, e_DIRECTION_RIGHT);
 }
 
 bool matchedWordPrimaryDiagonalReversed (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j)
 {
-    t_gridPosition gridSizes = (*pWordsGrid).m_getGridDimensions();
-    if (
-            (i + 1 >= wordLength)
-            && (j + 1 >= wordLength)
-        )
-    {
-        for (u_int k = 0; k < wordLength; k++)
-        {
-            if (word[k] != (*pWordsGrid).m_getCellValue(i - k, j - k))
-            {
-                return false;//stop substring checking on a first mismatch
-            }
-        }
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return matchedWordInDirections(pWordsGrid, word, wordLength, i, j, e_DIRECTION_UP, e_DIRECTION_LEFT);
 }
 
 bool matchedWordSecondaryDiagonal (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j)
 {
-    t_gridPosition gridSizes = (*pWordsGrid).m_getGridDimensions();
-    if (
-            (i + 1 >= wordLength)
-            && (j + wordLength - 1 < gridSizes.f_Column)
-        )
-    {
-        for (u_int k = 0; k < wordLength; k++)
-        {
-            if (word[k] != (*pWordsGrid).m_getCellValue(i - k, j + k))
-            {
-                return false;//stop substring checking on a first mismatch
-            }
-        }
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return matchedWordInDirections(pWordsGrid, word, wordLength, i, j, e_DIRECTION_UP, e_DIRECTION_RIGHT);
 }
 
 bool matchedWordSecondaryDiagonalReversed (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j)
 {
+    return matchedWordInDirections(pWordsGrid, word, wordLength, i, j, e_DIRECTION_DOWN, e_DIRECTION_LEFT);
+}
+
+bool matchedWordInDirections (  CharGrid * const pWordsGrid,
+                                const char * word,
+                                const u_int & wordLength,
+                                const u_int & initialRow,
+                                const u_int & initialColumn,
+                                const t_wordSearchingDirection & verticalDirection,
+                                const t_wordSearchingDirection & horizontalDirection                       
+    )
+{
     t_gridPosition gridSizes = (*pWordsGrid).m_getGridDimensions();
-    if (
-            (i + wordLength - 1 < gridSizes.f_Row)
-            && (j + 1 >= wordLength)
-        )
+    if (isWordSearchingOutOfRange(gridSizes, wordLength, initialRow, initialColumn, verticalDirection, horizontalDirection))
+    {
+        return false;
+    }
+    else
     {
         for (u_int k = 0; k < wordLength; k++)
         {
-            if (word[k] != (*pWordsGrid).m_getCellValue(i + k, j - k))
+            int row = moveInDirection(initialRow, k, verticalDirection);
+            int column = moveInDirection(initialColumn, k, horizontalDirection);
+            
+            if (word[k] != (*pWordsGrid).m_getCellValue(row, column))
             {
                 return false;//stop substring checking on a first mismatch
             }
         }
         return true;
     }
-    else
+}
+
+int moveInDirection (const u_int & initialIndex, const u_int & offset, const t_wordSearchingDirection & direction)
+{
+    switch (direction)
     {
-        return false;
+    case e_DIRECTION_LEFT:
+    case e_DIRECTION_UP:
+        return (int)initialIndex - (int)offset;
+
+    case e_DIRECTION_RIGHT:
+    case e_DIRECTION_DOWN:
+        return (int)initialIndex + (int)offset;
+
+    case e_STATIC_DIMENSION:
+    default:
+        return (int)initialIndex;
     }
+}
+
+bool isWordSearchingOutOfRange (const t_gridPosition & gridSizes,
+                                const u_int & wordLength,
+                                const u_int & initialRow,
+                                const u_int & initialColumn,
+                                const t_wordSearchingDirection & verticalDirection,
+                                const t_wordSearchingDirection & horizontalDirection
+    )
+{
+    int finalRow = moveInDirection(initialRow, wordLength - 1, verticalDirection);
+    int finalColumn = moveInDirection(initialColumn, wordLength - 1, horizontalDirection);
+    
+    bool isWordInRange = (
+            (finalRow >= 0)
+            && (finalRow < gridSizes.f_Row)
+            && (finalColumn >= 0)
+            && (finalColumn < gridSizes.f_Column)
+        );
+    
+    return !isWordInRange;
 }
 
 void printWordPosition (const t_gridPosition & position)
