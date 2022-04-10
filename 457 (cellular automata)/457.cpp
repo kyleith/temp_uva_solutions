@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define ONLINE_JUDGE 1
+//#define ONLINE_JUDGE 1
 
 #define u_int unsigned int
 
@@ -11,7 +11,6 @@ const u_int g_DAYS_COUNT = 50;
 
 void processTestCase ();
 
-void initDishes (u_int * dishes);
 void readDNA (u_int * dna);
 void printDishesContent (const u_int * dishes);
 void mutatePopulation (const u_int * dna, const u_int * currentDishesState, u_int * nextDishesState);
@@ -44,14 +43,13 @@ int main ()
 
 void processTestCase ()
 {
-    u_int dishes [g_DISHES_COUNT], bufferDishes [g_DISHES_COUNT];
+    u_int dishes [g_DISHES_COUNT] = { 0 }, bufferDishes [g_DISHES_COUNT] = { 0 };
     u_int *pCurrentDishesState = &dishes[0], *pBufferDishesState = &bufferDishes[0];
-    initDishes(pCurrentDishesState);
 
-    u_int dna [g_DNA_LENGTH];
+    u_int dna [g_DNA_LENGTH];//omit array initialization { 0 } for performance reason
     readDNA(&dna[0]);
 
-    dishes[g_INITIAL_DISH_INDEX] = 1;
+    dishes[g_INITIAL_DISH_INDEX] = 1;//launched mutation on day 0
     printDishesContent(&dishes[0]);
 
     for (u_int i = 1; i < g_DAYS_COUNT; i++)
@@ -59,14 +57,6 @@ void processTestCase ()
         mutatePopulation(&dna[0], pCurrentDishesState, pBufferDishesState);
         swapPointers(&pCurrentDishesState, &pBufferDishesState);
         printDishesContent(pCurrentDishesState);
-    }
-}
-
-void initDishes (u_int * dishes)
-{
-    for (u_int i = 0; i < g_DISHES_COUNT; i++)
-    {
-        dishes[i] = 0;
     }
 }
 
