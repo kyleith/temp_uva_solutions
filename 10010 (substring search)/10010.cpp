@@ -25,7 +25,7 @@ class CharGrid
 {
     public:
         CharGrid () { f_gridDimensions = std::make_pair(0, 0); };
-        ~CharGrid ();
+        ~CharGrid () {};
         
         t_gridPosition m_getGridDimensions () { return f_gridDimensions; };
         void m_setGridDimensions (const t_gridPosition & gridPosition) { f_gridDimensions = gridPosition; };
@@ -39,15 +39,15 @@ class CharGrid
 };
 //...char grid
 
-void processTestCase (CharGrid * const pWordsGrid);
+void processTestCase (CharGrid & pWordsGrid);
 
-void readWordsGrid (CharGrid * const pWordsGrid);
+void readWordsGrid (CharGrid & pWordsGrid);
 void readLookupWord (char * word);
 void omitLineEnding ();
 
-t_gridPosition searchWordInGrid (CharGrid * const wordsGrid, const char * word);
+t_gridPosition searchWordInGrid (CharGrid & wordsGrid, const char * word);
 
-bool matchedWordInDirections (  CharGrid * const pWordsGrid,
+bool matchedWordInDirections (  CharGrid & pWordsGrid,
                                 const char * word,
                                 const u_int & wordLength,
                                 const u_int & initialRow,
@@ -75,31 +75,31 @@ int main ()
     freopen("output.txt", "wt", stdout);
 #endif
 
-    CharGrid * const pWordsGrid = new CharGrid ();
+    CharGrid wordsGrid;
 
     u_int testCases = 0;
     scanf("%u", &testCases);
     if (testCases > 0)
     {
-        processTestCase(pWordsGrid);
+        processTestCase(wordsGrid);
     }
     for (u_int i = 1; i < testCases; i++)
     {
         printf("\n");
-        processTestCase(pWordsGrid);
+        processTestCase(wordsGrid);
     }
 
     return 0;
 }
 
-void processTestCase (CharGrid * const pWordsGrid)
+void processTestCase (CharGrid & wordsGrid)
 {
     t_gridPosition gridSizes (0, 0);
     scanf("%u%u", &gridSizes.f_Row, &gridSizes.f_Column);
     omitLineEnding();
     
-    (*pWordsGrid).m_setGridDimensions(gridSizes);
-    readWordsGrid(pWordsGrid);
+    wordsGrid.m_setGridDimensions(gridSizes);
+    readWordsGrid(wordsGrid);
 
     u_int lookupsCount = 0;
     scanf("%u", &lookupsCount);
@@ -110,19 +110,19 @@ void processTestCase (CharGrid * const pWordsGrid)
         char subString [g_MAX_WORD_LENGTH + 1];
         readLookupWord(subString);
 
-        t_gridPosition positionFound = searchWordInGrid(pWordsGrid, subString);
+        t_gridPosition positionFound = searchWordInGrid(wordsGrid, subString);
         printWordPosition(positionFound);
     }
 }
 
-void readWordsGrid (CharGrid * const pWordsGrid)
+void readWordsGrid (CharGrid & wordsGrid)
 {
-    t_gridPosition gridSizes = (*pWordsGrid).m_getGridDimensions();
+    t_gridPosition gridSizes = wordsGrid.m_getGridDimensions();
     for (u_int i = 0; i < gridSizes.f_Row; i++)
     {
         for (u_int j = 0; j < gridSizes.f_Column; j++)
         {
-            (*pWordsGrid).m_setCellValue(i, j, tolower(getchar()));
+            wordsGrid.m_setCellValue(i, j, tolower(getchar()));
         }    
         omitLineEnding();
     }
@@ -152,12 +152,12 @@ void omitLineEnding ()
         );
 }
 
-t_gridPosition searchWordInGrid (CharGrid * const wordsGrid, const char * word)
+t_gridPosition searchWordInGrid (CharGrid & wordsGrid, const char * word)
 {
     u_int wordLength = strlen(word);
     t_gridPosition gridPosition (g_MAX_WORD_LENGTH + 1, g_MAX_WORD_LENGTH + 1);
 
-    t_gridPosition gridSizes = (*wordsGrid).m_getGridDimensions();
+    t_gridPosition gridSizes = wordsGrid.m_getGridDimensions();
     for (u_int i = 0; i < gridSizes.f_Row; i++)
     {
         for (u_int j = 0; j < gridSizes.f_Column; j++)
@@ -185,7 +185,7 @@ t_gridPosition searchWordInGrid (CharGrid * const wordsGrid, const char * word)
     return gridPosition;
 }
 
-bool matchedWordInDirections (  CharGrid * const pWordsGrid,
+bool matchedWordInDirections (  CharGrid & wordsGrid,
                                 const char * word,
                                 const u_int & wordLength,
                                 const u_int & initialRow,
@@ -194,7 +194,7 @@ bool matchedWordInDirections (  CharGrid * const pWordsGrid,
                                 const t_wordSearchingDirection & horizontalDirection                       
     )
 {
-    t_gridPosition gridSizes = (*pWordsGrid).m_getGridDimensions();
+    t_gridPosition gridSizes = wordsGrid.m_getGridDimensions();
     if (isWordSearchingOutOfRange(gridSizes, wordLength, initialRow, initialColumn, verticalDirection, horizontalDirection))
     {
         return false;
@@ -206,7 +206,7 @@ bool matchedWordInDirections (  CharGrid * const pWordsGrid,
             int row = moveInDirection(initialRow, k, verticalDirection);
             int column = moveInDirection(initialColumn, k, horizontalDirection);
             
-            if (word[k] != (*pWordsGrid).m_getCellValue(row, column))
+            if (word[k] != wordsGrid.m_getCellValue(row, column))
             {
                 return false;//stop substring checking on a first mismatch
             }
