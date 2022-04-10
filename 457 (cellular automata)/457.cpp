@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-//#define ONLINE_JUDGE 1
+#define ONLINE_JUDGE 1
 
 #define u_int unsigned int
 
