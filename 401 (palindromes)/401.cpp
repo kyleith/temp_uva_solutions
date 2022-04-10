@@ -154,7 +154,7 @@ bool isMirroredString (const char * word, const char * mirroredLetters, const ch
 {
     u_int wordLength = strlen(word);
 
-    char mirroredWord [g_MAX_WORD_LENGTH + 1];
+    char mirroredWord [g_MAX_WORD_LENGTH + 1];//omitted array initialization { 0 } for performance reason
     mirroredWord[wordLength] = '\0';
 
     for (u_int i = 0; i < wordLength; i++)
