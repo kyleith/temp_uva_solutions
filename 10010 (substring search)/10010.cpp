@@ -3,7 +3,7 @@
 #include <cctype>
 #include <utility>
 
-//#define ONLINE_JUDGE 1
+#define ONLINE_JUDGE 1
 
 #define u_int unsigned int
 #define t_gridPosition std::pair<u_int, u_int>
