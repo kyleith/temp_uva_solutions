@@ -2,9 +2,8 @@
 #include <string.h>
 #include <cctype>
 #include <utility>
-#include <algorithm>
 
-#define ONLINE_JUDGE 1
+//#define ONLINE_JUDGE 1
 
 #define u_int unsigned int
 #define t_gridPosition std::pair<u_int, u_int>
@@ -17,7 +16,7 @@ const u_int g_MAX_WORD_LENGTH = 50;
 class CharGrid
 {
     public:
-        CharGrid ();
+        CharGrid () { f_gridDimensions = std::make_pair(0, 0); };
         ~CharGrid ();
         
         t_gridPosition m_getGridDimensions () { return f_gridDimensions; };
@@ -27,33 +26,9 @@ class CharGrid
         void m_setCellValue (const u_int & rowIndex, const u_int & columnIndex, const char & cellValue) { f_wordsGrid[rowIndex][columnIndex] = cellValue; };
 
     private:
-        char ** f_wordsGrid;
+        char f_wordsGrid[g_MAX_WORD_LENGTH][g_MAX_WORD_LENGTH];
         t_gridPosition f_gridDimensions;
 };
-
-CharGrid :: CharGrid ()
-{
-    f_wordsGrid = new char * [g_MAX_WORD_LENGTH];
-    for (u_int i = 0; i < g_MAX_WORD_LENGTH; i++)
-    {
-        f_wordsGrid[i] = new char [g_MAX_WORD_LENGTH];
-    }
-
-    f_gridDimensions = std::make_pair(0, 0);
-} 
-
-CharGrid :: ~CharGrid ()
-{
-    for (u_int i = 0; i < g_MAX_WORD_LENGTH; i++)
-    {
-        delete [] f_wordsGrid[i];
-    }
-    delete [] f_wordsGrid;
-    f_wordsGrid = NULL;
-
-    f_gridDimensions.f_Row = 0;
-    f_gridDimensions.f_Column = 0;
-}
 //...char grid
 
 void processTestCase (CharGrid * const pWordsGrid);
