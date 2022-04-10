@@ -2,14 +2,14 @@
 #include <string.h>
 #include <utility>
 
-#define ONLINE_JUDGE 1 
+//#define ONLINE_JUDGE 1 
 
 #define u_int unsigned int
 #define t_subInterval std::pair<int,int>
 
 const u_int g_MAX_SYMBOLS_IN_LINE = 100;
 const u_int g_SUBSTRINGS_COUNT = 5;
-const char * g_POEM_ENDING = "...";
+const char * const g_POEM_ENDING = "...";
 
 void omitLineEnding ();
 void readLine (char * line);
@@ -27,14 +27,10 @@ int main ()
     freopen("output.txt", "wt", stdout);
 #endif
 
-    char * const firstLine = new char [g_MAX_SYMBOLS_IN_LINE + 1];
-    char * const secondLine = new char [g_MAX_SYMBOLS_IN_LINE + 1];
+    char firstLine [g_MAX_SYMBOLS_IN_LINE + 1] = { 0 };
+    char secondLine [g_MAX_SYMBOLS_IN_LINE + 1] = { 0 };
     
-    t_subInterval subStringBorders [g_SUBSTRINGS_COUNT];
-    for (u_int i = 0; i < g_SUBSTRINGS_COUNT; i++)
-    {
-        subStringBorders[i] = std::make_pair(0, -1);
-    }   
+    t_subInterval subStringBorders [g_SUBSTRINGS_COUNT] = { std::make_pair(0, -1) };
     t_subInterval secondLineBorders (0, -1);
 
     u_int pairsCount = 0;
@@ -105,7 +101,7 @@ void updateSubstringBorders (char * line, t_subInterval * borders)
 
 void updateSecondLineBorders (char * line, t_subInterval & lineBorders)
 {
-    u_int endingMatch = strstr(line, "...") - &line[0];
+    u_int endingMatch = strstr(line, g_POEM_ENDING) - &line[0];
     
     lineBorders.first = 0;
     lineBorders.second = endingMatch - 1;
