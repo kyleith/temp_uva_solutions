@@ -11,6 +11,9 @@ const u_int g_MAX_SYMBOLS_IN_LINE = 100;
 const u_int g_SUBSTRINGS_COUNT = 5;
 const char * const g_POEM_ENDING = "...";
 
+const u_int g_ENDING_PARTS_COUNT = 4;
+const u_int g_ENDING_SUBSTRINGS_PATTERN [g_ENDING_PARTS_COUNT] = {3, 2, 1, 4};
+
 void omitLineEnding ();
 void readLine (char * line);
 void updateSubstringBorders (char * line, t_subInterval * borders);
@@ -120,10 +123,11 @@ void printSecondLine (char * firstLine, t_subInterval * firstLineBorders, char *
 {
     printSubString(secondLine, secondLineBorders);
 
-    printSubString(firstLine, firstLineBorders[3]);
-    printSubString(firstLine, firstLineBorders[2]);
-    printSubString(firstLine, firstLineBorders[1]);
-    printSubString(firstLine, firstLineBorders[4]);
+    for (u_int i = 0; i < g_ENDING_PARTS_COUNT; i++)
+    {
+        u_int substringIndex = g_ENDING_SUBSTRINGS_PATTERN[i];
+        printSubString(firstLine, firstLineBorders[substringIndex]);
+    }
 
     printf("\n");
 }
