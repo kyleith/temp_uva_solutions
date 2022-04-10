@@ -47,15 +47,6 @@ void omitLineEnding ();
 
 t_gridPosition searchWordInGrid (CharGrid * const wordsGrid, const char * word);
 
-bool matchedWordLineLeftToRight (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j);
-bool matchedWordLineRightToLeft (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j);
-bool matchedWordColumnTopToBottom (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j);
-bool matchedWordColumnBottomToTop (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j);
-bool matchedWordPrimaryDiagonal (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j);
-bool matchedWordPrimaryDiagonalReversed (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j);
-bool matchedWordSecondaryDiagonal (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j);
-bool matchedWordSecondaryDiagonalReversed (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j);
-
 bool matchedWordInDirections (  CharGrid * const pWordsGrid,
                                 const char * word,
                                 const u_int & wordLength,
@@ -172,16 +163,16 @@ t_gridPosition searchWordInGrid (CharGrid * const wordsGrid, const char * word)
         for (u_int j = 0; j < gridSizes.f_Column; j++)
         {
             bool wordMatched = (
-                    matchedWordLineLeftToRight(wordsGrid, word, wordLength, i, j)//line left to right
-                    || matchedWordLineRightToLeft(wordsGrid, word, wordLength, i, j)//line right to left
-                    || matchedWordColumnTopToBottom(wordsGrid, word, wordLength, i, j)//column top to bottom
-                    || matchedWordColumnBottomToTop(wordsGrid, word, wordLength, i, j)//column bottom to top
-                    || matchedWordPrimaryDiagonal(wordsGrid, word, wordLength, i, j)//primary diagonal
-                    || matchedWordPrimaryDiagonalReversed(wordsGrid, word, wordLength, i, j)//primary diagonal reversed
-                    || matchedWordSecondaryDiagonal(wordsGrid, word, wordLength, i, j)//secondary diagonal
-                    || matchedWordSecondaryDiagonalReversed(wordsGrid, word, wordLength, i, j)//secondary diagonal reversed
+                    matchedWordInDirections(    wordsGrid, word, wordLength, i, j, e_STATIC_DIMENSION,  e_DIRECTION_RIGHT)
+                    || matchedWordInDirections( wordsGrid, word, wordLength, i, j, e_STATIC_DIMENSION,  e_DIRECTION_LEFT)
+                    || matchedWordInDirections( wordsGrid, word, wordLength, i, j, e_DIRECTION_DOWN,    e_STATIC_DIMENSION)
+                    || matchedWordInDirections( wordsGrid, word, wordLength, i, j, e_DIRECTION_UP,      e_STATIC_DIMENSION)
+                    || matchedWordInDirections( wordsGrid, word, wordLength, i, j, e_DIRECTION_DOWN,    e_DIRECTION_RIGHT)
+                    || matchedWordInDirections( wordsGrid, word, wordLength, i, j, e_DIRECTION_UP,      e_DIRECTION_LEFT)
+                    || matchedWordInDirections( wordsGrid, word, wordLength, i, j, e_DIRECTION_UP,      e_DIRECTION_RIGHT)
+                    || matchedWordInDirections( wordsGrid, word, wordLength, i, j, e_DIRECTION_DOWN,    e_DIRECTION_LEFT)
                 );
-            
+
             if (wordMatched)
             {
                 gridPosition.f_Row = i + 1;
@@ -192,46 +183,6 @@ t_gridPosition searchWordInGrid (CharGrid * const wordsGrid, const char * word)
     }
 
     return gridPosition;
-}
-
-bool matchedWordLineLeftToRight (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j)
-{
-    return matchedWordInDirections(pWordsGrid, word, wordLength, i, j, e_STATIC_DIMENSION, e_DIRECTION_RIGHT);
-}
-
-bool matchedWordLineRightToLeft (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j)
-{
-    return matchedWordInDirections(pWordsGrid, word, wordLength, i, j, e_STATIC_DIMENSION, e_DIRECTION_LEFT);
-}
-
-bool matchedWordColumnTopToBottom (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j)
-{
-    return matchedWordInDirections(pWordsGrid, word, wordLength, i, j, e_DIRECTION_DOWN, e_STATIC_DIMENSION);
-}
-
-bool matchedWordColumnBottomToTop (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j)
-{
-    return matchedWordInDirections(pWordsGrid, word, wordLength, i, j, e_DIRECTION_UP, e_STATIC_DIMENSION);
-}
-
-bool matchedWordPrimaryDiagonal (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j)
-{
-    return matchedWordInDirections(pWordsGrid, word, wordLength, i, j, e_DIRECTION_DOWN, e_DIRECTION_RIGHT);
-}
-
-bool matchedWordPrimaryDiagonalReversed (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j)
-{
-    return matchedWordInDirections(pWordsGrid, word, wordLength, i, j, e_DIRECTION_UP, e_DIRECTION_LEFT);
-}
-
-bool matchedWordSecondaryDiagonal (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j)
-{
-    return matchedWordInDirections(pWordsGrid, word, wordLength, i, j, e_DIRECTION_UP, e_DIRECTION_RIGHT);
-}
-
-bool matchedWordSecondaryDiagonalReversed (CharGrid * const pWordsGrid, const char * word, const u_int & wordLength, const u_int & i, const u_int & j)
-{
-    return matchedWordInDirections(pWordsGrid, word, wordLength, i, j, e_DIRECTION_DOWN, e_DIRECTION_LEFT);
 }
 
 bool matchedWordInDirections (  CharGrid * const pWordsGrid,
