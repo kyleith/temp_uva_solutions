@@ -32,6 +32,14 @@ DataField calculateResult (const DataField & firstField, const DataField & secon
 void printResult (const u_int & caseIndex, const DataField & resultField);
 
 void readAndNormalizeValue (double & value, char & currentSymbol);
+void tryToLinkDataField (   const DataField & field,
+                            DataField & power,
+                            DataField & voltage,
+                            DataField & current,
+                            bool & isPowerDefined,
+                            bool & isVoltageDefined,
+                            bool & isCurrentDefined
+    );
 u_int findSymbolIndex (const char & symbol, const char * const word);
 void omitLineEnding ();
 
@@ -112,75 +120,39 @@ DataField decodeDataField (const bool & lastDataFieldInLine)
 DataField calculateResult (const DataField & firstField, const DataField & secondField)
 {
     DataField defaultResult ('\0', 0, '\0');
-
     DataField power (defaultResult), voltage (defaultResult), current (defaultResult);
-    DataField * thirdField = NULL;
     bool isPowerDefined = false, isVoltageDefined = false, isCurrentDefined = false;
 
-    char firstConcept = firstField.f_concept;
-    char secondConcept = secondField.f_concept;
+    tryToLinkDataField(firstField, power, voltage, current, isPowerDefined, isVoltageDefined, isCurrentDefined);
+    tryToLinkDataField(secondField, power, voltage, current, isPowerDefined, isVoltageDefined, isCurrentDefined);
 
-    switch (firstConcept)
-    {
-        case 'P':
-            power = firstField;
-            isPowerDefined = true;
-            break;
-        case 'U':
-            voltage = firstField;
-            isVoltageDefined = true;
-            break;
-        case 'I':
-            current = firstField;
-            isCurrentDefined = true;
-            break;
-        default:
-            return defaultResult;/*error*/
-    }
-
-    switch (secondConcept)
-    {
-        case 'P':
-            power = secondField;
-            isPowerDefined = true;
-            break;
-        case 'U':
-            voltage = secondField;
-            isVoltageDefined = true;
-            break;
-        case 'I':
-            current = secondField;
-            isCurrentDefined = true;
-            break;
-        default:
-            return defaultResult;/*error*/
-    }
-    
-    u_int conceptIndex = -1;
+    DataField * thirdField = NULL;
+    u_int conceptSymbol = '\0';
     if (isPowerDefined && isVoltageDefined)
     {
+        conceptSymbol = 'I';
         current.f_value = power.f_value / voltage.f_value;
         thirdField = &current;
-        conceptIndex = 2;
     }
     else if (isPowerDefined && isCurrentDefined)
     {
+        conceptSymbol = 'U';
         voltage.f_value = power.f_value / current.f_value;
         thirdField = &voltage;
-        conceptIndex = 1;
     }
     else if (isVoltageDefined && isCurrentDefined)
     {
+        conceptSymbol = 'P';
         power.f_value = voltage.f_value * current.f_value;
         thirdField = &power;
-        conceptIndex = 0;
     }
     else
     {
         return defaultResult;/*error*/
     }
 
-    (*thirdField).f_concept = g_CONCEPTS[conceptIndex];
+    u_int conceptIndex = findSymbolIndex(conceptSymbol, g_CONCEPTS);
+    (*thirdField).f_concept = conceptSymbol;
     (*thirdField).f_unit = g_UNITS[conceptIndex];
     return *thirdField;
 }
@@ -200,6 +172,34 @@ void readAndNormalizeValue (double & value, char & currentSymbol)
     if (prefixIndex < g_PREFIXES_COUNT)
     {
         value *= g_PREFIXES_MULTUPLIERS[prefixIndex];
+    }
+}
+
+void tryToLinkDataField (   const DataField & field,
+                            DataField & power,
+                            DataField & voltage,
+                            DataField & current,
+                            bool & isPowerDefined,
+                            bool & isVoltageDefined,
+                            bool & isCurrentDefined
+    )
+{
+    switch (field.f_concept)
+    {
+        case 'P':
+            power = field;
+            isPowerDefined = true;
+            break;
+        case 'U':
+            voltage = field;
+            isVoltageDefined = true;
+            break;
+        case 'I':
+            current = field;
+            isCurrentDefined = true;
+            break;
+        default:
+            break;//no action
     }
 }
 
