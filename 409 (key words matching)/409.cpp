@@ -12,7 +12,13 @@ const u_int g_MAX_KEYWORD_LENGTH = 20;
 const u_int g_MAX_EXCUSES_COUNT = 20;
 const u_int g_MAX_EXCUSE_LENGTH = 70;
 
-void processTestCase (const u_int & testCaseIndex, const u_int & keywordsCount, const u_int & excusesCount);
+void processTestCase (const u_int & testCaseIndex,
+                        const u_int & keywordsCount,
+                        const u_int & excusesCount,
+                        char keywordsDictionary[g_MAX_KEYWORDS_COUNT][g_MAX_KEYWORD_LENGTH + 1],
+                        char excusesList [g_MAX_EXCUSES_COUNT][g_MAX_EXCUSE_LENGTH + 1],
+                        u_int * excusesCoeffs
+    );
 
 void readWordsDictionary (const u_int & wordsCount, char dictionary[g_MAX_KEYWORDS_COUNT][g_MAX_KEYWORD_LENGTH + 1]);
 
@@ -43,24 +49,30 @@ int main ()
     freopen("output.txt", "wt", stdout);
 #endif
 
+    char keywordsDictionary [g_MAX_KEYWORDS_COUNT][g_MAX_KEYWORD_LENGTH + 1];
+    char excusesList [g_MAX_EXCUSES_COUNT][g_MAX_EXCUSE_LENGTH + 1];
+    u_int excusesCoeffs [g_MAX_EXCUSES_COUNT]; //no initialization for performance reason
+
     u_int keywords = 0, excuses = 0;
     u_int excuseSetNumber = 0;
     while (scanf("%u%u", &keywords, &excuses) == 2)
     {
         excuseSetNumber++;
-        processTestCase(excuseSetNumber, keywords, excuses);
+        processTestCase(excuseSetNumber, keywords, excuses, keywordsDictionary, excusesList, excusesCoeffs);
     }
 
     return 0;
 }
 
-void processTestCase (const u_int & testCaseIndex, const u_int & keywordsCount, const u_int & excusesCount)
+void processTestCase (const u_int & testCaseIndex,
+                        const u_int & keywordsCount,
+                        const u_int & excusesCount,
+                        char keywordsDictionary[g_MAX_KEYWORDS_COUNT][g_MAX_KEYWORD_LENGTH + 1],
+                        char excusesList [g_MAX_EXCUSES_COUNT][g_MAX_EXCUSE_LENGTH + 1],
+                        u_int * excusesCoeffs
+    )
 {
-    char keywordsDictionary [g_MAX_KEYWORDS_COUNT][g_MAX_KEYWORD_LENGTH + 1];
     readWordsDictionary(keywordsCount, keywordsDictionary);
-
-    char excusesList [g_MAX_EXCUSES_COUNT][g_MAX_EXCUSE_LENGTH + 1];
-    u_int excusesCoeffs [g_MAX_EXCUSES_COUNT]; //no initialization for performance reason
 
     for (u_int i = 0; i < excusesCount; i++)
     {
