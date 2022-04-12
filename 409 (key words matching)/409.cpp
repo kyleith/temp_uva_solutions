@@ -31,8 +31,8 @@ void processExcuseWord (const char * testWord,
 bool matchedKeyword (const char * keyword, const char * testWord);
 bool isAlphabetSymbol (const char & symbol);
 
-u_int findWorstExcuseCoeff (const u_int coeffs [g_MAX_EXCUSES_COUNT], const int & count);
-void printExcuse (const char excuse [g_MAX_EXCUSE_LENGTH + 1]);
+u_int findWorstExcuseCoeff (const u_int * coeffs, const int & count);
+void printExcuse (const char * excuse);
 
 void omitLineEnding ();
 
@@ -179,7 +179,7 @@ bool isAlphabetSymbol (const char & symbol)
         );
 }
 
-u_int findWorstExcuseCoeff (const u_int coeffs [g_MAX_EXCUSES_COUNT], const int & count)
+u_int findWorstExcuseCoeff (const u_int * coeffs, const int & count)
 {
     u_int maxCoeff = 0;
     for (u_int i = 0; i < count; i++)
@@ -192,7 +192,7 @@ u_int findWorstExcuseCoeff (const u_int coeffs [g_MAX_EXCUSES_COUNT], const int 
     return maxCoeff;
 }
 
-void printExcuse (const char excuse [g_MAX_EXCUSE_LENGTH + 1])
+void printExcuse (const char * excuse)
 {
     printf("%s\n", excuse);
 }
