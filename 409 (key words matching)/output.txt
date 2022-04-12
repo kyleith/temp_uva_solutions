@@ -16,10 +16,8 @@ a a
 
 Excuse Set #6
 56789pUMa01234
-There are no big cat names in this sentence so should it be printed?
 
 Excuse Set #7
-My dog ate my homework.
 Can you believe my dog died after eating my canary... AND MY HOMEWORK?
 
 Excuse Set #8
@@ -28,14 +26,12 @@ There was a thermonuclear war!
 
 Excuse Set #9
 DoG
-This excuse is so good that it contain 0 keywords.
 
 Excuse Set #10
 dog dog dog
 
 Excuse Set #11
 DoG
-This excuse is so good that it contain 0 keywords.
 
 Excuse Set #12
 dog dog dog
@@ -52,7 +48,6 @@ sdf sdfsdf sdf
 sd fsdfsdfs
 
 Excuse Set #16
-My dog ate my homework.
 Can you believe my dog died after eating my canary... AND MY HOMEWORK?
 
 Excuse Set #17

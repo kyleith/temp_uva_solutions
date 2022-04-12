@@ -159,7 +159,7 @@ bool matchedKeyword (const char * keyword, const char * testWord)
 
     for (u_int i = 0; i < keywordLength; i++)
     {
-        if (keyword[i] != testWord[i])
+        if (keyword[i] != std::tolower(testWord[i]))
         {
             return false;
         }
