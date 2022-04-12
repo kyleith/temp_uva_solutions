@@ -120,12 +120,18 @@ void readAndProcessExcuse ( const char keywords[g_MAX_KEYWORDS_COUNT][g_MAX_KEYW
     {
         if (isAlphabetSymbol(symbol))
         {
-            currentWord[currentWordLength] = symbol;
+            if (currentWordLength < g_MAX_KEYWORD_LENGTH)/*check to prevent Runtime Error*/
+            {
+                currentWord[currentWordLength] = symbol;
+            }
             currentWordLength++;
         }
         else
         {
-            if (currentWordLength > 0)
+            if (
+                    (currentWordLength > 0)
+                    && (currentWordLength <= g_MAX_KEYWORD_LENGTH)
+                )
             {
                 currentWord[currentWordLength] = '\0';
                 processExcuseWord(&currentWord[0], keywords, keywordsCount, currentExcuseCoeff);
