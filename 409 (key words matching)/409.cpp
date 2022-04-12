@@ -67,7 +67,7 @@ void processTestCase (const u_int & testCaseIndex, const u_int & keywordsCount, 
         readAndProcessExcuse(keywordsDictionary, keywordsCount, excusesList[i], excusesCoeffs[i]);
     }
 
-    printf("Excuse set #%u\n", testCaseIndex);
+    printf("Excuse Set #%u\n", testCaseIndex);
     u_int worstCoeff = findWorstExcuseCoeff(excusesCoeffs, excusesCount);
     for (u_int i = 0; i < excusesCount; i++)
     {
@@ -115,6 +115,7 @@ void readAndProcessExcuse ( const char keywords[g_MAX_KEYWORDS_COUNT][g_MAX_KEYW
         {
             if (currentWordLength > 0)
             {
+                currentWord[currentWordLength] = '\0';
                 processExcuseWord(&currentWord[0], keywords, keywordsCount, currentExcuseCoeff);
             }
             currentWordLength = 0;
@@ -125,11 +126,10 @@ void readAndProcessExcuse ( const char keywords[g_MAX_KEYWORDS_COUNT][g_MAX_KEYW
     }
     if (currentWordLength > 0)
     {
+        currentWord[currentWordLength] = '\0';
         processExcuseWord(&currentWord[0], keywords, keywordsCount, currentExcuseCoeff);
     }
     currentExcuse[excuseLength] = '\0';
-
-    //TODO: coeff calculation
 }
 
 void processExcuseWord (const char * testWord,
@@ -159,7 +159,7 @@ bool matchedKeyword (const char * keyword, const char * testWord)
 
     for (u_int i = 0; i < keywordLength; i++)
     {
-        if (keyword[i] != std::tolower(testWord[i]))
+        if (keyword[i] != testWord[i])
         {
             return false;
         }
@@ -176,10 +176,6 @@ bool isAlphabetSymbol (const char & symbol)
         || (
             (symbol >= 'A')
             && (symbol<= 'Z')
-        )
-        || (
-            (symbol >= '0')
-            && (symbol<= '9')
         );
 }
 
