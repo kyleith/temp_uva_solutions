@@ -16,8 +16,10 @@ const double g_PREFIXES_MULTUPLIERS [] = {0.001, 1000.0, 1000000.0};
 struct DataField
 {
     DataField (const char & symbol, const double & value, const char & unit) { f_concept = symbol; f_value = value; f_unit = unit; };
+    DataField (const DataField & field) { f_concept = field.f_concept; f_value = field.f_value; f_unit = field.f_unit; }
     ~DataField() {};
-    
+    DataField & operator = (const DataField & field) { f_concept = field.f_concept; f_value = field.f_value; f_unit = field.f_unit; return *this; }
+
     char f_concept;
     double f_value;
     char f_unit;
@@ -109,11 +111,78 @@ DataField decodeDataField (const bool & lastDataFieldInLine)
 
 DataField calculateResult (const DataField & firstField, const DataField & secondField)
 {
-    DataField result ('\0', 0, '\0');
+    DataField defaultResult ('\0', 0, '\0');
+
+    DataField power (defaultResult), voltage (defaultResult), current (defaultResult);
+    DataField * thirdField = NULL;
+    bool isPowerDefined = false, isVoltageDefined = false, isCurrentDefined = false;
 
     char firstConcept = firstField.f_concept;
     char secondConcept = secondField.f_concept;
-    return result;
+
+    switch (firstConcept)
+    {
+        case 'P':
+            power = firstField;
+            isPowerDefined = true;
+            break;
+        case 'U':
+            voltage = firstField;
+            isVoltageDefined = true;
+            break;
+        case 'I':
+            current = firstField;
+            isCurrentDefined = true;
+            break;
+        default:
+            return defaultResult;/*error*/
+    }
+
+    switch (secondConcept)
+    {
+        case 'P':
+            power = secondField;
+            isPowerDefined = true;
+            break;
+        case 'U':
+            voltage = secondField;
+            isVoltageDefined = true;
+            break;
+        case 'I':
+            current = secondField;
+            isCurrentDefined = true;
+            break;
+        default:
+            return defaultResult;/*error*/
+    }
+    
+    u_int conceptIndex = -1;
+    if (isPowerDefined && isVoltageDefined)
+    {
+        current.f_unit = power.f_unit / voltage.f_unit;
+        thirdField = &current;
+        conceptIndex = 2;
+    }
+    else if (isPowerDefined && isCurrentDefined)
+    {
+        voltage.f_unit = power.f_unit / current.f_unit;
+        thirdField = &voltage;
+        conceptIndex = 1;
+    }
+    else if (isVoltageDefined && isCurrentDefined)
+    {
+        power.f_unit = voltage.f_unit * current.f_unit;
+        thirdField = &power;
+        conceptIndex = 0;
+    }
+    else
+    {
+        return defaultResult;/*error*/
+    }
+
+    (*thirdField).f_concept = g_CONCEPTS[conceptIndex];
+    (*thirdField).f_unit = g_UNITS[conceptIndex];
+    return *thirdField;
 }
 
 void printResult (const u_int & caseIndex, const DataField & resultField)

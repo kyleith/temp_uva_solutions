@@ -1,0 +1,48 @@
+Problem #1
+P=0.00W
+
+Problem #2
+I=0.00A
+
+Problem #3
+U=0.00V
+
+Problem #4
+P=0.00W
+
+Problem #5
+I=0.00A
+
+Problem #6
+U=0.00V
+
+Problem #7
+U=0.00V
+
+Problem #8
+P=0.00W
+
+Problem #9
+I=0.00A
+
+Problem #10
+P=0.00W
+
+Problem #11
+I=0.00A
+
+Problem #12
+U=0.00V
+
+Problem #13
+P=0.00W
+
+Problem #14
+I=0.00A
+
+Problem #15
+I=0.00A
+
+Problem #16
+P=0.00W
+
