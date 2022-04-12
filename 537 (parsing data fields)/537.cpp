@@ -159,19 +159,19 @@ DataField calculateResult (const DataField & firstField, const DataField & secon
     u_int conceptIndex = -1;
     if (isPowerDefined && isVoltageDefined)
     {
-        current.f_unit = power.f_unit / voltage.f_unit;
+        current.f_value = power.f_value / voltage.f_value;
         thirdField = &current;
         conceptIndex = 2;
     }
     else if (isPowerDefined && isCurrentDefined)
     {
-        voltage.f_unit = power.f_unit / current.f_unit;
+        voltage.f_value = power.f_value / current.f_value;
         thirdField = &voltage;
         conceptIndex = 1;
     }
     else if (isVoltageDefined && isCurrentDefined)
     {
-        power.f_unit = voltage.f_unit * current.f_unit;
+        power.f_value = voltage.f_value * current.f_value;
         thirdField = &power;
         conceptIndex = 0;
     }
