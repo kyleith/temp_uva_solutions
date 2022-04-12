@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <cctype>
+#include <string.h>
 
 //#define ONLINE_JUDGE 1
 
@@ -20,6 +22,14 @@ void readAndProcessExcuse ( const char keywords[g_MAX_KEYWORDS_COUNT][g_MAX_KEYW
                             u_int & currentExcuseCoeff
     );
 
+void processExcuseWord (const char * testWord,
+                        const char keywords[g_MAX_KEYWORDS_COUNT][g_MAX_KEYWORD_LENGTH + 1],
+                        const u_int & keywordsCount,
+                        u_int & currentExcuseCoeff
+    );
+
+bool matchedKeyword (const char * keyword, const char * testWord);
+bool isAlphabetSymbol (const char & symbol);
 
 u_int findWorstExcuseCoeff (const u_int coeffs [g_MAX_EXCUSES_COUNT], const int & count);
 void printExcuse (const char excuse [g_MAX_EXCUSE_LENGTH + 1]);
@@ -86,6 +96,9 @@ void readAndProcessExcuse ( const char keywords[g_MAX_KEYWORDS_COUNT][g_MAX_KEYW
 {
     currentExcuseCoeff = 0;
 
+    char currentWord [g_MAX_KEYWORD_LENGTH + 1];
+    u_int currentWordLength = 0;
+
     int excuseLength = 0;
     char symbol = '\0';
     while (
@@ -93,12 +106,81 @@ void readAndProcessExcuse ( const char keywords[g_MAX_KEYWORDS_COUNT][g_MAX_KEYW
             && (symbol != EOF)
         )
     {
+        if (isAlphabetSymbol(symbol))
+        {
+            currentWord[currentWordLength] = symbol;
+            currentWordLength++;
+        }
+        else
+        {
+            if (currentWordLength > 0)
+            {
+                processExcuseWord(&currentWord[0], keywords, keywordsCount, currentExcuseCoeff);
+            }
+            currentWordLength = 0;
+        }
+
         currentExcuse[excuseLength] = symbol;
         excuseLength++;
+    }
+    if (currentWordLength > 0)
+    {
+        processExcuseWord(&currentWord[0], keywords, keywordsCount, currentExcuseCoeff);
     }
     currentExcuse[excuseLength] = '\0';
 
     //TODO: coeff calculation
+}
+
+void processExcuseWord (const char * testWord,
+                        const char keywords[g_MAX_KEYWORDS_COUNT][g_MAX_KEYWORD_LENGTH + 1],
+                        const u_int & keywordsCount,
+                        u_int & currentExcuseCoeff
+    )
+{
+    for (u_int i = 0; i < keywordsCount; i++)
+    {
+        if (matchedKeyword(keywords[i], testWord))
+        {
+            currentExcuseCoeff++;
+        }
+    }
+}
+
+bool matchedKeyword (const char * keyword, const char * testWord)
+{
+    u_int keywordLength = strlen(keyword);
+    u_int testWordLength = strlen(testWord);
+    
+    if (keywordLength != testWordLength)
+    {
+        return false;
+    }
+
+    for (u_int i = 0; i < keywordLength; i++)
+    {
+        if (keyword[i] != std::tolower(testWord[i]))
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool isAlphabetSymbol (const char & symbol)
+{
+    return (
+            (symbol >= 'a')
+            && (symbol<= 'z')
+        )
+        || (
+            (symbol >= 'A')
+            && (symbol<= 'Z')
+        )
+        || (
+            (symbol >= '0')
+            && (symbol<= '9')
+        );
 }
 
 u_int findWorstExcuseCoeff (const u_int coeffs [g_MAX_EXCUSES_COUNT], const int & count)
