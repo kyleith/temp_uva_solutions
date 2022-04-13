@@ -2,7 +2,7 @@
 #include <cctype>
 #include <string.h>
 
-//#define ONLINE_JUDGE 1
+#define ONLINE_JUDGE 1
 
 #define u_int unsigned int
 
@@ -130,7 +130,7 @@ void readAndProcessExcuse ( const char keywords[g_MAX_KEYWORDS_COUNT][g_MAX_KEYW
         {
             if (
                     (currentWordLength > 0)
-                    && (currentWordLength <= g_MAX_KEYWORD_LENGTH)
+                    && (currentWordLength <= g_MAX_KEYWORD_LENGTH)/*prevent longer word from trimming, comparing with keywords is not required because of longer length*/
                 )
             {
                 currentWord[currentWordLength] = '\0';
@@ -142,7 +142,10 @@ void readAndProcessExcuse ( const char keywords[g_MAX_KEYWORDS_COUNT][g_MAX_KEYW
         currentExcuse[excuseLength] = symbol;
         excuseLength++;
     }
-    if (currentWordLength > 0)
+    if (
+            (currentWordLength > 0)
+            && (currentWordLength <= g_MAX_KEYWORD_LENGTH)/*prevent longer word from trimming, comparing with keywords is not required because of longer length*/
+        )
     {
         currentWord[currentWordLength] = '\0';
         processExcuseWord(&currentWord[0], keywords, keywordsCount, currentExcuseCoeff);
