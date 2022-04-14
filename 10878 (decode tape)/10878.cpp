@@ -1,11 +1,16 @@
 #include <stdio.h>
 
-//#define ONLINE_JUDGE 1
+#define ONLINE_JUDGE 1
 
 #define u_int unsigned int
 
 const char g_BORDER_LINE_SYMBOL = '_';
 const u_int g_LINE_LENGTH = 11;
+
+const char g_SYMBOL_DECODE_ZERO = ' ';
+const char g_SYMBOL_DECODE_ONE = 'o';
+const u_int g_BINARY_WORD_LENGTH = 8;
+const u_int g_WORD_DECODING_INDEXES [g_BINARY_WORD_LENGTH] = {1, 2, 3, 4, 5, 7, 8, 9};
 
 void readAndDecodeInput ();
 
@@ -13,7 +18,7 @@ void readInputLine (char line [g_LINE_LENGTH], char & lastSymbol);
 void omitLineEnding (char & symbol);
 
 bool isBorderTapeLine (char line [g_LINE_LENGTH]);
-char decodeLine (char line [g_LINE_LENGTH]);
+char decodeLine (const char line [g_LINE_LENGTH]);
 
 int main ()
 {
@@ -71,8 +76,21 @@ bool isBorderTapeLine (char line [g_LINE_LENGTH])
     return line[0] == g_BORDER_LINE_SYMBOL;
 }
 
-char decodeLine (char line [g_LINE_LENGTH])
+char decodeLine (const char line [g_LINE_LENGTH])
 {
-    char symbol = '0';/*TODO*/
-    return symbol;
+    u_int symbolCode = 0;
+    
+    for (u_int i = 0; i < g_BINARY_WORD_LENGTH; i++)
+    {
+        u_int lineSymbolIndex = g_WORD_DECODING_INDEXES[i];
+        if (line[lineSymbolIndex] == g_SYMBOL_DECODE_ONE)
+        {
+            symbolCode |= 1;
+        }
+        symbolCode <<= 1;
+    }
+
+    symbolCode >>= 1;/*revert last shifting*/
+
+    return (char) symbolCode;
 }
