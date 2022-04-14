@@ -17,7 +17,7 @@ void readAndDecodeInput ();
 void readInputLine (char line [g_LINE_LENGTH], char & lastSymbol);
 void omitLineEnding (char & symbol);
 
-bool isBorderTapeLine (char line [g_LINE_LENGTH]);
+bool isBorderTapeLine (const char line [g_LINE_LENGTH]);
 char decodeLine (const char line [g_LINE_LENGTH]);
 
 int main ()
@@ -71,7 +71,7 @@ void omitLineEnding (char & symbol)
         );//no action
 }
 
-bool isBorderTapeLine (char line [g_LINE_LENGTH])
+bool isBorderTapeLine (const char line [g_LINE_LENGTH])
 {
     return line[0] == g_BORDER_LINE_SYMBOL;
 }
