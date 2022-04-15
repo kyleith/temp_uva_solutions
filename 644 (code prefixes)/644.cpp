@@ -4,7 +4,7 @@
 #include <string.h>
 #include <iostream>
 
-//#define ONLINE_JUDGE 1
+#define ONLINE_JUDGE 1
 
 #define u_int unsigned int
 #define vector std::vector
@@ -23,7 +23,7 @@ void processInput ();
 void processTestSet (char & lastSymbol, t_result & result);
 void readTestSetCodes (vector <string> & dictionary, char & lastSymbol);
 bool isDecodableSet (const vector <string> & dictionary);
-bool isSubstring (const string & line, const string & subString);
+bool isCodePrefix (const string & line, const string & subString);
 
 void printResult (const u_int & index, const t_result & result);
 
@@ -104,8 +104,8 @@ bool isDecodableSet (const vector <string> & dictionary)
         for (u_int j = i + 1; j < dictSize; j++)
         {
             if (
-                    isSubstring(dictionary[i], dictionary[j])
-                    || isSubstring(dictionary[j], dictionary[i])
+                    isCodePrefix(dictionary[i], dictionary[j])
+                    || isCodePrefix(dictionary[j], dictionary[i])
                 )
             {
                 return false;
@@ -116,7 +116,7 @@ bool isDecodableSet (const vector <string> & dictionary)
     return true;
 }
 
-bool isSubstring (const string & line, const string & subString)
+bool isCodePrefix (const string & line, const string & subString)
 {
     if (subString.size() > line.size())
     {
@@ -127,7 +127,7 @@ bool isSubstring (const string & line, const string & subString)
     const char * subStringSymbols = subString.c_str();
     u_int foundIndex = strstr(lineSymbols, subStringSymbols) - &lineSymbols[0];
 
-    return foundIndex < line.size();
+    return foundIndex == 0;
 }
 
 void printResult (const u_int & index, const t_result & result)
