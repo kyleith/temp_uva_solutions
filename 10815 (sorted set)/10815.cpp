@@ -1,15 +1,20 @@
 #include <stdio.h>
 #include <cctype>
+#include <set>
+#include <string.h>
 
 //#define ONLINE_JUDGE 1
 
 #define u_int unsigned int
+#define set std::set
 
 const u_int g_MAX_WORD_LENGTH = 200;
 
-void processInput ();
+void processInput (set<const char *> & dictionary);
+void processWord (const char * word, set<const char *> & dictionary);
 bool isLetter (const char & symbol);
-void processWord (const char * word);
+
+void printDictionary (const set<const char *> & dictionary);
 
 int main ()
 {
@@ -18,12 +23,15 @@ int main ()
     freopen("output.txt", "wt", stdout);
 #endif
 
-    processInput();
+    set<const char *> wordsDictionary;
+
+    processInput(wordsDictionary);
+    printDictionary(wordsDictionary);
 
     return 0;
 }
 
-void processInput ()
+void processInput (set<const char *> & dictionary)
 {
     char word [g_MAX_WORD_LENGTH + 1] = { 0 };
     u_int wordLength = 0;
@@ -39,16 +47,23 @@ void processInput ()
         else
         {
             word[wordLength] = '\0';
-            processWord(word);
+            processWord(word, dictionary);
 
             wordLength = 0;
         }
     }
 
     word[wordLength] = '\0';
-    if (wordLength > 0)
+    processWord(word, dictionary);
+}
+
+void processWord (const char * word, set<const char *> & dictionary)
+{
+    if (strlen(word) > 0)
     {
-        processWord(word);
+        char savedWord [g_MAX_WORD_LENGTH + 1];
+        strcpy(savedWord, word);
+        dictionary.insert(savedWord);
     }
 }
 
@@ -64,7 +79,10 @@ bool isLetter (const char & symbol)
             );
 }
 
-void processWord (const char * word)
+void printDictionary (const set<const char *> & dictionary)
 {
-    //TODO...
+    for (auto iterator = dictionary.begin(); iterator != dictionary.end(); iterator++)
+    {
+        printf("%s\n", *iterator);
+    }
 }
