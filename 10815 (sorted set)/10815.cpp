@@ -3,18 +3,28 @@
 #include <set>
 #include <string.h>
 
-//#define ONLINE_JUDGE 1
+#define ONLINE_JUDGE 1
 
 #define u_int unsigned int
 #define set std::set
+#define t_setItem const char *, SetItemCompare
+
+struct SetItemCompare
+{
+    bool operator () (const char * firstWord, const char * secondWord) const
+    {
+        return strcmp(firstWord, secondWord) < 0;
+    }
+};
 
 const u_int g_MAX_WORD_LENGTH = 200;
 
-void processInput (set<const char *> & dictionary);
-void processWord (const char * word, set<const char *> & dictionary);
+
+void processInput (set<t_setItem> & dictionary);
+void processWord (const char * word, set<t_setItem> & dictionary);
 bool isLetter (const char & symbol);
 
-void printDictionary (const set<const char *> & dictionary);
+void printDictionary (const set<t_setItem> & dictionary);
 
 int main ()
 {
@@ -23,7 +33,7 @@ int main ()
     freopen("output.txt", "wt", stdout);
 #endif
 
-    set<const char *> wordsDictionary;
+    set<t_setItem> wordsDictionary;
 
     processInput(wordsDictionary);
     printDictionary(wordsDictionary);
@@ -31,7 +41,7 @@ int main ()
     return 0;
 }
 
-void processInput (set<const char *> & dictionary)
+void processInput (set<t_setItem> & dictionary)
 {
     char word [g_MAX_WORD_LENGTH + 1] = { 0 };
     u_int wordLength = 0;
@@ -57,11 +67,11 @@ void processInput (set<const char *> & dictionary)
     processWord(word, dictionary);
 }
 
-void processWord (const char * word, set<const char *> & dictionary)
+void processWord (const char * word, set<t_setItem> & dictionary)
 {
     if (strlen(word) > 0)
     {
-        char savedWord [g_MAX_WORD_LENGTH + 1];
+        char * savedWord = new char [g_MAX_WORD_LENGTH + 1];
         strcpy(savedWord, word);
         dictionary.insert(savedWord);
     }
@@ -79,7 +89,7 @@ bool isLetter (const char & symbol)
             );
 }
 
-void printDictionary (const set<const char *> & dictionary)
+void printDictionary (const set<t_setItem> & dictionary)
 {
     for (auto iterator = dictionary.begin(); iterator != dictionary.end(); iterator++)
     {
