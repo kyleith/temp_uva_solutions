@@ -123,6 +123,9 @@ bool isCodePrefix (const string & line, const string & subString)
         return false;
     }
 
+    //NOTE: It may look that "strstr" makes EXTRA unnecessary comparations (as we check only index 0 matching - see the statement).
+    //But "strstr" works still faster than "for" cycle from 0 to subString.size().
+    //Run Time of the solution on Online Judge: "strstr" - 0.050s, "for" cycle - 0.060s.
     const char * lineSymbols = line.c_str();
     const char * subStringSymbols = subString.c_str();
     u_int foundIndex = strstr(lineSymbols, subStringSymbols) - &lineSymbols[0];
