@@ -153,7 +153,7 @@ void applyWordReplacement (const WordReplacement & rule, Text & inputText)
         swapPointers(&pActiveBuffer, &pInactiveBuffer);
     }
     
-    inputText = pActiveBuffer;
+    inputText = firstBuffer;/*both buffers are equal after replaceSubstring*/
 }
 
 bool replaceSubstring (const WordReplacement & rule, char *pActiveBuffer, char *pInactiveBuffer)
@@ -167,7 +167,8 @@ bool replaceSubstring (const WordReplacement & rule, char *pActiveBuffer, char *
     
     while (pivotIndex < oldLineLength)
     {
-        u_int matchFoundIndex = strstr(pActiveBuffer + pivotIndex, rule.f_word) - pActiveBuffer;
+        auto pFoundItem = strstr(pActiveBuffer + pivotIndex, rule.f_word);
+        u_int matchFoundIndex = pFoundItem == NULL ? oldLineLength : pFoundItem - pActiveBuffer;
 
         for (u_int i = initialCopingIndex; i < matchFoundIndex; i++)
         {
@@ -190,7 +191,7 @@ bool replaceSubstring (const WordReplacement & rule, char *pActiveBuffer, char *
 
     *(pInactiveBuffer + newLineLength) = '\0';
 
-    return strcmp(pActiveBuffer, pInactiveBuffer) == 0;
+    return strcmp(pActiveBuffer, pInactiveBuffer) != 0;/*false when buffers are equal*/
 }
 
 void swapPointers (char ** ppFirst, char ** ppSecond)
