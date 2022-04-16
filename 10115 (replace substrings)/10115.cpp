@@ -4,7 +4,7 @@
 #include <string>
 #include <queue>
 
-//#define ONLINE_JUDGE 1
+#define ONLINE_JUDGE 1
 
 #define u_int unsigned int
 #define queue std::queue
@@ -57,7 +57,7 @@ Text readInputText ();
 
 void applyReplacementsInText (queue<WordReplacement*> & dictionary, Text & inputText);
 void applyWordReplacement (const WordReplacement & rule, Text & inputText);
-bool replaceSubstring (const WordReplacement & rule, char *pActiveBuffer, char *pInactiveBuffer);
+void replaceSubstring (const WordReplacement & rule, char *pActiveBuffer, char *pInactiveBuffer);
 void swapPointers (char ** ppFirst, char ** ppSecond);
 
 void printText (const Text & inputText);
@@ -148,29 +148,25 @@ void applyWordReplacement (const WordReplacement & rule, Text & inputText)
     char *pInactiveBuffer = &secondBuffer[0];
     
     strcpy(pActiveBuffer, inputText.f_text);
-    while (replaceSubstring(rule, pActiveBuffer, pInactiveBuffer))
-    {
-        swapPointers(&pActiveBuffer, &pInactiveBuffer);
-    }
+    replaceSubstring(rule, pActiveBuffer, pInactiveBuffer);
     
     inputText = firstBuffer;/*both buffers are equal after replaceSubstring*/
 }
 
-bool replaceSubstring (const WordReplacement & rule, char *pActiveBuffer, char *pInactiveBuffer)
+void replaceSubstring (const WordReplacement & rule, char *pActiveBuffer, char *pInactiveBuffer)
 {
     u_int wordLength = strlen(rule.f_word);
     u_int replacementLength = strlen(rule.f_replacement);
 
-    u_int oldLineLength = strlen(pActiveBuffer);
-    u_int initialCopingIndex = 0, pivotIndex = 0;
-    u_int newLineLength = 0;
-    
-    while (pivotIndex < oldLineLength)
+    while (strcmp(pActiveBuffer, pInactiveBuffer) != 0)
     {
-        auto pFoundItem = strstr(pActiveBuffer + pivotIndex, rule.f_word);
+        u_int oldLineLength = strlen(pActiveBuffer);
+        u_int newLineLength = 0;
+
+        auto pFoundItem = strstr(pActiveBuffer, rule.f_word);
         u_int matchFoundIndex = pFoundItem == NULL ? oldLineLength : pFoundItem - pActiveBuffer;
 
-        for (u_int i = initialCopingIndex; i < matchFoundIndex; i++)
+        for (u_int i = 0; i < matchFoundIndex; i++)
         {
             *(pInactiveBuffer + newLineLength) = *(pActiveBuffer + i);
             newLineLength++;
@@ -185,13 +181,15 @@ bool replaceSubstring (const WordReplacement & rule, char *pActiveBuffer, char *
             }
         }
 
-        initialCopingIndex = matchFoundIndex + wordLength;
-        pivotIndex = initialCopingIndex;
+        for (u_int i = matchFoundIndex + wordLength; i < oldLineLength; i++)
+        {
+            *(pInactiveBuffer + newLineLength) = *(pActiveBuffer + i);
+            newLineLength++;
+        }
+        *(pInactiveBuffer + newLineLength) = '\0';
+
+        swapPointers(&pActiveBuffer, &pInactiveBuffer);
     }
-
-    *(pInactiveBuffer + newLineLength) = '\0';
-
-    return strcmp(pActiveBuffer, pInactiveBuffer) != 0;/*false when buffers are equal*/
 }
 
 void swapPointers (char ** ppFirst, char ** ppSecond)
