@@ -51,9 +51,9 @@ struct Text
 void omitLineEnding ();
 void processTestCase (const u_int & rulesCount);
 
-void readReplacementsDictionary (const u_int & rulesCount, queue<WordReplacement> & dictionary);
+void readReplacementsDictionary (const u_int & rulesCount, queue<WordReplacement*> & dictionary);
 Text readInputText ();
-void applyReplacementsInText (const queue<WordReplacement> & dictionary, Text & inputText);
+void applyReplacementsInText (const queue<WordReplacement*> & dictionary, Text & inputText);
 void printText (const Text & inputText);
 
 int main ()
@@ -87,7 +87,7 @@ void omitLineEnding ()
 
 void processTestCase (const u_int & rulesCount)
 {
-    queue<WordReplacement> dictionary;
+    queue<WordReplacement *> dictionary;
 
     readReplacementsDictionary(rulesCount, dictionary);
     
@@ -98,7 +98,7 @@ void processTestCase (const u_int & rulesCount)
     printText(currentText);
 }
 
-void readReplacementsDictionary (const u_int & rulesCount, queue<WordReplacement> & dictionary)
+void readReplacementsDictionary (const u_int & rulesCount, queue<WordReplacement*> & dictionary)
 {
     for (u_int i = 0; i < rulesCount; i++)
     {
@@ -106,7 +106,7 @@ void readReplacementsDictionary (const u_int & rulesCount, queue<WordReplacement
         getline(std::cin, word);
         getline(std::cin, replacement);
 
-        WordReplacement currentRule (word.c_str(), replacement.c_str());
+        WordReplacement * currentRule = new WordReplacement (word.c_str(), replacement.c_str());
         dictionary.push(currentRule);
     }
 }
@@ -120,7 +120,7 @@ Text readInputText ()
     return inputText;
 }
 
-void applyReplacementsInText (const queue<WordReplacement> & dictionary, Text & inputText)
+void applyReplacementsInText (const queue<WordReplacement*> & dictionary, Text & inputText)
 {
     //TODO...
 }
