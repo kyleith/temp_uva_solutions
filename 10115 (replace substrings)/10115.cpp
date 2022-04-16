@@ -23,7 +23,8 @@ struct WordReplacement
     }
     WordReplacement (const WordReplacement & copy)
     {
-        WordReplacement(copy.f_word, copy.f_replacement);
+        strcpy(f_word, copy.f_word);
+        strcpy(f_replacement, copy.f_replacement);
     }
     WordReplacement & operator = (const WordReplacement & copy)
     {
@@ -40,7 +41,7 @@ struct Text
 {
     Text () { f_text[0] = '\0'; }
     Text (const char text []) { strcpy(f_text, text); }
-    Text (const Text & copy) { Text(copy.f_text); }
+    Text (const Text & copy) { strcpy(f_text, copy.f_text); }
     
     Text & operator = (const Text & copy) { strcpy(f_text, copy.f_text); return *this; }
     Text & operator = (const char text []) { strcpy(f_text, text); return *this; }
@@ -53,7 +54,10 @@ void processTestCase (const u_int & rulesCount);
 
 void readReplacementsDictionary (const u_int & rulesCount, queue<WordReplacement*> & dictionary);
 Text readInputText ();
-void applyReplacementsInText (const queue<WordReplacement*> & dictionary, Text & inputText);
+
+void applyReplacementsInText (queue<WordReplacement*> & dictionary, Text & inputText);
+void applyWordReplacement (const WordReplacement & rule, Text & inputText);
+
 void printText (const Text & inputText);
 
 int main ()
@@ -120,9 +124,23 @@ Text readInputText ()
     return inputText;
 }
 
-void applyReplacementsInText (const queue<WordReplacement*> & dictionary, Text & inputText)
+void applyReplacementsInText (queue<WordReplacement*> & dictionary, Text & inputText)
 {
-    //TODO...
+    Text bufText (inputText);
+
+    while (!dictionary.empty())
+    {
+        applyWordReplacement(*dictionary.front(), bufText);
+
+        dictionary.pop();
+    }
+    
+    inputText = bufText;
+}
+
+void applyWordReplacement (const WordReplacement & rule, Text & inputText)
+{
+    //TODO: recursive word replacement
 }
 
 void printText (const Text & inputText)
