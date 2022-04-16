@@ -57,6 +57,8 @@ Text readInputText ();
 
 void applyReplacementsInText (queue<WordReplacement*> & dictionary, Text & inputText);
 void applyWordReplacement (const WordReplacement & rule, Text & inputText);
+bool replaceSubstring (const WordReplacement & rule, char *pActiveBuffer, char *pInactiveBuffer);
+void swapPointers (char ** ppFirst, char ** ppSecond);
 
 void printText (const Text & inputText);
 
@@ -140,7 +142,62 @@ void applyReplacementsInText (queue<WordReplacement*> & dictionary, Text & input
 
 void applyWordReplacement (const WordReplacement & rule, Text & inputText)
 {
-    //TODO: recursive word replacement
+    char firstBuffer [g_MAX_TEXT_LENGTH + 1] = { 0 };
+    char secondBuffer [g_MAX_TEXT_LENGTH + 1] = { 0 };
+    char *pActiveBuffer = &firstBuffer[0];
+    char *pInactiveBuffer = &secondBuffer[0];
+    
+    strcpy(pActiveBuffer, inputText.f_text);
+    while (replaceSubstring(rule, pActiveBuffer, pInactiveBuffer))
+    {
+        swapPointers(&pActiveBuffer, &pInactiveBuffer);
+    }
+    
+    inputText = pActiveBuffer;
+}
+
+bool replaceSubstring (const WordReplacement & rule, char *pActiveBuffer, char *pInactiveBuffer)
+{
+    u_int wordLength = strlen(rule.f_word);
+    u_int replacementLength = strlen(rule.f_replacement);
+
+    u_int oldLineLength = strlen(pActiveBuffer);
+    u_int initialCopingIndex = 0, pivotIndex = 0;
+    u_int newLineLength = 0;
+    
+    while (pivotIndex < oldLineLength)
+    {
+        u_int matchFoundIndex = strstr(pActiveBuffer + pivotIndex, rule.f_word) - pActiveBuffer;
+
+        for (u_int i = initialCopingIndex; i < matchFoundIndex; i++)
+        {
+            *(pInactiveBuffer + newLineLength) = *(pActiveBuffer + i);
+            newLineLength++;
+        }
+
+        if (matchFoundIndex < oldLineLength)
+        {
+            for (u_int i = 0; i < replacementLength; i++)
+            {
+                *(pInactiveBuffer + newLineLength) = rule.f_replacement[i];
+                newLineLength++;
+            }
+        }
+
+        initialCopingIndex = matchFoundIndex + wordLength;
+        pivotIndex = initialCopingIndex;
+    }
+
+    *(pInactiveBuffer + newLineLength) = '\0';
+
+    return strcmp(pActiveBuffer, pInactiveBuffer) == 0;
+}
+
+void swapPointers (char ** ppFirst, char ** ppSecond)
+{
+    char * pBuf = *ppFirst;
+    *ppFirst = *ppSecond;
+    *ppSecond = pBuf;
 }
 
 void printText (const Text & inputText)
