@@ -1,11 +1,14 @@
 #include <stdio.h>
+#include <iostream>
 #include <string.h>
+#include <string>
 #include <queue>
 
 //#define ONLINE_JUDGE 1
 
 #define u_int unsigned int
 #define queue std::queue
+#define string std::string
 
 const u_int g_MAX_SUBSTRING_LENGTH = 80;
 const u_int g_MAX_TEXT_LENGTH = 255;
@@ -45,6 +48,7 @@ struct Text
     char f_text [g_MAX_TEXT_LENGTH + 1];
 };
 
+void omitLineEnding ();
 void processTestCase (const u_int & rulesCount);
 
 void readReplacementsDictionary (const u_int & rulesCount, queue<WordReplacement> & dictionary);
@@ -65,10 +69,20 @@ int main ()
             && (rulesCount > 0)
         )
     {
+        omitLineEnding();
         processTestCase(rulesCount);
     }
 
     return 0;
+}
+
+void omitLineEnding ()
+{
+    char symbol = '\0';
+    while (
+            ((symbol = getchar()) != '\n')
+            && (symbol != EOF)
+        );
 }
 
 void processTestCase (const u_int & rulesCount)
@@ -86,14 +100,23 @@ void processTestCase (const u_int & rulesCount)
 
 void readReplacementsDictionary (const u_int & rulesCount, queue<WordReplacement> & dictionary)
 {
-    //TODO...
+    for (u_int i = 0; i < rulesCount; i++)
+    {
+        string word, replacement;
+        getline(std::cin, word);
+        getline(std::cin, replacement);
+
+        WordReplacement currentRule (word.c_str(), replacement.c_str());
+        dictionary.push(currentRule);
+    }
 }
 
 Text readInputText ()
 {
-    Text inputText;
+    string text;
+    getline(std::cin, text);
 
-    //TODO...
+    Text inputText (text.c_str());
     return inputText;
 }
 
