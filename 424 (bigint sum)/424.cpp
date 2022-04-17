@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <string>
+#include <algorithm>
 
 //#define ONLINE_JUDGE 1
 
@@ -12,10 +13,11 @@ const int g_MAX_LONG_NUMBER_LENGTH = 10001;
 class BigInt
 {
     public:
-        BigInt () { f_length = 0; }
+        BigInt () { f_digits[0] = 0; f_length = 1; }
         BigInt (const string & valueString)
         {
-            f_length = valueString.length();
+            f_digits[0] = 0;
+            f_length = std::max(1, (int)valueString.length());
             for (int i = 0; i < f_length; i++)
             {
                 int reverseIndex = f_length - 1 - i;
@@ -34,7 +36,6 @@ class BigInt
         {
             return *this;
         }
-
         int m_getLength () { return f_length; }
         void m_printValue ()
         {
@@ -44,11 +45,19 @@ class BigInt
             }
             printf("\n");
         }
+
+        BigInt & operator += (const BigInt & number);//implemented below
     
     private:
         int f_digits [g_MAX_LONG_NUMBER_LENGTH];
         int f_length; 
 };
+
+BigInt & BigInt::operator += (const BigInt & number)
+{
+    //TODO...
+    return *this;
+} 
 
 void processInput ();
 
@@ -66,6 +75,7 @@ int main ()
 
 void processInput ()
 {
+    BigInt totalSum;
     string inputString = "";
     while (
             std::getline(std::cin, inputString),
@@ -73,7 +83,9 @@ void processInput ()
         )
     {
         BigInt currentNumber (inputString);
-        currentNumber.m_printValue();
-        //TODO...
+
+        totalSum += currentNumber;
     }
+
+    totalSum.m_printValue();
 }
