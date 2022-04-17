@@ -3,7 +3,7 @@
 #include <string>
 #include <algorithm>
 
-//#define ONLINE_JUDGE 1
+#define ONLINE_JUDGE 1
 
 #define string std::string
 
@@ -20,11 +20,11 @@ class BigInt
             {
                 f_digits[i] = 0;
             }
-            f_length = 1;
+            f_length = 0;
         }
         BigInt (const string & valueString)
         {
-            f_length = std::max(1, (int)valueString.length());
+            f_length = valueString.length();
             for (int i = 0; i < f_length; i++)
             {
                 int reverseIndex = f_length - 1 - i;
@@ -34,6 +34,13 @@ class BigInt
             {
                 f_digits[i] = 0;
             }
+            
+            int leadingZerosCount = 0;
+            for (int i = 0; (i < valueString.length()) && (valueString[i] == '0'); i++)
+            {
+                leadingZerosCount++;
+            }
+            f_length -= leadingZerosCount;
         }
         BigInt(const BigInt & copy)
         {
