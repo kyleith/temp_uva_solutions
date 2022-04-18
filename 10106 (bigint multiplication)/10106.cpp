@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <algorithm>
 
 //#define ONLINE_JUDGE 1
 
@@ -35,6 +36,10 @@ BigInt::BigInt (const char value [])
     {
         int reverseIndex = valueLength - 1 - i;
         f_digits[reverseIndex] = value[i] - '0';
+    }
+    for (int i = valueLength; i < g_MAX_LONG_NUMBER_LENGTH; i++)
+    {
+        f_digits[i] = 0;
     }
 
     int leadingZeros = 0;
@@ -75,7 +80,17 @@ BigInt & BigInt::operator = (const BigInt & copy)
 
 BigInt & BigInt::operator += (const BigInt & number)
 {
-    //TODO...
+    int carrier = 0;
+    int maxLength = std::max(f_length, number.f_length);
+
+    for (int i = 0; i <= maxLength; i++)
+    {
+        int totalSum = carrier + f_digits[i] + number.f_digits[i];
+        carrier = totalSum / g_BIGINT_DIGIT_MODULE;
+        f_digits[i] = totalSum % g_BIGINT_DIGIT_MODULE;
+    }
+    f_length = (f_digits[maxLength] > 0) ? maxLength + 1 : maxLength;
+
     return *this;
 }
 
@@ -137,7 +152,7 @@ void processInput ()
         BigInt secondNumber (secondValue);
 
         firstNumber *= secondNumber;
-        secondNumber.m_printValue();
+        firstNumber.m_printValue();
     }
     
 }
