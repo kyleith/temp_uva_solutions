@@ -20,26 +20,56 @@ class BigInt
         BigInt & operator *= (const int & number);
         BigInt & operator <<= (const int & number);
 
-        void printValue ();
+        void m_printValue ();
 
     private:
-        int digits [g_MAX_LONG_NUMBER_LENGTH];
-        int length;
+        int f_digits [g_MAX_LONG_NUMBER_LENGTH];
+        int f_length;
 };
 
 BigInt::BigInt (const char value [])
 {
-    //TODO...
+    int valueLength = strlen(value);
+
+    for (int i = 0; i < valueLength; i++)
+    {
+        int reverseIndex = valueLength - 1 - i;
+        f_digits[reverseIndex] = value[i] - '0';
+    }
+
+    int leadingZeros = 0;
+    for (int i = 0; (i < valueLength) && (value[i] == '0'); i++)
+    {
+        leadingZeros++;
+    }
+
+    f_length = valueLength - leadingZeros;
 }
 
 BigInt::BigInt (const BigInt & copy)
 {
-    //TODO...
+    f_length = copy.f_length;
+    for (int i = 0; i < f_length; i++)
+    {
+        f_digits[i] = copy.f_digits[i];
+    }
+    for (int i = f_length; i < g_MAX_LONG_NUMBER_LENGTH; i++)
+    {
+        f_digits[i] = 0;
+    }
 }
 
 BigInt & BigInt::operator = (const BigInt & copy)
 {
-    //TODO...
+    f_length = copy.f_length;
+    for (int i = 0; i < f_length; i++)
+    {
+        f_digits[i] = copy.f_digits[i];
+    }
+    for (int i = f_length; i < g_MAX_LONG_NUMBER_LENGTH; i++)
+    {
+        f_digits[i] = 0;
+    }
     return *this;
 }
 
@@ -67,9 +97,19 @@ BigInt & BigInt::operator *= (const BigInt & number)
     return *this;
 }
 
-void BigInt::printValue ()
+void BigInt::m_printValue ()
 {
-    //TODO...
+    if (f_length == 0)
+    {
+        printf("0\n");
+        return;
+    }
+
+    for (int i = f_length - 1; i >= 0; i--)
+    {
+        printf("%d", f_digits[i]);
+    }
+    printf("\n");
 }
 
 void processInput ();
@@ -97,7 +137,7 @@ void processInput ()
         BigInt secondNumber (secondValue);
 
         firstNumber *= secondNumber;
-        secondNumber.printValue();
+        secondNumber.m_printValue();
     }
     
 }
