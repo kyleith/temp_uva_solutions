@@ -4,6 +4,8 @@
 
 //#define ONLINE_JUDGE 1
 
+#define u_int unsigned int
+
 const int g_MAX_INPUT_NUMBER_LENGTH = 250;
 const int g_MAX_LONG_NUMBER_LENGTH = g_MAX_INPUT_NUMBER_LENGTH * 2 + 1;
 const int g_BIGINT_DIGIT_MODULE = 10;
@@ -18,8 +20,8 @@ class BigInt
         BigInt & operator += (const BigInt & number);
         BigInt & operator *= (const BigInt & number);
         
-        BigInt & operator *= (const int & number);
-        BigInt & operator <<= (const int & number);
+        BigInt & operator *= (const u_int & number);
+        BigInt & operator <<= (const u_int & number);
 
         void m_printValue ();
 
@@ -94,13 +96,37 @@ BigInt & BigInt::operator += (const BigInt & number)
     return *this;
 }
 
-BigInt & BigInt::operator *= (const int & number)
+BigInt & BigInt::operator *= (const u_int & number)
 {
-    //TODO...
+    if (number == 0)
+    {
+        f_length = 0;
+        for (int i = 0; i < g_MAX_LONG_NUMBER_LENGTH; i++)
+        {
+            f_digits[i] = 0;
+        }
+    }
+    else
+    {
+        int carrier = 0;
+        for (int i = 0; i < f_length; i++)
+        {
+            int totalSum = carrier + (f_digits[i] * number);
+            carrier = totalSum / g_BIGINT_DIGIT_MODULE;
+            f_digits[i] = totalSum % g_BIGINT_DIGIT_MODULE;
+        }
+        while (carrier > 0)
+        {
+            f_digits[f_length] = carrier % g_BIGINT_DIGIT_MODULE;
+            f_length++;
+
+            carrier /= g_BIGINT_DIGIT_MODULE;
+        }
+    }
     return *this;
 }
 
-BigInt & BigInt::operator <<= (const int & number)
+BigInt & BigInt::operator <<= (const u_int & number)
 {
     //TODO...
     return *this;
