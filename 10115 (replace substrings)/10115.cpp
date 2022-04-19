@@ -134,6 +134,7 @@ void applyReplacementsInText (queue<WordReplacement*> & dictionary, Text & input
     {
         applyWordReplacement(*dictionary.front(), bufText);
 
+        delete dictionary.front();//free memory block of the pointer before losing the pointer
         dictionary.pop();
     }
     
