@@ -23,6 +23,7 @@ class BigInt
         BigInt operator * (const BigInt & number);
 
         BigInt & operator <<= (const u_int & number);
+        BigInt operator << (const u_int & number);
         BigInt & operator *= (const u_int & number);
         BigInt operator * (const u_int & number);
 
@@ -138,6 +139,13 @@ BigInt & BigInt::operator <<= (const u_int & number)
     }
     f_length += number;
     return *this;
+}
+
+BigInt BigInt::operator << (const u_int & number)
+{
+    BigInt totalResult(*this);
+    totalResult <<= number;
+    return totalResult;
 }
 
 BigInt & BigInt::operator *= (const u_int & number)
