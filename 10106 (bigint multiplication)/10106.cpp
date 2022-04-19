@@ -247,5 +247,4 @@ void processInput ()
         firstNumber *= secondNumber;
         firstNumber.m_printValue();
     }
-    
 }
