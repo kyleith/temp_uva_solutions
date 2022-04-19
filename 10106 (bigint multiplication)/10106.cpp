@@ -13,15 +13,18 @@ const int g_BIGINT_DIGIT_MODULE = 10;
 class BigInt
 {
     public:
+        BigInt ();
         BigInt (const char value []);
         BigInt (const BigInt & copy);        
         BigInt & operator = (const BigInt & copy);
 
         BigInt & operator += (const BigInt & number);
         BigInt & operator *= (const BigInt & number);
-        
-        BigInt & operator *= (const u_int & number);
+        BigInt operator * (const BigInt & number);
+
         BigInt & operator <<= (const u_int & number);
+        BigInt & operator *= (const u_int & number);
+        BigInt operator * (const u_int & number);
 
         void m_printValue ();
 
@@ -29,6 +32,15 @@ class BigInt
         int f_digits [g_MAX_LONG_NUMBER_LENGTH];
         int f_length;
 };
+
+BigInt::BigInt ()
+{
+    f_length = 0;
+    for (int i = 0; i < g_MAX_LONG_NUMBER_LENGTH; i++)
+    {
+        f_digits[i] = 0;
+    }
+}
 
 BigInt::BigInt (const char value [])
 {
@@ -96,6 +108,38 @@ BigInt & BigInt::operator += (const BigInt & number)
     return *this;
 }
 
+BigInt & BigInt::operator *= (const BigInt & number)
+{
+    //TODO...
+    return *this;
+}
+
+BigInt BigInt::operator * (const BigInt & number)
+{
+    BigInt totalResult;
+    return totalResult;
+}
+
+BigInt & BigInt::operator <<= (const u_int & number)
+{
+    if (f_length == 0)
+    {
+        return *this;
+    }
+
+    for (int i = f_length - 1; i >= 0; i--)
+    {
+        int newIndex = i + number;
+        f_digits[newIndex] = f_digits[i];
+    }
+    for (int i = number - 1; i >= 0; i--)
+    {
+        f_digits[i] = 0;
+    }
+    f_length += number;
+    return *this;
+}
+
 BigInt & BigInt::operator *= (const u_int & number)
 {
     if (number == 0)
@@ -126,30 +170,11 @@ BigInt & BigInt::operator *= (const u_int & number)
     return *this;
 }
 
-BigInt & BigInt::operator <<= (const u_int & number)
+BigInt BigInt::operator * (const u_int & number)
 {
-    if (f_length == 0)
-    {
-        return *this;
-    }
-
-    for (int i = f_length - 1; i >= 0; i--)
-    {
-        int newIndex = i + number;
-        f_digits[newIndex] = f_digits[i];
-    }
-    for (int i = number - 1; i >= 0; i--)
-    {
-        f_digits[i] = 0;
-    }
-    f_length += number;
-    return *this;
-}
-
-BigInt & BigInt::operator *= (const BigInt & number)
-{
-    //TODO...
-    return *this;
+    BigInt totalResult(*this);
+    totalResult *= number;
+    return totalResult;
 }
 
 void BigInt::m_printValue ()
