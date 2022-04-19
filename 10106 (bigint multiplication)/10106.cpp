@@ -2,11 +2,11 @@
 #include <string.h>
 #include <algorithm>
 
-//#define ONLINE_JUDGE 1
+#define ONLINE_JUDGE 1
 
 #define u_int unsigned int
 
-const int g_MAX_INPUT_NUMBER_LENGTH = 250;
+const int g_MAX_INPUT_NUMBER_LENGTH = 251;/*length of 10^250*/
 const int g_MAX_LONG_NUMBER_LENGTH = g_MAX_INPUT_NUMBER_LENGTH * 2 + 1;
 const int g_BIGINT_DIGIT_MODULE = 10;
 
@@ -111,14 +111,34 @@ BigInt & BigInt::operator += (const BigInt & number)
 
 BigInt & BigInt::operator *= (const BigInt & number)
 {
-    //TODO...
+    BigInt totalResult = (*this) * number;
+    (*this) = totalResult;
     return *this;
 }
 
 BigInt BigInt::operator * (const BigInt & number)
 {
-    BigInt totalResult;
-    return totalResult;
+    if (
+            (f_length == 0)
+            || (number.f_length == 0)
+        )
+    {
+        BigInt zeroNumber;
+        return zeroNumber;
+    }
+    else
+    {
+        BigInt totalResult;
+
+        for (int i = 0; i < number.f_length; i++)
+        {
+            BigInt buffer = (*this) * number.f_digits[i];
+            buffer <<= i;
+            totalResult += buffer;
+        }
+
+        return totalResult;
+    }
 }
 
 BigInt & BigInt::operator <<= (const u_int & number)
