@@ -128,7 +128,21 @@ BigInt & BigInt::operator *= (const u_int & number)
 
 BigInt & BigInt::operator <<= (const u_int & number)
 {
-    //TODO...
+    if (f_length == 0)
+    {
+        return *this;
+    }
+
+    for (int i = f_length - 1; i >= 0; i--)
+    {
+        int newIndex = i + number;
+        f_digits[newIndex] = f_digits[i];
+    }
+    for (int i = number - 1; i >= 0; i--)
+    {
+        f_digits[i] = 0;
+    }
+    f_length += number;
     return *this;
 }
 
