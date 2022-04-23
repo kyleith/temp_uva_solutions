@@ -11,6 +11,8 @@
 
 const int g_MAX_INT_VALUE = INT_MAX;
 const int g_MAX_BIG_INT_LENGTH = 1000;
+const u_int g_BIG_INT_DIGIT_MODULE = 10;
+
 const char g_OPERATOR_PLUS = '+';
 const char g_OPERATOR_MULT = '*';
 
@@ -29,7 +31,7 @@ class BigInt
         BigInt operator * (const u_int & number);
         BigInt & operator <<= (const u_int & number);
 
-        bool operator == (const BigInt & number);
+        bool operator > (const BigInt & number);
     
     private:
         char f_digits [g_MAX_BIG_INT_LENGTH];
@@ -90,6 +92,31 @@ BigInt & BigInt::operator = (const BigInt & copy)
         f_digits[i] = 0;
     }
     f_length = copy.f_length;
+
+    return *this;
+}
+
+BigInt & BigInt::operator += (const BigInt & number)
+{
+    u_int maxLength = std::max(f_length, number.f_length);
+
+    u_int carrier = 0;
+    for (u_int i = 0; i <= maxLength; i++)
+    {
+        u_int totalSum = carrier + f_digits[i] + number.f_digits[i];
+        carrier = totalSum / g_BIG_INT_DIGIT_MODULE;
+        f_digits[i] = totalSum % g_BIG_INT_DIGIT_MODULE;
+    }
+    f_length = (f_digits[maxLength] > 0) ? (maxLength + 1) : maxLength;
+
+    return *this;
+}
+
+BigInt & BigInt::operator *= (const BigInt & number)
+{
+    BigInt totalResult = (*this) * number;
+    (*this) = totalResult;
+    return *this;
 }
 
 void processTestCase (const string & inputStatement);
