@@ -169,6 +169,33 @@ BigInt & BigInt::operator <<= (const u_int & number)
     return *this;
 }
 
+bool BigInt::operator > (const BigInt & number)
+{
+    if (f_length > number.f_length)
+    {
+        return true;
+    }
+    else if (f_length < number.f_length)
+    {
+        return false;
+    }
+    else
+    {
+        //both equal length - looking for the first difference
+        for (int i = f_length - 1; i >= 0; i--)
+        {
+            if (f_digits[i] == number.f_digits[i])
+            {
+                continue;
+            }
+
+            return f_digits[i] > number.f_digits[i];
+        }
+
+        return false;/*both numbers are equal*/
+    }
+}
+
 void processTestCase (const string & inputStatement);
 void parseStatement (const char * inputStatement);
 void checkStatementWarnings ();
