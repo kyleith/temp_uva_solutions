@@ -206,7 +206,12 @@ bool BigInt::operator > (const BigInt & number) const
 const BigInt g_MAX_INT_VALUE_CONVERTED (std::to_string(g_MAX_INT_VALUE));
 
 void processTestCase (const string & inputStatement);
-void parseExpression (const char * inputStatement, BigInt & leftOperand, BigInt & rightOperand, t_operator & expressionOperator);
+
+void parseExpression (const string & inputStatement, BigInt & leftOperand, BigInt & rightOperand, t_operator & expressionOperator);
+bool testOperationParsing (const string & inputStatement, const char & operation, int & operationIndex);
+string parseValue (const string & inputStatement, const u_int & initialIndex, const u_int & finalIndex);
+bool isNumericSymbol (const char & symbol);
+
 void checkExpressionWarnings (const BigInt & leftOperand, const BigInt & rightOperand, const t_operator & expressionOperator);
 
 int main ()
@@ -233,14 +238,75 @@ void processTestCase (const string & inputStatement)
     BigInt leftOperand, rightOperand;
     t_operator expressionOperator;
 
-    parseExpression(inputSymbols, leftOperand, rightOperand, expressionOperator);
+    parseExpression(inputStatement, leftOperand, rightOperand, expressionOperator);
 
     checkExpressionWarnings(leftOperand, rightOperand, expressionOperator);
 }
 
-void parseExpression (const char * inputSymbols, BigInt & leftOperand, BigInt & rightOperand, t_operator & expressionOperator)
+void parseExpression (const string & inputStatement, BigInt & leftOperand, BigInt & rightOperand, t_operator & expressionOperator)
 {
-    //TODO: parse to operation, leftValue, rightValue - it is ok to use only BigInt
+    int operationIndex = -1;
+
+    if (testOperationParsing(inputStatement, g_OPERATOR_PLUS, operationIndex))
+    {
+        expressionOperator = e_PLUS;
+    }
+    else if (testOperationParsing(inputStatement, g_OPERATOR_MULT, operationIndex))
+    {
+        expressionOperator = e_MULTIPLY;
+    }
+
+    if (operationIndex != -1)
+    {
+        string leftValue = parseValue(inputStatement, 0, operationIndex - 1);
+        string rightValue = parseValue(inputStatement, operationIndex + 1, inputStatement.length() - 1);
+
+        leftOperand = (BigInt)(leftValue);
+        rightOperand = (BigInt)(rightValue);
+    }
+}
+
+bool testOperationParsing (const string & inputStatement, const char & operation, int & operationIndex)
+{
+    auto indexFound = inputStatement.find(operation);
+    if (indexFound != string::npos)
+    {
+        operationIndex = indexFound;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+string parseValue (const string & inputStatement, const u_int & initialIndex, const u_int & finalIndex)
+{
+    int leftIndex = initialIndex, rightIndex = finalIndex;
+    for (int i = initialIndex; i <= finalIndex; i++)
+    {
+        if (isNumericSymbol(inputStatement[i]))
+        {
+            leftIndex = i;
+            break;
+        }
+    }
+    for (int i = leftIndex + 1; i <= finalIndex; i++)
+    {
+        if (!isNumericSymbol(inputStatement[i]))
+        {
+            rightIndex = i - 1;
+            break;
+        }
+    }
+
+    return inputStatement.substr(initialIndex, finalIndex - initialIndex + 1);
+}
+
+bool isNumericSymbol (const char & symbol)
+{
+    return (symbol >= '0')
+        && (symbol <= '9');
 }
 
 void checkExpressionWarnings (const BigInt & leftOperand, const BigInt & rightOperand, const t_operator & expressionOperator)
