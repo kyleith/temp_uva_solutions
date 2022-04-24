@@ -4,7 +4,7 @@
 #include <string>
 #include <string.h>
 
-//#define ONLINE_JUDGE
+#define ONLINE_JUDGE
 
 #define string std::string
 #define u_int unsigned int
