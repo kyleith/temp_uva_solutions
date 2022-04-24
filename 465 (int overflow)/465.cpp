@@ -28,7 +28,7 @@ class BigInt
         BigInt & operator *= (const BigInt & number);
 
         BigInt operator * (const BigInt & number);
-        BigInt operator * (const u_int & number);
+        BigInt & operator *= (const u_int & number);
         BigInt & operator <<= (const u_int & number);
 
         bool operator > (const BigInt & number);
@@ -116,6 +116,56 @@ BigInt & BigInt::operator *= (const BigInt & number)
 {
     BigInt totalResult = (*this) * number;
     (*this) = totalResult;
+    return *this;
+}
+
+BigInt BigInt::operator * (const BigInt & number)
+{
+    BigInt totalResult;
+    for (u_int i = 0; i < number.f_length; i++)
+    {
+        BigInt currentProduct (*this);
+        currentProduct *= number.f_digits[i];
+        currentProduct <<= i;
+        totalResult += currentProduct;
+    }
+    return totalResult;
+}
+
+BigInt & BigInt::operator *= (const u_int & number)
+{
+    if (number == 0)
+    {
+        return *this;
+    }
+
+    u_int carrier = 0;
+    for (u_int i = 0; i <= f_length; i++)
+    {
+        u_int totalSum = carrier + (f_digits[i] * number);
+        carrier = totalSum / g_BIG_INT_DIGIT_MODULE;
+        f_digits[i] = totalSum % g_BIG_INT_DIGIT_MODULE;
+    }
+
+    if (f_digits[f_length] > 0)
+    {
+        f_length++;
+    }
+    return *this;
+}
+
+BigInt & BigInt::operator <<= (const u_int & number)
+{
+    if (number == 0)
+    {
+        return *this;
+    }
+
+    for (int i = f_length - 1; i >= 0; i--)
+    {
+        u_int newIndex = i + number;
+        f_digits[newIndex] = f_digits[i];
+    }
     return *this;
 }
 
