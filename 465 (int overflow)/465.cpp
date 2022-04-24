@@ -34,11 +34,11 @@ class BigInt
         BigInt & operator += (const BigInt & number);
         BigInt & operator *= (const BigInt & number);
 
-        BigInt operator * (const BigInt & number);
+        BigInt operator * (const BigInt & number) const;
         BigInt & operator *= (const u_int & number);
         BigInt & operator <<= (const u_int & number);
 
-        bool operator > (const BigInt & number);
+        bool operator > (const BigInt & number) const;
     
     private:
         char f_digits [g_MAX_BIG_INT_LENGTH];
@@ -126,7 +126,7 @@ BigInt & BigInt::operator *= (const BigInt & number)
     return *this;
 }
 
-BigInt BigInt::operator * (const BigInt & number)
+BigInt BigInt::operator * (const BigInt & number) const
 {
     BigInt totalResult;
     for (u_int i = 0; i < number.f_length; i++)
@@ -176,7 +176,7 @@ BigInt & BigInt::operator <<= (const u_int & number)
     return *this;
 }
 
-bool BigInt::operator > (const BigInt & number)
+bool BigInt::operator > (const BigInt & number) const
 {
     if (f_length > number.f_length)
     {
@@ -202,6 +202,8 @@ bool BigInt::operator > (const BigInt & number)
         return false;/*both numbers are equal*/
     }
 }
+
+const BigInt g_MAX_INT_VALUE_CONVERTED (std::to_string(g_MAX_INT_VALUE));
 
 void processTestCase (const string & inputStatement);
 void parseExpression (const char * inputStatement, BigInt & leftOperand, BigInt & rightOperand, t_operator & expressionOperator);
@@ -243,5 +245,29 @@ void parseExpression (const char * inputSymbols, BigInt & leftOperand, BigInt & 
 
 void checkExpressionWarnings (const BigInt & leftOperand, const BigInt & rightOperand, const t_operator & expressionOperator)
 {
-    //TODO: 3 BigInt numbers - left, right and result
+    if (leftOperand > g_MAX_INT_VALUE_CONVERTED)
+    {
+        printf("first number too big\n");
+    }
+
+    if (rightOperand > g_MAX_INT_VALUE_CONVERTED)
+    {
+        printf("second number too big\n");
+    }
+
+    BigInt result;
+    if (expressionOperator == e_PLUS)
+    {
+        result = leftOperand;
+        result += rightOperand;
+    }
+    else if (expressionOperator == e_MULTIPLY)
+    {
+        result = leftOperand * rightOperand;
+    }
+
+    if (result > g_MAX_INT_VALUE_CONVERTED)
+    {
+        printf("result too big\n");
+    }
 }
