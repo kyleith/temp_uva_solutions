@@ -141,8 +141,12 @@ BigInt BigInt::operator * (const BigInt & number) const
 
 BigInt & BigInt::operator *= (const u_int & number)
 {
-    if (number == 0)
+    if (
+            (number == 0)
+            || (f_length == 0)
+        )
     {
+        *this = (BigInt)("0");
         return *this;
     }
 
@@ -163,7 +167,10 @@ BigInt & BigInt::operator *= (const u_int & number)
 
 BigInt & BigInt::operator <<= (const u_int & number)
 {
-    if (number == 0)
+    if (
+            (number == 0)
+            || (f_length == 0)
+        )
     {
         return *this;
     }
