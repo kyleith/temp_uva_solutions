@@ -9,6 +9,13 @@
 #define string std::string
 #define u_int unsigned int
 
+enum t_operator
+{
+    e_INVALID = -1,
+    e_PLUS,
+    e_MULTIPLY
+};
+
 const int g_MAX_INT_VALUE = INT_MAX;
 const int g_MAX_BIG_INT_LENGTH = 1000;
 const u_int g_BIG_INT_DIGIT_MODULE = 10;
@@ -197,8 +204,8 @@ bool BigInt::operator > (const BigInt & number)
 }
 
 void processTestCase (const string & inputStatement);
-void parseStatement (const char * inputStatement);
-void checkStatementWarnings ();
+void parseExpression (const char * inputStatement, BigInt & leftOperand, BigInt & rightOperand, t_operator & expressionOperator);
+void checkExpressionWarnings (const BigInt & leftOperand, const BigInt & rightOperand, const t_operator & expressionOperator);
 
 int main ()
 {
@@ -219,21 +226,22 @@ int main ()
 void processTestCase (const string & inputStatement)
 {
     const char * inputSymbols = inputStatement.c_str();
+    printf("%s\n", inputSymbols);
 
-    parseStatement(inputSymbols);
+    BigInt leftOperand, rightOperand;
+    t_operator expressionOperator;
 
-    //TODO: with BigInt, compare each operand with g_MAX_INT_VALUE,
-    //then calculate result and compare it with g_MAX_INT_VALUE
+    parseExpression(inputSymbols, leftOperand, rightOperand, expressionOperator);
 
-    checkStatementWarnings();
+    checkExpressionWarnings(leftOperand, rightOperand, expressionOperator);
 }
 
-void parseStatement (const char * inputStatement)
+void parseExpression (const char * inputSymbols, BigInt & leftOperand, BigInt & rightOperand, t_operator & expressionOperator)
 {
     //TODO: parse to operation, leftValue, rightValue - it is ok to use only BigInt
 }
 
-void checkStatementWarnings ()
+void checkExpressionWarnings (const BigInt & leftOperand, const BigInt & rightOperand, const t_operator & expressionOperator)
 {
     //TODO: 3 BigInt numbers - left, right and result
 }
