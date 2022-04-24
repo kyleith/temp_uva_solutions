@@ -300,7 +300,7 @@ string parseValue (const string & inputStatement, const u_int & initialIndex, co
         }
     }
 
-    return inputStatement.substr(initialIndex, finalIndex - initialIndex + 1);
+    return inputStatement.substr(leftIndex, rightIndex - leftIndex + 1);
 }
 
 bool isNumericSymbol (const char & symbol)
