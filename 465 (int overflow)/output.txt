@@ -135,6 +135,7 @@ result too big
 result too big
 36 + 13786
 12 * 1158624794
+result too big
 13126 * 1073741847
 result too big
 2147483602 + 1073741810
@@ -323,6 +324,7 @@ result too big
 22558 + 1073741798
 15 * 4294967246
 second number too big
+result too big
 13461 * 1073741779
 result too big
 2147483665 * 2147483668
@@ -458,6 +460,7 @@ result too big
 result too big
 25 * 286589127656860308
 second number too big
+result too big
 36457 + 861511271
 32259 * 4294967342
 second number too big
@@ -1040,6 +1043,7 @@ result too big
 second number too big
 result too big
 50 * 95259713
+result too big
 829964035 + 49207
 24566 * 4294967326
 second number too big
@@ -1368,6 +1372,7 @@ result too big
 380104940 * 1073741835
 result too big
 42 * 2084657703
+result too big
 2113 + 852299792639729603
 second number too big
 result too big
