@@ -112,6 +112,74 @@ BigInt & BigInt::operator *= (const BigInt & number)
     return *this;
 }
 
+BigInt BigInt::operator * (const BigInt & number) const
+{
+    BigInt totalResult;
+    for (u_int i = 0; i < number.f_length; i++)
+    {
+        BigInt bufValue (*this);
+        bufValue *= number.f_digits[i];
+        bufValue <<= i;
+
+        totalResult += bufValue;
+    }
+    return totalResult;
+}
+
+BigInt & BigInt::operator *= (const u_int & number)
+{
+    if (
+            (f_length == 0)
+            || (number == 0)
+        )
+    {
+        *this = (BigInt)("0");
+        return *this;
+    }
+
+    u_int carrier = 0;
+    for (u_int i = 0; i < f_length; i++)
+    {
+        u_int totalSum = carrier + (f_digits[i] * number);
+        carrier = totalSum / g_BIGINT_DIGIT_MODULE;
+        f_digits[i] = totalSum % g_BIGINT_DIGIT_MODULE;
+    }
+    
+    while (carrier > 0)
+    {
+        f_digits[f_length] = (carrier % g_BIGINT_DIGIT_MODULE);
+        f_length++;
+        
+        carrier /= g_BIGINT_DIGIT_MODULE;
+    }
+
+    return *this;
+}
+
+BigInt & BigInt::operator <<= (const u_int & number)
+{
+    if (
+            (f_length == 0)
+            || (number == 0)
+        )
+    {
+        return *this;
+    }
+
+    for (int i = f_length - 1; i >= 0; i--)
+    {
+        u_int newIndex = i + number;
+        f_digits[newIndex] = f_digits[i];
+    }
+    for (u_int i = 0; i < number; i++)
+    {
+        f_digits[i] = 0;
+    }
+    f_length += number;
+
+    return *this;
+}
+
 void processInput ();
 void processTestCase (const string & line);
 void parseInputLine (const string & line);
