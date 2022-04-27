@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <string>
+#include <algorithm>
 
 //#define ONLINE_JUDGE 1
 
@@ -8,6 +9,7 @@
 #define u_int unsigned int
 
 const u_int g_MAX_BIGINT_LENGTH = 500;
+const u_int g_BIGINT_DIGIT_MODULE = 10;
 
 class BigInt
 {
@@ -85,6 +87,28 @@ BigInt & BigInt::operator = (const BigInt & copy)
     }
     f_length = copy.f_length;
 
+    return *this;
+}
+
+BigInt & BigInt::operator += (const BigInt & number)
+{
+    u_int maxLength = std::max(f_length, number.f_length);
+    
+    u_int carrier = 0;
+    for (u_int i = 0; i <= maxLength; i++)
+    {
+        u_int totalSum = carrier + f_digits[i] + number.f_digits[i];
+        carrier = totalSum / g_BIGINT_DIGIT_MODULE;
+        f_digits[i] = totalSum % g_BIGINT_DIGIT_MODULE;
+    }
+    f_length = (f_digits[maxLength] > 0) ? (maxLength + 1) : maxLength;
+
+    return *this;
+}
+
+BigInt & BigInt::operator *= (const BigInt & number)
+{
+    *this = (*this) * number;
     return *this;
 }
 
