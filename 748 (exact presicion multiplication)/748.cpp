@@ -7,9 +7,13 @@
 
 #define string std::string
 #define u_int unsigned int
+#define arrayLength(array) sizeof(array)/sizeof(*array)
 
 const u_int g_MAX_BIGINT_LENGTH = 500;
 const u_int g_BIGINT_DIGIT_MODULE = 10;
+
+const u_int g_INPUT_FLOAT_NUMBER_SYMBOLS_INDICES [] = {0, 1, 2, 3, 4, 5};
+const u_int g_INPUT_TARGET_POWER_SYMBOLS_INDICES [] = {7, 8};
 
 class BigInt
 {
@@ -182,7 +186,12 @@ BigInt & BigInt::operator <<= (const u_int & number)
 
 void processInput ();
 void processTestCase (const string & line);
-void parseInputLine (const string & line);
+
+void parseInputLine (const string & inputLine, BigInt & number, int & exponent, u_int & targetPower);
+void parseFloatNumber (const string & inputLine, BigInt & number, int & exponent);
+void parseTargetPower (const string & inputLine, u_int & targetPower);
+bool isNumericSymbol (const char & symbol);
+
 void calculateBigIntPower ();
 void formatAndPrintResult ();
 
@@ -209,16 +218,51 @@ void processInput ()
 
 void processTestCase (const string & inputLine)
 {
-    parseInputLine(inputLine);
+    BigInt number;
+    int exponent = 0;
+    u_int targetPower = 0;
+
+    parseInputLine(inputLine, number, exponent, targetPower);
 
     calculateBigIntPower();
 
     formatAndPrintResult();
 }
 
-void parseInputLine (const string & inputLine)
+void parseInputLine (const string & inputLine, BigInt & number, int & exponent, u_int & targetPower)
 {
-    //TODO: parse line into BigInt, point index and u_int
+    parseFloatNumber(inputLine, number, exponent);
+    parseTargetPower(inputLine, targetPower);
+}
+
+void parseFloatNumber (const string & inputLine, BigInt & number, int & exponent)
+{
+    //TODO...
+}
+
+void parseTargetPower (const string & inputLine, u_int & targetPower)
+{
+    u_int result = 0;
+    u_int digitsCount = arrayLength(g_INPUT_TARGET_POWER_SYMBOLS_INDICES);
+
+    for (u_int i = 0; i < digitsCount; i++)
+    {
+        u_int symbolIndex = g_INPUT_TARGET_POWER_SYMBOLS_INDICES[i];
+        char symbol = inputLine[symbolIndex];
+        if (isNumericSymbol(symbol))
+        {
+            result *= g_BIGINT_DIGIT_MODULE;
+            result += (symbol - '0');
+        }
+    }
+
+    targetPower = result;
+}
+
+bool isNumericSymbol (const char & symbol)
+{
+    return (symbol >= '0')
+        && (symbol <= '9');
 }
 
 void calculateBigIntPower ()
