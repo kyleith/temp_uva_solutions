@@ -14,6 +14,7 @@ const u_int g_BIGINT_DIGIT_MODULE = 10;
 
 const u_int g_INPUT_FLOAT_NUMBER_SYMBOLS_INDICES [] = {0, 1, 2, 3, 4, 5};
 const u_int g_INPUT_TARGET_POWER_SYMBOLS_INDICES [] = {7, 8};
+const char g_FLOAT_DELIMITER = '.';
 
 class BigInt
 {
@@ -50,7 +51,8 @@ BigInt::BigInt (const string & value)
     
     for (u_int i = 0; i < valueLength; i++)
     {
-        f_digits[i] = value[i] - '0';
+        u_int reversedIndex = valueLength - 1 - i;
+        f_digits[reversedIndex] = value[i] - '0';
     }
     for (u_int i = valueLength; i < g_MAX_BIGINT_LENGTH; i++)
     {
@@ -237,7 +239,27 @@ void parseInputLine (const string & inputLine, BigInt & number, int & exponent, 
 
 void parseFloatNumber (const string & inputLine, BigInt & number, int & exponent)
 {
-    //TODO...
+    auto foundDelimiterIndex = inputLine.find(g_FLOAT_DELIMITER);
+    if (foundDelimiterIndex != string::npos)
+    {
+        u_int indicesCount = arrayLength(g_INPUT_FLOAT_NUMBER_SYMBOLS_INDICES);
+        exponent = (indicesCount - 1 - foundDelimiterIndex) * (-1);
+
+        string leftPart = (foundDelimiterIndex > 0) 
+                            ? inputLine.substr(g_INPUT_FLOAT_NUMBER_SYMBOLS_INDICES[0], foundDelimiterIndex)
+                            : "";
+        string rightPart = (foundDelimiterIndex < indicesCount)
+                            ? inputLine.substr(foundDelimiterIndex + 1, indicesCount - foundDelimiterIndex - 1)
+                            : "";
+
+        number = (BigInt) (leftPart + rightPart);
+    }
+    else
+    {
+        string targetNumber = inputLine.substr(g_INPUT_FLOAT_NUMBER_SYMBOLS_INDICES[0], arrayLength(g_INPUT_FLOAT_NUMBER_SYMBOLS_INDICES));
+        number = (BigInt) targetNumber;
+        exponent = 0;
+    }
 }
 
 void parseTargetPower (const string & inputLine, u_int & targetPower)
