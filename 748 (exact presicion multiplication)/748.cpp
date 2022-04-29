@@ -9,7 +9,7 @@
 #define u_int unsigned int
 #define arrayLength(array) sizeof(array)/sizeof(*array)
 
-const u_int g_MAX_BIGINT_LENGTH = 500;
+const u_int g_MAX_BIGINT_LENGTH = 126;//10^(5*25)
 const u_int g_BIGINT_DIGIT_MODULE = 10;
 
 const u_int g_INPUT_FLOAT_NUMBER_SYMBOLS_INDICES [] = {0, 1, 2, 3, 4, 5};
@@ -202,7 +202,7 @@ void parseTargetPower (const string & inputLine, u_int & targetPower);
 bool isNumericSymbol (const char & symbol);
 
 BigInt calculateBigIntPower (const BigInt & number, const u_int & targetPower);
-void formatAndPrintResult ();
+void formatAndPrintResult (const BigInt & number, const int & exponent);
 
 int main ()
 {
@@ -234,8 +234,9 @@ void processTestCase (const string & inputLine)
     parseInputLine(inputLine, number, exponent, targetPower);
 
     BigInt resultDigits = calculateBigIntPower(number, targetPower);
+    int resultExponent = exponent * targetPower;
 
-    formatAndPrintResult();
+    formatAndPrintResult(resultDigits, resultExponent);
 }
 
 void parseInputLine (const string & inputLine, BigInt & number, int & exponent, u_int & targetPower)
@@ -324,7 +325,7 @@ BigInt calculateBigIntPower (const BigInt & number, const u_int & targetPower)
     return result;
 }
 
-void formatAndPrintResult ()
+void formatAndPrintResult (const BigInt & number, const int & exponent)
 {
     //TODO: params BigInt and point index, result string shows shortened exact float number
 }
