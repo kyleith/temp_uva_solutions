@@ -63,7 +63,7 @@ BigInt::BigInt (const string & value)
     }
 
     u_int leadingZeros = 0;
-    for (int i = valueLength - 1; (i >= 0) && (value[i] == '0'); i--)
+    for (u_int i = 0; (i < valueLength) && (value[i] == '0'); i++)
     {
         leadingZeros++;
     }
