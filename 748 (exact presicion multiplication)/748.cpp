@@ -30,6 +30,8 @@ class BigInt
         BigInt operator * (const BigInt & number) const;
         BigInt & operator *= (const u_int & number);
         BigInt & operator <<= (const u_int & number);
+
+        bool isZero () const;
     
     private:
         char f_digits[g_MAX_BIGINT_LENGTH];//1 byte int
@@ -186,6 +188,11 @@ BigInt & BigInt::operator <<= (const u_int & number)
     return *this;
 }
 
+bool BigInt::isZero () const
+{
+    return f_length == 0;
+}
+
 void processInput ();
 void processTestCase (const string & line);
 
@@ -194,7 +201,7 @@ void parseFloatNumber (const string & inputLine, BigInt & number, int & exponent
 void parseTargetPower (const string & inputLine, u_int & targetPower);
 bool isNumericSymbol (const char & symbol);
 
-void calculateBigIntPower ();
+BigInt calculateBigIntPower (const BigInt & number, const u_int & targetPower);
 void formatAndPrintResult ();
 
 int main ()
@@ -226,7 +233,7 @@ void processTestCase (const string & inputLine)
 
     parseInputLine(inputLine, number, exponent, targetPower);
 
-    calculateBigIntPower();
+    BigInt resultDigits = calculateBigIntPower(number, targetPower);
 
     formatAndPrintResult();
 }
@@ -287,10 +294,34 @@ bool isNumericSymbol (const char & symbol)
         && (symbol <= '9');
 }
 
-void calculateBigIntPower ()
+BigInt calculateBigIntPower (const BigInt & number, const u_int & targetPower)
 {
-    //TODO: params BigInt and u_int, result is BigInt
-    //TODO: algo for fast power calculation
+    if (number.isZero())
+    {
+        BigInt zero;
+        return zero;
+    }
+    else if (targetPower == 0)
+    {
+        BigInt one ("1");
+        return one;
+    }
+    
+    BigInt result("1");
+    BigInt bufferMultiplier(number);
+    u_int bufferPower = targetPower;
+
+    while (bufferPower > 0)
+    {
+        if (bufferPower & 1)
+        {
+            result *= bufferMultiplier;
+        }
+        bufferPower >>= 1;
+        bufferMultiplier *= bufferMultiplier;
+    }
+
+    return result;
 }
 
 void formatAndPrintResult ()
