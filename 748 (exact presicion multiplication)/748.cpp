@@ -3,13 +3,13 @@
 #include <string>
 #include <algorithm>
 
-//#define ONLINE_JUDGE 1
+#define ONLINE_JUDGE 1
 
 #define string std::string
 #define u_int unsigned int
 #define arrayLength(array) sizeof(array)/sizeof(*array)
 
-const u_int g_MAX_BIGINT_LENGTH = 200;
+const u_int g_MAX_BIGINT_LENGTH = 301;/* 10^((6+6)*25) */
 const u_int g_BIGINT_DIGIT_MODULE = 10;
 
 const u_int g_INPUT_FLOAT_NUMBER_SYMBOLS_INDICES [] = {0, 1, 2, 3, 4, 5};
@@ -204,6 +204,7 @@ bool isNumericSymbol (const char & symbol);
 
 BigInt calculateBigIntPower (const BigInt & number, const u_int & targetPower);
 void formatAndPrintResult (const BigInt & number, const int & exponent);
+string trimNumberZeros (const string & numberLine);
 
 int main ()
 {
@@ -329,6 +330,7 @@ BigInt calculateBigIntPower (const BigInt & number, const u_int & targetPower)
 void formatAndPrintResult (const BigInt & number, const int & exponent)
 {
     string result = formatBigIntNumber(number, exponent);
+    result = trimNumberZeros(result);
     printf("%s\n", result.c_str());
 }
 
@@ -367,4 +369,36 @@ string formatBigIntNumber(const BigInt & number, const int & exponent)
     }
 
     return (string) resultLine;
+}
+
+string trimNumberZeros (const string & numberLine)
+{
+    int lineLength = numberLine.length();
+    
+    int startingIndex = 0;
+    while (
+            (startingIndex < lineLength)
+            && (numberLine[startingIndex] == '0')
+        )
+    {
+        startingIndex++;
+    }
+
+    int finalIndex = lineLength - 1;
+    while (
+            (finalIndex >= 0)
+            && (numberLine[finalIndex] == '0')
+        )
+    {
+        finalIndex--;
+    }
+    
+    if (startingIndex <= finalIndex)
+    {
+        return numberLine.substr(startingIndex, finalIndex - startingIndex + 1);
+    }
+    else
+    {
+        return "";
+    }
 }
