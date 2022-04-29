@@ -18,6 +18,7 @@ const char g_FLOAT_DELIMITER = '.';
 
 class BigInt
 {
+        friend string formatBigIntNumber(const BigInt & number, const int & exponent);
     public:
         BigInt ();
         BigInt (const string & value);
@@ -327,5 +328,21 @@ BigInt calculateBigIntPower (const BigInt & number, const u_int & targetPower)
 
 void formatAndPrintResult (const BigInt & number, const int & exponent)
 {
-    //TODO: params BigInt and point index, result string shows shortened exact float number
+    string result = formatBigIntNumber(number, exponent);
+    printf("%s\n", result);
+}
+
+string formatBigIntNumber(const BigInt & number, const int & exponent)
+{
+    char resultLine[g_MAX_BIGINT_LENGTH + 2/*. and \0*/] = { 0 };
+
+    if (number.f_length == 0)
+    {
+        resultLine[0] = '.';
+        return (string) resultLine;
+    }
+
+    //TODO...
+
+    return (string) resultLine;
 }
