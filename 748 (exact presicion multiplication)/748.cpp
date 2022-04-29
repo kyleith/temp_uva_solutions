@@ -9,7 +9,7 @@
 #define u_int unsigned int
 #define arrayLength(array) sizeof(array)/sizeof(*array)
 
-const u_int g_MAX_BIGINT_LENGTH = 126;//10^(5*25)
+const u_int g_MAX_BIGINT_LENGTH = 200;
 const u_int g_BIGINT_DIGIT_MODULE = 10;
 
 const u_int g_INPUT_FLOAT_NUMBER_SYMBOLS_INDICES [] = {0, 1, 2, 3, 4, 5};
@@ -32,7 +32,7 @@ class BigInt
         BigInt & operator *= (const u_int & number);
         BigInt & operator <<= (const u_int & number);
 
-        bool isZero () const;
+        bool m_isZero () const;
     
     private:
         char f_digits[g_MAX_BIGINT_LENGTH];//1 byte int
@@ -189,7 +189,7 @@ BigInt & BigInt::operator <<= (const u_int & number)
     return *this;
 }
 
-bool BigInt::isZero () const
+bool BigInt::m_isZero () const
 {
     return f_length == 0;
 }
@@ -298,7 +298,7 @@ bool isNumericSymbol (const char & symbol)
 
 BigInt calculateBigIntPower (const BigInt & number, const u_int & targetPower)
 {
-    if (number.isZero())
+    if (number.m_isZero())
     {
         BigInt zero;
         return zero;
@@ -329,7 +329,7 @@ BigInt calculateBigIntPower (const BigInt & number, const u_int & targetPower)
 void formatAndPrintResult (const BigInt & number, const int & exponent)
 {
     string result = formatBigIntNumber(number, exponent);
-    printf("%s\n", result);
+    printf("%s\n", result.c_str());
 }
 
 string formatBigIntNumber(const BigInt & number, const int & exponent)
@@ -342,7 +342,29 @@ string formatBigIntNumber(const BigInt & number, const int & exponent)
         return (string) resultLine;
     }
 
-    //TODO...
+    int numberLength = number.f_length;
+    int leftDigitsCount = std::max(numberLength + exponent, 0);
+    int rightDigitsCount = std::max(-1 * exponent, 0);
+
+    int currentDigitIndex = leftDigitsCount + rightDigitsCount - 1;
+    u_int currentResultLineLength = 0;
+    
+    for (u_int i = 0; i < leftDigitsCount; i++)
+    {
+        resultLine[currentResultLineLength] = '0' + number.f_digits[currentDigitIndex];
+        currentResultLineLength++;
+
+        currentDigitIndex--;
+    }
+    resultLine[currentResultLineLength] = '.';
+    currentResultLineLength++;
+    for (u_int i = 0; i < rightDigitsCount; i++)
+    {
+        resultLine[currentResultLineLength] = '0' + number.f_digits[currentDigitIndex];
+        currentResultLineLength++;
+
+        currentDigitIndex--;
+    }
 
     return (string) resultLine;
 }
