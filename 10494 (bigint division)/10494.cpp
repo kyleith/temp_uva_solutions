@@ -19,6 +19,8 @@ bool isNumericCharacter (const char & symbol);
 t_lli convertStringToNumber (const string & number);
 
 string calculateExpression (const string & firstNumber, const char & operation, const t_lli & secondNumber);
+void calculateDivision (const string & divisible, const t_lli & divisor, string quotient, string remainder);
+
 void printResult (const string & line);
 
 int main()
@@ -119,11 +121,25 @@ t_lli convertStringToNumber (const string & number)
 
 string calculateExpression (const string & firstNumber, const char & operation, const t_lli & secondNumber)
 {
+    string quotient;
+    string remainder;
+    calculateDivision(firstNumber, secondNumber, quotient, remainder);
+
     string result;
-
-    //TODO...
-
+    if (operation == g_OPERATION_DIV)
+    {
+        result = quotient;
+    }
+    else if (operation == g_OPERATION_MOD)
+    {
+        result = remainder;
+    }
     return result;
+}
+
+void calculateDivision (const string & divisible, const t_lli & divisor, string quotient, string remainder)
+{
+    //TODO...
 }
 
 void printResult (const string & line)
