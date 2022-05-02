@@ -13,6 +13,11 @@ const char g_OPERATION_MOD = '%';
 void processInput ();
 
 void parseExpression (const string & inputLine, string & firstNumber, char & operation, t_lli & secondNumber);
+bool searchSymbol (const string & inputLine, const char & symbol, int & foundIndex);
+string parseNumberAsString (const string & inputLine, const int & startingIndex, const int & finalIndex);
+bool isNumericCharacter (const char & symbol);
+t_lli convertStringToNumber (const string & number);
+
 string calculateExpression (const string & firstNumber, const char & operation, const t_lli & secondNumber);
 void printResult (const string & line);
 
@@ -47,7 +52,69 @@ void processInput ()
 
 void parseExpression (const string & inputLine, string & firstNumber, char & operation, t_lli & secondNumber)
 {
-    //TODO...
+    int operationSymbolIndex = -1;
+    if (searchSymbol(inputLine, g_OPERATION_DIV, operationSymbolIndex))
+    {
+        operation = g_OPERATION_DIV;
+    }
+    else if (searchSymbol(inputLine, g_OPERATION_MOD, operationSymbolIndex))
+    {
+        operation = g_OPERATION_MOD;
+    }
+    else
+    {
+        //no operation - this is an input error
+        return;
+    }
+
+    firstNumber = parseNumberAsString(inputLine, 0, operationSymbolIndex - 1);
+    secondNumber = convertStringToNumber(parseNumberAsString(inputLine, operationSymbolIndex + 1, inputLine.length() - 1));
+}
+
+bool searchSymbol (const string & inputLine, const char & symbol, int & foundIndex)
+{
+    int index = inputLine.find(symbol);
+    if (index != string::npos)
+    {
+        foundIndex = index;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+string parseNumberAsString (const string & inputLine, const int & startingIndex, const int & finalIndex)
+{
+    string result;
+    for (int i = startingIndex; i <= finalIndex; i++)
+    {
+        char symbol = inputLine[i];
+        if (isNumericCharacter(symbol))
+        {
+            result.push_back(symbol);
+        }
+    }
+    return result;
+}
+
+bool isNumericCharacter (const char & symbol)
+{
+    return (symbol >= '0')
+        && (symbol <= '9');
+}
+
+t_lli convertStringToNumber (const string & number)
+{
+    t_lli result = 0;
+    int length = number.length();
+    for (int i = 0; i < length; i++)
+    {
+        result *= 10;
+        result += (number[i] - '0');
+    }
+    return result;
 }
 
 string calculateExpression (const string & firstNumber, const char & operation, const t_lli & secondNumber)
