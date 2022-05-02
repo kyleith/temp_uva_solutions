@@ -7,6 +7,9 @@
 #define string std::string
 #define t_lli long long int
 
+const char g_OPERATION_DIV = '/';
+const char g_OPERATION_MOD = '%';
+
 void processInput ();
 
 void parseExpression (const string & inputLine, string & firstNumber, char & operation, t_lli & secondNumber);
@@ -49,10 +52,14 @@ void parseExpression (const string & inputLine, string & firstNumber, char & ope
 
 string calculateExpression (const string & firstNumber, const char & operation, const t_lli & secondNumber)
 {
+    string result;
+
     //TODO...
+
+    return result;
 }
 
 void printResult (const string & line)
 {
-    //TODO...
+    printf("%s\n", line.c_str());
 }
