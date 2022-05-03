@@ -19,7 +19,7 @@ bool isNumericCharacter (const char & symbol);
 t_lli convertStringToNumber (const string & number);
 
 string calculateExpression (const string & firstNumber, const char & operation, const t_lli & secondNumber);
-void calculateDivision (const string & divisible, const t_lli & divisor, string quotient, string remainder);
+void calculateDivision (const string & divisible, const t_lli & divisor, string quotient, t_lli remainder);
 
 void printResult (const string & line);
 
@@ -122,7 +122,7 @@ t_lli convertStringToNumber (const string & number)
 string calculateExpression (const string & firstNumber, const char & operation, const t_lli & secondNumber)
 {
     string quotient;
-    string remainder;
+    t_lli remainder;
     calculateDivision(firstNumber, secondNumber, quotient, remainder);
 
     string result;
@@ -132,12 +132,12 @@ string calculateExpression (const string & firstNumber, const char & operation, 
     }
     else if (operation == g_OPERATION_MOD)
     {
-        result = remainder;
+        result = std::to_string(remainder);
     }
     return result;
 }
 
-void calculateDivision (const string & divisible, const t_lli & divisor, string quotient, string remainder)
+void calculateDivision (const string & divisible, const t_lli & divisor, string quotient, t_lli remainder)
 {
     //TODO...
 }
