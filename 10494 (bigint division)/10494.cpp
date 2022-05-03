@@ -19,7 +19,7 @@ bool isNumericCharacter (const char & symbol);
 t_lli convertStringToNumber (const string & number);
 
 string calculateExpression (const string & firstNumber, const char & operation, const t_lli & secondNumber);
-void calculateDivision (const string & divisible, const t_lli & divisor, string quotient, t_lli remainder);
+void calculateDivision (const string & divisible, const t_lli & divisor, string & quotient, t_lli & remainder);
 
 void printResult (const string & line);
 
@@ -137,9 +137,25 @@ string calculateExpression (const string & firstNumber, const char & operation, 
     return result;
 }
 
-void calculateDivision (const string & divisible, const t_lli & divisor, string quotient, t_lli remainder)
+void calculateDivision (const string & divisible, const t_lli & divisor, string & quotient, t_lli & remainder)
 {
-    //TODO...
+    string resultQuotient = "";
+    t_lli buffer = 0;
+
+    int digitsCount = divisible.length();
+    for (int i = 0; i < digitsCount; i++)
+    {
+        buffer *= 10;
+        buffer += (divisible[i] - '0');
+
+        int resultDigit = (buffer / divisor);
+        resultQuotient.push_back('0' + resultDigit);
+
+        buffer %= divisor;
+    }
+
+    quotient = resultQuotient;
+    remainder = buffer;
 }
 
 void printResult (const string & line)
