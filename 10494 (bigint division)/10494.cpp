@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-//#define ONLINE_JUDGE 1
+#define ONLINE_JUDGE 1
 
 #define string std::string
 #define t_lli long long int
@@ -20,6 +20,7 @@ t_lli convertStringToNumber (const string & number);
 
 string calculateExpression (const string & firstNumber, const char & operation, const t_lli & secondNumber);
 void calculateDivision (const string & divisible, const t_lli & divisor, string & quotient, t_lli & remainder);
+void trimLeadingZeros (string & number);
 
 void printResult (const string & line);
 
@@ -154,8 +155,34 @@ void calculateDivision (const string & divisible, const t_lli & divisor, string 
         buffer %= divisor;
     }
 
+    trimLeadingZeros(resultQuotient);
+
     quotient = resultQuotient;
     remainder = buffer;
+}
+
+void trimLeadingZeros (string & number)
+{
+    int firstSignificantIndex = -1;
+    
+    int digitsCount = number.length();
+    for (int i = 0; i < digitsCount; i++)
+    {
+        if (number[i] != '0')
+        {
+            firstSignificantIndex = i;
+            break;
+        }
+    }
+
+    if (firstSignificantIndex == -1)
+    {
+        number = "0";
+    }
+    else
+    {
+        number = number.substr(firstSignificantIndex, digitsCount - firstSignificantIndex);
+    }
 }
 
 void printResult (const string & line)
