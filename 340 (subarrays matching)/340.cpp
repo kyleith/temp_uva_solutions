@@ -6,13 +6,20 @@
 
 const int g_MAX_CODE_LENGTH = 1000;
 
-void processInput ();
+struct CodeHint
+{
+    int f_strongMatchesCount = 0;
+    int f_weakMatchesCount = 0;
+};
 
+void processInput ();
 void processTestCase (const u_int & counter, bool & isExitTestCase);
+
 void readSecretCode (const int & codeLength, int * code);
 void readGuessCode (const int & codeLength, int * code, bool & isExitGuessCode);
-void calculateCodeHint ();
-void printCodeHint ();
+
+CodeHint calculateCodeHint (const int * secretCode, const int * guessCode, const int & codeLength);
+void printCodeHint (const CodeHint & hint);
 
 int main ()
 {
@@ -57,8 +64,8 @@ void processTestCase (const u_int & counter, bool & isExitTestCase)
         readGuessCode(codeLength, guessCode, isExitGuessCode);
         while (!isExitGuessCode)
         {
-            calculateCodeHint();//TODO...
-            printCodeHint();//TODO...
+            CodeHint currentHint = calculateCodeHint(secretCode, guessCode, codeLength);
+            printCodeHint(currentHint);
 
             readGuessCode(codeLength, guessCode, isExitGuessCode);
         }
@@ -87,12 +94,15 @@ void readGuessCode (const int & codeLength, int * code, bool & isExitGuessCode)
     isExitGuessCode = (bool)(code[0] == 0);
 }
 
-void calculateCodeHint ()
+CodeHint calculateCodeHint (const int * secretCode, const int * guessCode, const int & codeLength)
 {
+    CodeHint result;
     //TODO...
+
+    return result;
 }
 
-void printCodeHint ()
+void printCodeHint (const CodeHint & hint)
 {
-    //TODO...
+    printf("    (%d,%d)\n", hint.f_strongMatchesCount, hint.f_weakMatchesCount);
 }
