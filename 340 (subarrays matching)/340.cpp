@@ -2,11 +2,13 @@
 
 //#define ONLINE_JUDGE 1
 
+const int g_MAX_CODE_LENGTH = 1000;
+
 void processInput ();
 
-void processTestCase ();
-void readSecretCode ();
-void readGuessCode ();
+void processTestCase (bool & isExit);
+void readSecretCode (const int & codeLength, int * code);
+void readGuessCode (const int & codeLength, int * code, bool & isExitGuessCode);
 void calculateCodeHint ();
 void printCodeHint ();
 
@@ -24,22 +26,59 @@ int main ()
 
 void processInput ()
 {
-    //TODO...
+    bool isExitTestCase = false;
+    while (!isExitTestCase)
+    {
+        processTestCase(isExitTestCase);
+    }
 }
 
-void processTestCase ()
+void processTestCase (bool & isExitTestCase)
 {
-    //TODO...
+    int codeLength = -1;
+    scanf("%d", &codeLength);
+
+    if (codeLength > 0)
+    {
+        isExitTestCase = false;
+
+        int secretCode [g_MAX_CODE_LENGTH] = { 0 };
+        readSecretCode(codeLength, secretCode);
+
+        int guessCode [g_MAX_CODE_LENGTH] = { 0 };
+        bool isExitGuessCode = false;
+
+        readGuessCode(codeLength, guessCode, isExitGuessCode);
+        while (!isExitGuessCode)
+        {
+            calculateCodeHint();//TODO...
+            printCodeHint();//TODO...
+
+            readGuessCode(codeLength, guessCode, isExitGuessCode);
+        }
+    }
+    else
+    {
+        isExitTestCase = true;
+    }
 }
 
-void readSecretCode ()
+void readSecretCode (const int & codeLength, int * code)
 {
-    //TODO...
+    for (int i = 0; i < codeLength; i++)
+    {
+        scanf("%d", &code[i]);
+    }
 }
 
-void readGuessCode ()
+void readGuessCode (const int & codeLength, int * code, bool & isExitGuessCode)
 {
-    //TODO..
+    for (int i = 0; i < codeLength; i++)
+    {
+        scanf("%d", &code[i]);
+    }
+
+    isExitGuessCode = (bool)(code[0] == 0);
 }
 
 void calculateCodeHint ()
