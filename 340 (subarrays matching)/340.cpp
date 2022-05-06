@@ -96,9 +96,24 @@ void readGuessCode (const int & codeLength, int * code, bool & isExitGuessCode)
 
 CodeHint calculateCodeHint (const int * secretCode, const int * guessCode, const int & codeLength)
 {
-    CodeHint result;
-    //TODO...
+    int strongMatches = 0;
+    int weakMatches = 0;
 
+    for (int i = 0; i < codeLength; i++)
+    {
+        if (secretCode[i] == guessCode[i])
+        {
+            strongMatches++;
+        }
+        else
+        {
+            //TODO...
+        }
+    }
+
+    CodeHint result;
+    result.f_strongMatchesCount = strongMatches;
+    result.f_weakMatchesCount = weakMatches;
     return result;
 }
 
