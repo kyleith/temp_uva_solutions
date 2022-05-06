@@ -2,11 +2,13 @@
 
 //#define ONLINE_JUDGE 1
 
+#define u_int unsigned long int
+
 const int g_MAX_CODE_LENGTH = 1000;
 
 void processInput ();
 
-void processTestCase (bool & isExit);
+void processTestCase (const u_int & counter, bool & isExitTestCase);
 void readSecretCode (const int & codeLength, int * code);
 void readGuessCode (const int & codeLength, int * code, bool & isExitGuessCode);
 void calculateCodeHint ();
@@ -27,13 +29,15 @@ int main ()
 void processInput ()
 {
     bool isExitTestCase = false;
+    u_int counter = 0;
     while (!isExitTestCase)
     {
-        processTestCase(isExitTestCase);
+        counter++;
+        processTestCase(counter, isExitTestCase);
     }
 }
 
-void processTestCase (bool & isExitTestCase)
+void processTestCase (const u_int & counter, bool & isExitTestCase)
 {
     int codeLength = -1;
     scanf("%d", &codeLength);
@@ -41,6 +45,8 @@ void processTestCase (bool & isExitTestCase)
     if (codeLength > 0)
     {
         isExitTestCase = false;
+
+        printf("Game %lu:\n", counter);
 
         int secretCode [g_MAX_CODE_LENGTH] = { 0 };
         readSecretCode(codeLength, secretCode);
