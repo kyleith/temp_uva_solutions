@@ -1,8 +1,11 @@
 #include <stdio.h>
+#include <map>
+#include <algorithm>
 
-//#define ONLINE_JUDGE 1
+#define ONLINE_JUDGE 1
 
 #define u_int unsigned long int
+#define t_digitsMap std::map<int, int>
 
 const int g_MAX_CODE_LENGTH = 1000;
 
@@ -19,6 +22,9 @@ void readSecretCode (const int & codeLength, int * code);
 void readGuessCode (const int & codeLength, int * code, bool & isExitGuessCode);
 
 CodeHint calculateCodeHint (const int * secretCode, const int * guessCode, const int & codeLength);
+void addDigitToMap (const int & digit, t_digitsMap & targetMap);
+int calculateWeakMapMatches (const t_digitsMap & secretMap, const t_digitsMap & guessMap);
+
 void printCodeHint (const CodeHint & hint);
 
 int main ()
@@ -97,7 +103,8 @@ void readGuessCode (const int & codeLength, int * code, bool & isExitGuessCode)
 CodeHint calculateCodeHint (const int * secretCode, const int * guessCode, const int & codeLength)
 {
     int strongMatches = 0;
-    int weakMatches = 0;
+    t_digitsMap secretCodeMap;
+    t_digitsMap guessCodeMap;
 
     for (int i = 0; i < codeLength; i++)
     {
@@ -107,13 +114,42 @@ CodeHint calculateCodeHint (const int * secretCode, const int * guessCode, const
         }
         else
         {
-            //TODO...
+            addDigitToMap(secretCode[i], secretCodeMap);
+            addDigitToMap(guessCode[i], guessCodeMap);
         }
     }
 
     CodeHint result;
     result.f_strongMatchesCount = strongMatches;
-    result.f_weakMatchesCount = weakMatches;
+    result.f_weakMatchesCount = calculateWeakMapMatches(secretCodeMap, guessCodeMap);
+    return result;
+}
+
+void addDigitToMap (const int & digit, t_digitsMap & targetMap)
+{
+    auto foundIterator = targetMap.find(digit);
+    if (foundIterator != targetMap.end())
+    {
+        foundIterator->second++;
+    }
+    else
+    {
+        targetMap.insert(std::make_pair(digit, 1));
+    }
+}
+
+int calculateWeakMapMatches (const t_digitsMap & secretMap, const t_digitsMap & guessMap)
+{
+    int result = 0;
+    for (auto iterator = guessMap.begin(); iterator != guessMap.end(); iterator++)
+    {
+        int digit = iterator->first;
+        auto foundIterator = secretMap.find(digit);
+        if (foundIterator != secretMap.end())
+        {
+            result += (std::min(iterator->second, foundIterator->second));
+        }
+    }
     return result;
 }
 
