@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <map>
+#include <utility>
 
 //#define ONLINE_JUDGE 1
 
@@ -51,10 +52,21 @@ void processInputLineAndSaveCountry (string & country)
 
 void saveCountryRepetitionInMap (const string & country, t_map & targetMap)
 {
-    //TODO..
+    auto iteratorFound = targetMap.find(country);
+    if (iteratorFound == targetMap.end())
+    {
+        targetMap.insert(std::make_pair(country, 1));
+    }
+    else
+    {
+        iteratorFound->second++;
+    }
 }
 
 void printSortedMap (const t_map & resultMap)
 {
-    //TODO...
+    for (auto iterator = resultMap.begin(); iterator != resultMap.end(); iterator++)
+    {
+        printf("%s %d\n", iterator->first.c_str(), iterator->second);
+    }
 }
