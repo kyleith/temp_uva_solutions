@@ -1,10 +1,14 @@
 #include <stdio.h>
+#include <string>
+#include <iostream>
 
 //#define ONLINE_JUDGE 1
 
+#define string std::string
+
 void processInput ();
-void processInputLineAndSaveCountry ();
-void saveCountryRepetitionInMap ();
+void processInputLineAndSaveCountry (string & country);
+void saveCountryRepetitionInMap (const string & country);
 void printSortedMap ();
 
 int main()
@@ -26,19 +30,23 @@ void processInput ()
 
     for (int i = 0; i < n; i++)
     {
-        processInputLineAndSaveCountry();
-        saveCountryRepetitionInMap();
+        string country;
+        processInputLineAndSaveCountry(country);
+        saveCountryRepetitionInMap(country);
     }
 
     printSortedMap();
 }
 
-void processInputLineAndSaveCountry ()
+void processInputLineAndSaveCountry (string & country)
 {
-    //TODO...
+    std::cin >> country;
+    
+    string buffer = "";
+    std::getline(std::cin, buffer);
 }
 
-void saveCountryRepetitionInMap ()
+void saveCountryRepetitionInMap (const string & country)
 {
     //TODO..
 }
