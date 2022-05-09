@@ -4,10 +4,10 @@
 #include <map>
 #include <utility>
 
-//#define ONLINE_JUDGE 1
+#define ONLINE_JUDGE 1
 
 #define string std::string
-#define t_map std::map<string, int, std::greater<string>>
+#define t_map std::map<string, int, std::less<string>>
 
 void processInput ();
 void processInputLineAndSaveCountry (string & country);
