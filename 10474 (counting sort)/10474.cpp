@@ -2,10 +2,12 @@
 
 //#define ONLINE_JUDGE
 
+const int g_ARRAY_LENGTH = 10001;
+
 void processInput ();
 void processTestCase (const int & caseIndex, bool & isExit);
-void readArray ();
-void readAndProcessQuery ();
+void readInputArray (const int & n, int * countArray, int * lowerBoundArray);
+void readAndProcessQuery (const int * countArray, const int * lowerBoundArray);
 
 int main ()
 {
@@ -45,19 +47,22 @@ void processTestCase (const int & caseIndex, bool & isExit)
 
     printf("CASE# %d:\n", caseIndex);
 
-    readArray();
+    int countArray[g_ARRAY_LENGTH] = {0};
+    int lowerBoundArray[g_ARRAY_LENGTH] = {0};
+    readInputArray(n, countArray, lowerBoundArray);
+    
     for (int i = 0; i < q; i++)
     {
-        readAndProcessQuery();
+        readAndProcessQuery(countArray, lowerBoundArray);
     }
 }
 
-void readArray ()
+void readInputArray (const int & n, int * countArray, int * lowerBoundArray)
 {
     //TODO...
 }
 
-void readAndProcessQuery ()
+void readAndProcessQuery (const int * countArray, const int * lowerBoundArray)
 {
     //TODO...
 }
