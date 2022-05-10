@@ -59,10 +59,21 @@ void processTestCase (const int & caseIndex, bool & isExit)
 
 void readInputArray (const int & n, int * countArray, int * lowerBoundArray)
 {
-    //TODO...
+    for (int i = 0; i < n; i++)
+    {
+        int number = -1;
+        scanf("%d", &number);
+        countArray[number]++;
+    }
+
+    for (int i = 1; i < g_ARRAY_LENGTH; i++)
+    {
+        lowerBoundArray[i] = lowerBoundArray[i - 1] + countArray[i];
+    }
 }
 
 void readAndProcessQuery (const int * countArray, const int * lowerBoundArray)
 {
-    //TODO...
+    int number = -1;
+    scanf("%d", &number);
 }
