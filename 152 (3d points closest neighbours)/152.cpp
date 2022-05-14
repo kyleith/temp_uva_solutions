@@ -117,7 +117,10 @@ void applyClusterPartition (const int & n, Point * pointsArray, int * closestDis
                 swapArrayElements(pClusterBound, j, pointsArray);                
             }
         }
+    }
 
+    for (int i = pBoundNonProcessedIndex; i <= pClusterBound; i++)
+    {
         int clusterPointClosestDistanceIndex = closestDistances[i];
         if (clusterPointClosestDistanceIndex < g_DISTANCES_ARRAY_LENGTH)
         {
