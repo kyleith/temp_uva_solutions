@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <cmath>
 #include <limits>
+#include <algorithm>
 
 //#define ONLINE_JUDGE 1
 
@@ -44,13 +45,14 @@ int main ()
 void processInput ()
 {
     Point inputPoints[g_MAX_POINTS_COUNT];
-    int closestDistances [g_MAX_POINTS_COUNT] = { g_MAX_DISTANCE_INFINITY };
     int distanceStatsArray [g_DISTANCES_ARRAY_LENGTH] = { 0 };
-    
     int n = 0;
 
     readInputPoints(inputPoints, n);
-   
+    
+    int closestDistances [g_MAX_POINTS_COUNT];
+    std::fill_n(closestDistances, n, g_MAX_DISTANCE_INFINITY);  
+
     applyKNearestNeighboursSorting(n, inputPoints, closestDistances);
 
     processNeighboursStats(closestDistances, n, distanceStatsArray);
@@ -103,9 +105,10 @@ void applyClusterPartition (const int & n, Point * pointsArray, int * closestDis
         for (int j = i + 1; j < n; j++)
         {
             double distance = calculateDistance(pointsArray[i], pointsArray[j]);
-
             int distanceRangeIndex = floor(distance);
+
             closestDistances[i] = std::min(closestDistances[i], distanceRangeIndex);
+            closestDistances[j] = std::min(closestDistances[j], distanceRangeIndex);
 
             if (
                     (distance < g_MAX_CLUSTER_DISTANCE)
