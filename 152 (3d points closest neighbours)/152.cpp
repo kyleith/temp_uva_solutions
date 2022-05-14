@@ -143,5 +143,9 @@ void swapArrayElements (const int & i, const int & j, Point * pointsArray)
 
 void printResults (const int * distanceStatsArray)
 {
-    //TODO...
+    for (int i = 0; i < g_DISTANCES_ARRAY_LENGTH; i++)
+    {
+        printf("%4d", distanceStatsArray[i]);
+    }
+    printf("\n");
 }
