@@ -22,12 +22,11 @@ void processInput ();
 
 void readInputPoints (Point * points, int & pointsCount);
 
-void applyKNearestNeighboursSorting (const int & n, Point * pointsArray, int * closestDistances);
-void applyClusterPartition (const int & n, Point * pointsArray, int * closestDistances, int & pBoundNonProcessedIndex);
+void applyKNearestNeighboursSorting (const int & n, Point * pointsArray, int * closestDistances, int * distanceStatsArray);
+void applyClusterPartition (const int & n, Point * pointsArray, int * closestDistances, int * distanceStatsArray, int & pBoundNonProcessedIndex);
 double calculateDistance (const Point & A, const Point & B);
 void swapArrayElements (const int & i, const int & j, Point * pointsArray);
 
-void processNeighboursStats (const int * closestDistances, const int & n, int * distanceStatsArray);
 void printResults (const int * distanceStatsArray);
 
 int main ()
@@ -53,10 +52,8 @@ void processInput ()
     int closestDistances [g_MAX_POINTS_COUNT];
     std::fill_n(closestDistances, n, g_MAX_DISTANCE_INFINITY);  
 
-    applyKNearestNeighboursSorting(n, inputPoints, closestDistances);
+    applyKNearestNeighboursSorting(n, inputPoints, closestDistances, distanceStatsArray);
 
-    processNeighboursStats(closestDistances, n, distanceStatsArray);
-    
     printResults(distanceStatsArray);
 }
 
@@ -80,17 +77,17 @@ void readInputPoints (Point * points, int & pointsCount)
     }
 }
 
-void applyKNearestNeighboursSorting (const int & n, Point * pointsArray, int * closestDistances)
+void applyKNearestNeighboursSorting (const int & n, Point * pointsArray, int * closestDistances, int * distanceStatsArray)
 {
     int boundNonProcessedIndex = 0;
 
     while (boundNonProcessedIndex < n)
     {
-        applyClusterPartition(n, pointsArray, closestDistances, boundNonProcessedIndex);
+        applyClusterPartition(n, pointsArray, closestDistances, distanceStatsArray, boundNonProcessedIndex);
     }
 }
 
-void applyClusterPartition (const int & n, Point * pointsArray, int * closestDistances, int & pBoundNonProcessedIndex)
+void applyClusterPartition (const int & n, Point * pointsArray, int * closestDistances, int * distanceStatsArray, int & pBoundNonProcessedIndex)
 {
     int pClusterBound = pBoundNonProcessedIndex;
     
@@ -120,6 +117,12 @@ void applyClusterPartition (const int & n, Point * pointsArray, int * closestDis
                 swapArrayElements(pClusterBound, j, pointsArray);                
             }
         }
+
+        int clusterPointClosestDistanceIndex = closestDistances[i];
+        if (clusterPointClosestDistanceIndex < g_DISTANCES_ARRAY_LENGTH)
+        {
+            distanceStatsArray[clusterPointClosestDistanceIndex]++;
+        }
     }
 
     pBoundNonProcessedIndex = pClusterBound + 1;
@@ -136,11 +139,6 @@ void swapArrayElements (const int & i, const int & j, Point * pointsArray)
     Point buffer = pointsArray[i];
     pointsArray[i] = pointsArray[j];
     pointsArray[j] = buffer;
-}
-
-void processNeighboursStats (const int * closestDistances, const int & n, int * distanceStatsArray)
-{
-    //TODO...
 }
 
 void printResults (const int * distanceStatsArray)
