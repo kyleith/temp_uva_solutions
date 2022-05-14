@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <cmath>
+#include <limits>
 
 //#define ONLINE_JUDGE 1
 
 const int g_MAX_POINTS_COUNT = 5000;
+
+const int g_MAX_DISTANCE_INFINITY = INT_MAX;
 const int g_DISTANCES_ARRAY_LENGTH = 10;
 
 struct Point
@@ -20,6 +23,7 @@ void readInputPoints (Point * points, int & pointsCount);
 void applyKNearestNeighboursSorting (const int & n, Point * pointsArray, int * closestDistances);
 void applyClusterPartition (const int & n, Point * pointsArray, int * closestDistances, int & pBoundNonProcessedIndex);
 double calculateDistance (const Point & A, const Point & B);
+void swapArrayElements (const int & i, const int & j, Point * pointsArray);
 
 void processNeighboursStats (const int * closestDistances, const int & n, int * distanceStatsArray);
 void printResults (const int * distanceStatsArray);
@@ -39,7 +43,7 @@ int main ()
 void processInput ()
 {
     Point inputPoints[g_MAX_POINTS_COUNT];
-    int closestDistances [g_MAX_POINTS_COUNT] = { 0 };
+    int closestDistances [g_MAX_POINTS_COUNT] = { g_MAX_DISTANCE_INFINITY };
     int distanceStatsArray [g_DISTANCES_ARRAY_LENGTH] = { 0 };
     
     int n = 0;
@@ -89,9 +93,18 @@ void applyClusterPartition (const int & n, Point * pointsArray, int * closestDis
     
     for (int i = pBoundNonProcessedIndex; i < n; i++)
     {
-        int clusterElementIndex = i;
         for (int j = i + 1; j < n; j++)
         {
+            double distance = calculateDistance(pointsArray[i], pointsArray[j]);
+
+            int distanceRangeIndex = floor(distance);
+            closestDistances[i] = std::min(closestDistances[i], distanceRangeIndex);
+
+            if (distance < g_DISTANCES_ARRAY_LENGTH)
+            {
+                //TODO: add point to cluster and move bound
+                //also ignore if the point is already inside the cluster
+            }
         }
     }
 }
@@ -100,6 +113,13 @@ double calculateDistance (const Point & A, const Point & B)
 {
     double result = sqrt((A.x - B.x)*(A.x - B.x) + (A.y - B.y)*(A.y - B.y) + (A.z - B.z)*(A.z - B.z));
     return result;
+}
+
+void swapArrayElements (const int & i, const int & j, Point * pointsArray)
+{
+    Point buffer = pointsArray[i];
+    pointsArray[i] = pointsArray[j];
+    pointsArray[j] = buffer;
 }
 
 void processNeighboursStats (const int * closestDistances, const int & n, int * distanceStatsArray)
