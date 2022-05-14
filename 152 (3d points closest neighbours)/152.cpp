@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <cmath>
-#include <limits>
+#include <limits.h>
 #include <algorithm>
 
-//#define ONLINE_JUDGE 1
+#define ONLINE_JUDGE 1
 
 const int g_MAX_POINTS_COUNT = 5000;
 const int g_DISTANCES_ARRAY_LENGTH = 10;
@@ -93,11 +93,11 @@ void applyClusterPartition (const int & n, Point * pointsArray, int * closestDis
     
     for (int i = pBoundNonProcessedIndex; i < n - 1; i++)
     {
-        if (i > pClusterBound)
-        {
-            //current cluster is finished
-            break;
-        }
+        // if (i > pClusterBound)
+        // {
+        //     //current cluster is finished
+        //     break;
+        // }
 
         for (int j = i + 1; j < n; j++)
         {
@@ -107,16 +107,18 @@ void applyClusterPartition (const int & n, Point * pointsArray, int * closestDis
             closestDistances[i] = std::min(closestDistances[i], distanceRangeIndex);
             closestDistances[j] = std::min(closestDistances[j], distanceRangeIndex);
 
-            if (
-                    (distance < g_MAX_CLUSTER_DISTANCE)
-                    && (j > pClusterBound)/*ignore if the point is already inside the cluster*/
-                )
-            {
-                //add point to cluster and move bound
-                pClusterBound++;
-                swapArrayElements(pClusterBound, j, pointsArray);                
-            }
+            // if (
+            //         (distance < g_MAX_CLUSTER_DISTANCE)
+            //         && (j > pClusterBound)/*ignore if the point is already inside the cluster*/
+            //     )
+            // {
+            //     //add point to cluster and move bound
+            //     pClusterBound++;
+            //     swapArrayElements(pClusterBound, j, pointsArray);                
+            // }
         }
+
+        pClusterBound++;
     }
 
     for (int i = pBoundNonProcessedIndex; i <= pClusterBound; i++)
