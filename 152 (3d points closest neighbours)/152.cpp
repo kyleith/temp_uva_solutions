@@ -3,6 +3,7 @@
 //#define ONLINE_JUDGE 1
 
 const int g_MAX_POINTS_COUNT = 5000;
+const int g_DISTANCES_ARRAY_LENGTH = 10;
 
 struct Point
 {
@@ -14,9 +15,8 @@ struct Point
 void processInput ();
 
 void readInputPoints (Point * points, int & pointsCount);
-void applyKNearestNeighboursPartition ();
-void saveProcessedResults ();
-void printResults ();
+void applyKNearestNeighboursSorting (const int & n, Point * pointsArray, int * distancesArray);
+void printResults (const int * distancesArray);
 
 int main ()
 {
@@ -37,11 +37,10 @@ void processInput ()
 
     readInputPoints(inputPoints, n);
 
-    //loop until all points are processed
-    applyKNearestNeighboursPartition();
-    saveProcessedResults();
+    int resultDistances [g_DISTANCES_ARRAY_LENGTH] = { 0 };
+    applyKNearestNeighboursSorting(n, inputPoints, resultDistances);
 
-    printResults();
+    printResults(resultDistances);
 }
 
 void readInputPoints (Point * points, int & pointsCount)
@@ -64,17 +63,12 @@ void readInputPoints (Point * points, int & pointsCount)
     }
 }
 
-void applyKNearestNeighboursPartition ()
+void applyKNearestNeighboursSorting (const int & n, Point * pointsArray, int * distancesArray)
 {
     //TODO...
 }
 
-void saveProcessedResults ()
-{
-    //TODO...
-}
-
-void printResults ()
+void printResults (const int * distancesArray)
 {
     //TODO...
 }
