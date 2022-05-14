@@ -5,9 +5,10 @@
 //#define ONLINE_JUDGE 1
 
 const int g_MAX_POINTS_COUNT = 5000;
+const int g_DISTANCES_ARRAY_LENGTH = 10;
 
 const int g_MAX_DISTANCE_INFINITY = INT_MAX;
-const int g_DISTANCES_ARRAY_LENGTH = 10;
+const double g_MAX_CLUSTER_DISTANCE = (double)g_DISTANCES_ARRAY_LENGTH;
 
 struct Point
 {
@@ -89,10 +90,16 @@ void applyKNearestNeighboursSorting (const int & n, Point * pointsArray, int * c
 
 void applyClusterPartition (const int & n, Point * pointsArray, int * closestDistances, int & pBoundNonProcessedIndex)
 {
-    int pboundIndex = pBoundNonProcessedIndex;
+    int pClusterBound = pBoundNonProcessedIndex;
     
-    for (int i = pBoundNonProcessedIndex; i < n; i++)
+    for (int i = pBoundNonProcessedIndex; i < n - 1; i++)
     {
+        if (i > pClusterBound)
+        {
+            //current cluster is finished
+            break;
+        }
+
         for (int j = i + 1; j < n; j++)
         {
             double distance = calculateDistance(pointsArray[i], pointsArray[j]);
@@ -100,13 +107,19 @@ void applyClusterPartition (const int & n, Point * pointsArray, int * closestDis
             int distanceRangeIndex = floor(distance);
             closestDistances[i] = std::min(closestDistances[i], distanceRangeIndex);
 
-            if (distance < g_DISTANCES_ARRAY_LENGTH)
+            if (
+                    (distance < g_MAX_CLUSTER_DISTANCE)
+                    && (j > pClusterBound)/*ignore if the point is already inside the cluster*/
+                )
             {
-                //TODO: add point to cluster and move bound
-                //also ignore if the point is already inside the cluster
+                //add point to cluster and move bound
+                pClusterBound++;
+                swapArrayElements(pClusterBound, j, pointsArray);                
             }
         }
     }
+
+    pBoundNonProcessedIndex = pClusterBound + 1;
 }
 
 double calculateDistance (const Point & A, const Point & B)
