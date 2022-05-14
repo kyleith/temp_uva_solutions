@@ -21,12 +21,8 @@ struct Point
 void processInput ();
 
 void readInputPoints (Point * points, int & pointsCount);
-
-void applyKNearestNeighboursSorting (const int & n, Point * pointsArray, int * closestDistances, int * distanceStatsArray);
-void applyClusterPartition (const int & n, Point * pointsArray, int * closestDistances, int * distanceStatsArray, int & pBoundNonProcessedIndex);
+void updateDistances (const int & n, Point * pointsArray, int * closestDistances, int * distanceStatsArray);
 double calculateDistance (const Point & A, const Point & B);
-void swapArrayElements (const int & i, const int & j, Point * pointsArray);
-
 void printResults (const int * distanceStatsArray);
 
 int main ()
@@ -52,7 +48,7 @@ void processInput ()
     int closestDistances [g_MAX_POINTS_COUNT];
     std::fill_n(closestDistances, n, g_MAX_DISTANCE_INFINITY);  
 
-    applyKNearestNeighboursSorting(n, inputPoints, closestDistances, distanceStatsArray);
+    updateDistances(n, inputPoints, closestDistances, distanceStatsArray);
 
     printResults(distanceStatsArray);
 }
@@ -77,28 +73,10 @@ void readInputPoints (Point * points, int & pointsCount)
     }
 }
 
-void applyKNearestNeighboursSorting (const int & n, Point * pointsArray, int * closestDistances, int * distanceStatsArray)
+void updateDistances (const int & n, Point * pointsArray, int * closestDistances, int * distanceStatsArray)
 {
-    int boundNonProcessedIndex = 0;
-
-    while (boundNonProcessedIndex < n)
+    for (int i = 0; i < n - 1; i++)
     {
-        applyClusterPartition(n, pointsArray, closestDistances, distanceStatsArray, boundNonProcessedIndex);
-    }
-}
-
-void applyClusterPartition (const int & n, Point * pointsArray, int * closestDistances, int * distanceStatsArray, int & pBoundNonProcessedIndex)
-{
-    int pClusterBound = pBoundNonProcessedIndex;
-    
-    for (int i = pBoundNonProcessedIndex; i < n - 1; i++)
-    {
-        // if (i > pClusterBound)
-        // {
-        //     //current cluster is finished
-        //     break;
-        // }
-
         for (int j = i + 1; j < n; j++)
         {
             double distance = calculateDistance(pointsArray[i], pointsArray[j]);
@@ -106,22 +84,10 @@ void applyClusterPartition (const int & n, Point * pointsArray, int * closestDis
 
             closestDistances[i] = std::min(closestDistances[i], distanceRangeIndex);
             closestDistances[j] = std::min(closestDistances[j], distanceRangeIndex);
-
-            // if (
-            //         (distance < g_MAX_CLUSTER_DISTANCE)
-            //         && (j > pClusterBound)/*ignore if the point is already inside the cluster*/
-            //     )
-            // {
-            //     //add point to cluster and move bound
-            //     pClusterBound++;
-            //     swapArrayElements(pClusterBound, j, pointsArray);                
-            // }
         }
-
-        pClusterBound++;
     }
 
-    for (int i = pBoundNonProcessedIndex; i <= pClusterBound; i++)
+    for (int i = 0; i < n; i++)
     {
         int clusterPointClosestDistanceIndex = closestDistances[i];
         if (clusterPointClosestDistanceIndex < g_DISTANCES_ARRAY_LENGTH)
@@ -129,21 +95,12 @@ void applyClusterPartition (const int & n, Point * pointsArray, int * closestDis
             distanceStatsArray[clusterPointClosestDistanceIndex]++;
         }
     }
-
-    pBoundNonProcessedIndex = pClusterBound + 1;
 }
 
 double calculateDistance (const Point & A, const Point & B)
 {
     double result = sqrt((A.x - B.x)*(A.x - B.x) + (A.y - B.y)*(A.y - B.y) + (A.z - B.z)*(A.z - B.z));
     return result;
-}
-
-void swapArrayElements (const int & i, const int & j, Point * pointsArray)
-{
-    Point buffer = pointsArray[i];
-    pointsArray[i] = pointsArray[j];
-    pointsArray[j] = buffer;
 }
 
 void printResults (const int * distanceStatsArray)
