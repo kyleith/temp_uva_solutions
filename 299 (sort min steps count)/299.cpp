@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-//#define ONLINE_JUDGE 1
+#define ONLINE_JUDGE 1
 
 const int g_MAX_ARRAY_LENGTH = 50;
 
