@@ -9,7 +9,7 @@ void processTestCase ();
 void readTestCaseData (int * array, int & n);
 
 int calculateSwapsNumber (const int & n, int * array);
-void applyOptimalSorting (const int & n, int * array, int & totalSwaps);
+void applyBubbleSorting (const int & n, int * array, int & totalSwaps);
 void swapValues (int & i, int & j, int * array);
 
 void printTestCaseResult (const int & result);
@@ -67,25 +67,25 @@ int calculateSwapsNumber (const int & n, int * array)
     }
 
     int result = 0;
-    applyOptimalSorting(n, array, result);
+    applyBubbleSorting(n, array, result);
 
     return result;
 }
 
-void applyOptimalSorting (const int & n, int * array, int & totalSwaps)
+void applyBubbleSorting (const int & n, int * array, int & totalSwaps)
 {
     int currentSwaps = 0;
-    for (int i = 0; i < n; i++)
+    for (int bubbleIndex = 0; bubbleIndex < n - 1; bubbleIndex++)
     {
         bool sorted = true;
-        for (int currentIndex = 0; currentIndex < n; currentIndex++)
+        for (int currentIndex = n - 1; currentIndex > bubbleIndex; currentIndex--)
         {
-            int correctElementIndex = array[currentIndex] - 1;
-            if (currentIndex != correctElementIndex)
+            int previousIndex = currentIndex - 1;
+            if (array[previousIndex] > array[currentIndex])
             {
                 sorted = false;
 
-                swapValues(currentIndex, correctElementIndex, array);
+                swapValues(previousIndex, currentIndex, array);
                 currentSwaps++;
             }
         }
