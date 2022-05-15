@@ -2,10 +2,12 @@
 
 //#define ONLINE_JUDGE 1
 
+const int g_MAX_ARRAY_LENGTH = 50;
+
 void processInput ();
 
 void processTestCase ();
-void readTestCaseData ();
+void readTestCaseData (int * array, int & n);
 void calculateSwapsNumber ();
 void printTestCaseResult ();
 
@@ -23,23 +25,35 @@ int main ()
 
 void processInput ()
 {
-    //TODO: read N and process test cases in a cycle
-    processTestCase();
+    int testCasesCount;
+    scanf("%d", &testCasesCount);
+
+    for (int i = 0; i < testCasesCount; i++)
+    {
+        processTestCase();
+    }
 }
 
 void processTestCase ()
 {
-    //TODO...
-    readTestCaseData();
+    int inputArray[g_MAX_ARRAY_LENGTH] = { 0 };
+    int n;
+
+    readTestCaseData(inputArray, n);
 
     calculateSwapsNumber();
 
     printTestCaseResult();
 }
 
-void readTestCaseData ()
+void readTestCaseData (int * array, int & n)
 {
-    //TODO: read L and array elements
+    scanf("%d", &n);
+
+    for (int i = 0; i < n; i++)
+    {
+        scanf("%d", &array[i]);
+    }
 }
 
 void calculateSwapsNumber ()
