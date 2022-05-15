@@ -8,8 +8,8 @@ void processInput ();
 
 void processTestCase ();
 void readTestCaseData (int * array, int & n);
-void calculateSwapsNumber ();
-void printTestCaseResult ();
+int calculateSwapsNumber (const int & n, int * array);
+void printTestCaseResult (const int & result);
 
 int main ()
 {
@@ -41,9 +41,9 @@ void processTestCase ()
 
     readTestCaseData(inputArray, n);
 
-    calculateSwapsNumber();
+    int totalSwapsCount = calculateSwapsNumber(n, inputArray);
 
-    printTestCaseResult();
+    printTestCaseResult(totalSwapsCount);
 }
 
 void readTestCaseData (int * array, int & n)
@@ -56,12 +56,16 @@ void readTestCaseData (int * array, int & n)
     }
 }
 
-void calculateSwapsNumber ()
+int calculateSwapsNumber (const int & n, int * array)
 {
+    int result = 0;
+
     //TODO...
+
+    return result;
 }
 
-void printTestCaseResult ()
+void printTestCaseResult (const int & result)
 {
-    //TODO...
+    printf("Optimal train swapping takes %d swaps.\n", result);
 }
