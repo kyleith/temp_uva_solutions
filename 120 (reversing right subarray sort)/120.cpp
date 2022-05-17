@@ -20,6 +20,9 @@ void readTestCaseArray (vector<int> & stack, bool & isInputEnd);
 void tokenizeInputLine (const string & line, vector<int> & stack);
 
 void applyArraySorting (vector<int> & stack, vector<int> & flips);
+int findMinElementIndexOnRightSubStack (const vector<int> & stack, const int & leftIndex);
+void reverseRightSubStack (const int & leftIndex, vector<int> & stack);
+
 void printArray (const vector<int> & stack);
 
 int main ()
@@ -86,6 +89,41 @@ void tokenizeInputLine (const string & line, vector<int> & stack)
 }
 
 void applyArraySorting (vector<int> & stack, vector<int> & flips)
+{
+    int n = stack.size();
+    for (int currentElementIndex = 0; currentElementIndex < n - 1; currentElementIndex++)
+    {
+        int minElementIndex = findMinElementIndexOnRightSubStack(stack, currentElementIndex);
+        if (currentElementIndex != minElementIndex)
+        {
+            reverseRightSubStack(minElementIndex, stack);
+            flips.push_back(minElementIndex + 1);
+
+            reverseRightSubStack(currentElementIndex, stack);
+            flips.push_back(currentElementIndex + 1);
+        }
+    }
+
+    flips.push_back(0);
+}
+
+int findMinElementIndexOnRightSubStack (const vector<int> & stack, const int & leftIndex)
+{
+    int minIndex = leftIndex;
+    int n = stack.size();
+    
+    for (int i = leftIndex + 1; i < n; i++)
+    {
+        if (stack[i] < stack[minIndex])
+        {
+            minIndex = i;
+        }
+    }
+    
+    return minIndex;
+}
+
+void reverseRightSubStack (const int & leftIndex, vector<int> & stack)
 {
     //TODO...
 }
