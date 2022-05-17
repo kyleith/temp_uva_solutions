@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <string>
+#include <string.h>
 #include <vector>
 
 //#define ONLINE_JUDGE 1
@@ -9,6 +10,7 @@
 #define vector std::vector
 
 const int g_MAX_STACK_LENGTH = 30;
+const char * g_NUMBERS_DELIMITER = " ";
 
 void processInput ();
 void processTestCase (bool & isInputEnd);
@@ -48,7 +50,11 @@ void processTestCase (bool & isInputEnd)
 
     readTestCaseArray(stack, isInputEnd);
 
+    printTestCaseArray(stack);
+
     //TODO...
+    applyArraySorting();
+    printResultFlips();
 }
 
 void readTestCaseArray (vector<int> & stack, bool & isInputEnd)
@@ -62,17 +68,18 @@ void readTestCaseArray (vector<int> & stack, bool & isInputEnd)
     }
 
     tokenizeInputLine(line, stack);
-
-    printTestCaseArray(stack);
-
-    //TODO...
-    applyArraySorting();
-    printResultFlips();
 }
 
 void tokenizeInputLine (const string & line, vector<int> & stack)
 {
-    //TODO: use strtok and stoi...
+    char *token = strtok(const_cast<char*>(line.c_str()), g_NUMBERS_DELIMITER); 
+
+    while (token != nullptr)
+    {
+        stack.push_back(std::stoi(token));
+
+        token = strtok(nullptr, g_NUMBERS_DELIMITER);
+    }
 }
 
 void applyArraySorting ()
@@ -82,7 +89,16 @@ void applyArraySorting ()
 
 void printTestCaseArray (const vector<int> & stack)
 {
-    //TODO...
+    int n = stack.size();
+    if (n > 0)
+    {
+        printf("%d", stack[0]);
+    }
+    for (int i = 1; i < n; i++)
+    {
+        printf(" %d", stack[i]);
+    }
+    printf("\n");
 }
 
 void printResultFlips ()
