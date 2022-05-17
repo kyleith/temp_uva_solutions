@@ -1,10 +1,15 @@
 #include <stdio.h>
+#include <iostream>
+#include <string>
 
 //#define ONLINE_JUDGE 1
 
+#define string std::string
+
 void processInput ();
-void processTestCase ();
-void readTestCaseArray ();
+
+void processTestCase (bool & isInputEnd);
+void readTestCaseArray (bool & isInputEnd);
 void applyArraySorting ();
 void printTestCaseArray ();
 void printResultFlips ();
@@ -23,16 +28,26 @@ int main ()
 
 void processInput ()
 {
+    bool isInputEnd = false;
+    while (!isInputEnd)
+    {
+        processTestCase(isInputEnd);
+    }
+    
+}
+
+void processTestCase (bool & isInputEnd)
+{
+    readTestCaseArray(isInputEnd);
+
     //TODO...
 }
 
-void processTestCase ()
+void readTestCaseArray (bool & isInputEnd)
 {
-    //TODO...
-}
+    string line = "";
+    isInputEnd = (bool)(!std::getline(std::cin, line));
 
-void readTestCaseArray ()
-{
     //TODO...
 }
 
