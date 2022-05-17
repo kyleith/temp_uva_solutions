@@ -10,6 +10,7 @@
 #define vector std::vector
 
 const int g_MAX_STACK_LENGTH = 30;
+const int g_MAX_FLIPS_COUNT = g_MAX_STACK_LENGTH * 2;/*not exact value - this is approximate top border*/
 const char * g_NUMBERS_DELIMITER = " ";
 
 void processInput ();
@@ -18,9 +19,8 @@ void processTestCase (bool & isInputEnd);
 void readTestCaseArray (vector<int> & stack, bool & isInputEnd);
 void tokenizeInputLine (const string & line, vector<int> & stack);
 
-void applyArraySorting ();
-void printTestCaseArray (const vector<int> & stack);
-void printResultFlips ();
+void applyArraySorting (vector<int> & stack, vector<int> & flips);
+void printArray (const vector<int> & stack);
 
 int main ()
 {
@@ -50,11 +50,16 @@ void processTestCase (bool & isInputEnd)
 
     readTestCaseArray(stack, isInputEnd);
 
-    printTestCaseArray(stack);
+    if (!isInputEnd)
+    {
+        printArray(stack);
 
-    //TODO...
-    applyArraySorting();
-    printResultFlips();
+        vector<int> flips;
+        flips.reserve(g_MAX_FLIPS_COUNT);
+        applyArraySorting(stack, flips);
+        
+        printArray(flips);
+    }
 }
 
 void readTestCaseArray (vector<int> & stack, bool & isInputEnd)
@@ -62,12 +67,10 @@ void readTestCaseArray (vector<int> & stack, bool & isInputEnd)
     string line = "";
     isInputEnd = (bool)(!std::getline(std::cin, line));
 
-    if (isInputEnd)
+    if (!isInputEnd)
     {
-        return;
+        tokenizeInputLine(line, stack);
     }
-
-    tokenizeInputLine(line, stack);
 }
 
 void tokenizeInputLine (const string & line, vector<int> & stack)
@@ -82,26 +85,21 @@ void tokenizeInputLine (const string & line, vector<int> & stack)
     }
 }
 
-void applyArraySorting ()
+void applyArraySorting (vector<int> & stack, vector<int> & flips)
 {
     //TODO...
 }
 
-void printTestCaseArray (const vector<int> & stack)
+void printArray (const vector<int> & array)
 {
-    int n = stack.size();
+    int n = array.size();
     if (n > 0)
     {
-        printf("%d", stack[0]);
+        printf("%d", array[0]);
     }
     for (int i = 1; i < n; i++)
     {
-        printf(" %d", stack[i]);
+        printf(" %d", array[i]);
     }
     printf("\n");
-}
-
-void printResultFlips ()
-{
-    //TODO...
 }
