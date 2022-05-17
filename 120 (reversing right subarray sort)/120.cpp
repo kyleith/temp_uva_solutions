@@ -5,7 +5,7 @@
 #include <vector>
 #include <algorithm>
 
-//#define ONLINE_JUDGE 1
+#define ONLINE_JUDGE 1
 
 #define string std::string
 #define vector std::vector
@@ -100,8 +100,11 @@ void applyArraySorting (vector<int> & stack, vector<int> & flips)
         int maxElementIndex = findMaxElementIndexOnLeftSubStack(stack, currentElementIndex);
         if (currentElementIndex != maxElementIndex)
         {
-            reverseLeftSubStack(maxElementIndex, stack);
-            flips.push_back(n - maxElementIndex);
+            if (maxElementIndex > 0)
+            {
+                reverseLeftSubStack(maxElementIndex, stack);
+                flips.push_back(n - maxElementIndex);
+            }
 
             reverseLeftSubStack(currentElementIndex, stack);
             flips.push_back(n - currentElementIndex);
