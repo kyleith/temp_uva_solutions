@@ -1,17 +1,23 @@
 #include <stdio.h>
 #include <iostream>
 #include <string>
+#include <vector>
 
 //#define ONLINE_JUDGE 1
 
 #define string std::string
+#define vector std::vector
+
+const int g_MAX_STACK_LENGTH = 30;
 
 void processInput ();
-
 void processTestCase (bool & isInputEnd);
-void readTestCaseArray (bool & isInputEnd);
+
+void readTestCaseArray (vector<int> & stack, bool & isInputEnd);
+void tokenizeInputLine (const string & line, vector<int> & stack);
+
 void applyArraySorting ();
-void printTestCaseArray ();
+void printTestCaseArray (const vector<int> & stack);
 void printResultFlips ();
 
 int main ()
@@ -33,22 +39,40 @@ void processInput ()
     {
         processTestCase(isInputEnd);
     }
-    
 }
 
 void processTestCase (bool & isInputEnd)
 {
-    readTestCaseArray(isInputEnd);
+    vector<int> stack;
+    stack.reserve(g_MAX_STACK_LENGTH);
+
+    readTestCaseArray(stack, isInputEnd);
 
     //TODO...
 }
 
-void readTestCaseArray (bool & isInputEnd)
+void readTestCaseArray (vector<int> & stack, bool & isInputEnd)
 {
     string line = "";
     isInputEnd = (bool)(!std::getline(std::cin, line));
 
+    if (isInputEnd)
+    {
+        return;
+    }
+
+    tokenizeInputLine(line, stack);
+
+    printTestCaseArray(stack);
+
     //TODO...
+    applyArraySorting();
+    printResultFlips();
+}
+
+void tokenizeInputLine (const string & line, vector<int> & stack)
+{
+    //TODO: use strtok and stoi...
 }
 
 void applyArraySorting ()
@@ -56,7 +80,7 @@ void applyArraySorting ()
     //TODO...
 }
 
-void printTestCaseArray ()
+void printTestCaseArray (const vector<int> & stack)
 {
     //TODO...
 }
