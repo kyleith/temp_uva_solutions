@@ -3,6 +3,7 @@
 #include <string>
 #include <string.h>
 #include <vector>
+#include <algorithm>
 
 //#define ONLINE_JUDGE 1
 
@@ -62,6 +63,9 @@ void processTestCase (bool & isInputEnd)
         applyArraySorting(stack, flips);
         
         printArray(flips);
+        
+        //printArray(stack);
+        //printf("\n");
     }
 }
 
@@ -125,7 +129,7 @@ int findMinElementIndexOnRightSubStack (const vector<int> & stack, const int & l
 
 void reverseRightSubStack (const int & leftIndex, vector<int> & stack)
 {
-    //TODO...
+    std::reverse(stack.begin() + leftIndex, stack.end());
 }
 
 void printArray (const vector<int> & array)
