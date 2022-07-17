@@ -2,15 +2,24 @@
 #include <string>
 #include <iostream>
 #include <map>
+#include <vector>
 
 //#define ONLINE_JUDGE
 
 #define string std::string
+#define vector std::vector
 #define map std::map
 
+#define t_wordsVector vector <string>
+#define t_wordsMap map <string, int>
+
 void processInput ();
-void readFilteredWords (map <string, string> & words);
-void printSortedResult (const map <string, string> & words);
+
+void readAndPreFilterWords (t_wordsVector & wordsCandidates, t_wordsMap & wordsMap);
+string transformWordToMapKey (const string & word);
+
+void sortWordsVector (t_wordsVector & words);
+void printResult (const t_wordsVector & wordsCandidates, const t_wordsMap & wordsMap);
 
 int main ()
 {
@@ -26,18 +35,45 @@ int main ()
 
 void processInput ()
 {
-    map <string, string> words;
+    t_wordsVector wordsCandidates;
+    t_wordsMap wordsMap;
 
-    readFilteredWords(words);
-    printSortedResult(words);
+    readAndPreFilterWords(wordsCandidates, wordsMap);
+    sortWordsVector(wordsCandidates);
+    
+    printResult(wordsCandidates, wordsMap);
 }
 
-void readFilteredWords (map <string, string> & words)
+void readAndPreFilterWords (t_wordsVector & wordsCandidates, t_wordsMap & wordsMap)
+{
+    string currentWord;
+
+    while (std::cin >> currentWord)
+    {
+        bool isEndingSequence = (currentWord[0] == '#');
+        if (isEndingSequence)
+        {
+            break;
+        }
+
+        string currentKey = transformWordToMapKey(currentWord);
+        //TODO...
+    }
+    
+}
+
+string transformWordToMapKey (const string & word)
+{
+    //TODO...
+    return "";
+}
+
+void sortWordsVector (t_wordsVector & words)
 {
     //TODO...
 }
 
-void printSortedResult (const map <string, string> & words)
+void printResult (const t_wordsVector & wordsCandidates, const t_wordsMap & wordsMap)
 {
     //TODO...
 }
