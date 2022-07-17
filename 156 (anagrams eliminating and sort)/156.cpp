@@ -3,6 +3,8 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include <cctype>
+#include <algorithm>
 
 //#define ONLINE_JUDGE
 
@@ -78,17 +80,28 @@ string transformWordToMapKey (const string & word)
 {
     string resultKey;
 
-    //TODO: optimal transformation...
+    int wordLength = word.length();
+    for (int i = 0; i < wordLength; i++)
+    {
+        char lowerLetter = tolower(word[i]);
+        resultKey.push_back(lowerLetter);
+    }
+    
+    std::sort(resultKey.begin(), resultKey.end());
 
     return resultKey;
 }
 
 void sortWordsVector (t_wordsVector & words)
 {
-    //TODO...
+    std::sort(words.begin(), words.end());
 }
 
 void printResult (const t_wordsVector & wordsCandidates, const t_wordsMap & wordsMap)
 {
-    //TODO...
+    int wordsCount = wordsCandidates.size();
+    for (int i = 0; i < wordsCount; i++)
+    {
+        //TODO...
+    }
 }
