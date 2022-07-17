@@ -1,12 +1,16 @@
 #include <stdio.h>
+#include <string>
+#include <iostream>
+#include <map>
 
 //#define ONLINE_JUDGE
 
+#define string std::string
+#define map std::map
+
 void processInput ();
-void readInputWords ();
-void filterNotAnagrams ();
-void sortResult ();
-void printResult ();
+void readFilteredWords (map <string, string> & words);
+void printSortedResult (const map <string, string> & words);
 
 int main ()
 {
@@ -22,25 +26,18 @@ int main ()
 
 void processInput ()
 {
-    //TODO: read words, eliminate anagrams, sort result and print...
+    map <string, string> words;
+
+    readFilteredWords(words);
+    printSortedResult(words);
 }
 
-void readInputWords ()
+void readFilteredWords (map <string, string> & words)
 {
     //TODO...
 }
 
-void filterNotAnagrams ()
-{
-    //TODO...
-}
-
-void sortResult ()
-{
-    //TODO...
-}
-
-void printResult ()
+void printSortedResult (const map <string, string> & words)
 {
     //TODO...
 }
