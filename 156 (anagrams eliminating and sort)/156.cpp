@@ -57,15 +57,30 @@ void readAndPreFilterWords (t_wordsVector & wordsCandidates, t_wordsMap & wordsM
         }
 
         string currentKey = transformWordToMapKey(currentWord);
-        //TODO...
+        
+        //foundElement is iteraror
+        auto foundElement = wordsMap.find(currentKey);
+        bool isKeyFound = (foundElement != wordsMap.end());
+        if (!isKeyFound)
+        {
+            wordsMap[currentKey] = 0;
+            wordsCandidates.push_back(currentWord);
+        }
+        else
+        {
+            //increase repeatition counter
+            foundElement->second++;
+        }
     }
-    
 }
 
 string transformWordToMapKey (const string & word)
 {
-    //TODO...
-    return "";
+    string resultKey;
+
+    //TODO: optimal transformation...
+
+    return resultKey;
 }
 
 void sortWordsVector (t_wordsVector & words)
