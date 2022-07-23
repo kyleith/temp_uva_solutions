@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <cmath>
 
 //#define ONLINE_JUDGE 1
 
@@ -97,8 +98,11 @@ void printFormattedResult (const vector<string> & list, const int & longestLengt
 
 int calculateOutputLinesCount (const int & n, const int & longestLength)
 {
-    int columns = (g_MAX_OUTPUT_WIDTH + 2) / (longestLength + 2);
-    int lines = n / columns;
+    double divisive = g_MAX_OUTPUT_WIDTH + 2;
+    double divisor = longestLength + 2;
+    int columns = std::ceil(divisive / divisor);
+
+    int lines = std::ceil((double)n / (double)columns);
     return lines;
 }
 
