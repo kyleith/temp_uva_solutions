@@ -100,7 +100,8 @@ int calculateOutputLinesCount (const int & n, const int & longestLength)
 {
     double divisive = g_MAX_OUTPUT_WIDTH + 2;
     double divisor = longestLength + 2;
-    int columns = std::ceil(divisive / divisor);
+    int columns = std::floor(divisive / divisor);
+    columns = std::max(columns, 1);
 
     int lines = std::ceil((double)n / (double)columns);
     return lines;

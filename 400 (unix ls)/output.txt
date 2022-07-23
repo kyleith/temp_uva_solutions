@@ -5,9 +5,10 @@ looooooong                     something_somehting_something
 name                           tiny                         
 short                        
 ------------------------------------------------------------
-Aisha         Craig_Tucker  Kyle          Porky         Stimey      
-Butch         Eric_Cartman  Mr.MacKey     Stan        
-Butters       Joe           P.D.          Stephany    
+Aisha         Eric_Cartman  P.D.          Stimey      
+Butch         Joe           Porky       
+Butters       Kyle          Stan        
+Craig_Tucker  Mr.MacKey     Stephany    
 ------------------------------------------------------------
 Alice       Chris       Jan         Marsha      Ruben     
 Bobby       Cindy       Jody        Mike        Shirley   
@@ -19,9 +20,11 @@ Carol       Greg        Lori        Peter
 abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefgh
 abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefgz
 ------------------------------------------------------------
-12345678.123         much_longer_name     tiny               
-2short4me            shorter              very_long_file_name
-mid_size_name        size-1               z                  
+12345678.123         size-1             
+2short4me            tiny               
+mid_size_name        very_long_file_name
+much_longer_name     z                  
+shorter            
 ------------------------------------------------------------
 a  b  d  e  g  h  j  k  m  n  p  q  s  t  v  w  y  z
 a  c  d  f  g  i  j  l  m  o  p  r  s  u  v  x  y
