@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <cmath>
 
-//#define ONLINE_JUDGE 1
+#define ONLINE_JUDGE 1
 
 #define string std::string
 #define vector std::vector
