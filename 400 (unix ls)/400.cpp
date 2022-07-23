@@ -2,11 +2,16 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 //#define ONLINE_JUDGE 1
 
 #define string std::string
 #define vector std::vector
+
+const int g_MAX_INPUT_N = 100;
+const int g_MAX_OUTPUT_WIDTH = 60;
+const string g_OUTPUT_SEPARATOR = "------------------------------------------------------------";
 
 void processInput ();
 void processTestCase (bool & isEndCase);
@@ -14,6 +19,9 @@ void processTestCase (bool & isEndCase);
 void readFilenames (const int & n, vector<string> & list, int & longestLength);
 void sortFilenames (vector<string> & list);
 void printFormattedResult (const vector<string> & list, const int & longestLength);
+
+int calculateOutputLinesCount (const int & n, const int & longestLength);
+void printOutputLine (const vector<string> & list, const int & n, const int & firstElementIndex, const int & step, const int & longestLength);
 
 int main ()
 {
@@ -56,15 +64,50 @@ void processTestCase (bool & isEndCase)
 
 void readFilenames (const int & n, vector<string> & list, int & longestLength)
 {
-    //TODO...
+    list.reserve(g_MAX_INPUT_N);
+
+    int maxLength = 0;
+    for (int i = 0; i < n; i++)
+    {
+        string word;
+        std::cin >> word;
+        list.push_back(word);
+
+        maxLength = std::max(maxLength, (int)word.length());
+    }
+    longestLength = maxLength;
 }
 
 void sortFilenames (vector<string> & list)
 {
-    //TODO...
+    std::sort(list.begin(), list.end());
 }
 
 void printFormattedResult (const vector<string> & list, const int & longestLength)
 {
+    std::cout << g_OUTPUT_SEPARATOR << '\n';
 
+    int n = list.size();
+    int linesCount = calculateOutputLinesCount(n, longestLength);
+    for (int i = 0; i < linesCount; i++)
+    {
+        printOutputLine(list, n, i, linesCount, longestLength);
+    }
+}
+
+int calculateOutputLinesCount (const int & n, const int & longestLength)
+{
+    int columns = (g_MAX_OUTPUT_WIDTH + 2) / (longestLength + 2);
+    int lines = n / columns;
+    return lines;
+}
+
+void printOutputLine (const vector<string> & list, const int & n, const int & firstElementIndex, const int & step, const int & longestLength)
+{
+    int i = -1;
+    for (i = firstElementIndex; i + step < n; i+=step)
+    {
+        std::cout << list[i] << "  ";
+    }
+    std::cout << list[i] << '\n';
 }
