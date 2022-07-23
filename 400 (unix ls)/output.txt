@@ -1,26 +1,26 @@
 ------------------------------------------------------------
-2short4me                        short                            tiny                         
-987456321789                     size2                        
-looooooong                       some_longer_name             
-name                             something_somehting_something
+2short4me                      short                          tiny                         
+987456321789                   size2                        
+looooooong                     some_longer_name             
+name                           something_somehting_something
 ------------------------------------------------------------
-Aisha           Craig_Tucker    Kyle            Porky           Stimey      
-Butch           Eric_Cartman    Mr.MacKey       Stan        
-Butters         Joe             P.D.            Stephany    
+Aisha         Craig_Tucker  Kyle          Porky         Stimey      
+Butch         Eric_Cartman  Mr.MacKey     Stan        
+Butters       Joe           P.D.          Stephany    
 ------------------------------------------------------------
-Alice         Carol         Danny         Jody          Marsha        Peter         Sissy     
-Bobby         Chris         Greg          Keith         Mike          Ruben     
-Buffy         Cindy         Jan           Lori          Mr._French    Shirley   
+Alice       Carol       Danny       Jody        Marsha      Peter       Sissy     
+Bobby       Chris       Greg        Keith       Mike        Ruben     
+Buffy       Cindy       Jan         Lori        Mr._French  Shirley   
 ------------------------------------------------------------
 123456789112345678921234567893123456789412345678951234567896
 123456789112345678921234567893123456789412345678951234567896
 abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefgh
 abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefgz
 ------------------------------------------------------------
-12345678.123           shorter                z                  
-2short4me              size-1             
-mid_size_name          tiny               
-much_longer_name       very_long_file_name
+12345678.123         shorter              z                  
+2short4me            size-1             
+mid_size_name        tiny               
+much_longer_name     very_long_file_name
 ------------------------------------------------------------
-a    b    c    d    e    f    g    h    i    j    k    l    m    n    o    p    q    r    s    t    u    v    w    x    y    z
-a    b    c    d    e    f    g    h    i    j    k    l    m    n    o    p    q    r    s    t    u    v    w    x    y    z
+a  b  c  d  e  f  g  h  i  j  k  l  m  n  o  p  q  r  s  t  u  v  w  x  y  z
+a  b  c  d  e  f  g  h  i  j  k  l  m  n  o  p  q  r  s  t  u  v  w  x  y  z
