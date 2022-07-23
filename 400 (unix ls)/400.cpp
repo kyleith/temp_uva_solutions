@@ -107,7 +107,9 @@ void printOutputLine (const vector<string> & list, const int & n, const int & fi
     int i = -1;
     for (i = firstElementIndex; i + step < n; i+=step)
     {
-        std::cout << list[i] << "  ";
+        std::cout.width(longestLength + 2);
+        std::cout << std::left << list[i] << "  ";
     }
-    std::cout << list[i] << '\n';
+    std::cout.width(longestLength);
+    std::cout << std::left << list[i] << '\n';
 }
