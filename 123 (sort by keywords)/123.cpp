@@ -1,12 +1,18 @@
 #include <stdio.h>
+#include <iostream>
+#include <cstring>
+#include <set>
 
 //#define ONLINE_JUDGE 1
 
+#define string std::string
+#define set std::set
+
 void processInput ();
 
-void readListOfWords ();
-void readListOfTitles ();
-void populateKeywords ();
+void readListOfWords (set<string> & words);
+void readAndProcessListOfTitles (const set<string> & ignorableWords);
+void populateKeywordsFromTitle (const string & title);
 void printSortedResult ();
 
 int main ()
@@ -23,23 +29,25 @@ int main ()
 
 void processInput ()
 {
-    readListOfWords();
-    readListOfTitles();
-    populateKeywords();
+    set<string> ignorableWords;
+
+    readListOfWords(ignorableWords);
+    readAndProcessListOfTitles(ignorableWords);
     printSortedResult();
 }
 
-void readListOfWords ()
+void readListOfWords (set<string> & words)
 {
     //TODO: read list of ignorable words, ending is "::"
 }
 
-void readListOfTitles ()
+void readAndProcessListOfTitles (const set<string> & ignorableWords)
 {
-    //TODO: read list of titles one by line, ending is EOF
+    //TODO: read list of titles one by line, ending is EOF.
+    //Then instead of storing all the titles, process each title immediaterly.
 }
 
-void populateKeywords ()
+void populateKeywordsFromTitle (const string & title)
 {
     //TODO: detect keywords, capitilize and put their sentences to sorted dictionary
 }
