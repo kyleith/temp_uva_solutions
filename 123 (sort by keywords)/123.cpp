@@ -15,6 +15,8 @@
 #define pair std::pair
 #define t_keywordPair pair<string, vector<string>>
 
+const string g_INPUT_WORDS_ENDING = "::";
+
 void processInput ();
 
 void readListOfWords (set<string> & words);
@@ -52,7 +54,16 @@ void processInput ()
 
 void readListOfWords (set<string> & words)
 {
-    //TODO: read list of ignorable words, ending is "::"
+    string word;
+    std::cin >> word;
+    
+    bool isEnding = false;
+    while (!isEnding)
+    {
+        words.insert(word);
+        std::cin >> word;
+        isEnding = (word == g_INPUT_WORDS_ENDING);
+    }
 }
 
 void readAndProcessListOfTitles (
