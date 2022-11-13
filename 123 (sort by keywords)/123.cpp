@@ -27,10 +27,21 @@ void readAndProcessListOfTitles (
         map<string, t_keywordPair> & dictionary
     );
 void populateKeywordsFromTitle (
+        const set<string> & ignorableWords,
         const string & title,
         map<string, t_keywordPair> & dictionary
     );
+
 vector<string> extractWordsFromTitle (const string & title);
+bool isIgnorableWord (
+        const set<string> & ignorableWords,
+        const string & word
+    );
+void addKWICElement (
+        const vector<string> & wordsList,
+        const int & wordIndex,
+        map<string, t_keywordPair> & dictionary
+    );
 
 void printSortedResult (const map<string, t_keywordPair> & dictionary);
 
@@ -80,17 +91,26 @@ void readAndProcessListOfTitles (
 
     while (getline(std::cin, title))
     {
-        populateKeywordsFromTitle(title, dictionary);
+        populateKeywordsFromTitle(ignorableWords, title, dictionary);
     }
 }
 
 void populateKeywordsFromTitle (
+        const set<string> & ignorableWords,
         const string & title,
         map<string, t_keywordPair> & dictionary
     )
 {
     vector<string> wordsList = extractWordsFromTitle(title);
-    //TODO: detect keywords, capitalize and put their sentences to sorted dictionary
+
+    int n = wordsList.size();
+    for (size_t i = 0; i < n; i++)
+    {
+        if (!isIgnorableWord(ignorableWords, wordsList[i]))
+        {
+            addKWICElement(wordsList, i, dictionary);
+        }
+    }
 }
 
 vector<string> extractWordsFromTitle (const string & title)
@@ -125,6 +145,38 @@ vector<string> extractWordsFromTitle (const string & title)
     }
 
     return wordsList;
+}
+
+bool isIgnorableWord (
+        const set<string> & ignorableWords,
+        const string & word
+    )
+{
+    return ignorableWords.find(word) != ignorableWords.end();
+}
+
+void addKWICElement (
+        const vector<string> & wordsList,
+        const int & wordIndex,
+        map<string, t_keywordPair> & dictionary
+    )
+{
+    string keyword = wordsList[wordIndex];
+    auto foundPointer = dictionary.find(keyword);
+    if (foundPointer == dictionary.end())
+    {
+        //create new element
+        vector<string> sentences;
+        t_keywordPair elementPair = std::make_pair(keyword, sentences);
+
+        //TODO: capitalize keyword and build sentence
+
+        dictionary[keyword] = elementPair;
+    }
+    else
+    {
+        //update found element
+    }
 }
 
 void printSortedResult (const map<string, t_keywordPair> & dictionary)
