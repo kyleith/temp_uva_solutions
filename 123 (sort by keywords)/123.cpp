@@ -7,7 +7,7 @@
 #include <utility>
 #include <cctype>
 
-//#define ONLINE_JUDGE 1
+#define ONLINE_JUDGE 1
 
 #define string std::string
 #define set std::set
@@ -231,5 +231,12 @@ string buildKWICSentence (
 
 void printSortedResult (const map<string, t_keywordPair> & dictionary)
 {
-    //TODO: print KWIC-index, i.e. print related sentences of sorted keywords from the dictionary
+    for (auto pElement = dictionary.begin(); pElement != dictionary.end(); pElement++)
+    {
+        int n = pElement->second.second.size();
+        for (size_t i = 0; i < n; i++)
+        {
+            std::cout << pElement->second.second[i] << '\n';
+        }
+    }
 }
