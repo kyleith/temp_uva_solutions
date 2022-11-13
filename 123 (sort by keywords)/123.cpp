@@ -37,12 +37,18 @@ bool isIgnorableWord (
         const set<string> & ignorableWords,
         const string & word
     );
+
 void addKWICElement (
         const vector<string> & wordsList,
         const int & wordIndex,
         map<string, t_keywordPair> & dictionary
     );
 string uppercaseWord (const string & word);
+string buildKWICSentence (
+        const vector<string> & wordsList,
+        const int & wordIndex,
+        const string & highlightedWord
+    );
 
 void printSortedResult (const map<string, t_keywordPair> & dictionary);
 
@@ -167,16 +173,20 @@ void addKWICElement (
     if (foundPointer == dictionary.end())
     {
         //create new element
-        vector<string> sentences;
         string highlightedWord = uppercaseWord(keyword);
-        t_keywordPair elementPair = std::make_pair(highlightedWord, sentences);
 
-        //TODO: build sentence
+        vector<string> sentences;
+        string targetSentence = buildKWICSentence(wordsList, wordIndex, highlightedWord);
+        sentences.push_back(targetSentence);
+
+        t_keywordPair elementPair = std::make_pair(highlightedWord, sentences);
         dictionary[keyword] = elementPair;
     }
     else
     {
         //update found element
+        string targetSentence = buildKWICSentence(wordsList, wordIndex, dictionary[keyword].first);
+        dictionary[keyword].second.push_back(targetSentence);
     }
 }
 
@@ -188,6 +198,17 @@ string uppercaseWord (const string & word)
     {
         result.insert(result.length(), 1, toupper(word[i]));
     }
+    return result;
+}
+
+string buildKWICSentence (
+        const vector<string> & wordsList,
+        const int & wordIndex,
+        const string & highlightedWord
+    )
+{
+    string result;
+    //TODO: build sentence
     return result;
 }
 
