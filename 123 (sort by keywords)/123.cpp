@@ -56,7 +56,7 @@ void readListOfWords (set<string> & words)
 {
     string word;
     std::cin >> word;
-    
+
     bool isEnding = false;
     while (!isEnding)
     {
@@ -71,8 +71,11 @@ void readAndProcessListOfTitles (
         map<string, t_keywordPair> & dictionary
     )
 {
-    //TODO: read list of titles one by line, ending is EOF.
-    //Then instead of storing all the titles, process each title immediately.
+    string title;
+    while (getline(std::cin, title))
+    {
+        populateKeywordsFromTitle(title, dictionary);
+    }
 }
 
 void populateKeywordsFromTitle (
