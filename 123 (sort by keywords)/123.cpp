@@ -5,6 +5,7 @@
 #include <map>
 #include <vector>
 #include <utility>
+#include <cctype>
 
 //#define ONLINE_JUDGE 1
 
@@ -16,6 +17,7 @@
 #define t_keywordPair pair<string, vector<string>>
 
 const string g_INPUT_WORDS_ENDING = "::";
+const char g_WORDS_DELIMITER = ' ';
 
 void processInput ();
 
@@ -28,6 +30,8 @@ void populateKeywordsFromTitle (
         const string & title,
         map<string, t_keywordPair> & dictionary
     );
+vector<string> extractWordsFromTitle (const string & title);
+
 void printSortedResult (const map<string, t_keywordPair> & dictionary);
 
 int main ()
@@ -72,6 +76,8 @@ void readAndProcessListOfTitles (
     )
 {
     string title;
+    getline(std::cin, title);/*read line ending from readListOfWords*/
+
     while (getline(std::cin, title))
     {
         populateKeywordsFromTitle(title, dictionary);
@@ -83,7 +89,42 @@ void populateKeywordsFromTitle (
         map<string, t_keywordPair> & dictionary
     )
 {
+    vector<string> wordsList = extractWordsFromTitle(title);
     //TODO: detect keywords, capitalize and put their sentences to sorted dictionary
+}
+
+vector<string> extractWordsFromTitle (const string & title)
+{
+    vector<string> wordsList;
+
+    string word;
+    int i = 0;
+    int n = title.length();
+    while (i < n)
+    {
+        char currentSymbol = title[i];
+        if (currentSymbol == g_WORDS_DELIMITER)
+        {
+            if (word.length() > 0)
+            {
+                wordsList.push_back(word);
+            }
+            word = "";
+        }
+        else
+        {
+            char nextSymbol = tolower(currentSymbol);
+            word.insert(word.length(), 1, nextSymbol);
+        }
+        i++;
+    }
+
+    if (word.length() > 0)
+    {
+        wordsList.push_back(word);
+    }
+
+    return wordsList;
 }
 
 void printSortedResult (const map<string, t_keywordPair> & dictionary)
