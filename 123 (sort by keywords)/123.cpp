@@ -208,7 +208,24 @@ string buildKWICSentence (
     )
 {
     string result;
-    //TODO: build sentence
+    int n = wordsList.size();
+    for (size_t i = 0; i < n; i++)
+    {
+        if (i == wordIndex)
+        {
+            result.append(highlightedWord);
+        }
+        else
+        {
+            result.append(wordsList[i]);
+        }
+
+        if (i < n - 1)
+        {
+            result.insert(result.length(), 1, g_WORDS_DELIMITER);
+        }
+    }
+
     return result;
 }
 
