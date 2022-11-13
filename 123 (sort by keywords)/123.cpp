@@ -42,6 +42,7 @@ void addKWICElement (
         const int & wordIndex,
         map<string, t_keywordPair> & dictionary
     );
+string uppercaseWord (const string & word);
 
 void printSortedResult (const map<string, t_keywordPair> & dictionary);
 
@@ -167,16 +168,27 @@ void addKWICElement (
     {
         //create new element
         vector<string> sentences;
-        t_keywordPair elementPair = std::make_pair(keyword, sentences);
+        string highlightedWord = uppercaseWord(keyword);
+        t_keywordPair elementPair = std::make_pair(highlightedWord, sentences);
 
-        //TODO: capitalize keyword and build sentence
-
+        //TODO: build sentence
         dictionary[keyword] = elementPair;
     }
     else
     {
         //update found element
     }
+}
+
+string uppercaseWord (const string & word)
+{
+    string result;
+    int n = word.length();
+    for (size_t i = 0; i < n; i++)
+    {
+        result.insert(result.length(), 1, toupper(word[i]));
+    }
+    return result;
 }
 
 void printSortedResult (const map<string, t_keywordPair> & dictionary)
