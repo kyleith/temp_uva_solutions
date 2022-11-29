@@ -1,12 +1,23 @@
 #include <cstdio>
 #include <iostream>
+#include <vector>
+#include <string>
 
 //#define ONLINE_JUDGE 1
 
+#define vector std::vector
+#define string std::string
+
+const int g_MAX_TEAMS_COUNT = 30;
+const int g_MAX_GAMES_COUNT = 1000;
+
 void processInput ();
+void readLineEnding ();
 
 void processSingleTournament ();
-void readTournamentTeams ();
+void readTournamentTeams (vector<string> & names);
+void readTournamentGamesResuls (vector<string> & results);
+
 void processTournamentGamesResults ();
 void sortTeamsRanking ();
 void printTournamentResult ();
@@ -31,6 +42,7 @@ void processInput ()
 {
     int tournamentsCount = 0;
     std::cin >> tournamentsCount;
+    readLineEnding();
 
     processSingleTournament();
     for (int i = 1; i < tournamentsCount; i++)
@@ -40,17 +52,58 @@ void processInput ()
     }
 }
 
+void readLineEnding ()
+{
+    string fakeLine;
+    std::getline(std::cin, fakeLine);
+}
+
 void processSingleTournament ()
 {
-    readTournamentTeams();
+    string tournamentName;
+    std::getline(std::cin, tournamentName);
+
+    vector<string> teamsNames;
+    teamsNames.reserve(g_MAX_TEAMS_COUNT);
+    readTournamentTeams(teamsNames);
+
+    vector <string> gamesResults;
+    gamesResults.reserve(g_MAX_GAMES_COUNT);
+    readTournamentGamesResuls(gamesResults);
+
     processTournamentGamesResults();
     sortTeamsRanking();
+
+    std::cout << tournamentName << "\n";
     printTournamentResult();
 }
 
-void readTournamentTeams ()
+void readTournamentTeams (vector<string> & names)
 {
-    //TODO: read list of team names...
+    int teamsCount = 0;
+    std::cin >> teamsCount;
+    readLineEnding();
+
+    for (int i = 0; i < teamsCount; i++)
+    {
+        string name;
+        std::getline(std::cin, name);
+        names.push_back(name);
+    }
+}
+
+void readTournamentGamesResuls (vector<string> & results)
+{
+    int gamesCount = 0;
+    std::cin >> gamesCount;
+    readLineEnding();
+
+    for (int i = 0; i < gamesCount; i++)
+    {
+        string result;
+        std::getline(std::cin, result);
+        results.push_back(result);
+    }
 }
 
 void processTournamentGamesResults ()
