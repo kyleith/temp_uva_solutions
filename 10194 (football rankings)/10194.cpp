@@ -1,6 +1,7 @@
-#include <stdio.h>
+#include <cstdio>
+#include <iostream>
 
-#define ONLINE_JUDGE 1
+//#define ONLINE_JUDGE 1
 
 void processInput ();
 
@@ -28,7 +29,15 @@ int main ()
 
 void processInput ()
 {
-    //TODO: read N tounaments count and process tounaments...
+    int tournamentsCount = 0;
+    std::cin >> tournamentsCount;
+
+    processSingleTournament();
+    for (int i = 1; i < tournamentsCount; i++)
+    {
+        std::cout << "\n";
+        processSingleTournament();
+    }
 }
 
 void processSingleTournament ()
