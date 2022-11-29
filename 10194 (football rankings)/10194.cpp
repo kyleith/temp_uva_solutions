@@ -2,14 +2,20 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <map>
 
 //#define ONLINE_JUDGE 1
 
 #define vector std::vector
 #define string std::string
+#define map std::map
 
-const int g_MAX_TEAMS_COUNT = 30;
-const int g_MAX_GAMES_COUNT = 1000;
+struct GameResult
+{
+    GameResult () : m_teamName(""), m_goalsScored(0), m_goalsAgainst(0) {};
+    string m_teamName;
+    int m_goalsScored, m_goalsAgainst;
+};
 
 class Team
 {
@@ -23,7 +29,8 @@ public:
     {
         m_lowercaseName = name;/*TODO...*/
     };
-    void addGameResult (const int & goalsScored, const int & goalsAgainst);
+    string getName() { return m_name; };
+    void addGameResult (const GameResult & result);
 private:
     string m_name, m_lowercaseName;
     int m_points;
@@ -32,15 +39,17 @@ private:
     int m_goalsScored, m_goalsAgainst, m_goalsDiff;
 };
 
-void Team::addGameResult (const int & goalsScored, const int & goalsAgainst)
+void Team::addGameResult (const GameResult & result)
 {
     //increase games count
     m_gamesCount++;
 
     //update goals metrics
+    int goalsScored = result.m_goalsScored;
+    int goalsAgainst = result.m_goalsAgainst;
     m_goalsScored += goalsScored;
     m_goalsAgainst += goalsAgainst;
-    m_goalsDiff = goalsScored - goalsAgainst;
+    m_goalsDiff = m_goalsScored - m_goalsAgainst;
 
     //update wins-ties-losses count
     bool isWinner = (goalsScored > goalsAgainst);
@@ -65,18 +74,19 @@ void Team::addGameResult (const int & goalsScored, const int & goalsAgainst)
 
 void processInput ();
 void readLineEnding ();
-
 void processSingleTournament ();
+
 void readTournamentTeams (vector<string> & names);
 void readTournamentGamesResults (vector<string> & results);
-
 void initTournamentTeams (const vector<string> & names, vector <Team> & teams);
+
 void processTournamentGamesResults (const vector<string> & results, vector <Team> & teams);
+void decodeGameResult (const string & resultLine, GameResult & firstResult, GameResult & secondResult);
+void addResultToTeamsDict (const GameResult & teamResult, map<string,vector<GameResult>> & dict);
+void updateTeamsStats (map<string,vector<GameResult>> & dict, vector <Team> & teams);
+
 void sortTeamsRanking (vector <Team> & teams);
 void printTournamentResult (const vector <Team> & teams);
-
-void decodeGameResult ();
-void updateTeamStats ();
 void printTeamStats (const Team & team);
 
 int main ()
@@ -176,10 +186,59 @@ void initTournamentTeams (const vector<string> & names, vector <Team> & teams)
 
 void processTournamentGamesResults (const vector<string> & results, vector <Team> & teams)
 {
-    //TODO: decode games' results, update teams' stats...
+    map<string,vector<GameResult>> teamsResultsDict;
 
-    decodeGameResult();
-    updateTeamStats();
+    int resultLinesCount = results.size();
+    for (int i = 0; i < resultLinesCount; i++)
+    {
+        GameResult firstTeamResult, secondTeamResult;
+        decodeGameResult(results[i], firstTeamResult, secondTeamResult);
+        addResultToTeamsDict(firstTeamResult, teamsResultsDict);
+        addResultToTeamsDict(secondTeamResult, teamsResultsDict);
+    }
+
+    updateTeamsStats(teamsResultsDict, teams);
+}
+
+void decodeGameResult (const string & resultLine, GameResult & firstResult, GameResult & secondResult)
+{
+    //TODO: decode team1, team2, goals1, goals2
+}
+
+void addResultToTeamsDict (const GameResult & teamResult, map<string,vector<GameResult>> & dict)
+{
+    auto iter = dict.find(teamResult.m_teamName);
+    if (iter != dict.end())
+    {
+        (iter->second).push_back(teamResult);
+    }
+    else
+    {
+        vector<GameResult> teamGames;
+        teamGames.push_back(teamResult);
+        dict[teamResult.m_teamName] = teamGames;
+    }
+}
+
+void updateTeamsStats (map<string,vector<GameResult>> & dict, vector <Team> & teams)
+{
+    int teamsCount = teams.size();
+    for (int i = 0; i < teamsCount; i++)
+    {
+        Team & currentTeam = teams[i];
+        string teamName = currentTeam.getName();
+
+        auto iter = dict.find(teamName);
+        if (iter != dict.end())
+        {
+            vector<GameResult> & teamGamesResults = iter->second;
+            int teamGamesCount = teamGamesResults.size();
+            for (int i = 0; i < teamGamesCount; i++)
+            {
+                currentTeam.addGameResult(teamGamesResults[i]);
+            }
+        }
+    }
 }
 
 void sortTeamsRanking (vector <Team> & teams)
@@ -195,16 +254,6 @@ void printTournamentResult (const vector <Team> & teams)
         std::cout << i << ") ";
         printTeamStats(teams[i-1]);
     }
-}
-
-void decodeGameResult ()
-{
-    //TODO: decode team1, team2, goals1, goals2
-}
-
-void updateTeamStats ()
-{
-    //TODO: update team stats: points, games count, wins/draws/losses, goals scored, goals against
 }
 
 void printTeamStats (const Team & team)
