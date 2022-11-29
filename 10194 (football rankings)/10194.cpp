@@ -203,21 +203,28 @@ void processTournamentGamesResults (const vector<string> & results, vector <Team
 
 void decodeGameResult (const string & resultLine, GameResult & firstResult, GameResult & secondResult)
 {
-    string team0, team1, goals0, goals1;
+    string team0, team1, goalsStr0, goalsStr1;
     int lineLength = resultLine.size();
     int pos = 0;
 
     decodeStringPart(resultLine, '#', team0, pos);
     pos++;//skip '#'
-    decodeStringPart(resultLine, '@', goals0, pos);
+    decodeStringPart(resultLine, '@', goalsStr0, pos);
     pos++;//skip '@'
-    decodeStringPart(resultLine, '#', goals1, pos);
+    decodeStringPart(resultLine, '#', goalsStr1, pos);
     pos++;//skip '#'
     decodeStringPart(resultLine, '\0', team1, pos);
 
+    int goals0 = std::stoi(goalsStr0);
+    int goals1 = std::stoi(goalsStr1);
+
     firstResult.m_teamName = team0;
+    firstResult.m_goalsScored = goals0;
+    firstResult.m_goalsAgainst = goals1;
+
     secondResult.m_teamName = team1;
-    //TODO: decode goals1, goals2
+    secondResult.m_goalsScored = goals1;
+    secondResult.m_goalsAgainst = goals0;
 }
 
 void decodeStringPart (const string & line, const char & delimiter, string & subString, int & pos)
