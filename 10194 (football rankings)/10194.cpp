@@ -11,20 +11,73 @@
 const int g_MAX_TEAMS_COUNT = 30;
 const int g_MAX_GAMES_COUNT = 1000;
 
+class Team
+{
+    friend void printTeamStats (const Team & team);
+public:
+    Team (const string & name) : m_name(name),
+                        m_points(0),
+                        m_wins(0), m_draws(0), m_losses(0),
+                        m_gamesCount(0),
+                        m_goalsScored(0), m_goalsAgainst(0), m_goalsDiff(0)
+    {
+        m_lowercaseName = name;/*TODO...*/
+    };
+    void addGameResult (const int & goalsScored, const int & goalsAgainst);
+private:
+    string m_name, m_lowercaseName;
+    int m_points;
+    int m_wins, m_draws, m_losses;
+    int m_gamesCount;
+    int m_goalsScored, m_goalsAgainst, m_goalsDiff;
+};
+
+void Team::addGameResult (const int & goalsScored, const int & goalsAgainst)
+{
+    //increase games count
+    m_gamesCount++;
+
+    //update goals metrics
+    m_goalsScored += goalsScored;
+    m_goalsAgainst += goalsAgainst;
+    m_goalsDiff = goalsScored - goalsAgainst;
+
+    //update wins-ties-losses count
+    bool isWinner = (goalsScored > goalsAgainst);
+    bool isDraw = (goalsScored == goalsAgainst);
+    bool isLoser = (goalsScored < goalsAgainst);
+    if (isWinner)
+    {
+        m_wins++;
+    }
+    else if (isDraw)
+    {
+        m_draws++;
+    }
+    else if (isLoser)
+    {
+        m_losses++;
+    }
+
+    //update total points
+    m_points = (3 * m_wins) + m_draws;
+}
+
 void processInput ();
 void readLineEnding ();
 
 void processSingleTournament ();
 void readTournamentTeams (vector<string> & names);
-void readTournamentGamesResuls (vector<string> & results);
+void readTournamentGamesResults (vector<string> & results);
 
-void processTournamentGamesResults ();
-void sortTeamsRanking ();
-void printTournamentResult ();
+void initTournamentTeams (const vector<string> & names, vector <Team> & teams);
+void processTournamentGamesResults (const vector<string> & results, vector <Team> & teams);
+void sortTeamsRanking (vector <Team> & teams);
+void printTournamentResult (const vector <Team> & teams);
 
 void decodeGameResult ();
 void updateTeamStats ();
-void formatTeamStats ();
+void printTeamStats (const Team & team);
 
 int main ()
 {
@@ -64,18 +117,19 @@ void processSingleTournament ()
     std::getline(std::cin, tournamentName);
 
     vector<string> teamsNames;
-    teamsNames.reserve(g_MAX_TEAMS_COUNT);
     readTournamentTeams(teamsNames);
 
     vector <string> gamesResults;
-    gamesResults.reserve(g_MAX_GAMES_COUNT);
-    readTournamentGamesResuls(gamesResults);
+    readTournamentGamesResults(gamesResults);
 
-    processTournamentGamesResults();
-    sortTeamsRanking();
+    vector <Team> tournamentTeams;
+    initTournamentTeams(teamsNames, tournamentTeams);
+
+    processTournamentGamesResults(gamesResults, tournamentTeams);
+    sortTeamsRanking(tournamentTeams);
 
     std::cout << tournamentName << "\n";
-    printTournamentResult();
+    printTournamentResult(tournamentTeams);
 }
 
 void readTournamentTeams (vector<string> & names)
@@ -84,6 +138,7 @@ void readTournamentTeams (vector<string> & names)
     std::cin >> teamsCount;
     readLineEnding();
 
+    names.reserve(teamsCount);
     for (int i = 0; i < teamsCount; i++)
     {
         string name;
@@ -92,12 +147,13 @@ void readTournamentTeams (vector<string> & names)
     }
 }
 
-void readTournamentGamesResuls (vector<string> & results)
+void readTournamentGamesResults (vector<string> & results)
 {
     int gamesCount = 0;
     std::cin >> gamesCount;
     readLineEnding();
 
+    results.reserve(gamesCount);
     for (int i = 0; i < gamesCount; i++)
     {
         string result;
@@ -106,25 +162,39 @@ void readTournamentGamesResuls (vector<string> & results)
     }
 }
 
-void processTournamentGamesResults ()
+void initTournamentTeams (const vector<string> & names, vector <Team> & teams)
 {
-    //TODO: read lines of games' results...
+    int teamsCount = names.size();
+    teams.reserve(teamsCount);
+
+    for (int i = 0; i < teamsCount; i++)
+    {
+        Team currentTeam(names[i]);
+        teams.push_back(currentTeam);
+    }
+}
+
+void processTournamentGamesResults (const vector<string> & results, vector <Team> & teams)
+{
     //TODO: decode games' results, update teams' stats...
 
     decodeGameResult();
     updateTeamStats();
 }
 
-void sortTeamsRanking ()
+void sortTeamsRanking (vector <Team> & teams)
 {
     //TODO: sort by criterias: most points, wins count, goal difference, goals scored, less games, lexicographic case-insensitive order...
 }
 
-void printTournamentResult ()
+void printTournamentResult (const vector <Team> & teams)
 {
-    //TODO: print teams stats in sorted order...
-
-    formatTeamStats();
+    int teamsCount = teams.size();
+    for (int i = 1; i <= teamsCount; i++)
+    {
+        std::cout << i << ") ";
+        printTeamStats(teams[i-1]);
+    }
 }
 
 void decodeGameResult ()
@@ -137,7 +207,15 @@ void updateTeamStats ()
     //TODO: update team stats: points, games count, wins/draws/losses, goals scored, goals against
 }
 
-void formatTeamStats ()
+void printTeamStats (const Team & team)
 {
-    //TODO...
+    std::cout << team.m_name << " " <<
+                team.m_points << "p, " <<
+                team.m_gamesCount << "g (" <<
+                team.m_wins << "-" <<
+                team.m_draws << "-" <<
+                team.m_losses << "), " <<
+                team.m_goalsDiff << "gd (" <<
+                team.m_goalsScored << "-" <<
+                team.m_goalsAgainst << ")\n";
 }
