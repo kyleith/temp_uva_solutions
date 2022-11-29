@@ -6,7 +6,7 @@
 #include <cctype>
 #include <algorithm>
 
-//#define ONLINE_JUDGE 1
+#define ONLINE_JUDGE 1
 
 #define vector std::vector
 #define string std::string
@@ -292,8 +292,42 @@ void sortTeamsRanking (vector <Team> & teams)
 
 bool rankCompare (const Team & first, const Team & second)
 {
-    //TODO: sort by criterias: most points, wins count, goal difference, goals scored, less games, lexicographic case-insensitive order...
-    return first.m_points > second.m_points;
+    if (first.m_points == second.m_points)
+    {
+        if (first.m_wins == second.m_wins)
+        {
+            if (first.m_goalsDiff == second.m_goalsDiff)
+            {
+                if (first.m_goalsScored == second.m_goalsScored)
+                {
+                    if (first.m_gamesCount == second.m_gamesCount)
+                    {
+                        return first.m_lowercaseName < second.m_lowercaseName;
+                    }
+                    else
+                    {
+                        return first.m_gamesCount < second.m_gamesCount;
+                    }
+                }
+                else
+                {
+                    return first.m_goalsScored > second.m_goalsScored;
+                }
+            }
+            else
+            {
+                return first.m_goalsDiff > second.m_goalsDiff;
+            }
+        }
+        else
+        {
+            return first.m_wins > second.m_wins;
+        }
+    }
+    else
+    {
+        return first.m_points > second.m_points;
+    }
 }
 
 void printTournamentResult (const vector <Team> & teams)
