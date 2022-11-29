@@ -83,7 +83,7 @@ void initTournamentTeams (const vector<string> & names, vector <Team> & teams);
 void processTournamentGamesResults (const vector<string> & results, vector <Team> & teams);
 void decodeGameResult (const string & resultLine, GameResult & firstResult, GameResult & secondResult);
 void addResultToTeamsDict (const GameResult & teamResult, map<string,vector<GameResult>> & dict);
-void updateTeamsStats (map<string,vector<GameResult>> & dict, vector <Team> & teams);
+void updateTeamsStats (const map<string,vector<GameResult>> & dict, vector <Team> & teams);
 
 void sortTeamsRanking (vector <Team> & teams);
 void printTournamentResult (const vector <Team> & teams);
@@ -220,7 +220,7 @@ void addResultToTeamsDict (const GameResult & teamResult, map<string,vector<Game
     }
 }
 
-void updateTeamsStats (map<string,vector<GameResult>> & dict, vector <Team> & teams)
+void updateTeamsStats (const map<string,vector<GameResult>> & dict, vector <Team> & teams)
 {
     int teamsCount = teams.size();
     for (int i = 0; i < teamsCount; i++)
@@ -231,7 +231,7 @@ void updateTeamsStats (map<string,vector<GameResult>> & dict, vector <Team> & te
         auto iter = dict.find(teamName);
         if (iter != dict.end())
         {
-            vector<GameResult> & teamGamesResults = iter->second;
+            const vector<GameResult> & teamGamesResults = iter->second;
             int teamGamesCount = teamGamesResults.size();
             for (int i = 0; i < teamGamesCount; i++)
             {
