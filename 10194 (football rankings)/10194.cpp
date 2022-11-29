@@ -82,6 +82,7 @@ void initTournamentTeams (const vector<string> & names, vector <Team> & teams);
 
 void processTournamentGamesResults (const vector<string> & results, vector <Team> & teams);
 void decodeGameResult (const string & resultLine, GameResult & firstResult, GameResult & secondResult);
+void decodeStringPart (const string & line, const char & delimiter, string & subString, int & pos);
 void addResultToTeamsDict (const GameResult & teamResult, map<string,vector<GameResult>> & dict);
 void updateTeamsStats (const map<string,vector<GameResult>> & dict, vector <Team> & teams);
 
@@ -202,7 +203,34 @@ void processTournamentGamesResults (const vector<string> & results, vector <Team
 
 void decodeGameResult (const string & resultLine, GameResult & firstResult, GameResult & secondResult)
 {
-    //TODO: decode team1, team2, goals1, goals2
+    string team0, team1, goals0, goals1;
+    int lineLength = resultLine.size();
+    int pos = 0;
+
+    decodeStringPart(resultLine, '#', team0, pos);
+    pos++;//skip '#'
+    decodeStringPart(resultLine, '@', goals0, pos);
+    pos++;//skip '@'
+    decodeStringPart(resultLine, '#', goals1, pos);
+    pos++;//skip '#'
+    decodeStringPart(resultLine, '\0', team1, pos);
+
+    firstResult.m_teamName = team0;
+    secondResult.m_teamName = team1;
+    //TODO: decode goals1, goals2
+}
+
+void decodeStringPart (const string & line, const char & delimiter, string & subString, int & pos)
+{
+    subString = "";
+    int lineLength = line.size();
+    while ((pos < lineLength)
+            && (line[pos] != delimiter)
+        )
+    {
+        subString.push_back(line[pos]);//left team name
+        pos++;
+    }
 }
 
 void addResultToTeamsDict (const GameResult & teamResult, map<string,vector<GameResult>> & dict)
