@@ -3,6 +3,8 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <cctype>
+#include <algorithm>
 
 //#define ONLINE_JUDGE 1
 
@@ -20,6 +22,7 @@ struct GameResult
 class Team
 {
     friend void printTeamStats (const Team & team);
+    friend bool rankCompare (const Team & first, const Team & second);
 public:
     Team (const string & name) : m_name(name),
                         m_points(0),
@@ -27,7 +30,12 @@ public:
                         m_gamesCount(0),
                         m_goalsScored(0), m_goalsAgainst(0), m_goalsDiff(0)
     {
-        m_lowercaseName = name;/*TODO...*/
+        m_lowercaseName = "";
+        int nameLength = name.size();
+        for (int i = 0; i < nameLength; i++)
+        {
+            m_lowercaseName.push_back(std::tolower(name[i]));
+        }
     };
     string getName() { return m_name; };
     void addGameResult (const GameResult & result);
@@ -87,6 +95,7 @@ void addResultToTeamsDict (const GameResult & teamResult, map<string,vector<Game
 void updateTeamsStats (const map<string,vector<GameResult>> & dict, vector <Team> & teams);
 
 void sortTeamsRanking (vector <Team> & teams);
+bool rankCompare (const Team & first, const Team & second);
 void printTournamentResult (const vector <Team> & teams);
 void printTeamStats (const Team & team);
 
@@ -278,7 +287,13 @@ void updateTeamsStats (const map<string,vector<GameResult>> & dict, vector <Team
 
 void sortTeamsRanking (vector <Team> & teams)
 {
+    std::sort(teams.begin(), teams.end(), rankCompare);
+}
+
+bool rankCompare (const Team & first, const Team & second)
+{
     //TODO: sort by criterias: most points, wins count, goal difference, goals scored, less games, lexicographic case-insensitive order...
+    return first.m_points > second.m_points;
 }
 
 void printTournamentResult (const vector <Team> & teams)
