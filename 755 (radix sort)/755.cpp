@@ -5,12 +5,17 @@
 #include <cctype>
 #include <algorithm>
 
-//#define ONLINE_JUDGE 1
+#define ONLINE_JUDGE 1
 
 #define string std::string
 #define vector std::vector
 
-const int g_MAX_NUMBERS_COUNT = 100000;
+const long g_MAX_NUMBERS_COUNT = 100000;
+
+const int g_FORMATTED_DIGITS_COUNT = 7;
+const int g_FORMATTED_DELIMITER_POS = 4;
+const long g_DIGITS_EXTRACT_MULTIPLIERS[g_FORMATTED_DIGITS_COUNT] = {10, 100, 1000, 10000, 100000, 1000000, 10000000};
+
 string g_decodeKey = "";
 
 string generateDecodeString ();
@@ -22,6 +27,8 @@ void processTestCase ();
 long decodeNumber (const string & line);
 void sortNumbers (vector <long> & numbers);
 void searchAndPrintDublicates (const vector <long> & numbers);
+string formatNumber (const long & number);
+int getDigit (const long & number, const int & pos);
 
 int main ()
 {
@@ -179,7 +186,7 @@ void searchAndPrintDublicates (const vector <long> & numbers)
 		if (repeated > 1)
 		{
 			noDuplicates = false;
-			std::cout << currentElem << " " << repeated << "\n";
+			std::cout << formatNumber(currentElem) << " " << repeated << "\n";
 		}
 
 		mainPos = flagPos;
@@ -189,4 +196,29 @@ void searchAndPrintDublicates (const vector <long> & numbers)
 	{
 		std::cout << "No duplicates.\n";
 	}
+}
+
+string formatNumber (const long & number)
+{
+	string result = "";
+	for (int i = g_FORMATTED_DIGITS_COUNT - 1; i >= g_FORMATTED_DELIMITER_POS; i--)
+	{
+		result.push_back(getDigit(number, i) + '0');
+	}
+	result.push_back('-');
+	for (int i = g_FORMATTED_DELIMITER_POS - 1; i >= 0; i--)
+	{
+		result.push_back(getDigit(number, i) + '0');
+	}
+	return result;
+}
+
+int getDigit (const long & number, const int & pos)
+{
+	int result = number % g_DIGITS_EXTRACT_MULTIPLIERS[pos];//trim left digits
+	if (pos > 0)
+	{
+		result /= g_DIGITS_EXTRACT_MULTIPLIERS[pos - 1];//trim right digits
+	}
+	return result;
 }
