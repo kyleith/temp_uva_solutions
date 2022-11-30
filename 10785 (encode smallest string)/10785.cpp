@@ -1,8 +1,9 @@
 #include <cstdio>
 #include <iostream>
 #include <string>
+#include <algorithm>
 
-//#define ONLINE_JUDGE 1
+#define ONLINE_JUDGE 1
 
 #define string std::string
 
@@ -110,11 +111,39 @@ void processInput ()
 
 string calculateName (const int & length)
 {
-    //TODO...
-    return "";
+    return g_MAX_NAME_UNSORTED.substr(0, length);
 }
 
 void sortLetters (string & name)
 {
-    //TODO...
+    string oddStr = "", evenStr = "";
+
+    int length = name.length();
+    for (int i = 0; i < length; i++)
+    {
+        if (i & 1)
+        {
+            oddStr.push_back(name[i]);
+        }
+        else
+        {
+            evenStr.push_back(name[i]);
+        }
+    }
+
+    std::sort(std::begin(oddStr), std::end(oddStr));
+    std::sort(std::begin(evenStr), std::end(evenStr));
+
+    for (int i = 0; i < length; i++)
+    {
+        int halfIndex = i / 2;
+        if (i & 1)
+        {
+            name[i] = oddStr[halfIndex];
+        }
+        else
+        {
+            name[i] = evenStr[halfIndex];
+        }
+    }
 }
