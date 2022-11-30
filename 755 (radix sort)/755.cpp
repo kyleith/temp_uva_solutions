@@ -15,6 +15,7 @@ const long g_MAX_NUMBERS_COUNT = 100000;
 const int g_FORMATTED_DIGITS_COUNT = 7;
 const int g_FORMATTED_DELIMITER_POS = 4;
 const long g_DIGITS_EXTRACT_MULTIPLIERS[g_FORMATTED_DIGITS_COUNT] = {10, 100, 1000, 10000, 100000, 1000000, 10000000};
+const int g_RADIX_VALUE = 10;
 
 string g_decodeKey = "";
 
@@ -26,6 +27,8 @@ void processTestCase ();
 
 long decodeNumber (const string & line);
 void sortNumbers (vector <long> & numbers);
+void radixSort (vector <long> & numbers);
+
 void searchAndPrintDublicates (const vector <long> & numbers);
 string formatNumber (const long & number);
 int getDigit (const long & number, const int & pos);
@@ -156,8 +159,54 @@ long decodeNumber (const string & line)
 
 void sortNumbers (vector <long> & numbers)
 {
-	//TODO: radix sort
-	std::sort(numbers.begin(), numbers.end());
+	//std::sort(numbers.begin(), numbers.end());
+
+	//radix sort implementation is correct, but for UVA#775 std::sort works faster
+	radixSort(numbers);
+}
+
+void radixSort (vector <long> & numbers)
+{
+	int radixBuffer [g_RADIX_VALUE] = {0};
+
+	int numbersCount = numbers.size();
+	vector <long> buffer;
+	buffer.reserve(numbersCount);
+	for (int i = 0; i < numbersCount; i++)
+	{
+		buffer[i] = -1;
+	}
+
+	for (int digitIndex = 0; digitIndex < g_FORMATTED_DIGITS_COUNT; digitIndex++)
+	{
+		for (int radixIndex = 0; radixIndex < g_RADIX_VALUE; radixIndex++)
+		{
+			radixBuffer[radixIndex] = 0;//clear radix buffer
+		}
+		for (int numberIndex = 0; numberIndex < numbersCount; numberIndex++)
+		{
+			int digit = getDigit(numbers[numberIndex], digitIndex);
+			radixBuffer[digit]++;//calculate digit subarrays sizes
+		}
+		int count = 0;
+		for (int radixIndex = 0; radixIndex < g_RADIX_VALUE; radixIndex++)
+		{
+			int temp = radixBuffer[radixIndex];
+			radixBuffer[radixIndex] = count;//move subarray bounds to the left
+			count += temp;
+		}
+		for (int numberIndex = 0; numberIndex < numbersCount; numberIndex++)
+		{
+			int digit = getDigit(numbers[numberIndex], digitIndex);
+			buffer[radixBuffer[digit]] = numbers[numberIndex];//sort array by digit
+			radixBuffer[digit]++;
+		}
+
+		for (int numberIndex = 0; numberIndex < numbersCount; numberIndex++)
+		{
+			numbers[numberIndex] = buffer[numberIndex];//copy buffer to main array
+		}
+	}
 }
 
 void searchAndPrintDublicates (const vector <long> & numbers)
