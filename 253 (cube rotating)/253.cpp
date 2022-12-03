@@ -3,7 +3,7 @@
 #include <iostream>
 #include <vector>
 
-//#define ONLINE_JUDGE 1
+#define ONLINE_JUDGE 1
 
 #define string std::string
 #define vector std::vector
@@ -130,6 +130,7 @@ void Cube::reset ()
 void initCubeRotations ();
 void processInput ();
 void processCase (const string & input);
+string applyCubeRotatingPattern (const string & cube, const string & pattern);
 
 int main ()
 {
@@ -172,5 +173,38 @@ void processInput ()
 
 void processCase (const string & input)
 {
-	//TODO: decode input, build cubes and compare cubes
+	string firstCube, secondCube;
+	firstCube = input.substr(0, g_CUBE_SIDES_COUNT);
+	secondCube = input.substr(g_CUBE_SIDES_COUNT, g_CUBE_SIDES_COUNT);
+
+	bool areEqual = false;
+	for (int i = 0; i < g_CUBE_DIFFERENT_ROTATIONS_COUNT; i++)
+	{
+		string currentRotation = applyCubeRotatingPattern(secondCube, g_cubeRotations[i]);
+		if (firstCube == currentRotation)
+		{
+			areEqual = true;
+			break;
+		}
+	}
+
+	if (areEqual)
+	{
+		std::cout << "TRUE\n";
+	}
+	else
+	{
+		std::cout << "FALSE\n";
+	}
+}
+
+string applyCubeRotatingPattern (const string & cube, const string & pattern)
+{
+	string result = "xxxxxx";
+	for (int i = 0; i < g_CUBE_SIDES_COUNT; i++)
+	{
+		int targetPos = pattern[i] - '1';
+		result[i] = cube[targetPos];
+	}
+	return result;
 }
