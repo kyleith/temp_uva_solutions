@@ -1,7 +1,7 @@
 #include <cstdio>
 #include <cmath>
 
-//#define ONLINE_JUDGE 1
+#define ONLINE_JUDGE 1
 
 void processInput ();
 void processCase (const long long & H0, const long long & CLast);
@@ -43,8 +43,23 @@ void processCase (const long long & H0, const long long & CLast)
 		return;
 	}
 
-	long long N = binSearch(1, H0, H0, CLast);
-	long long last = log(CLast)/log(N);
+	long long N, last;
+
+	if (CLast + 1 == H0)
+	{
+		N = CLast;
+		last = 1;
+	}
+	else if (CLast == 1)
+	{
+		N = 1;
+		last = log(H0)/log(N + 1);
+	}
+	else
+	{
+		N = binSearch(2, H0, H0, CLast);
+		last = log(CLast)/log(N);
+	}
 
 	long long metric0 = 0, metric1 = 0;
 	for (
