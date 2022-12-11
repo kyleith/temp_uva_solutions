@@ -1,7 +1,7 @@
 #include <cstdio>
 #include <cmath>
 
-#define ONLINE_JUDGE 1
+//#define ONLINE_JUDGE 1
 
 void processInput ();
 void processCase (const long long & H0, const long long & CLast);
