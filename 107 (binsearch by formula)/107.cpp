@@ -5,7 +5,8 @@
 
 void processInput ();
 void processCase (const long long & H0, const long long & CLast);
-long long binSearch (const long long & left, const long long & right, const long long & eqValue);
+long long binSearch (const long long & left, const long long & right, const long long & H0, const long long & CLast);
+long long calculateFormulaValue (const long long & H0, const long long & N);
 
 int main ()
 {
@@ -36,14 +37,40 @@ void processInput ()
 
 void processCase (const long long & H0, const long long & CLast)
 {
-	long long N = binSearch(0, H0, CLast);
+	long long N = binSearch(0, H0, H0, CLast);
 	long long last = log(CLast)/log(N);
 
-	//TODO...
+	long long metric0 = 0, metric1 = 0;
+	printf("%lld %lld\n", metric0, metric1);
 }
 
-long long binSearch (const long long & left, const long long & right, const long long & eqValue)
+long long binSearch (const long long & left, const long long & right, const long long & H0, const long long & CLast)
 {
-	//TODO...
-	return 0;
+	long long l = left, r = right;
+	long long middle = -1;
+	while (l <= r)
+	{
+		long long diff = r - l;
+		middle = l + (diff / 2) + (diff % 2);
+
+		long long Fmiddle = calculateFormulaValue(H0, middle);
+		if (Fmiddle == CLast)
+		{
+			break;
+		}
+		else if (Fmiddle > CLast)
+		{
+			r = middle - 1;
+		}
+		else if (Fmiddle < CLast)
+		{
+			l = middle + 1;
+		}
+	}
+	return middle;
+}
+
+long long calculateFormulaValue (const long long & H0, const long long & N)
+{
+	return pow(N, (log(H0)/log(N+1)));
 }
