@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 #define ONLINE_JUDGE 1
 
@@ -131,6 +132,7 @@ void initCubeRotations ();
 void processInput ();
 void processCase (const string & input);
 string applyCubeRotatingPattern (const string & cube, const string & pattern);
+bool isUnsolved (const string & first, const string & second);
 
 int main ()
 {
@@ -178,13 +180,16 @@ void processCase (const string & input)
 	secondCube = input.substr(g_CUBE_SIDES_COUNT, g_CUBE_SIDES_COUNT);
 
 	bool areEqual = false;
-	for (int i = 0; i < g_CUBE_DIFFERENT_ROTATIONS_COUNT; i++)
+	if (!isUnsolved(firstCube, secondCube))
 	{
-		string currentRotation = applyCubeRotatingPattern(secondCube, g_cubeRotations[i]);
-		if (firstCube == currentRotation)
+		for (int i = 0; i < g_CUBE_DIFFERENT_ROTATIONS_COUNT; i++)
 		{
-			areEqual = true;
-			break;
+			string currentRotation = applyCubeRotatingPattern(secondCube, g_cubeRotations[i]);
+			if (firstCube == currentRotation)
+			{
+				areEqual = true;
+				break;
+			}
 		}
 	}
 
@@ -207,4 +212,13 @@ string applyCubeRotatingPattern (const string & cube, const string & pattern)
 		result[i] = cube[targetPos];
 	}
 	return result;
+}
+
+bool isUnsolved (const string & first, const string & second)
+{
+	string firstCube(first), secondCube(second);
+	std::sort(firstCube.begin(), firstCube.end());
+	std::sort(secondCube.begin(), secondCube.end());
+
+	return firstCube != secondCube;
 }
