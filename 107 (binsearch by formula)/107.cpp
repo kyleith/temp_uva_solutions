@@ -37,6 +37,12 @@ void processInput ()
 
 void processCase (const long long & H0, const long long & CLast)
 {
+	if (H0 == 1)
+	{
+		printf("0 1\n");
+		return;
+	}
+
 	long long N = binSearch(1, H0, H0, CLast);
 	long long last = log(CLast)/log(N);
 
