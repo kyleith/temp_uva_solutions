@@ -62,7 +62,7 @@ long long binSearch (const long long & distance)
 	long long left = 0, right = (1 << 16);
 	long long middle = -1;
 
-	while (left < right)
+	while (left <= right)
 	{
 		long long diff = right - left;
 		middle = left + (diff / 2) + (diff % 2);
