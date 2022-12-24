@@ -1,6 +1,6 @@
 #include <cstdio>
 
-//#define ONLINE_JUDGE 1
+#define ONLINE_JUDGE 1
 
 void processInput ();
 void processTestCase ();
@@ -59,7 +59,7 @@ void processTestCase ()
 
 long long binSearch (const long long & distance)
 {
-	long long left = 0, right = (1 << 16);
+	long long left = 0, right = 100000;
 	long long middle = -1;
 
 	while (left <= right)
