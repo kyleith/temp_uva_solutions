@@ -1,6 +1,8 @@
 #include <cstdio>
 
-//#define ONLINE_JUDGE 1
+#define ONLINE_JUDGE 1
+
+void processInput ();
 
 int main ()
 {
@@ -9,5 +11,16 @@ int main ()
 	freopen("output.txt", "wt", stdout);
 #endif
 
+	processInput();
+
 	return 0;
+}
+
+void processInput ()
+{
+	int n, m;
+	while (scanf("%d%d", &n, &m) == 2)
+	{
+		printf("%ld\n", (n * m) - 1);
+	}
 }
