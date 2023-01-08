@@ -1,6 +1,6 @@
 #include <cstdio>
 
-//#define ONLINE_JUDGE 1
+#define ONLINE_JUDGE 1
 
 void processInput ();
 void processTestCase ();
