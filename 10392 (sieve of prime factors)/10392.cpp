@@ -104,7 +104,7 @@ void processTestCase (const long long & number)
 		currentPrimeFactor = g_primeFactors[primesCount - 1];
 
 		/*try to add new primes to sieve*/
-		/*while (currentPrimeFactor <= sqrt(currentNumber))
+		while (currentPrimeFactor <= sqrt(currentNumber))
 		{
 			while (currentNumber % currentPrimeFactor == 0)
 			{
@@ -112,7 +112,7 @@ void processTestCase (const long long & number)
 				g_primeFactors.push_back(currentPrimeFactor);
 			}
 			currentPrimeFactor += 2;
-		}*/
+		}
 
 		if (currentNumber > 1)
 		{
