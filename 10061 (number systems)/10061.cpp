@@ -115,9 +115,8 @@ long calculateDigits (const long & number, const long & base)
 
 	for (long i = 2; i <= number; i++)
 	{
-		result += log(i);
+		result += (log(i)/log(base));
 	}
-	result /= log(base);
 
 	return 1 + floor(result);
 }
