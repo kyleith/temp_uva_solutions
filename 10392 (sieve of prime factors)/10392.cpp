@@ -3,11 +3,12 @@
 
 #define vector std::vector
 
-const int g_MAX_ARRAY_LENGTH = 100000;
-vector<int> g_primeFactors;
+const long g_MAX_ARRAY_LENGTH = 1000000;
+vector<long> g_primeFactors;
 
 void initPrimeFactorsArray ();
 void processInput ();
+void processTestCase (const long long & number);
 
 int main ()
 {
@@ -26,9 +27,10 @@ int main ()
 void initPrimeFactorsArray ()
 {
 	g_primeFactors.clear();
+	g_primeFactors.reserve(g_MAX_ARRAY_LENGTH);
 
 	bool isPrimeFactor[g_MAX_ARRAY_LENGTH];
-	for (int i = 0; i < g_MAX_ARRAY_LENGTH; i++)
+	for (long i = 0; i < g_MAX_ARRAY_LENGTH; i++)
 	{
 		isPrimeFactor[i] = true;
 	}
@@ -38,26 +40,21 @@ void initPrimeFactorsArray ()
 
 	g_primeFactors.push_back(2);
 	/*labeling even numbers 4, 6, 8... as non-prime*/
-	for (int i = 4; i < g_MAX_ARRAY_LENGTH; i+= 2)
+	for (long i = 4; i < g_MAX_ARRAY_LENGTH; i+=2)
 	{
 		isPrimeFactor[i] = false;
 	}
 
-	for (int i = 3; i < g_MAX_ARRAY_LENGTH; i+=2)
+	for (long i = 3; i < g_MAX_ARRAY_LENGTH; i+=2)
 	{
 		if (isPrimeFactor[i])
 		{
-			int currentPrimeFactor = i;
+			long currentPrimeFactor = i;
 			g_primeFactors.push_back(currentPrimeFactor);
 
-			for (int j = currentPrimeFactor + 2; j < g_MAX_ARRAY_LENGTH; j+=2)
+			for (long j = currentPrimeFactor * 2; j < g_MAX_ARRAY_LENGTH; j+=currentPrimeFactor)
 			{
-				if (!isPrimeFactor[j])
-				{
-					continue;
-				}
-
-				isPrimeFactor[j] = (j % currentPrimeFactor != 0);
+				isPrimeFactor[j] = false;
 			}
 		}
 	}
@@ -65,5 +62,43 @@ void initPrimeFactorsArray ()
 
 void processInput ()
 {
-	//TODO...
+	long long number;
+	scanf("%lld", &number);
+
+	while (number > 0)
+	{
+		processTestCase(number);
+
+		scanf("%lld", &number);
+	}
+}
+
+void processTestCase (const long long & number)
+{
+	long long currentNumber = number;
+
+	int primesCount = g_primeFactors.size();
+	int primeIndex = 0;
+
+	while (
+			currentNumber > 1
+			&& primeIndex < primesCount
+		)
+	{
+		int currentPrimeFactor = g_primeFactors[primeIndex];
+		while (currentNumber % currentPrimeFactor == 0)
+		{
+			printf("    %lld\n", currentPrimeFactor);
+			currentNumber /= currentPrimeFactor;
+		}
+		primeIndex++;
+	}
+
+	if (currentNumber > 1)
+	{
+		printf("    %lld\n", currentNumber);
+		g_primeFactors.push_back(currentNumber);
+	}
+
+	printf("\n");
 }
