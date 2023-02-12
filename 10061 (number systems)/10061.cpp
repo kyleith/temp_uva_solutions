@@ -1,5 +1,10 @@
 #include <cstdio>
 #include <cmath>
+#include <vector>
+
+#define vector std::vector
+
+const int g_MAX_UNIQUE_FACTORS_COUNT = 30;
 
 void processInput ();
 void processTestCase (const long & number, const long & base);
@@ -39,15 +44,76 @@ void processTestCase (const long & number, const long & base)
 
 long calculateZeros (const long & number, const long & base)
 {
-	//TODO...
-	return 0;
+	vector <int> baseUniqueFactors;
+	vector <int> baseFactorsCount;
+	vector <int> totalFactorsCount;
+
+	baseUniqueFactors.reserve(g_MAX_UNIQUE_FACTORS_COUNT);
+	baseFactorsCount.reserve(g_MAX_UNIQUE_FACTORS_COUNT);
+	totalFactorsCount.reserve(g_MAX_UNIQUE_FACTORS_COUNT);
+
+	int current = 2;
+	int baseValue = base;
+	int baseRoot = floor(sqrt(base));
+	while (baseValue > 1)
+	{
+		if (baseValue % current == 0)
+		{
+			baseUniqueFactors.push_back(current);
+			totalFactorsCount.push_back(0);
+
+			int factorCount = 0;
+			while (baseValue % current == 0)
+			{
+				baseValue /= current;
+				factorCount++;
+			}
+			baseFactorsCount.push_back(factorCount);
+		}
+
+		if (current == 2)
+		{
+			current++;
+		}
+		else if (current < baseRoot)
+		{
+			current += 2;
+		}
+		else
+		{
+			current = baseValue;
+		}
+	}
+
+	int uniqueFactorsCount = baseUniqueFactors.size();
+	for (long i = 2; i <= number; i++)
+	{
+		long currentNumber = i;
+		for (int j = 0; j < uniqueFactorsCount; j++)
+		{
+			int currentFactor = baseUniqueFactors[j];
+			while (currentNumber % currentFactor == 0)
+			{
+				currentNumber /= currentFactor;
+				totalFactorsCount[j]++;
+			}
+		}
+	}
+
+	int result = totalFactorsCount[0] / baseFactorsCount[0];
+	for (int i = 1; i < uniqueFactorsCount; i++)
+	{
+		result = std::min(result, totalFactorsCount[i] / baseFactorsCount[i]);
+	}
+
+	return result;
 }
 
 long calculateDigits (const long & number, const long & base)
 {
-	long double result = 0.0;
+	double result = 0;
 
-	for (long i = 1; i <= number; i++)
+	for (long i = 2; i <= number; i++)
 	{
 		result += log(i);
 	}
