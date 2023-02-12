@@ -79,19 +79,22 @@ void processTestCase (const long long & number)
 
 	int primesCount = g_primeFactors.size();
 	int primeIndex = 0;
+	int currentPrimeFactor = g_primeFactors[primeIndex];
 
 	while (
 			currentNumber > 1
+			&& currentPrimeFactor * currentPrimeFactor <= currentNumber
 			&& primeIndex < primesCount
 		)
 	{
-		int currentPrimeFactor = g_primeFactors[primeIndex];
 		while (currentNumber % currentPrimeFactor == 0)
 		{
 			printf("    %lld\n", currentPrimeFactor);
 			currentNumber /= currentPrimeFactor;
 		}
+
 		primeIndex++;
+		currentPrimeFactor = g_primeFactors[primeIndex];
 	}
 
 	if (currentNumber > 1)
