@@ -1,10 +1,11 @@
 #include <cstdio>
 #include <vector>
+#include <cmath>
 
 #define vector std::vector
 
 const long g_MAX_ARRAY_LENGTH = 1000000;
-vector<long> g_primeFactors;
+vector<long long> g_primeFactors;
 
 void initPrimeFactorsArray ();
 void processInput ();
@@ -79,11 +80,12 @@ void processTestCase (const long long & number)
 
 	int primesCount = g_primeFactors.size();
 	int primeIndex = 0;
-	int currentPrimeFactor = g_primeFactors[primeIndex];
+	long long currentPrimeFactor = g_primeFactors[primeIndex];
 
+	/*iterate through sieve*/
 	while (
 			currentNumber > 1
-			&& currentPrimeFactor * currentPrimeFactor <= currentNumber
+			&& currentPrimeFactor <= sqrt(currentNumber)
 			&& primeIndex < primesCount
 		)
 	{
@@ -99,8 +101,24 @@ void processTestCase (const long long & number)
 
 	if (currentNumber > 1)
 	{
-		printf("    %lld\n", currentNumber);
-		g_primeFactors.push_back(currentNumber);
+		currentPrimeFactor = g_primeFactors[primesCount - 1];
+
+		/*try to add new primes to sieve*/
+		/*while (currentPrimeFactor <= sqrt(currentNumber))
+		{
+			while (currentNumber % currentPrimeFactor == 0)
+			{
+				printf("    %lld\n", currentPrimeFactor);
+				g_primeFactors.push_back(currentPrimeFactor);
+			}
+			currentPrimeFactor += 2;
+		}*/
+
+		if (currentNumber > 1)
+		{
+			printf("    %lld\n", currentNumber);
+			g_primeFactors.push_back(currentNumber);
+		}
 	}
 
 	printf("\n");
