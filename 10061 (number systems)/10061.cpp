@@ -111,12 +111,13 @@ long calculateZeros (const long & number, const long & base)
 
 long calculateDigits (const long & number, const long & base)
 {
-	double result = 0;
+	long double result = 0;
 
-	for (long i = 2; i <= number; i++)
+	for (long i = 1; i <= number; i++)
 	{
-		result += (log(i)/log(base));
+		result += (log10(i)/log10(base));
 	}
+	result += 1e-5;
 
-	return 1 + floor(result);
+	return ceil(result);
 }
