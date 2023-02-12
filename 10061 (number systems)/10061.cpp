@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <cmath>
 
 void processInput ();
 void processTestCase (const long & number, const long & base);
@@ -30,7 +31,7 @@ void processInput ()
 
 void processTestCase (const long & number, const long & base)
 {
-	long zerosCount = calculateDigits(number, base);
+	long zerosCount = calculateZeros(number, base);
 	long digitsCount = calculateDigits(number, base);
 
 	printf("%ld %ld\n", zerosCount, digitsCount);
@@ -44,6 +45,13 @@ long calculateZeros (const long & number, const long & base)
 
 long calculateDigits (const long & number, const long & base)
 {
-	//TODO...
-	return 0;
+	long double result = 0.0;
+
+	for (long i = 1; i <= number; i++)
+	{
+		result += log(i);
+	}
+	result /= log(base);
+
+	return 1 + floor(result);
 }
