@@ -47,7 +47,7 @@ Triangle::Triangle (const Point & first, const Point & second, const Point & thi
 	m_first = first;
 	m_second = second;
 	m_third = third;
-	m_area = 0.5 * abs(((third.m_y - first.m_y) * (second.m_x - first.m_x)) - ((second.m_y - first.m_y) * (third.m_x - first.m_x)));
+	m_area = 0.5 * fabs(((third.m_y - first.m_y) * (second.m_x - first.m_x)) - ((second.m_y - first.m_y) * (third.m_x - first.m_x)));
 }
 
 void Triangle::operator= (const Triangle & source)
