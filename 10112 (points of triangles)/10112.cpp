@@ -82,7 +82,7 @@ bool Triangle::hasPoint (const Point & point)
 
 double Triangle::calculateAngle (const Point & v1, const Point & v2)
 {
-	double result = asin(((v2.m_y * v1.m_x) - (v1.m_y * v2.m_x)) / (sqrt(v1.m_x * v1.m_x + v1.m_y * v1.m_y) * sqrt(v2.m_x * v2.m_x + v2.m_y * v2.m_y)));
+	double result = acos(((v1.m_x * v2.m_x) + (v1.m_y * v2.m_y)) / (sqrt(v1.m_x * v1.m_x + v1.m_y * v1.m_y) * sqrt(v2.m_x * v2.m_x + v2.m_y * v2.m_y)));
 	return result;
 }
 
@@ -105,12 +105,13 @@ int main ()
 void processInput ()
 {
 	int n;
-	scanf("%d\n", &n);
 
-	while (n > 0)
+	while (
+			scanf("%d\n", &n) == 1
+			&& n > 0
+		)
 	{
 		processTestCase(n);
-		scanf("%d\n", &n);
 	}
 }
 
