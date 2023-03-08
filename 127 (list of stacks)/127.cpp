@@ -113,24 +113,49 @@ void runPilesCollapsing (vector<stack<string>> & piles)
 
 bool isThirdNeighborCompatible (const int & currentIndex, const vector<stack<string>> & piles)
 {
-	//TODO...
-	return 0;
+	int compareIndex = currentIndex - 3;
+	if (compareIndex < 0)
+	{
+		return false;
+	}
+	else
+	{
+		string currentCard = piles[currentIndex].top();
+		string compareCard = piles[compareIndex].top();
+
+		return (currentCard[0] == compareCard[0])
+			|| (currentCard[1] == compareCard[1]);
+	}
 }
 
 bool isFirstNeighborCompatible (const int & currentIndex, const vector<stack<string>> & piles)
 {
-	//TODO...
-	return 0;
+	int compareIndex = currentIndex - 1;
+	if (compareIndex < 0)
+	{
+		return false;
+	}
+	else
+	{
+		string currentCard = piles[currentIndex].top();
+		string compareCard = piles[compareIndex].top();
+
+		return (currentCard[0] == compareCard[0])
+			|| (currentCard[1] == compareCard[1]);
+	}
 }
 
 void moveCard (const int & sourceIndex, const int & targetIndex, vector<stack<string>> & piles)
 {
-	//TODO...
+	string currentCard = piles[sourceIndex].top();
+	piles[sourceIndex].pop();
+
+	piles[targetIndex].push(currentCard);
 }
 
 void removePile (const int & currentIndex, vector<stack<string>> & piles)
 {
-	//TODO...
+	piles.erase(piles.begin() + currentIndex);
 }
 
 void printResult (const vector<stack<string>> & piles)
