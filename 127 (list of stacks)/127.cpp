@@ -103,6 +103,12 @@ void runPilesCollapsing (vector<stack<string>> & piles)
 			{
 				removePile(index, piles);
 			}
+
+			if (movesPossible)
+			{
+				//exit the current iteration and return to the beginning
+				break;
+			}
 			else
 			{
 				index++;
