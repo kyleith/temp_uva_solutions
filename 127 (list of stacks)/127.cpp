@@ -15,6 +15,12 @@ void processTestCase (const string & firstLine, const string & secondLine);
 
 void parseInputLine (const string & line, vector<stack<string>> & piles);
 void runPilesCollapsing (vector<stack<string>> & piles);
+
+bool isThirdNeighborCompatible (const int & currentIndex, const vector<stack<string>> & piles);
+bool isFirstNeighborCompatible (const int & currentIndex, const vector<stack<string>> & piles);
+void moveCard (const int & sourceIndex, const int & targetIndex, vector<stack<string>> & piles);
+void removePile (const int & currentIndex, vector<stack<string>> & piles);
+
 void printResult (const vector<stack<string>> & piles);
 
 int main ()
@@ -73,6 +79,56 @@ void parseInputLine (const string & line, vector<stack<string>> & piles)
 }
 
 void runPilesCollapsing (vector<stack<string>> & piles)
+{
+	bool movesPossible = true;
+	while (movesPossible)
+	{
+		movesPossible = false;
+
+		int index = 0;
+		while (index < piles.size())
+		{
+			if (isThirdNeighborCompatible(index, piles))
+			{
+				movesPossible = true;
+				moveCard(index, index - 3, piles);
+			}
+			else if (isFirstNeighborCompatible(index, piles))
+			{
+				movesPossible = true;
+				moveCard(index, index - 1, piles);
+			}
+
+			if (piles[index].empty())
+			{
+				removePile(index, piles);
+			}
+			else
+			{
+				index++;
+			}
+		}
+	}
+}
+
+bool isThirdNeighborCompatible (const int & currentIndex, const vector<stack<string>> & piles)
+{
+	//TODO...
+	return 0;
+}
+
+bool isFirstNeighborCompatible (const int & currentIndex, const vector<stack<string>> & piles)
+{
+	//TODO...
+	return 0;
+}
+
+void moveCard (const int & sourceIndex, const int & targetIndex, vector<stack<string>> & piles)
+{
+	//TODO...
+}
+
+void removePile (const int & currentIndex, vector<stack<string>> & piles)
 {
 	//TODO...
 }
