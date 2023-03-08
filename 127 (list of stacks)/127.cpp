@@ -81,38 +81,36 @@ void parseInputLine (const string & line, vector<stack<string>> & piles)
 void runPilesCollapsing (vector<stack<string>> & piles)
 {
 	bool movesPossible = true;
-	while (movesPossible)
+
+	int dealerCardIndex = 0;
+	while (dealerCardIndex < piles.size())
 	{
 		movesPossible = false;
-
-		int index = 0;
-		while (index < piles.size())
+		if (isThirdNeighborCompatible(dealerCardIndex, piles))
 		{
-			if (isThirdNeighborCompatible(index, piles))
+			movesPossible = true;
+			moveCard(dealerCardIndex, dealerCardIndex - 3, piles);
+			if (piles[dealerCardIndex].empty())
 			{
-				movesPossible = true;
-				moveCard(index, index - 3, piles);
+				removePile(dealerCardIndex, piles);
 			}
-			else if (isFirstNeighborCompatible(index, piles))
+			dealerCardIndex = dealerCardIndex - 3;
+		}
+		else if (isFirstNeighborCompatible(dealerCardIndex, piles))
+		{
+			movesPossible = true;
+			moveCard(dealerCardIndex, dealerCardIndex - 1, piles);
+			if (piles[dealerCardIndex].empty())
 			{
-				movesPossible = true;
-				moveCard(index, index - 1, piles);
+				removePile(dealerCardIndex, piles);
 			}
 
-			if (piles[index].empty())
-			{
-				removePile(index, piles);
-			}
+			dealerCardIndex = dealerCardIndex - 1;
+		}
 
-			if (movesPossible)
-			{
-				//exit the current iteration and return to the beginning
-				break;
-			}
-			else
-			{
-				index++;
-			}
+		if (!movesPossible)
+		{
+			dealerCardIndex++;
 		}
 	}
 }
