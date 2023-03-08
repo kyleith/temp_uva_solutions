@@ -58,7 +58,18 @@ void processTestCase (const string & firstLine, const string & secondLine)
 
 void parseInputLine (const string & line, vector<stack<string>> & piles)
 {
-	//TODO...
+	int length = line.size();
+	for (int i = 0; i < length; i+=3)
+	{
+		string card = "";
+		card.push_back(line[i]);
+		card.push_back(line[i+1]);
+
+		stack<string> currentPile;
+		currentPile.push(card);
+
+		piles.push_back(currentPile);
+	}
 }
 
 void runPilesCollapsing (vector<stack<string>> & piles)
@@ -68,5 +79,18 @@ void runPilesCollapsing (vector<stack<string>> & piles)
 
 void printResult (const vector<stack<string>> & piles)
 {
-	//TODO...
+	int pilesCount = piles.size();
+	if (pilesCount == 1)
+	{
+		printf("1 pile remaining: 52\n");
+	}
+	else
+	{
+		printf("%d piles remaining: ", pilesCount);
+		for (int i = 0; i < pilesCount - 1; i++)
+		{
+			printf("%d ", piles[i].size());
+		}
+		printf("%d\n", piles[pilesCount - 1].size());
+	}
 }
