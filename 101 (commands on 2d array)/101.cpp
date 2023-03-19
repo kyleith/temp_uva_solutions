@@ -49,6 +49,11 @@ void processMoveOverCommand (const Command & complexCommand, vector<vector<int>>
 void processPileOntoCommand (const Command & complexCommand, vector<vector<int>> & stacks, vector<int> & blocksAdresses);
 void processPileOverCommand (const Command & complexCommand, vector<vector<int>> & stacks, vector<int> & blocksAdresses);
 
+void moveBlockToDefault (const int & sourceBlock, vector<vector<int>> & stacks, vector<int> & blocksAdresses);
+void moveBlockToTarget (const int & sourceBlock, const int & targetBlock, vector<vector<int>> & stacks, vector<int> & blocksAdresses);
+void pileBlockToTarget (const int & sourceBlock, const int & targetBlock, vector<vector<int>> & stacks, vector<int> & blocksAdresses);
+void resetAboveBlocks (const int & sourceBlock, vector<vector<int>> & stacks, vector<int> & blocksAdresses);
+
 void printResult (const vector<vector<int>> & stacks);
 
 int main ()
@@ -202,20 +207,44 @@ bool isValidComplexCommand (const Command & complexCommand, const vector<int> & 
 
 void processMoveOntoCommand (const Command & complexCommand, vector<vector<int>> & stacks, vector<int> & blocksAdresses)
 {
-	//TODO...
+	resetAboveBlocks(complexCommand.m_leftOperand, stacks, blocksAdresses);
+	resetAboveBlocks(complexCommand.m_rightOperand, stacks, blocksAdresses);
+	moveBlockToTarget(complexCommand.m_leftOperand, complexCommand.m_rightOperand, stacks, blocksAdresses);
 }
 
 void processMoveOverCommand (const Command & complexCommand, vector<vector<int>> & stacks, vector<int> & blocksAdresses)
 {
-	//TODO...
+	resetAboveBlocks(complexCommand.m_leftOperand, stacks, blocksAdresses);
+	moveBlockToTarget(complexCommand.m_leftOperand, complexCommand.m_rightOperand, stacks, blocksAdresses);
 }
 
 void processPileOntoCommand (const Command & complexCommand, vector<vector<int>> & stacks, vector<int> & blocksAdresses)
 {
-	//TODO...
+	resetAboveBlocks(complexCommand.m_rightOperand, stacks, blocksAdresses);
+	pileBlockToTarget(complexCommand.m_leftOperand, complexCommand.m_rightOperand, stacks, blocksAdresses);
 }
 
 void processPileOverCommand (const Command & complexCommand, vector<vector<int>> & stacks, vector<int> & blocksAdresses)
+{
+	pileBlockToTarget(complexCommand.m_leftOperand, complexCommand.m_rightOperand, stacks, blocksAdresses);
+}
+
+void moveBlockToDefault (const int & sourceBlock, vector<vector<int>> & stacks, vector<int> & blocksAdresses)
+{
+	//TODO...
+}
+
+void moveBlockToTarget (const int & sourceBlock, const int & targetBlock, vector<vector<int>> & stacks, vector<int> & blocksAdresses)
+{
+	//TODO...
+}
+
+void pileBlockToTarget (const int & sourceBlock, const int & targetBlock, vector<vector<int>> & stacks, vector<int> & blocksAdresses)
+{
+	//TODO...
+}
+
+void resetAboveBlocks (const int & sourceBlock, vector<vector<int>> & stacks, vector<int> & blocksAdresses)
 {
 	//TODO...
 }
