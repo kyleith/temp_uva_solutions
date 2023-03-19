@@ -41,7 +41,14 @@ void processInput ();
 void initStacks (const int & n, vector<vector<int>> & stacks, vector<int> & blocksAdresses);
 void readAndParseCommands (vector<Command> & commands);
 void processCommands (const vector<Command> & commands, vector<vector<int>> & stacks, vector<int> & blocksAdresses);
+
 void processComplexCommand (const Command & complexCommand, vector<vector<int>> & stacks, vector<int> & blocksAdresses);
+bool isValidComplexCommand (const Command & complexCommand, const vector<int> & blocksAdresses);
+void processMoveOntoCommand (const Command & complexCommand, vector<vector<int>> & stacks, vector<int> & blocksAdresses);
+void processMoveOverCommand (const Command & complexCommand, vector<vector<int>> & stacks, vector<int> & blocksAdresses);
+void processPileOntoCommand (const Command & complexCommand, vector<vector<int>> & stacks, vector<int> & blocksAdresses);
+void processPileOverCommand (const Command & complexCommand, vector<vector<int>> & stacks, vector<int> & blocksAdresses);
+
 void printResult (const vector<vector<int>> & stacks);
 
 int main ()
@@ -137,6 +144,78 @@ void processCommands (const vector<Command> & commands, vector<vector<int>> & st
 }
 
 void processComplexCommand (const Command & complexCommand, vector<vector<int>> & stacks, vector<int> & blocksAdresses)
+{
+	bool isValidCommand = isValidComplexCommand(complexCommand, blocksAdresses);
+	if (isValidCommand)
+	{
+		switch (complexCommand.m_type)
+		{
+		case e_MOVE_ONTO:
+			processMoveOntoCommand(complexCommand, stacks, blocksAdresses);
+			break;
+
+		case e_MOVE_OVER:
+			processMoveOverCommand(complexCommand, stacks, blocksAdresses);
+			break;
+
+		case e_PILE_ONTO:
+			processPileOntoCommand(complexCommand, stacks, blocksAdresses);
+			break;
+
+		case e_PILE_OVER:
+			processPileOverCommand(complexCommand, stacks, blocksAdresses);
+			break;
+
+		default:
+			break;
+		}
+	}
+}
+
+bool isValidComplexCommand (const Command & complexCommand, const vector<int> & blocksAdresses)
+{
+	bool isValid = true;
+	int leftOperand = complexCommand.m_leftOperand;
+	int rightOperand = complexCommand.m_rightOperand;
+	int n = blocksAdresses.size();
+
+	if (
+			leftOperand < 0
+			|| n <= leftOperand
+			|| rightOperand < 0
+			|| n <= rightOperand
+		)
+	{
+		isValid = false;
+	}
+
+	if (
+			leftOperand == rightOperand
+			|| blocksAdresses[leftOperand] == blocksAdresses[rightOperand]
+		)
+	{
+		isValid = false;
+	}
+
+	return isValid;
+}
+
+void processMoveOntoCommand (const Command & complexCommand, vector<vector<int>> & stacks, vector<int> & blocksAdresses)
+{
+	//TODO...
+}
+
+void processMoveOverCommand (const Command & complexCommand, vector<vector<int>> & stacks, vector<int> & blocksAdresses)
+{
+	//TODO...
+}
+
+void processPileOntoCommand (const Command & complexCommand, vector<vector<int>> & stacks, vector<int> & blocksAdresses)
+{
+	//TODO...
+}
+
+void processPileOverCommand (const Command & complexCommand, vector<vector<int>> & stacks, vector<int> & blocksAdresses)
 {
 	//TODO...
 }
