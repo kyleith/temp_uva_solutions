@@ -38,10 +38,10 @@ struct Command
 };
 
 void processInput ();
-void initStacks (const int & n, vector<vector<int>> & stacks);
+void initStacks (const int & n, vector<vector<int>> & stacks, vector<int> & blocksAdresses);
 void readAndParseCommands (vector<Command> & commands);
-void processCommands (const vector<Command> & commands, vector<vector<int>> & stacks);
-void processComplexCommand (const Command & complexCommand, vector<vector<int>> & stacks);
+void processCommands (const vector<Command> & commands, vector<vector<int>> & stacks, vector<int> & blocksAdresses);
+void processComplexCommand (const Command & complexCommand, vector<vector<int>> & stacks, vector<int> & blocksAdresses);
 void printResult (const vector<vector<int>> & stacks);
 
 int main ()
@@ -60,18 +60,20 @@ void processInput ()
 {
 	int n = -1;
 	vector<vector<int>> stacks;
+	vector<int> blocksAdresses;
 	vector<Command> commands;
 
 	scanf("%d\n", &n);
-	initStacks(n, stacks);
+	initStacks(n, stacks, blocksAdresses);
 	readAndParseCommands(commands);
-	processCommands(commands, stacks);
+	processCommands(commands, stacks, blocksAdresses);
 	printResult(stacks);
 }
 
-void initStacks (const int & n, vector<vector<int>> & stacks)
+void initStacks (const int & n, vector<vector<int>> & stacks, vector<int> & blocksAdresses)
 {
 	stacks.reserve(n);
+	blocksAdresses.reserve(n);
 	for (int i = 0; i < n; i++)
 	{
 		vector<int> temp;
@@ -79,6 +81,7 @@ void initStacks (const int & n, vector<vector<int>> & stacks)
 		temp.push_back(i);
 
 		stacks.push_back(temp);
+		blocksAdresses.push_back(i);
 	}
 }
 
@@ -124,16 +127,16 @@ void readAndParseCommands (vector<Command> & commands)
 	}
 }
 
-void processCommands (const vector<Command> & commands, vector<vector<int>> & stacks)
+void processCommands (const vector<Command> & commands, vector<vector<int>> & stacks, vector<int> & blocksAdresses)
 {
 	int length = commands.size();
 	for (int i = 0; i < length; i++)
 	{
-		processComplexCommand(commands[i], stacks);
+		processComplexCommand(commands[i], stacks, blocksAdresses);
 	}
 }
 
-void processComplexCommand (const Command & complexCommand, vector<vector<int>> & stacks)
+void processComplexCommand (const Command & complexCommand, vector<vector<int>> & stacks, vector<int> & blocksAdresses)
 {
 	//TODO...
 }
