@@ -51,6 +51,7 @@ void processPileOverCommand (const Command & complexCommand, vector<vector<int>>
 
 void moveBlockToDefault (const int & sourceBlock, vector<vector<int>> & stacks, vector<int> & blocksAdresses);
 void moveBlockToTarget (const int & sourceBlock, const int & targetBlock, vector<vector<int>> & stacks, vector<int> & blocksAdresses);
+void moveBlockToTargetIndex (const int & sourceBlock, const int & targetIndex, vector<vector<int>> & stacks, vector<int> & blocksAdresses);
 void pileBlockToTarget (const int & sourceBlock, const int & targetBlock, vector<vector<int>> & stacks, vector<int> & blocksAdresses);
 void resetAboveBlocks (const int & sourceBlock, vector<vector<int>> & stacks, vector<int> & blocksAdresses);
 
@@ -231,22 +232,105 @@ void processPileOverCommand (const Command & complexCommand, vector<vector<int>>
 
 void moveBlockToDefault (const int & sourceBlock, vector<vector<int>> & stacks, vector<int> & blocksAdresses)
 {
-	//TODO...
+	moveBlockToTargetIndex(sourceBlock, sourceBlock, stacks, blocksAdresses);
 }
 
 void moveBlockToTarget (const int & sourceBlock, const int & targetBlock, vector<vector<int>> & stacks, vector<int> & blocksAdresses)
 {
-	//TODO...
+	moveBlockToTargetIndex(sourceBlock, blocksAdresses[targetBlock], stacks, blocksAdresses);
+}
+
+void moveBlockToTargetIndex (const int & sourceBlock, const int & targetIndex, vector<vector<int>> & stacks, vector<int> & blocksAdresses)
+{
+	int currentBlock = sourceBlock;
+	int currentBlockTargetIndex = targetIndex;
+	int sourceIndex = blocksAdresses[currentBlock];
+
+	int blockIndex = -1;
+	int stackHeight = stacks[sourceIndex].size();
+	for (int i = 0; i < stackHeight; i++)
+	{
+		if (stacks[sourceIndex][i] == currentBlock)
+		{
+			blockIndex = i;
+			break;
+		}
+	}
+
+	if (blockIndex >= 0)
+	{
+		stacks[sourceIndex].erase(stacks[sourceIndex].begin() + blockIndex);
+
+		stacks[currentBlockTargetIndex].push_back(currentBlock);
+		blocksAdresses[currentBlock] = currentBlockTargetIndex;
+
+		if (stacks[currentBlockTargetIndex][0] != currentBlockTargetIndex)
+		{
+			printf("errorPush_back\n");
+		}
+	}
+	else
+	{
+		printf("errorMove\n");
+	}
 }
 
 void pileBlockToTarget (const int & sourceBlock, const int & targetBlock, vector<vector<int>> & stacks, vector<int> & blocksAdresses)
 {
-	//TODO...
+	int sourceIndex = blocksAdresses[sourceBlock];
+	int targetIndex = blocksAdresses[targetBlock];
+
+	int blockIndex = -1;
+	int stackHeight = stacks[sourceIndex].size();
+	for (int i = 0; i < stackHeight; i++)
+	{
+		if (stacks[sourceIndex][i] == sourceBlock)
+		{
+			blockIndex = i;
+			break;
+		}
+	}
+	if (blockIndex >= 0)
+	{
+		int movingBlocksCount = stackHeight - blockIndex;
+		for (int i = 0; i < movingBlocksCount; i++)
+		{
+			moveBlockToTargetIndex(stacks[sourceIndex][blockIndex], targetIndex, stacks, blocksAdresses);
+		}
+	}
+	else
+	{
+		printf("errorPile\n");
+	}
 }
 
 void resetAboveBlocks (const int & sourceBlock, vector<vector<int>> & stacks, vector<int> & blocksAdresses)
 {
-	//TODO...
+	int sourceIndex = blocksAdresses[sourceBlock];
+
+	int blockIndex = -1;
+	int stackHeight = stacks[sourceIndex].size();
+	for (int i = 0; i < stackHeight; i++)
+	{
+		if (stacks[sourceIndex][i] == sourceBlock)
+		{
+			blockIndex = i;
+			break;
+		}
+	}
+
+	if (blockIndex >= 0)
+	{
+		int aboveBlocksCount = stackHeight - 1 - blockIndex;
+		for (int i = 0; i < aboveBlocksCount; i++)
+		{
+			moveBlockToDefault(stacks[sourceIndex][blockIndex + 1], stacks, blocksAdresses);
+		}
+	}
+	else
+	{
+		printf("errorReset\n");
+	}
 }
 
 void printResult (const vector<vector<int>> & stacks)
