@@ -1,7 +1,16 @@
 #include <cstdio>
 #include <vector>
+#include <string>
+#include <iostream>
 
 #define vector std::vector
+#define string std::string
+
+const string g_STRING_QUIT = "quit";
+const string g_STRING_MOVE = "move";
+const string g_STRING_PILE = "pile";
+const string g_STRING_ONTO = "onto";
+const string g_STRING_OVER = "over";
 
 enum t_commandType
 {
@@ -74,7 +83,44 @@ void initStacks (const int & n, vector<vector<int>> & stacks)
 
 void readAndParseCommands (vector<Command> & commands)
 {
-	//TODO...
+	string firstWord, secondWord;
+	int firstValue, secondValue;
+
+	while (firstWord != g_STRING_QUIT)
+	{
+		std::cin >> firstWord;
+		if (firstWord == g_STRING_QUIT)
+		{
+			break;
+		}
+
+		std::cin >> firstValue >> secondWord >> secondValue;
+
+		Command bufCommand(e_INVALID, firstValue, secondValue);
+		if (firstWord == g_STRING_MOVE)
+		{
+			if (secondWord == g_STRING_ONTO)
+			{
+				bufCommand.m_type = e_MOVE_ONTO;
+			}
+			else if (secondWord == g_STRING_OVER)
+			{
+				bufCommand.m_type = e_MOVE_OVER;
+			}
+		}
+		else if (firstWord == g_STRING_PILE)
+		{
+			if (secondWord == g_STRING_ONTO)
+			{
+				bufCommand.m_type = e_PILE_ONTO;
+			}
+			else if (secondWord == g_STRING_OVER)
+			{
+				bufCommand.m_type = e_PILE_OVER;
+			}
+		}
+		commands.push_back(bufCommand);
+	}
 }
 
 void processCommands (const vector<Command> & commands, vector<vector<int>> & stacks)
