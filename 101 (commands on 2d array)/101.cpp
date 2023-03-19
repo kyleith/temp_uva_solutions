@@ -41,6 +41,7 @@ void processInput ();
 void initStacks (const int & n, vector<vector<int>> & stacks);
 void readAndParseCommands (vector<Command> & commands);
 void processCommands (const vector<Command> & commands, vector<vector<int>> & stacks);
+void processComplexCommand (const Command & complexCommand, vector<vector<int>> & stacks);
 void printResult (const vector<vector<int>> & stacks);
 
 int main ()
@@ -124,6 +125,15 @@ void readAndParseCommands (vector<Command> & commands)
 }
 
 void processCommands (const vector<Command> & commands, vector<vector<int>> & stacks)
+{
+	int length = commands.size();
+	for (int i = 0; i < length; i++)
+	{
+		processComplexCommand(commands[i], stacks);
+	}
+}
+
+void processComplexCommand (const Command & complexCommand, vector<vector<int>> & stacks)
 {
 	//TODO...
 }
