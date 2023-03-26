@@ -1,6 +1,7 @@
 #include <cstdio>
 
 void processInput ();
+void processTestCase (const int & n, const int & k, const int & m);
 
 int main ()
 {
@@ -15,6 +16,19 @@ int main ()
 }
 
 void processInput ()
+{
+	int n, k, m;
+	while (
+		scanf("%d%d%d", &n, &k, &m) == 3
+		&& (n > 0)
+	)
+	{
+		processTestCase(n, k, m);
+		/* code */
+	}
+}
+
+void processTestCase (const int & n, const int & k, const int & m)
 {
 	//TODO...
 }
