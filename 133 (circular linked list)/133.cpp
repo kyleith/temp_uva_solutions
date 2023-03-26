@@ -44,8 +44,8 @@ void processTestCase (const int & n, const int & k, const int & m)
 	while (list.size() > 0)
 	{
 		int listLength = list.size();
-		int nextKIndex = (lastKIndex + k) % listLength;
-		int nextMIndex = (listLength + lastMIndex - (m % listLength)) % listLength;
+		int nextKIndex = (listLength + lastKIndex + k - 1) % listLength;
+		int nextMIndex = (listLength + lastMIndex - ((m - 1) % listLength)) % listLength;
 
 		if (nextKIndex == nextMIndex)
 		{
