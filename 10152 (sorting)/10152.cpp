@@ -14,7 +14,7 @@ void readStack (const int & n, vector<string> & stack);
 void calculateAndPrintMoves (const vector<string> & leftStack, const vector<string> & rightStack);
 
 void convertNamesToIndexes (const vector<string> & leftStack, const vector<string> & rightStack, vector<int> & leftToRightIndexes, vector<int> & rightToLeftIndexes);
-int calculateFirstMovedRightIndex (const vector<int> & leftToRightIndexes, const vector<int> & rightToLeftIndexes);
+int calculateFirstMovedRightIndex (const vector<int> & leftToRightIndexes);
 void printSolvingMoves (const vector<string> & rightStack, const int & initialRightIndex);
 
 int main ()
@@ -76,7 +76,7 @@ void calculateAndPrintMoves (const vector<string> & leftStack, const vector<stri
 
 	convertNamesToIndexes(leftStack, rightStack, leftToRightIndexes, rightToLeftIndexes);
 
-	int initialRightIndex = calculateFirstMovedRightIndex(leftToRightIndexes, rightToLeftIndexes);
+	int initialRightIndex = calculateFirstMovedRightIndex(leftToRightIndexes);
 
 	printSolvingMoves(rightStack, initialRightIndex);
 }
@@ -109,10 +109,20 @@ void convertNamesToIndexes (const vector<string> & leftStack, const vector<strin
 	}
 }
 
-int calculateFirstMovedRightIndex (const vector<int> & leftToRightIndexes, const vector<int> & rightToLeftIndexes)
+int calculateFirstMovedRightIndex (const vector<int> & leftToRightIndexes)
 {
-	//TODO...
-	return 0;
+	int n = leftToRightIndexes.size();
+	int rightPointer = 0;
+
+	for (int i = 0; i < n; i++)
+	{
+		if (rightPointer == leftToRightIndexes[i])
+		{
+			rightPointer++;
+		}
+	}
+
+	return rightPointer;
 }
 
 void printSolvingMoves (const vector<string> & rightStack, const int & initialRightIndex)
