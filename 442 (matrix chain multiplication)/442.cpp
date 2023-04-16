@@ -16,7 +16,9 @@ struct Matrix
 };
 
 void processInput ();
-void processTestCase (const string & line, const unordered_map <string, Matrix> & mainDictionary);
+void processTestCase (const string & line, unordered_map <string, Matrix> & mainDictionary);
+bool areMatricesCompartible (const Matrix & left, const Matrix & right);
+void applyMultiplication (const Matrix & left, const Matrix & right, Matrix & result, int & elementaryMultiplicationsCounter);
 
 int main ()
 {
@@ -54,17 +56,19 @@ void processInput ()
 	}
 }
 
-void processTestCase (const string & line, const unordered_map <string, Matrix> & mainDictionary)
+void processTestCase (const string & line, unordered_map <string, Matrix> & mainDictionary)
 {
-	unordered_map <string, Matrix> bufDictionary;
 	stack<string> bufStack;
 	bool isError = false;
+	int totalCounter = 0;
 
 	int length = line.size();
 	for (int i = 0; i < length; i++)
 	{
 		char symbol = line[i];
 		string stackElement = "";
+		Matrix tempMatrix;
+		int bufCounter = 0;
 
 		bool isOpeningBracket = (symbol == '(');
 		if (isOpeningBracket)
@@ -86,9 +90,23 @@ void processTestCase (const string & line, const unordered_map <string, Matrix> 
 			}
 			else
 			{
-				stackElement = bufStack.top() + symbol;
+				string leftName = bufStack.top();
+				string rightName = "";
+				rightName += symbol;
+
+				stackElement = leftName + rightName;
 				bufStack.pop();
-				//TODO: implement multiplication
+
+				if (!areMatricesCompartible(mainDictionary[leftName], mainDictionary[rightName]))
+				{
+					isError = true;
+					break;
+				}
+
+				//matrices multiplication
+				applyMultiplication(mainDictionary[leftName], mainDictionary[rightName], tempMatrix, bufCounter);
+				mainDictionary[stackElement] = tempMatrix;
+				totalCounter += bufCounter;
 			}
 
 			bufStack.push(stackElement);
@@ -125,16 +143,42 @@ void processTestCase (const string & line, const unordered_map <string, Matrix> 
 					}
 					else if (bufStack.top() != "(")
 					{
-						stackElement = bufStack.top() + bufTop;
+						string leftName = bufStack.top();
+						string rightName = bufTop;
+
+						stackElement = leftName + rightName;
 						bufStack.pop();
-						//TODO: implement multiplication
+
+						if (!areMatricesCompartible(mainDictionary[leftName], mainDictionary[rightName]))
+						{
+							isError = true;
+							break;
+						}
+
+						//matrices multiplication
+						applyMultiplication(mainDictionary[leftName], mainDictionary[rightName], tempMatrix, bufCounter);
+						mainDictionary[stackElement] = tempMatrix;
+						totalCounter += bufCounter;
 					}
 				}
 				else
 				{
-					stackElement = bufStack.top() + bufTop;
+					string leftName = bufStack.top();
+					string rightName = bufTop;
+
+					stackElement = leftName + rightName;
 					bufStack.pop();
-					//TODO: implement multiplication
+
+					if (!areMatricesCompartible(mainDictionary[leftName], mainDictionary[rightName]))
+					{
+						isError = true;
+						break;
+					}
+
+					//matrices multiplication
+					applyMultiplication(mainDictionary[leftName], mainDictionary[rightName], tempMatrix, bufCounter);
+					mainDictionary[stackElement] = tempMatrix;
+					totalCounter += bufCounter;
 				}
 
 				bufStack.push(stackElement);
@@ -148,7 +192,20 @@ void processTestCase (const string & line, const unordered_map <string, Matrix> 
 	}
 	else
 	{
-		//TODO...
-		printf("%s\n", bufStack.top().c_str());
+		printf("%d\n", totalCounter);
+		//printf("%s\n", bufStack.top().c_str());
 	}
+}
+
+bool areMatricesCompartible (const Matrix & left, const Matrix & right)
+{
+	return left.m_columns == right.m_rows;
+}
+
+void applyMultiplication (const Matrix & left, const Matrix & right, Matrix & result, int & elementaryMultiplicationsCounter)
+{
+	Matrix buffer (left.m_rows, right.m_columns);
+	result = buffer;
+
+	elementaryMultiplicationsCounter = left.m_rows * left.m_columns * right.m_columns;
 }
