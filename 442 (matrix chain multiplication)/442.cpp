@@ -2,9 +2,11 @@
 #include <iostream>
 #include <string>
 #include <unordered_map>
+#include <stack>
 
 #define string std::string
 #define unordered_map std::unordered_map
+#define stack std::stack
 
 struct Matrix
 {
@@ -14,7 +16,7 @@ struct Matrix
 };
 
 void processInput ();
-void processTestCase (const string & testLine, const unordered_map <string, Matrix> & dict);
+void processTestCase (const string & line, const unordered_map <string, Matrix> & mainDictionary);
 
 int main ()
 {
@@ -52,8 +54,101 @@ void processInput ()
 	}
 }
 
-void processTestCase (const string & testLine, const unordered_map <string, Matrix> & dict)
+void processTestCase (const string & line, const unordered_map <string, Matrix> & mainDictionary)
 {
-	//TODO...
-	printf("0\n");
+	unordered_map <string, Matrix> bufDictionary;
+	stack<string> bufStack;
+	bool isError = false;
+
+	int length = line.size();
+	for (int i = 0; i < length; i++)
+	{
+		char symbol = line[i];
+		string stackElement = "";
+
+		bool isOpeningBracket = (symbol == '(');
+		if (isOpeningBracket)
+		{
+			stackElement += symbol;
+			bufStack.push(stackElement);
+			continue;
+		}
+
+		bool isMatrixName = (symbol >= 'A' && symbol <= 'Z');
+		if (isMatrixName)
+		{
+			if (
+					bufStack.empty()
+					|| (bufStack.top() == "(")
+				)
+			{
+				stackElement += symbol;
+			}
+			else
+			{
+				stackElement = bufStack.top() + symbol;
+				bufStack.pop();
+				//TODO: implement multiplication
+			}
+
+			bufStack.push(stackElement);
+			continue;
+		}
+
+		bool isClosingBracket = (symbol == ')');
+		if (isClosingBracket)
+		{
+			if (bufStack.empty())
+			{
+				isError = true;
+				break;
+			}
+
+			string bufTop = bufStack.top();
+			bufStack.pop();
+
+			if (bufTop != "(")
+			{
+				if (bufStack.empty())
+				{
+					stackElement = bufTop;
+				}
+				else if (bufStack.top() == "(")
+				{
+					bufStack.pop();//extract bracket
+					if (
+							bufStack.empty()
+							|| (bufStack.top() == "(")
+						)
+					{
+						stackElement = bufTop;
+					}
+					else if (bufStack.top() != "(")
+					{
+						stackElement = bufStack.top() + bufTop;
+						bufStack.pop();
+						//TODO: implement multiplication
+					}
+				}
+				else
+				{
+					stackElement = bufStack.top() + bufTop;
+					bufStack.pop();
+					//TODO: implement multiplication
+				}
+
+				bufStack.push(stackElement);
+			}
+		}
+	}
+
+	if (isError)
+	{
+		printf("error\n");
+	}
+	else
+	{
+		//TODO...
+		printf("%s\n", bufStack.top().c_str());
+	}
 }
