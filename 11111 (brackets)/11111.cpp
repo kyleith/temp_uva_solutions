@@ -128,22 +128,20 @@ bool isCorrectMatrioshka (const vector<int> & inputNumbers)
 		}
 	}
 
-	if (buffer.empty())
-	{
-		return true;
-	}
-
-	StackElement topElem = buffer.top();
-	if (topElem.m_type != e_TOY)
-	{
-		isError = true;
-	}
-
 	if (isError)
 	{
 		return false;
 	}
 
-	buffer.pop();
-	return buffer.empty();
+	while (!buffer.empty())
+	{
+		if (buffer.top().m_type != e_TOY)
+		{
+			isError = true;
+			break;
+		}
+		buffer.pop();
+	}
+
+	return !isError;
 }
