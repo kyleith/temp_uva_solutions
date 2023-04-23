@@ -51,11 +51,21 @@ void processTestCase (const string & inputLine)
 void readInputNumbers (const string & inputLine, vector<int> & inputNumbers)
 {
 	std::istringstream ss(inputLine);
-	//TODO...
+
+	int value;
+	while (ss >> value)
+	{
+		inputNumbers.push_back(value);
+	}
 }
 
 bool isCorrectMatrioshka (const vector<int> & inputNumbers)
 {
+	if (inputNumbers.size() == 0)
+	{
+		return true;
+	}
+
 	//TODO...
 	return false;
 }
