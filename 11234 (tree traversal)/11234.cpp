@@ -169,9 +169,7 @@ void BinaryTree::processLevelOrderTraversal (int nodeIndex)
 		int currentNodeIndex = buffer.front();
 		buffer.pop();
 
-		string leftPart;
-		leftPart.push_back(m_nodeNames[currentNodeIndex]);
-		m_levelOrderLog = (leftPart + m_levelOrderLog);
+		m_levelOrderLog.push_back(m_nodeNames[currentNodeIndex]);
 
 		if (m_leftChildren[currentNodeIndex] != -1)
 		{
@@ -186,6 +184,7 @@ void BinaryTree::processLevelOrderTraversal (int nodeIndex)
 
 void processInput ();
 void processTestCase (const string & postOrderLog);
+void reverseLine (string & line);
 
 int main ()
 {
@@ -216,10 +215,23 @@ void processInput ()
 void processTestCase (const string & postOrderLog)
 {
 	BinaryTree tree;
-	string levelOrderLog;
+	string resultLog;
 
 	tree.buildFromPostOrder(postOrderLog);
-	levelOrderLog = tree.traverseLevelOrder();
+	resultLog = tree.traverseLevelOrder();
+	reverseLine(resultLog);
 
-	std::cout << levelOrderLog << '\n';
+	std::cout << resultLog << '\n';
+}
+
+void reverseLine (string & line)
+{
+	int lastIndex = line.size() - 1;
+	int halfLength = line.size() / 2;
+	for (int i = 0; i < halfLength; i++)
+	{
+		char buf = line[i];
+		line[i] = line[lastIndex - i];
+		line[lastIndex - i] = buf;
+	}
 }
