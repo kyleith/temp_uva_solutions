@@ -1,11 +1,50 @@
 #include <cstdio>
 #include <string>
 #include <iostream>
+#include <vector>
 
 #define string std::string
+#define vector std::vector
+
+class BinaryTree
+{
+public:
+	BinaryTree () : m_n(0) {}
+
+	void buildFromPostOrder (const string & postOrderLog);
+	string traversePreOrder ();
+	void clearAll ();
+
+private:
+	int m_n;
+	vector<char> m_nodeNames;
+	vector<int> m_leftChildren;
+	vector<int> m_rightChildren;
+	vector<int> m_parentNodes;
+};
+
+void BinaryTree::buildFromPostOrder (const string & postOrderLog)
+{
+	//TODO...
+}
+
+string BinaryTree::traversePreOrder ()
+{
+	string result = "";
+	//TODO...
+	return result;
+}
+
+void BinaryTree::clearAll ()
+{
+	m_n = 0;
+	m_leftChildren.clear();
+	m_rightChildren.clear();
+	m_parentNodes.clear();
+}
 
 void processInput ();
-void processTestCase (const string & line);
+void processTestCase (const string & postOrderLog);
 
 int main ()
 {
@@ -33,9 +72,13 @@ void processInput ()
 	}
 }
 
-void processTestCase (const string & line)
+void processTestCase (const string & postOrderLog)
 {
-	//TODO...
+	BinaryTree tree;
+	string preOrderLog;
 
-	std::cout << line << '\n';
+	tree.buildFromPostOrder(postOrderLog);
+	preOrderLog = tree.traversePreOrder();
+
+	std::cout << preOrderLog << '\n';
 }
