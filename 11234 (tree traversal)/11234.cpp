@@ -3,10 +3,12 @@
 #include <iostream>
 #include <vector>
 #include <stack>
+#include <queue>
 
 #define string std::string
 #define vector std::vector
 #define stack std::stack
+#define queue std::queue
 
 class BinaryTree
 {
@@ -29,6 +31,7 @@ private:
 	string m_levelOrderLog;
 
 	void processPreOrderTraversal (int nodeIndex);
+	void processLevelOrderTraversal (int nodeIndex);
 };
 
 void BinaryTree::buildFromPostOrder (const string & postOrderLog)
@@ -122,7 +125,7 @@ string BinaryTree::traverseLevelOrder ()
 	}
 
 	m_levelOrderLog = "";
-	//TODO...
+	processLevelOrderTraversal(m_rootIndex);
 
 	return m_levelOrderLog;
 }
@@ -149,6 +152,36 @@ void BinaryTree::processPreOrderTraversal (int nodeIndex)
 
 	processPreOrderTraversal(m_leftChildren[nodeIndex]);
 	processPreOrderTraversal(m_rightChildren[nodeIndex]);
+}
+
+void BinaryTree::processLevelOrderTraversal (int nodeIndex)
+{
+	if (nodeIndex == -1)
+	{
+		return;
+	}
+
+	queue<int> buffer;
+	buffer.push(nodeIndex);
+
+	while (!buffer.empty())
+	{
+		int currentNodeIndex = buffer.front();
+		buffer.pop();
+
+		string leftPart;
+		leftPart.push_back(m_nodeNames[currentNodeIndex]);
+		m_levelOrderLog = (leftPart + m_levelOrderLog);
+
+		if (m_leftChildren[currentNodeIndex] != -1)
+		{
+			buffer.push(m_leftChildren[currentNodeIndex]);
+		}
+		if (m_rightChildren[currentNodeIndex] != -1)
+		{
+			buffer.push(m_rightChildren[currentNodeIndex]);
+		}
+	}
 }
 
 void processInput ();
