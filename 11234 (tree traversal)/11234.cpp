@@ -15,6 +15,7 @@ public:
 
 	void buildFromPostOrder (const string & postOrderLog);
 	string traversePreOrder ();
+	string traverseLevelOrder ();
 	void clearAll ();
 
 private:
@@ -25,6 +26,7 @@ private:
 	vector<int> m_rightChildren;
 	vector<int> m_parentNodes;
 	string m_preOrderLog;
+	string m_levelOrderLog;
 
 	void processPreOrderTraversal (int nodeIndex);
 };
@@ -109,6 +111,22 @@ string BinaryTree::traversePreOrder ()
 	return m_preOrderLog;
 }
 
+string BinaryTree::traverseLevelOrder ()
+{
+	if (
+			m_n == 0
+			|| m_rootIndex == -1
+		)
+	{
+		return "";
+	}
+
+	m_levelOrderLog = "";
+	//TODO...
+
+	return m_levelOrderLog;
+}
+
 void BinaryTree::clearAll ()
 {
 	m_n = 0;
@@ -117,6 +135,7 @@ void BinaryTree::clearAll ()
 	m_rightChildren.clear();
 	m_parentNodes.clear();
 	m_preOrderLog = "";
+	m_levelOrderLog = "";
 }
 
 void BinaryTree::processPreOrderTraversal (int nodeIndex)
@@ -164,10 +183,10 @@ void processInput ()
 void processTestCase (const string & postOrderLog)
 {
 	BinaryTree tree;
-	string preOrderLog;
+	string levelOrderLog;
 
 	tree.buildFromPostOrder(postOrderLog);
-	preOrderLog = tree.traversePreOrder();
+	levelOrderLog = tree.traverseLevelOrder();
 
-	std::cout << preOrderLog << '\n';
+	std::cout << levelOrderLog << '\n';
 }
