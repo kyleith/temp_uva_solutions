@@ -24,6 +24,9 @@ private:
 	vector<int> m_leftChildren;
 	vector<int> m_rightChildren;
 	vector<int> m_parentNodes;
+	string m_preOrderLog;
+
+	void processPreOrderTraversal (int nodeIndex);
 };
 
 void BinaryTree::buildFromPostOrder (const string & postOrderLog)
@@ -88,7 +91,6 @@ void BinaryTree::buildFromPostOrder (const string & postOrderLog)
 			buffer.push(index);
 		}
 	}
-
 }
 
 string BinaryTree::traversePreOrder ()
@@ -101,9 +103,10 @@ string BinaryTree::traversePreOrder ()
 		return "";
 	}
 
-	string result = "";
-	//TODO...
-	return result;
+	m_preOrderLog = "";
+	processPreOrderTraversal(m_rootIndex);
+
+	return m_preOrderLog;
 }
 
 void BinaryTree::clearAll ()
@@ -113,6 +116,20 @@ void BinaryTree::clearAll ()
 	m_leftChildren.clear();
 	m_rightChildren.clear();
 	m_parentNodes.clear();
+	m_preOrderLog = "";
+}
+
+void BinaryTree::processPreOrderTraversal (int nodeIndex)
+{
+	if (nodeIndex == -1)
+	{
+		return;
+	}
+
+	m_preOrderLog.push_back(m_nodeNames[nodeIndex]);
+
+	processPreOrderTraversal(m_leftChildren[nodeIndex]);
+	processPreOrderTraversal(m_rightChildren[nodeIndex]);
 }
 
 void processInput ();
