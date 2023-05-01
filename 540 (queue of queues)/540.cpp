@@ -2,9 +2,54 @@
 #include <unordered_map>
 #include <string>
 #include <iostream>
+#include <vector>
+#include <queue>
 
 #define unordered_map std::unordered_map
 #define string std::string
+#define vector std::vector
+#define queue std::queue
+
+class TeamQueue
+{
+public:
+	TeamQueue(const int & teamsCount);
+	void enqueue(const int & personId, const int & teamId);
+	int dequeue ();
+private:
+	int m_teamsCount;
+	vector<queue<int>> m_teamQueues;
+	vector<int> m_nextTeam;
+	int m_headTeam, m_tailTeam;
+};
+
+TeamQueue::TeamQueue (const int & teamsCount)
+{
+	m_teamsCount = teamsCount;
+	m_headTeam = -1;
+	m_tailTeam = -1;
+
+	m_teamQueues.reserve(m_teamsCount);
+	m_nextTeam.reserve(m_teamsCount);
+
+	for (int i = 0; i < m_teamsCount; i++)
+	{
+		queue<int> currentQueue;
+		m_teamQueues.push_back(currentQueue);
+		m_nextTeam.push_back(-1);
+	}
+}
+
+void TeamQueue::enqueue (const int & personId, const int & teamId)
+{
+	//TODO...
+}
+
+int TeamQueue::dequeue ()
+{
+	//TODO...
+	return -1;
+}
 
 void processInput ();
 void processTestCase (const int & teamsCount);
@@ -40,6 +85,7 @@ void processInput ()
 void processTestCase (const int & teamsCount)
 {
 	unordered_map<int, int> personIdToTeamId;
+	TeamQueue currentTeamQueue(teamsCount);
 
 	for (int teamId = 0; teamId < teamsCount; teamId++)
 	{
@@ -63,11 +109,12 @@ void processTestCase (const int & teamsCount)
 		if (currentCommand == "ENQUEUE")
 		{
 			std::cin >> personId;
-			//TODO: process ENQUEUE...
+			currentTeamQueue.enqueue(personId, personIdToTeamId[personId]);
 		}
 		else if (currentCommand == "DEQUEUE")
 		{
-			//TODO: process ENQUEUE...
+			personId = currentTeamQueue.dequeue();
+			printf("%d\n", personId);
 		}
 	}
 }
