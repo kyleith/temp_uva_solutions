@@ -42,13 +42,52 @@ TeamQueue::TeamQueue (const int & teamsCount)
 
 void TeamQueue::enqueue (const int & personId, const int & teamId)
 {
-	//TODO...
+	if (m_headTeam == -1)
+	{
+		m_headTeam = teamId;
+		m_tailTeam = teamId;
+	}
+	else if (m_teamQueues[teamId].empty())
+	{
+		if (m_tailTeam == -1)
+		{
+			printf("error enqueue ");
+			return;
+		}
+		m_nextTeam[m_tailTeam] = teamId;
+		m_tailTeam = teamId;
+	}
+
+	m_teamQueues[teamId].push(personId);
 }
 
 int TeamQueue::dequeue ()
 {
-	//TODO...
-	return -1;
+	if (
+			(m_headTeam == -1)
+			|| m_teamQueues[m_headTeam].empty()
+		)
+	{
+		printf("error dequeue ");
+		return -1;
+	}
+
+	int personId = m_teamQueues[m_headTeam].front();
+
+	m_teamQueues[m_headTeam].pop();
+	if (m_teamQueues[m_headTeam].empty())
+	{
+		int bufIndex = m_headTeam;
+		m_headTeam = m_nextTeam[m_headTeam];
+		m_nextTeam[bufIndex] = -1;
+
+		if (m_headTeam == -1)
+		{
+			m_tailTeam = -1;
+		}
+	}
+
+	return personId;
 }
 
 void processInput ();
