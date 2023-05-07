@@ -3,22 +3,24 @@
 
 #define vector std::vector
 
+const int g_MAX_NODES_COUNT = 1000;
+
 class BinaryTree
 {
 public:
 	BinaryTree() {}
-	~BinaryTree();
 	void readTree();
 	void runBFS();
 	void filterRootToLeavesPathSum ();
 	bool hasLeafPathSum (const int & targetSum);
 private:
-	vector<int> m_nodeValues;
-	vector<int> m_leftChildren;
-	vector<int> m_rightChildren;
-	vector<int> m_parentNodes;
-	vector<int> m_allNodesPathSum;
-	vector<int> m_leavesNodesPathSum;
+	int m_nodeValues[g_MAX_NODES_COUNT];
+	int m_leftChildren[g_MAX_NODES_COUNT];
+	int m_rightChildren[g_MAX_NODES_COUNT];
+	int m_parentNodes[g_MAX_NODES_COUNT];
+	int m_allNodesPathSum[g_MAX_NODES_COUNT];
+	int m_leavesNodesPathSum[g_MAX_NODES_COUNT];
+	int m_nodesCount;
 	char m_storedReadSymbol;
 
 	int readNode (int parentIndex);
@@ -29,25 +31,10 @@ private:
 
 void BinaryTree::readTree ()
 {
-	m_nodeValues.clear();
-	m_leftChildren.clear();
-	m_rightChildren.clear();
-	m_parentNodes.clear();
-	m_allNodesPathSum.clear();
-	m_leavesNodesPathSum.clear();
 	m_storedReadSymbol = '\0';
+	m_nodesCount = 0;
 
 	readNode(-1);
-}
-
-BinaryTree::~BinaryTree ()
-{
-	m_nodeValues.clear();
-	m_leftChildren.clear();
-	m_rightChildren.clear();
-	m_parentNodes.clear();
-	m_allNodesPathSum.clear();
-	m_leavesNodesPathSum.clear();
 }
 
 void BinaryTree::runBFS ()
@@ -76,12 +63,11 @@ int BinaryTree::readNode (int parentIndex)
 	readNodeValue(nodeValue, isEmptyNode);
 	if (!isEmptyNode)
 	{
-		m_nodeValues.push_back(nodeValue);
-		m_leftChildren.push_back(-1);
-		m_rightChildren.push_back(-1);
-		m_parentNodes.push_back(parentIndex);
+		nodeIndex = m_nodesCount;
+		m_nodesCount++;
+		m_nodeValues[nodeIndex] = nodeValue;
+		m_parentNodes[nodeIndex] = parentIndex;
 
-		nodeIndex = m_nodeValues.size() - 1;
 		m_leftChildren[parentIndex] = readNode(nodeIndex);
 		m_rightChildren[parentIndex] = readNode(nodeIndex);
 	}
