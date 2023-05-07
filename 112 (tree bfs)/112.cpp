@@ -3,12 +3,12 @@
 
 #define vector std::vector
 
-const int g_MAX_NODES_COUNT = 1000;
+const int g_MAX_NODES_COUNT = 10000;
 
 class BinaryTree
 {
 public:
-	BinaryTree();
+	BinaryTree() {}
 	void readTree();
 	bool hasLeafPathSum (const int & targetSum);
 private:
@@ -25,16 +25,6 @@ private:
 	void readCloseBracket();
 	void readNodeValue(int & value, bool & isEmptyNode);
 };
-
-BinaryTree::BinaryTree ()
-{
-	for (int i = 0; i < g_MAX_NODES_COUNT; i++)
-	{
-		m_leftChildren[i] = -1;
-		m_rightChildren[i] = -1;
-		m_parentNodes[i] = -1;
-	}
-}
 
 void BinaryTree::readTree ()
 {
@@ -83,8 +73,8 @@ int BinaryTree::readNode (int parentIndex)
 		}
 		m_allNodesPathSum[nodeIndex] = parentSum + nodeValue;
 
-		m_leftChildren[parentIndex] = readNode(nodeIndex);
-		m_rightChildren[parentIndex] = readNode(nodeIndex);
+		m_leftChildren[nodeIndex] = readNode(nodeIndex);
+		m_rightChildren[nodeIndex] = readNode(nodeIndex);
 	}
 	readCloseBracket();
 	return nodeIndex;
