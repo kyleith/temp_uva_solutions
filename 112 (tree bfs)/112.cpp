@@ -7,6 +7,7 @@ class BinaryTree
 {
 public:
 	BinaryTree() {}
+	~BinaryTree();
 	void readTree();
 	void runBFS();
 	void filterRootToLeavesPathSum ();
@@ -18,7 +19,7 @@ private:
 	vector<int> m_parentNodes;
 	vector<int> m_allNodesPathSum;
 	vector<int> m_leavesNodesPathSum;
-	char storedReadSymbol;
+	char m_storedReadSymbol;
 
 	int readNode (int parentIndex);
 	void readOpenBracket();
@@ -34,9 +35,19 @@ void BinaryTree::readTree ()
 	m_parentNodes.clear();
 	m_allNodesPathSum.clear();
 	m_leavesNodesPathSum.clear();
-	storedReadSymbol = '\0';
+	m_storedReadSymbol = '\0';
 
 	readNode(-1);
+}
+
+BinaryTree::~BinaryTree ()
+{
+	m_nodeValues.clear();
+	m_leftChildren.clear();
+	m_rightChildren.clear();
+	m_parentNodes.clear();
+	m_allNodesPathSum.clear();
+	m_leavesNodesPathSum.clear();
 }
 
 void BinaryTree::runBFS ()
@@ -80,11 +91,12 @@ int BinaryTree::readNode (int parentIndex)
 
 void BinaryTree::readOpenBracket ()
 {
-	if (storedReadSymbol == '(')
+	if (m_storedReadSymbol == '(')
 	{
+		m_storedReadSymbol = '\0';
 		return;
 	}
-	storedReadSymbol = '\0';
+	m_storedReadSymbol = '\0';
 
 	char bufSymbol = '\0';
 	while (
@@ -98,11 +110,12 @@ void BinaryTree::readOpenBracket ()
 
 void BinaryTree::readCloseBracket ()
 {
-	if (storedReadSymbol == ')')
+	if (m_storedReadSymbol == ')')
 	{
+		m_storedReadSymbol = '\0';
 		return;
 	}
-	storedReadSymbol = '\0';
+	m_storedReadSymbol = '\0';
 
 	char bufSymbol = '\0';
 	while (
@@ -120,9 +133,9 @@ void BinaryTree::readNodeValue(int & value, bool & isEmptyNode)
 	while (
 			scanf("%c", &bufSymbol) == 1
 			&& !(
-				bufSymbol != '('
-				|| bufSymbol != ')'
-				|| bufSymbol != '-'
+				bufSymbol == '('
+				|| bufSymbol == ')'
+				|| bufSymbol == '-'
 				|| ('0' <= bufSymbol && bufSymbol <= '9')
 			)
 		)
@@ -133,7 +146,7 @@ void BinaryTree::readNodeValue(int & value, bool & isEmptyNode)
 	if (bufSymbol == '(' || bufSymbol == ')')
 	{
 		isEmptyNode = true;
-		storedReadSymbol = bufSymbol;
+		m_storedReadSymbol = bufSymbol;
 		return;
 	}
 
@@ -156,7 +169,7 @@ void BinaryTree::readNodeValue(int & value, bool & isEmptyNode)
 		absValue *= 10;
 		absValue += (bufSymbol - '0');
 	}
-	storedReadSymbol = bufSymbol;
+	m_storedReadSymbol = bufSymbol;
 
 	value = sign * absValue;
 	isEmptyNode = false;
