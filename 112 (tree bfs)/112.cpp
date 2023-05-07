@@ -8,10 +8,8 @@ const int g_MAX_NODES_COUNT = 1000;
 class BinaryTree
 {
 public:
-	BinaryTree() {}
+	BinaryTree();
 	void readTree();
-	void runBFS();
-	void filterRootToLeavesPathSum ();
 	bool hasLeafPathSum (const int & targetSum);
 private:
 	int m_nodeValues[g_MAX_NODES_COUNT];
@@ -19,7 +17,6 @@ private:
 	int m_rightChildren[g_MAX_NODES_COUNT];
 	int m_parentNodes[g_MAX_NODES_COUNT];
 	int m_allNodesPathSum[g_MAX_NODES_COUNT];
-	int m_leavesNodesPathSum[g_MAX_NODES_COUNT];
 	int m_nodesCount;
 	char m_storedReadSymbol;
 
@@ -29,6 +26,16 @@ private:
 	void readNodeValue(int & value, bool & isEmptyNode);
 };
 
+BinaryTree::BinaryTree ()
+{
+	for (int i = 0; i < g_MAX_NODES_COUNT; i++)
+	{
+		m_leftChildren[i] = -1;
+		m_rightChildren[i] = -1;
+		m_parentNodes[i] = -1;
+	}
+}
+
 void BinaryTree::readTree ()
 {
 	m_storedReadSymbol = '\0';
@@ -37,19 +44,20 @@ void BinaryTree::readTree ()
 	readNode(-1);
 }
 
-void BinaryTree::runBFS ()
-{
-	//TODO...
-}
-
-void BinaryTree::filterRootToLeavesPathSum ()
-{
-	//TODO...
-}
-
 bool BinaryTree::hasLeafPathSum (const int & targetSum)
 {
-	//TODO...
+	for (int i = 0; i < m_nodesCount; i++)
+	{
+		bool isLeaf = (m_leftChildren[i] == -1 && m_rightChildren[i] == -1);
+		if (isLeaf)
+		{
+			bool isMatch = (targetSum == m_allNodesPathSum[i]);
+			if (isMatch)
+			{
+				return true;
+			}
+		}
+	}
 	return false;
 }
 
@@ -67,6 +75,13 @@ int BinaryTree::readNode (int parentIndex)
 		m_nodesCount++;
 		m_nodeValues[nodeIndex] = nodeValue;
 		m_parentNodes[nodeIndex] = parentIndex;
+
+		int parentSum = 0;
+		if (parentIndex != -1)
+		{
+			parentSum = m_allNodesPathSum[parentIndex];
+		}
+		m_allNodesPathSum[nodeIndex] = parentSum + nodeValue;
 
 		m_leftChildren[parentIndex] = readNode(nodeIndex);
 		m_rightChildren[parentIndex] = readNode(nodeIndex);
@@ -189,8 +204,6 @@ void processTestCase (const int & targetSum)
 {
 	BinaryTree currentTree;
 	currentTree.readTree();
-	currentTree.runBFS();
-	currentTree.filterRootToLeavesPathSum();
 
 	bool isSumFound = currentTree.hasLeafPathSum(targetSum);
 	if (isSumFound)
