@@ -11,6 +11,81 @@ void processInput ();
 void processTestCase (const string & inorderLine, const string & postorderLine);
 int parseElements (const string & line, int array []);
 
+class Tree
+{
+public:
+	Tree(const string & inorderLine, const string & postorderLine);
+	int traverseAndFindLeafValue();
+private:
+	int m_inOrderElements[g_MAX_NODES_COUNT], m_postOrderElements[g_MAX_NODES_COUNT], m_indexInInorder[g_MAX_NODES_COUNT];
+	int m_n;
+	int m_minSum, m_leafValue;
+
+	void traverse(int leftIO, int rightIO, int leftPO, int rightPO, int parentSum);
+};
+
+Tree::Tree(const string & inorderLine, const string & postorderLine)
+{
+	m_n = parseElements(inorderLine, m_inOrderElements);
+	parseElements(postorderLine, m_postOrderElements);
+
+	for (int i = 0; i < m_n; i++)
+	{
+		int element = m_inOrderElements[i];
+		m_indexInInorder[element] = i;
+	}
+}
+
+int Tree::traverseAndFindLeafValue()
+{
+	m_minSum = -1;
+	m_leafValue = -1;
+
+	traverse(0, m_n - 1, 0, m_n - 1, 0);
+
+	return m_leafValue;
+}
+
+void Tree::traverse(int leftIO, int rightIO, int leftPO, int rightPO, int parentSum)
+{
+	if (
+			leftIO > rightIO
+			|| leftPO > rightPO
+		)
+	{
+		return;
+	}
+	int currentValue = m_postOrderElements[rightPO];
+	int currentSum = parentSum + currentValue;
+
+	if (leftPO == rightPO)//node is leaf
+	{
+		if (
+				m_minSum == -1
+				|| currentSum < m_minSum
+			)
+		{
+			m_minSum = currentSum;
+			m_leafValue = currentValue;
+		}
+		else if (
+				currentSum == m_minSum
+				&& currentValue < m_leafValue
+			)
+		{
+			m_leafValue = currentValue;
+		}
+		return;
+	}
+
+	int nodeIndex = m_indexInInorder[currentValue];
+	int leftCount = nodeIndex - leftIO;
+	int rightCount = rightIO - nodeIndex;
+
+	traverse(leftIO, leftIO + leftCount - 1, leftPO, leftPO + leftCount - 1, currentSum);
+	traverse(rightIO - rightCount + 1, rightIO, rightPO - rightCount, rightPO - 1, currentSum);
+}
+
 int main ()
 {
 #ifndef ONLINE_JUDGE
@@ -37,19 +112,8 @@ void processInput ()
 
 void processTestCase (const string & inorderLine, const string & postorderLine)
 {
-	int inOrderElements[g_MAX_NODES_COUNT], postOrderElements[g_MAX_NODES_COUNT], indexInInorder[g_MAX_NODES_COUNT];
-	int n = 0;
-	n = parseElements(inorderLine, inOrderElements);
-	parseElements(postorderLine, postOrderElements);
-
-	for (int i = 0; i < n; i++)
-	{
-		int element = inOrderElements[i];
-		indexInInorder[element] = i;
-	}
-
-	int minSum = -1, leafValue = -1;
-	//TODO...
+	Tree currentTree(inorderLine, postorderLine);
+	int leafValue = currentTree.traverseAndFindLeafValue();
 
 	printf("%d\n", leafValue);
 }
