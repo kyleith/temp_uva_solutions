@@ -1,6 +1,11 @@
 #include <cstdio>
+#include <string>
+#include <iostream>
+
+#define string std::string
 
 void processInput ();
+void processTestCase ();
 
 int main ()
 {
@@ -16,5 +21,21 @@ int main ()
 
 void processInput ()
 {
-	//TODO...
+	int n;
+	scanf("%d\n", &n);
+
+	for (int i = 0; i < n; i++)
+	{
+		processTestCase();
+	}
+}
+
+void processTestCase ()
+{
+	string firstLine, secondLine;
+	std::getline(std::cin, firstLine);
+	std::getline(std::cin, secondLine);
+
+	int result = 0;//TODO...
+	printf("There are %d black pixels.\n", result);
 }
