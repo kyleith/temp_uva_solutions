@@ -74,9 +74,18 @@ void processTestCase (const int & n)
 
 char lookupTable (const string & table, const string & decodeWord, const string & word)
 {
-	char result = '0';
+	int n = decodeWord.size();
+	int tableIndex = 0;
 
-	//TODO...
+	for (int i = 0; i < n; i++)
+	{
+		int wordSymbolIndex = decodeWord[i] - '0';
+		int value = word[wordSymbolIndex] - '0';
 
+		tableIndex <<= 1;
+		tableIndex |= value;
+	}
+
+	char result = table[tableIndex];
 	return result;
 }
