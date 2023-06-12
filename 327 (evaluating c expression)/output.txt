@@ -1,0 +1,18 @@
+Expression: a
+Expression: ++a
+Expression: --a
+Expression: a++
+Expression: a--
+Expression: a + b
+Expression: k - z
+Expression: 	++a++ + --b--
+Expression: ++a   -- - --k++
+Expression: -- l ++ - -- a ++
+Expression: l-a
+Expression: a-l
+Expression: a+++++b
+Expression: k-----c
+Expression: a--+++l
+Expression: m+++--p
+Expression: z---++w
+Expression: w++---i
