@@ -1,0 +1,71 @@
+Expression: 
+    value = 0
+Expression: a
+    value = 1
+    a = 1
+Expression: ++a
+    value = 2
+    a = 2
+Expression: --a
+    value = 0
+    a = 0
+Expression: a++
+    value = 1
+    a = 2
+Expression: a--
+    value = 1
+    a = 0
+Expression: a + b
+    value = 3
+    a = 1
+    b = 2
+Expression: k - z
+    value = -15
+    k = 11
+    z = 26
+Expression: 
+    value = 0
+Expression: ++a++ + --b--
+    value = 3
+    a = 3
+    b = 0
+Expression: ++a   -- - --k++
+    value = -8
+    a = 1
+    k = 11
+Expression: -- l ++ - -- a ++
+    value = 11
+    a = 1
+    l = 12
+Expression: l-a
+    value = 11
+    a = 1
+    l = 12
+Expression: a-l
+    value = -11
+    a = 1
+    l = 12
+Expression: a+++++b
+    value = 4
+    a = 2
+    b = 3
+Expression: k-----c
+    value = 9
+    c = 2
+    k = 10
+Expression: a--+++l
+    value = 14
+    a = 0
+    l = 13
+Expression: m+++--p
+    value = 28
+    m = 14
+    p = 15
+Expression: z---++w
+    value = 2
+    w = 24
+    z = 25
+Expression: w++---i
+    value = 15
+    i = 8
+    w = 24
