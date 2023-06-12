@@ -23,10 +23,10 @@ Expression: ++a++ + --b--
 Expression: ++a   -- - --k++
     value = 0
     a = 1
-    k = 12
+    k = 11
 Expression: -- l ++ - -- a ++
     value = 0
-    a = 2
+    a = 1
     l = 12
 Expression: l-a
     value = 0
@@ -35,12 +35,15 @@ Expression: a-l
 Expression: a+++++b
     value = 0
     a = 2
+    b = 3
 Expression: k-----c
     value = 0
+    c = 2
     k = 10
 Expression: a--+++l
     value = 0
     a = 0
+    l = 13
 Expression: m+++--p
     value = 0
     m = 14
@@ -51,4 +54,5 @@ Expression: z---++w
     z = 25
 Expression: w++---i
     value = 0
+    i = 8
     w = 24

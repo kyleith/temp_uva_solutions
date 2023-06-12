@@ -165,6 +165,13 @@ void parseExpression (
 			bool isPre = (i > 0 && isLetter(minifiedExpression[i - 1]));
 			bool isPost = (i + 2 < length && isLetter(minifiedExpression[i + 2]));
 
+			if (!isPre && !isPost)
+			{
+				//Expression: -- l ++ - -- a ++
+				mainExpression.push_back(minifiedExpression[i]);
+				continue;
+			}
+
 			if (isPre)
 			{
 				char operand = minifiedExpression[i - 1];
