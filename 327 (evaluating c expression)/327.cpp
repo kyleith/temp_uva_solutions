@@ -189,8 +189,8 @@ void parseExpression (
 		{
 			bool isIncrement = (minifiedExpression[i] == '+');
 			bool isDecrement = (minifiedExpression[i] == '-');
-			bool isPre = (i > 0 && isLetter(minifiedExpression[i - 1]));
-			bool isPost = (i + 2 < length && isLetter(minifiedExpression[i + 2]));
+			bool isPre = (i + 2 < length && isLetter(minifiedExpression[i + 2]));
+			bool isPost = (i > 0 && isLetter(minifiedExpression[i - 1]));
 
 			if (!isPre && !isPost)
 			{
@@ -201,7 +201,7 @@ void parseExpression (
 
 			if (isPre)
 			{
-				char operand = minifiedExpression[i - 1];
+				char operand = minifiedExpression[i + 2];
 				if (isIncrement)
 				{
 					preIncrement.push(operand);
@@ -213,7 +213,7 @@ void parseExpression (
 			}
 			else if (isPost)
 			{
-				char operand = minifiedExpression[i + 2];
+				char operand = minifiedExpression[i - 1];
 				if (isIncrement)
 				{
 					postIncrement.push(operand);

@@ -4,16 +4,16 @@ Expression: a
     value = 1
     a = 1
 Expression: ++a
-    value = 1
-    a = 2
-Expression: --a
-    value = 1
-    a = 0
-Expression: a++
     value = 2
     a = 2
-Expression: a--
+Expression: --a
     value = 0
+    a = 0
+Expression: a++
+    value = 1
+    a = 2
+Expression: a--
+    value = 1
     a = 0
 Expression: a + b
     value = 3
@@ -30,7 +30,7 @@ Expression: ++a++ + --b--
     a = 3
     b = 0
 Expression: ++a   -- - --k++
-    value = -12
+    value = -8
     a = 1
     k = 11
 Expression: -- l ++ - -- a ++
@@ -50,15 +50,15 @@ Expression: a+++++b
     a = 2
     b = 3
 Expression: k-----c
-    value = 7
+    value = 9
     c = 2
     k = 10
 Expression: a--+++l
-    value = 12
+    value = 14
     a = 0
     l = 13
 Expression: m+++--p
-    value = 30
+    value = 28
     m = 14
     p = 15
 Expression: z---++w
