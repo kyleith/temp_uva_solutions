@@ -6,7 +6,7 @@
 
 void processInput ();
 string getMinifiedExpression (const string & line);
-void evaluateExpression (const string & line);
+void evaluateExpression (const string & minifiedExpression);
 
 int main ()
 {
@@ -29,20 +29,30 @@ void processInput ()
 		bool isValidExpression = (minifiedExpression.size() > 0);
 		if (isValidExpression)
 		{
-			evaluateExpression(inputLine);
+			printf("Expression: %s\n", inputLine.c_str());
+			evaluateExpression(minifiedExpression);
 		}
 	}
 }
 
 string getMinifiedExpression (const string & line)
 {
-	string result = line;
-	//TODO...
+	string result = "";
+	int lineLength = line.size();
+	for (int i = 0; i < lineLength; i++)
+	{
+		char symbol = line[i];
+		bool isLetter = ('a' <= symbol && symbol <= 'z');
+		bool isOperator = (symbol == '-' || symbol == '+');
+		if (isLetter || isOperator)
+		{
+			result.push_back(symbol);
+		}
+	}
 	return result;
 }
 
-void evaluateExpression (const string & line)
+void evaluateExpression (const string & minifiedExpression)
 {
-	printf("Expression: %s\n", line.c_str());
 	//TODO...
 }
