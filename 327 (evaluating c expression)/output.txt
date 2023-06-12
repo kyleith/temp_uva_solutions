@@ -1,18 +1,54 @@
 Expression: a
+    value = 0
 Expression: ++a
+    value = 0
+    a = 2
 Expression: --a
+    value = 0
+    a = 0
 Expression: a++
+    value = 0
+    a = 2
 Expression: a--
+    value = 0
+    a = 0
 Expression: a + b
+    value = 0
 Expression: k - z
+    value = 0
 Expression: ++a++ + --b--
+    value = 0
+    a = 3
+    b = 0
 Expression: ++a   -- - --k++
+    value = 0
+    a = 1
+    k = 12
 Expression: -- l ++ - -- a ++
+    value = 0
+    a = 2
+    l = 12
 Expression: l-a
+    value = 0
 Expression: a-l
+    value = 0
 Expression: a+++++b
+    value = 0
+    a = 2
 Expression: k-----c
+    value = 0
+    k = 10
 Expression: a--+++l
+    value = 0
+    a = 0
 Expression: m+++--p
+    value = 0
+    m = 14
+    p = 15
 Expression: z---++w
+    value = 0
+    w = 24
+    z = 25
 Expression: w++---i
+    value = 0
+    w = 24
