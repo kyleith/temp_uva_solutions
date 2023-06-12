@@ -41,7 +41,7 @@ void processInput ()
 	while (std::getline(std::cin, inputLine))
 	{
 		string minifiedExpression = getMinifiedExpression(inputLine);
-		bool isValidExpression = (minifiedExpression.size() > 0);
+		bool isValidExpression = true;//(minifiedExpression.size() > 0);
 		if (isValidExpression)
 		{
 			printf("Expression: %s\n", inputLine.c_str());
@@ -85,6 +85,7 @@ void evaluateExpression (const string & minifiedExpression)
 
 	parseExpression(minifiedExpression, preIncrement, preDecrement, postIncrement, postDecrement, mainExpression);
 
+	//pre-operators
 	while (!preIncrement.empty())
 	{
 		char operand = preIncrement.front();
@@ -105,8 +106,34 @@ void evaluateExpression (const string & minifiedExpression)
 		variableChanged[index] = true;
 	}
 
-	//TODO: run main expression
+	//running main expression
+	int length = mainExpression.size();
+	if (length > 0)
+	{
+		char index = mainExpression[0] - 'a';
+		variableChanged[index] = true;
+		expressionValue = variableValues[index];
+	}
+	for (int i = 1; i + 1 < length; i+=2)
+	{
+		char operation = mainExpression[i];
+		char rightOperand = mainExpression[i + 1];
 
+		int rightOperandIndex = rightOperand - 'a';
+		int rightOperandValue = variableValues[rightOperandIndex];
+		variableChanged[rightOperandIndex] = true;
+
+		if (operation == '-')
+		{
+			expressionValue -= rightOperandValue;
+		}
+		else if (operation == '+')
+		{
+			expressionValue += rightOperandValue;
+		}
+	}
+
+	//post-operators
 	while (!postIncrement.empty())
 	{
 		char operand = postIncrement.front();
@@ -127,8 +154,8 @@ void evaluateExpression (const string & minifiedExpression)
 		variableChanged[index] = true;
 	}
 
+	//printing result
 	printf("    value = %d\n", expressionValue);
-
 	for (int i = 0; i < g_VARIABLES_COUNT; i++)
 	{
 		if (variableChanged[i])
