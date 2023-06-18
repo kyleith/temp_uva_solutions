@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <sstream>
 
 #define vector std::vector
 #define string std::string
@@ -45,8 +46,36 @@ bool TreeTraversal::isEquilibrium()
 
 int TreeTraversal::traverseTree()
 {
-	//TODO...
-	return 0;
+	++m_inputLineIndex;
+	if (
+			m_inputLineIndex >= m_inputTree.size()
+			|| m_isTraversalError
+		)
+	{
+		return 0;
+	}
+
+	std::istringstream ss(m_inputTree[m_inputLineIndex]);
+
+	int weightLeft = -1, distanceLeft = 0;
+	int weightRight = -1, distanceRight = 0;
+	ss >> weightLeft >> distanceLeft >> weightRight >> distanceRight;
+
+	if (weightLeft == 0)
+	{
+		weightLeft = traverseTree();
+	}
+	if (weightRight == 0)
+	{
+		weightRight = traverseTree();
+	}
+
+	if (weightLeft * distanceLeft != weightRight * distanceRight)
+	{
+		m_isTraversalError = true;
+	}
+
+	return (weightLeft * distanceLeft) + (weightRight * distanceRight);
 }
 
 void processInput ();
