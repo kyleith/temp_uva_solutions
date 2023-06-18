@@ -16,7 +16,7 @@ private:
 	bool m_isTraversalError;
 	int m_inputLineIndex;
 	vector<string> m_inputTree;
-	int traverseTree();
+	long long traverseTree();
 };
 
 TreeTraversal::TreeTraversal ()
@@ -44,7 +44,7 @@ bool TreeTraversal::isEquilibrium()
 	return !m_isTraversalError;
 }
 
-int TreeTraversal::traverseTree()
+long long TreeTraversal::traverseTree()
 {
 	++m_inputLineIndex;
 	if (
@@ -57,8 +57,8 @@ int TreeTraversal::traverseTree()
 
 	std::istringstream ss(m_inputTree[m_inputLineIndex]);
 
-	int weightLeft = -1, distanceLeft = 0;
-	int weightRight = -1, distanceRight = 0;
+	long long weightLeft = -1, distanceLeft = 0;
+	long long weightRight = -1, distanceRight = 0;
 	ss >> weightLeft >> distanceLeft >> weightRight >> distanceRight;
 
 	if (weightLeft == 0)
@@ -75,7 +75,7 @@ int TreeTraversal::traverseTree()
 		m_isTraversalError = true;
 	}
 
-	return (weightLeft * distanceLeft) + (weightRight * distanceRight);
+	return (weightLeft + weightRight);
 }
 
 void processInput ();
@@ -98,8 +98,14 @@ void processInput ()
 	int n;
 	scanf("%d\n\n", &n);
 
-	for (int i = 0; i < n; i++)
+	if (n > 0)
 	{
+		processTestCase();
+	}
+
+	for (int i = 1; i < n; i++)
+	{
+		printf("\n");
 		processTestCase();
 	}
 }
@@ -110,10 +116,10 @@ void processTestCase ()
 	bool isEquilibrium = currentTraversal.isEquilibrium();
 	if (isEquilibrium)
 	{
-		printf("YES\n\n");
+		printf("YES\n");
 	}
 	else
 	{
-		printf("NO\n\n");
+		printf("NO\n");
 	}
 }
