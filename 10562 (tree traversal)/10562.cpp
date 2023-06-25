@@ -159,7 +159,10 @@ int main ()
 void processInput ()
 {
 	int n;
-	scanf("%d\n", &n);
+	scanf("%d", &n);
+
+	string buffer;
+	std::getline(std::cin, buffer);//read line ending
 
 	for (int i = 0; i < n; i++)
 	{
