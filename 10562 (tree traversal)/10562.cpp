@@ -73,10 +73,7 @@ void TreeTraversal::traverseTree (int lineIndex, int columnIndex)
 	if (!isLeafNode(lineIndex, columnIndex))
 	{
 		int borderLineIndex = lineIndex + 2;
-		if (
-			columnIndex <= m_inputTree[borderLineIndex].size()
-			&& columnIndex <= m_inputTree[borderLineIndex + 1].size()
-		)
+		if (columnIndex <= m_inputTree[borderLineIndex].length())
 		{
 			int leftColumn = columnIndex;
 			int rightColumn = columnIndex;
@@ -91,7 +88,7 @@ void TreeTraversal::traverseTree (int lineIndex, int columnIndex)
 					break;
 				}
 			}
-			for (int i = rightColumn + 1; i < m_inputTree[borderLineIndex].size(); i++)//search '-' to the right
+			for (int i = rightColumn + 1; i < m_inputTree[borderLineIndex].length(); i++)//search '-' to the right
 			{
 				if (m_inputTree[borderLineIndex][i] == '-')
 				{
@@ -126,6 +123,8 @@ bool TreeTraversal::isNodeSymbol (char symbol)
 		|| symbol == '|'
 		|| symbol == ' '
 		|| symbol == '#'
+		|| symbol == '\0'
+		|| symbol == '\n'
 	);
 	return !isReservedSymbol;
 }
