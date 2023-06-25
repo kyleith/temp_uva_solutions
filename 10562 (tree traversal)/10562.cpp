@@ -102,6 +102,10 @@ void TreeTraversal::traverseTree (int lineIndex, int columnIndex)
 					break;
 				}
 			}
+			if (rightColumn >= m_inputTree[borderLineIndex + 1].length())
+			{
+				rightColumn = m_inputTree[borderLineIndex + 1].length() - 1;
+			}
 			for (int i = leftColumn; i <= rightColumn; i++)
 			{
 				if (isNodeSymbol(m_inputTree[borderLineIndex + 1][i]))
