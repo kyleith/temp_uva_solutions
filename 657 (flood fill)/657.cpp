@@ -27,7 +27,7 @@ private:
 	int m_width, m_height;
 
 	int calculateDotsOnCube (int row, int column);
-	void dfsDie (int row, int column);
+	void dfsDie (int row, int column, char dotSymbol);
 };
 
 void Picture::readPicture (const int & width, const int & height)
@@ -56,8 +56,8 @@ void Picture::decodeDots ()
 		{
 			if (m_area[i][j] == '*')
 			{
-				//int buffer = calculateDotsOnCube(i, j);
-				//dotsCount.push_back(buffer);
+				int buffer = calculateDotsOnCube(i, j);
+				dotsCount.push_back(buffer);
 			}
 		}
 	}
@@ -68,7 +68,7 @@ void Picture::decodeDots ()
 		{
 			if (m_area[i][j] == 'X')
 			{
-				//dfsDie(i, j);
+				dfsDie(i, j, 'X');
 				int buffer = 1;
 				dotsCount.push_back(buffer);
 			}
@@ -93,8 +93,12 @@ int Picture::calculateDotsOnCube (int row, int column)
 	int dotsCount = 0;
 
 	stack<int> buffer;
+	stack<int> dotCandidates;
+
 	int code = row * 100 + column;
 	buffer.push(code);
+
+	m_area[row][column] = '-';
 
 	while (!buffer.empty())
 	{
@@ -103,8 +107,6 @@ int Picture::calculateDotsOnCube (int row, int column)
 
 		int i = code / 100;
 		int j = code % 100;
-
-		m_area[i][j] = '-';
 
 		for (int k = 0; k < g_DIRECTIONS_COUNT; k++)
 		{
@@ -117,26 +119,48 @@ int Picture::calculateDotsOnCube (int row, int column)
 			{
 				if (m_area[nextRow][nextColumn] == '*')
 				{
-					code = row * 100 + column;
+					code = nextRow * 100 + nextColumn;
 					buffer.push(code);
+
+					m_area[nextRow][nextColumn] = '-';
 				}
 				else if (m_area[nextRow][nextColumn] == 'X')
 				{
-					dotsCount++;
-					dfsDie(nextRow, nextColumn);
+					code = nextRow * 100 + nextColumn;
+					buffer.push(code);
+
+					dotCandidates.push(code);
+					m_area[nextRow][nextColumn] = '?';
 				}
 			}
+		}
+	}
+
+	while (!dotCandidates.empty())
+	{
+		code = dotCandidates.top();
+		dotCandidates.pop();
+
+		int i = code / 100;
+		int j = code % 100;
+
+		if (m_area[i][j] == '?')
+		{
+			dotsCount++;
+			dfsDie(i, j, '?');
 		}
 	}
 
 	return dotsCount;
 }
 
-void Picture::dfsDie (int row, int column)
+void Picture::dfsDie (int row, int column, char dotSymbol)
 {
 	stack<int> buffer;
 	int code = row * 100 + column;
 	buffer.push(code);
+
+	m_area[row][column] = '+';
 
 	while (!buffer.empty())
 	{
@@ -145,8 +169,6 @@ void Picture::dfsDie (int row, int column)
 
 		int i = code / 100;
 		int j = code % 100;
-
-		m_area[i][j] = '+';
 
 		for (int k = 0; k < g_DIRECTIONS_COUNT; k++)
 		{
@@ -158,11 +180,13 @@ void Picture::dfsDie (int row, int column)
 			if (
 				isValidRow
 				&& isValidColumn
-				&& m_area[nextRow][nextColumn] == 'X'
+				&& m_area[nextRow][nextColumn] == dotSymbol
 			)
 			{
-				code = row * 100 + column;
+				code = nextRow * 100 + nextColumn;
 				buffer.push(code);
+
+				m_area[nextRow][nextColumn] = '+';
 			}
 		}
 	}
@@ -204,4 +228,5 @@ void processTestCase (const int & width, const int & height)
 	Picture currentPicture;
 	currentPicture.readPicture(width, height);
 	currentPicture.decodeDots();
+	printf("\n");
 }
