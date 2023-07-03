@@ -2,9 +2,16 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <algorithm>
+#include <stack>
 
 #define vector std::vector
 #define string std::string
+#define stack std::stack
+
+const int g_DIRECTIONS_COUNT = 4;
+const int g_DIRECTIONS_X[g_DIRECTIONS_COUNT] = {0, 1, 0, -1};
+const int g_DIRECTIONS_Y[g_DIRECTIONS_COUNT] = {-1, 0, 1, 0};
 
 void processInput ();
 void processTestCase (const int & width, const int & height);
@@ -18,6 +25,9 @@ public:
 private:
 	vector<string> m_area;
 	int m_width, m_height;
+
+	int calculateDotsOnCube (int row, int column);
+	void dfsDie (int row, int column);
 };
 
 void Picture::readPicture (const int & width, const int & height)
@@ -37,7 +47,125 @@ void Picture::readPicture (const int & width, const int & height)
 
 void Picture::decodeDots ()
 {
-	//TODO...
+	vector<int> dotsCount;
+	dotsCount.clear();
+
+	for (int i = 0; i < m_height; i++)
+	{
+		for (int j = 0; j < m_width; j++)
+		{
+			if (m_area[i][j] == '*')
+			{
+				//int buffer = calculateDotsOnCube(i, j);
+				//dotsCount.push_back(buffer);
+			}
+		}
+	}
+
+	for (int i = 0; i < m_height; i++)
+	{
+		for (int j = 0; j < m_width; j++)
+		{
+			if (m_area[i][j] == 'X')
+			{
+				//dfsDie(i, j);
+				int buffer = 1;
+				dotsCount.push_back(buffer);
+			}
+		}
+	}
+
+	std::sort(dotsCount.begin(), dotsCount.end());
+
+	if (dotsCount.size() > 0)
+	{
+		printf("%d", dotsCount[0]);
+	}
+	for (int i = 1; i < dotsCount.size(); i++)
+	{
+		printf(" %d", dotsCount[i]);
+	}
+	printf("\n");
+}
+
+int Picture::calculateDotsOnCube (int row, int column)
+{
+	int dotsCount = 0;
+
+	stack<int> buffer;
+	int code = row * 100 + column;
+	buffer.push(code);
+
+	while (!buffer.empty())
+	{
+		code = buffer.top();
+		buffer.pop();
+
+		int i = code / 100;
+		int j = code % 100;
+
+		m_area[i][j] = '-';
+
+		for (int k = 0; k < g_DIRECTIONS_COUNT; k++)
+		{
+			int nextRow = i + g_DIRECTIONS_Y[k];
+			int nextColumn = j + g_DIRECTIONS_X[k];
+			bool isValidRow = (0 <= nextRow && nextRow < m_height);
+			bool isValidColumn = (0 <= nextColumn && nextColumn < m_width);
+
+			if (isValidRow && isValidColumn)
+			{
+				if (m_area[nextRow][nextColumn] == '*')
+				{
+					code = row * 100 + column;
+					buffer.push(code);
+				}
+				else if (m_area[nextRow][nextColumn] == 'X')
+				{
+					dotsCount++;
+					dfsDie(nextRow, nextColumn);
+				}
+			}
+		}
+	}
+
+	return dotsCount;
+}
+
+void Picture::dfsDie (int row, int column)
+{
+	stack<int> buffer;
+	int code = row * 100 + column;
+	buffer.push(code);
+
+	while (!buffer.empty())
+	{
+		code = buffer.top();
+		buffer.pop();
+
+		int i = code / 100;
+		int j = code % 100;
+
+		m_area[i][j] = '+';
+
+		for (int k = 0; k < g_DIRECTIONS_COUNT; k++)
+		{
+			int nextRow = i + g_DIRECTIONS_Y[k];
+			int nextColumn = j + g_DIRECTIONS_X[k];
+			bool isValidRow = (0 <= nextRow && nextRow < m_height);
+			bool isValidColumn = (0 <= nextColumn && nextColumn < m_width);
+
+			if (
+				isValidRow
+				&& isValidColumn
+				&& m_area[nextRow][nextColumn] == 'X'
+			)
+			{
+				code = row * 100 + column;
+				buffer.push(code);
+			}
+		}
+	}
 }
 
 int main ()
