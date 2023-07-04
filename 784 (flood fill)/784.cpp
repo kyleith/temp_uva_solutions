@@ -15,6 +15,8 @@ public:
 	void printMaze();
 private:
 	vector<string> m_area;
+
+	void dfsMaze (int row, int column);
 };
 
 void Maze::readMaze ()
@@ -22,23 +24,40 @@ void Maze::readMaze ()
 	m_area.clear();
 
 	string buffer;
-	while (
-		std::getline(std::cin, buffer)
-		&& !(buffer.length() > 0 && buffer[0] == '-')
-	)
+	while (std::getline(std::cin, buffer))
 	{
 		m_area.push_back(buffer);
-	}
 
-	if (buffer.length() > 0 && buffer[0] == '-')
-	{
-		m_area.push_back(buffer);
+		if (buffer.length() > 0 && buffer[0] == '_')
+		{
+			break;
+		}
 	}
 }
 
 void Maze::fillMaze ()
 {
-	//TODO...
+	int startRow = -1, startColumn = -1;
+
+	int lines = m_area.size();
+	for (int i = 0; i < lines; i++)
+	{
+		int columns = m_area[i].length();
+		for (int j = 0; j < columns; j++)
+		{
+			if (m_area[i][j] == '*')
+			{
+				startRow = i;
+				startColumn = j;
+				break;
+			}
+		}
+	}
+
+	if (startRow > 0 && startColumn > 0)
+	{
+		dfsMaze(startRow, startColumn);
+	}
 }
 
 void Maze::printMaze ()
@@ -48,6 +67,13 @@ void Maze::printMaze ()
 	{
 		printf("%s\n", m_area[i].c_str());
 	}
+}
+
+void Maze::dfsMaze (int row, int column)
+{
+	m_area[row][column] = '#';
+
+	//TODO...
 }
 
 void processInput ();

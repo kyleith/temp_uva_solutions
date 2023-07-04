@@ -1,18 +1,18 @@
 AAAAAAAAA
 A   A   A
-A * A   A
+A # A   A
 A   A   A
 AAAAAAAAA
 _________
 BBBBB   BBBBB
 B   B   B   B
-B * B   B   B
+B # B   B   B
 B   B   B   B
 BBBBB   BBBBB
 _________
 CCCCCCCCCCCCC
 C   C   C   C
-C * C   C   C
+C # C   C   C
 C   C   C   C
 CC CCCCCCC CC
 C   C   C   C
@@ -26,7 +26,7 @@ CCCCCCCCCCCCC
 _____________
 AXXXBXXXCXXXDXXXEXXXFXXXG
 X   X   X   X   X   X   X
-X *     X   X           X
+X #     X   X           X
 X   X   X   X   X   X   X
 XXXXXX XXXXXXXXXXXXXXX XX
 X   X   X   X   X   X   X
@@ -36,7 +36,7 @@ HXXXIXXXJXXXKXXXLXXXMXXXX
 _________________________
 XXXXX
 X  XX
-X*XXX
+X#XXX
 X   X
 X X X
 X XX
@@ -46,12 +46,12 @@ XXX
 __
 XXX
 X X
-X*X
+X#X
 XX
 ____
 AXXXBXXXCXXXDXXXEXXXFXXXG
 X   X   X   X   X   X   X
-X *     X   X           X
+X #     X   X           X
 X   X   X   X   X   X   X
 XXXXXX XXXXXXXXXXXXXXX XX
 X   X   X   X   X   X   X
