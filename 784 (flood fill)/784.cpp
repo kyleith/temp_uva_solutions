@@ -30,7 +30,6 @@ void Maze::readMaze ()
 	m_area.clear();
 
 	string buffer;
-	//std::cin.ignore();
 	while (std::getline(std::cin, buffer))
 	{
 		m_area.push_back(buffer);
@@ -133,7 +132,10 @@ int main ()
 void processInput ()
 {
 	int n;
-	scanf("%d\n", &n);
+	scanf("%d", &n);
+
+	string buffer;
+	std::getline(std::cin, buffer);
 
 	for (int i = 0; i < n; i++)
 	{
