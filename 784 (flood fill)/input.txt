@@ -1,5 +1,5 @@
 7
-AAAAAAAAA
+AAAAAAAAA 
 A   A   A
 A * A   A
 A   A   A
@@ -25,13 +25,13 @@ C   C   C   C
 C   C   C   C
 CCCCCCCCCCCCC
 _____________
-AXXXBXXXCXXXDXXXEXXXFXXXG
+AXXXBXXXCXXXDXXXEXXXFXXXG   
 X   X   X   X   X   X   X
 X *     X   X           X
 X   X   X   X   X   X   X
 XXXXXX XXXXXXXXXXXXXXX XX
 X   X   X   X   X   X   X
-X   X                   X
+X   X                   X 
 X   X   X   X   X   X   X
 HXXXIXXXJXXXKXXXLXXXMXXXX
 _________________________
@@ -50,13 +50,13 @@ X X
 X*X
 XX
 ____
-AXXXBXXXCXXXDXXXEXXXFXXXG
+AXXXBXXXCXXXDXXXEXXXFXXXG   
 X   X   X   X   X   X   X
 X *     X   X           X
 X   X   X   X   X   X   X
 XXXXXX XXXXXXXXXXXXXXX XX
 X   X   X   X   X   X   X
-X   X                   X
+X   X                   X 
 X   X   X   X   X   X   X
 HXXXIXXXJXXXKXXXLXXXMXXXX
 _

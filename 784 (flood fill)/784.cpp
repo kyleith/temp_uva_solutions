@@ -2,9 +2,15 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <stack>
+
+const int g_DIRECTIONS_COUNT = 4;
+const int g_DIRECTIONS_X[g_DIRECTIONS_COUNT] = {0, 1, 0, -1};
+const int g_DIRECTIONS_Y[g_DIRECTIONS_COUNT] = {-1, 0, 1, 0};
 
 #define vector std::vector
 #define string std::string
+#define stack std::stack
 
 class Maze
 {
@@ -24,6 +30,7 @@ void Maze::readMaze ()
 	m_area.clear();
 
 	string buffer;
+	//std::cin.ignore();
 	while (std::getline(std::cin, buffer))
 	{
 		m_area.push_back(buffer);
@@ -73,7 +80,39 @@ void Maze::dfsMaze (int row, int column)
 {
 	m_area[row][column] = '#';
 
-	//TODO...
+	int lines = m_area.size();
+	stack<int> buffer;
+	int code = row * 100 + column;
+	buffer.push(code);
+
+	while (!buffer.empty())
+	{
+		code = buffer.top();
+		buffer.pop();
+		int i = code / 100;
+		int j = code % 100;
+
+		for (int k = 0; k < g_DIRECTIONS_COUNT; k++)
+		{
+			int nextRow = i + g_DIRECTIONS_Y[k];
+			int nextColumn = j + g_DIRECTIONS_X[k];
+			bool isValidRow = (0 <= nextRow && nextRow < lines);
+			if (isValidRow)
+			{
+				bool isValidColumn = (0 <= nextColumn && nextColumn < m_area[nextRow].length());
+				if (
+					isValidColumn
+					&& m_area[nextRow][nextColumn] == ' '
+				)
+				{
+					m_area[nextRow][nextColumn] = '#';
+
+					code = nextRow * 100 + nextColumn;
+					buffer.push(code);
+				}
+			}
+		}
+	}
 }
 
 void processInput ();
