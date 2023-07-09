@@ -2,9 +2,15 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <stack>
 
 #define vector std::vector
 #define string std::string
+#define stack std::stack
+
+const int g_DIRECTIONS_COUNT = 4;
+const int g_DIRECTIONS_X [g_DIRECTIONS_COUNT] = {0, 1, 0, -1};
+const int g_DIRECTIONS_Y [g_DIRECTIONS_COUNT] = {-1, 0, 1, 0};
 
 void processInput ();
 void processTestCase (const int & width, const int & height);
@@ -21,6 +27,8 @@ private:
 	vector<string> m_targetMaze;
 	int m_inputWidth, m_inputHeight;
 	int m_targetWidth, m_targetHeight;
+
+	void dfsPathInTargetMaze (const int & i, const int & j, bool & outIsCycle, int & outPathLength);
 };
 
 void Maze::readInputSlashMaze (const int & width, const int & height)
@@ -79,7 +87,86 @@ void Maze::transformToTargetMaze ()
 
 void Maze::processTargetMaze ()
 {
-	//TODO...
+	int cyclesCount = 0, longestCycle = -1;
+
+	for (int i = 0; i < m_targetHeight; i++)
+	{
+		for (int j = 0; j < m_targetWidth; j++)
+		{
+			if (m_targetMaze[i][j] == '0')
+			{
+				bool isCycle;
+				int pathLength;
+				dfsPathInTargetMaze(i, j, isCycle, pathLength);
+
+				if (isCycle)
+				{
+					cyclesCount++;
+					if (pathLength > longestCycle)
+					{
+						longestCycle = pathLength;
+					}
+				}
+			}
+		}
+	}
+
+	if (cyclesCount == 0)
+	{
+		printf("There are no cycles.\n");
+	}
+	else
+	{
+		printf("%d Cycles; the longest has length %d.\n", cyclesCount, longestCycle);
+	}
+}
+
+void Maze::dfsPathInTargetMaze (const int & i, const int & j, bool & outIsCycle, int & outPathLength)
+{
+	stack<int> buffer;
+	int currentPathLength = 1;
+	bool isOutOfMaze = false;
+
+	int code = i * 1000 + j;
+	buffer.push(code);
+	m_targetMaze[i][j] = '+';
+
+	while (!buffer.empty())
+	{
+		code = buffer.top();
+		buffer.pop();
+
+		int row = code % 1000;
+		int column = code / 1000;
+
+		for (int k = 0; k < g_DIRECTIONS_COUNT; k++)
+		{
+			int nextRow = row + g_DIRECTIONS_Y[k];
+			int nextColumn = column + g_DIRECTIONS_X[k];
+
+			bool isValidRow = (0 <= nextRow && nextRow < m_targetHeight);
+			bool isValidColumn = (0 <= nextColumn && nextColumn < m_targetWidth);
+
+			if (isValidRow && isValidColumn)
+			{
+				if (m_targetMaze[nextRow][nextColumn] == '0')
+				{
+					m_targetMaze[nextRow][nextColumn] = '+';
+					currentPathLength++;
+
+					code = nextRow * 1000 + nextColumn;
+					buffer.push(code);
+				}
+			}
+			else
+			{
+				isOutOfMaze = true;
+			}
+		}
+	}
+
+	outIsCycle = !isOutOfMaze;
+	outPathLength = currentPathLength / 3;
 }
 
 int main ()
