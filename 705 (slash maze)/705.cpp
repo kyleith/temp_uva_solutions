@@ -136,8 +136,8 @@ void Maze::dfsPathInTargetMaze (const int & i, const int & j, bool & outIsCycle,
 		code = buffer.top();
 		buffer.pop();
 
-		int row = code % 1000;
-		int column = code / 1000;
+		int row = code / 1000;
+		int column = code % 1000;
 
 		for (int k = 0; k < g_DIRECTIONS_COUNT; k++)
 		{

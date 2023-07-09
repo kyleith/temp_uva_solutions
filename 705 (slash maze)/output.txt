@@ -1,23 +1,23 @@
 Maze #1:
-1 Cycles; the longest has length 16.
+2 Cycles; the longest has length 16.
 
 Maze #2:
 There are no cycles.
 
 Maze #3:
-There are no cycles.
+1 Cycles; the longest has length 4.
 
 Maze #4:
 1 Cycles; the longest has length 20.
 
 Maze #5:
-41 Cycles; the longest has length 4.
+50 Cycles; the longest has length 4.
 
 Maze #6:
-1201 Cycles; the longest has length 4.
+1691 Cycles; the longest has length 4.
 
 Maze #7:
-There are no cycles.
+1 Cycles; the longest has length 10212.
 
 Maze #8:
 There are no cycles.
@@ -26,10 +26,10 @@ Maze #9:
 5 Cycles; the longest has length 36.
 
 Maze #10:
-2 Cycles; the longest has length 296.
+1 Cycles; the longest has length 296.
 
 Maze #11:
-There are no cycles.
+4 Cycles; the longest has length 4.
 
 Maze #12:
 There are no cycles.
