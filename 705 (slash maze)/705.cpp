@@ -12,7 +12,7 @@ void processTestCase (const int & width, const int & height);
 class Maze
 {
 public:
-	Maze(){}
+	Maze() : m_inputHeight(0), m_inputWidth(0), m_targetWidth(0), m_targetHeight(0) {}
 	void readInputSlashMaze (const int & width, const int & height);
 	void transformToTargetMaze ();
 	void processTargetMaze ();
@@ -20,6 +20,7 @@ private:
 	vector<string> m_inputMaze;
 	vector<string> m_targetMaze;
 	int m_inputWidth, m_inputHeight;
+	int m_targetWidth, m_targetHeight;
 };
 
 void Maze::readInputSlashMaze (const int & width, const int & height)
@@ -39,7 +40,41 @@ void Maze::readInputSlashMaze (const int & width, const int & height)
 
 void Maze::transformToTargetMaze ()
 {
-	//TODO...
+	m_targetMaze.clear();
+
+	m_targetWidth = m_inputWidth * 3;
+	m_targetHeight = m_inputHeight * 3;
+
+	string buffer = "";
+	for (int i = 0; i < m_targetWidth; i++)
+	{
+		buffer.push_back('0');
+	}
+	for (int i = 0; i < m_targetHeight; i++)
+	{
+		m_targetMaze.push_back(buffer);
+	}
+
+	for (int i = 0; i < m_inputHeight; i++)
+	{
+		for (int j = 0; j < m_inputWidth; j++)
+		{
+			int targetI = i * 3;
+			int targetJ = j * 3;
+			if (m_inputMaze[i][j] == '/')
+			{
+				m_targetMaze[targetI][targetJ + 2] = '1';
+				m_targetMaze[targetI + 1][targetJ + 1] = '1';
+				m_targetMaze[targetI + 2][targetJ] = '1';
+			}
+			else // == '\'
+			{
+				m_targetMaze[targetI][targetJ] = '1';
+				m_targetMaze[targetI + 1][targetJ + 1] = '1';
+				m_targetMaze[targetI + 2][targetJ + 2] = '1';
+			}
+		}
+	}
 }
 
 void Maze::processTargetMaze ()
