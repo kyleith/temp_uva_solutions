@@ -78,9 +78,9 @@ void Maze::tryToEscapeMaze ()
 	int escapeTime = -1;
 
 	if (
-		m_startL > 0
-		&& m_startR > 0
-		&& m_startC > 0
+		m_startL >= 0
+		&& m_startR >= 0
+		&& m_startC >= 0
 	)
 	{
 		bfsMaze(m_startL, m_startR, m_startC, foundExit, escapeTime);
@@ -144,7 +144,7 @@ void Maze::bfsMaze (const int & startL, const int & startR, const int & startC, 
 					m_maze[nextLevel][nextRow][nextColumn] = '+';
 					m_distances[nextLevel][nextRow][nextColumn] = m_distances[level][row][column] + 1;
 
-					code = level * 10000 + row * 100 + column;
+					code = nextLevel * 10000 + nextRow * 100 + nextColumn;
 					buffer.push(code);
 				}
 				else if (m_maze[nextLevel][nextRow][nextColumn] == 'E')
