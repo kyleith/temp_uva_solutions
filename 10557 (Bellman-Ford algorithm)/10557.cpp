@@ -1,7 +1,10 @@
 #include <cstdio>
 #include <vector>
+#include <stack>
+#include <algorithm>
 
 #define vector std::vector
+#define stack std::stack
 
 const int g_MAX_ROOMS_COUNT = 101;
 const int g_PATH_VALUE_LIMIT = 100;
@@ -22,7 +25,7 @@ private:
 	void cutConnectedComponentFromStart (const int & startIndex);
 	void cutConnectedComponentFromEnd (const int & finalIndex);
 	void tryAdjustedBellmanFord ();
-	void tryAdjustedNegativeCycleDetection (bool & cycleDetected);
+	void tryAdjustedNegativeCycleDetection (bool & negativeCycleDetected);
 };
 
 void Maze::readMaze (const int & roomsCount)
@@ -71,7 +74,7 @@ void Maze::tryToEscapeMaze (const int & startIndex, const int finalIndex)
 	{
 		cutConnectedComponentFromEnd(finalIndex);
 
-		m_pathValues[startIndex] = -100;
+		m_pathValues[startIndex] = 0;
 		tryAdjustedBellmanFord();
 
 		if (m_pathValues[finalIndex] < g_PATH_VALUE_LIMIT)
@@ -101,22 +104,145 @@ void Maze::tryToEscapeMaze (const int & startIndex, const int finalIndex)
 
 void Maze::cutConnectedComponentFromStart (const int & startIndex)
 {
-	//TODO...
+	bool isCurrentConnectedRoom[g_MAX_ROOMS_COUNT];
+	for (int i = 0; i <= m_roomsCount; i++)
+	{
+		isCurrentConnectedRoom[i] = false;
+	}
+
+	stack<int> buffer;
+	buffer.push(startIndex);
+	isCurrentConnectedRoom[startIndex] = true;
+
+	while (!buffer.empty())
+	{
+		int currentRoom = buffer.top();
+		buffer.pop();
+
+		for (int i = 0; i < m_graph[currentRoom].size(); i++)
+		{
+			int nextRoom = m_graph[currentRoom][i];
+			if (
+					m_isConnectedRoom[nextRoom]
+					&& !isCurrentConnectedRoom[nextRoom]
+				)
+			{
+				isCurrentConnectedRoom[nextRoom] = true;
+				buffer.push(nextRoom);
+			}
+		}
+	}
+
+	for (int i = 1; i <= m_roomsCount; i++)
+	{
+		m_isConnectedRoom[i] = isCurrentConnectedRoom[i];
+	}
 }
 
 void Maze::cutConnectedComponentFromEnd (const int & finalIndex)
 {
-	//TODO...
+	bool isCurrentConnectedRoom[g_MAX_ROOMS_COUNT];
+	for (int i = 0; i <= m_roomsCount; i++)
+	{
+		isCurrentConnectedRoom[i] = false;
+	}
+
+	stack<int> buffer;
+	buffer.push(finalIndex);
+	isCurrentConnectedRoom[finalIndex] = true;
+
+	while (!buffer.empty())
+	{
+		int currentRoom = buffer.top();
+		buffer.pop();
+
+		for (int i = 0; i < m_reversedGraph[currentRoom].size(); i++)
+		{
+			int nextRoom = m_reversedGraph[currentRoom][i];
+			if (
+					m_isConnectedRoom[nextRoom]
+					&& !isCurrentConnectedRoom[nextRoom]
+				)
+			{
+				isCurrentConnectedRoom[nextRoom] = true;
+				buffer.push(nextRoom);
+			}
+		}
+	}
+
+	for (int i = 1; i <= m_roomsCount; i++)
+	{
+		m_isConnectedRoom[i] = isCurrentConnectedRoom[i];
+	}
 }
 
 void Maze::tryAdjustedBellmanFord ()
 {
-	//TODO...
+	for (int counter = 0; counter < m_roomsCount - 1; counter++)
+	{
+		for (int u = 1; u <= m_roomsCount; u++)
+		{
+			if (
+				!m_isConnectedRoom[u]
+				|| m_pathValues[u] >= g_PATH_VALUE_LIMIT
+			)
+			{
+				continue;
+			}
+
+			int d = m_pathValues[u];
+
+			for (int j = 0; j < m_graph[u].size(); j++)
+			{
+				int v = m_graph[u][j];
+				if (
+					!m_isConnectedRoom[v]
+					|| d + m_roomWeights[v] >= g_PATH_VALUE_LIMIT
+				)
+				{
+					continue;
+				}
+
+				m_pathValues[v] = std::min(m_pathValues[v], d + m_roomWeights[v]);
+			}
+		}
+	}
 }
 
-void Maze::tryAdjustedNegativeCycleDetection (bool & cycleDetected)
+void Maze::tryAdjustedNegativeCycleDetection (bool & negativeCycleDetected)
 {
-	//TODO...
+	for (int u = 1; u <= m_roomsCount; u++)
+	{
+		if (
+			!m_isConnectedRoom[u]
+			|| m_pathValues[u] >= g_PATH_VALUE_LIMIT
+		)
+		{
+			continue;
+		}
+
+		int d = m_pathValues[u];
+
+		for (int j = 0; j < m_graph[u].size(); j++)
+		{
+			int v = m_graph[u][j];
+			if (
+				!m_isConnectedRoom[v]
+				|| d + m_roomWeights[v] >= g_PATH_VALUE_LIMIT
+			)
+			{
+				continue;
+			}
+
+			if (m_pathValues[v] > d + m_roomWeights[v])
+			{
+				negativeCycleDetected = true;
+				return;
+			}
+		}
+	}
+
+	negativeCycleDetected = false;
 }
 
 void processInput ();
