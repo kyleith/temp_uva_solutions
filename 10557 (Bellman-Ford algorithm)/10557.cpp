@@ -4,6 +4,7 @@
 #define vector std::vector
 
 const int g_MAX_ROOMS_COUNT = 101;
+const int g_PATH_VALUE_LIMIT = 100;
 
 class Maze
 {
@@ -14,7 +15,14 @@ public:
 private:
 	int m_roomsCount;
 	int m_roomWeights[g_MAX_ROOMS_COUNT];
-	vector<vector<int>> m_graph;
+	bool m_isConnectedRoom[g_MAX_ROOMS_COUNT];
+	int m_pathValues[g_MAX_ROOMS_COUNT];
+	vector<vector<int>> m_graph, m_reversedGraph;
+
+	void cutConnectedComponentFromStart (const int & startIndex);
+	void cutConnectedComponentFromEnd (const int & finalIndex);
+	void tryAdjustedBellmanFord ();
+	void tryAdjustedNegativeCycleDetection (bool & cycleDetected);
 };
 
 void Maze::readMaze (const int & roomsCount)
@@ -25,9 +33,12 @@ void Maze::readMaze (const int & roomsCount)
 	for (int i = 0; i <= m_roomsCount; i++)
 	{
 		m_roomWeights[i] = 0;
+		m_isConnectedRoom[i] = false;
+		m_pathValues[i] = g_PATH_VALUE_LIMIT;
 
 		vector<int> buffer;
 		m_graph.push_back(buffer);
+		m_reversedGraph.push_back(buffer);
 	}
 
 	for (int i = 1; i <= m_roomsCount; i++)
@@ -35,6 +46,7 @@ void Maze::readMaze (const int & roomsCount)
 		int roomWeight;
 		scanf("%d", & roomWeight);
 		m_roomWeights[i] = roomWeight * -1;
+		m_isConnectedRoom[i] = true;
 
 		int doorsCount;
 		scanf("%d", & doorsCount);
@@ -44,6 +56,7 @@ void Maze::readMaze (const int & roomsCount)
 			int currentDoor;
 			scanf("%d", &currentDoor);
 			m_graph[i].push_back(currentDoor);
+			m_reversedGraph[currentDoor].push_back(i);
 		}
 	}
 }
@@ -51,7 +64,30 @@ void Maze::readMaze (const int & roomsCount)
 void Maze::tryToEscapeMaze (const int & startIndex, const int finalIndex)
 {
 	bool escapeSucceeded = false;
-	//TODO...
+
+	cutConnectedComponentFromStart(startIndex);
+
+	if (m_isConnectedRoom[finalIndex])
+	{
+		cutConnectedComponentFromEnd(finalIndex);
+
+		m_pathValues[startIndex] = -100;
+		tryAdjustedBellmanFord();
+
+		if (m_pathValues[finalIndex] < g_PATH_VALUE_LIMIT)
+		{
+			escapeSucceeded = true;
+		}
+		else
+		{
+			bool hasNegativeCycle = false;
+			tryAdjustedNegativeCycleDetection(hasNegativeCycle);
+			if (hasNegativeCycle)
+			{
+				escapeSucceeded = true;
+			}
+		}
+	}
 
 	if (escapeSucceeded)
 	{
@@ -61,6 +97,26 @@ void Maze::tryToEscapeMaze (const int & startIndex, const int finalIndex)
 	{
 		printf("hopeless\n");
 	}
+}
+
+void Maze::cutConnectedComponentFromStart (const int & startIndex)
+{
+	//TODO...
+}
+
+void Maze::cutConnectedComponentFromEnd (const int & finalIndex)
+{
+	//TODO...
+}
+
+void Maze::tryAdjustedBellmanFord ()
+{
+	//TODO...
+}
+
+void Maze::tryAdjustedNegativeCycleDetection (bool & cycleDetected)
+{
+	//TODO...
 }
 
 void processInput ();
