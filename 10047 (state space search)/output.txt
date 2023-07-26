@@ -1,5 +1,5 @@
 Case #1
-destination not reachable
+minimum time = -1 sec
 
 Case #2
 destination not reachable
@@ -11,22 +11,22 @@ Case #4
 destination not reachable
 
 Case #5
-destination not reachable
+minimum time = -1 sec
 
 Case #6
 destination not reachable
 
 Case #7
-destination not reachable
+minimum time = -1 sec
 
 Case #8
 destination not reachable
 
 Case #9
-destination not reachable
+minimum time = -1 sec
 
 Case #10
-destination not reachable
+minimum time = -1 sec
 
 Case #11
 destination not reachable
@@ -35,16 +35,16 @@ Case #12
 destination not reachable
 
 Case #13
-destination not reachable
+minimum time = -1 sec
 
 Case #14
 destination not reachable
 
 Case #15
-destination not reachable
+minimum time = -1 sec
 
 Case #16
-destination not reachable
+minimum time = -1 sec
 
 Case #17
 destination not reachable
@@ -53,7 +53,7 @@ Case #18
 destination not reachable
 
 Case #19
-destination not reachable
+minimum time = -1 sec
 
 Case #20
 destination not reachable
@@ -65,19 +65,19 @@ Case #22
 destination not reachable
 
 Case #23
-destination not reachable
+minimum time = -1 sec
 
 Case #24
 destination not reachable
 
 Case #25
-destination not reachable
+minimum time = -1 sec
 
 Case #26
 destination not reachable
 
 Case #27
-destination not reachable
+minimum time = -1 sec
 
 Case #28
 destination not reachable
@@ -101,7 +101,7 @@ Case #34
 destination not reachable
 
 Case #35
-destination not reachable
+minimum time = -1 sec
 
 Case #36
 destination not reachable
@@ -113,58 +113,58 @@ Case #38
 destination not reachable
 
 Case #39
-destination not reachable
+minimum time = -1 sec
 
 Case #40
-destination not reachable
+minimum time = -1 sec
 
 Case #41
 destination not reachable
 
 Case #42
-destination not reachable
+minimum time = -1 sec
 
 Case #43
-destination not reachable
+minimum time = -1 sec
 
 Case #44
 destination not reachable
 
 Case #45
-destination not reachable
+minimum time = -1 sec
 
 Case #46
-destination not reachable
+minimum time = -1 sec
 
 Case #47
-destination not reachable
+minimum time = -1 sec
 
 Case #48
-destination not reachable
+minimum time = -1 sec
 
 Case #49
-destination not reachable
+minimum time = -1 sec
 
 Case #50
-destination not reachable
+minimum time = -1 sec
 
 Case #51
 destination not reachable
 
 Case #52
-destination not reachable
+minimum time = -1 sec
 
 Case #53
-destination not reachable
+minimum time = -1 sec
 
 Case #54
-destination not reachable
+minimum time = -1 sec
 
 Case #55
-destination not reachable
+minimum time = -1 sec
 
 Case #56
-destination not reachable
+minimum time = -1 sec
 
 Case #57
 destination not reachable
@@ -173,37 +173,37 @@ Case #58
 destination not reachable
 
 Case #59
-destination not reachable
+minimum time = -1 sec
 
 Case #60
 destination not reachable
 
 Case #61
-destination not reachable
+minimum time = -1 sec
 
 Case #62
-destination not reachable
+minimum time = -1 sec
 
 Case #63
-destination not reachable
+minimum time = -1 sec
 
 Case #64
-destination not reachable
+minimum time = -1 sec
 
 Case #65
-destination not reachable
+minimum time = -1 sec
 
 Case #66
-destination not reachable
+minimum time = -1 sec
 
 Case #67
-destination not reachable
+minimum time = -1 sec
 
 Case #68
 destination not reachable
 
 Case #69
-destination not reachable
+minimum time = -1 sec
 
 Case #70
 destination not reachable
@@ -230,13 +230,13 @@ Case #77
 destination not reachable
 
 Case #78
-destination not reachable
+minimum time = -1 sec
 
 Case #79
-destination not reachable
+minimum time = -1 sec
 
 Case #80
-destination not reachable
+minimum time = -1 sec
 
 Case #81
 destination not reachable
@@ -251,7 +251,7 @@ Case #84
 destination not reachable
 
 Case #85
-destination not reachable
+minimum time = -1 sec
 
 Case #86
 destination not reachable
@@ -266,16 +266,16 @@ Case #89
 destination not reachable
 
 Case #90
-destination not reachable
+minimum time = -1 sec
 
 Case #91
-destination not reachable
+minimum time = -1 sec
 
 Case #92
-destination not reachable
+minimum time = -1 sec
 
 Case #93
-destination not reachable
+minimum time = -1 sec
 
 Case #94
 destination not reachable
@@ -284,28 +284,28 @@ Case #95
 destination not reachable
 
 Case #96
-destination not reachable
+minimum time = -1 sec
 
 Case #97
 destination not reachable
 
 Case #98
-destination not reachable
+minimum time = -1 sec
 
 Case #99
-destination not reachable
+minimum time = -1 sec
 
 Case #100
-destination not reachable
+minimum time = -1 sec
 
 Case #101
-destination not reachable
+minimum time = -1 sec
 
 Case #102
 destination not reachable
 
 Case #103
-destination not reachable
+minimum time = -1 sec
 
 Case #104
 destination not reachable
@@ -317,55 +317,55 @@ Case #106
 destination not reachable
 
 Case #107
-destination not reachable
+minimum time = -1 sec
 
 Case #108
 destination not reachable
 
 Case #109
-destination not reachable
+minimum time = -1 sec
 
 Case #110
-destination not reachable
+minimum time = -1 sec
 
 Case #111
 destination not reachable
 
 Case #112
-destination not reachable
+minimum time = -1 sec
 
 Case #113
-destination not reachable
+minimum time = -1 sec
 
 Case #114
-destination not reachable
+minimum time = -1 sec
 
 Case #115
-destination not reachable
+minimum time = -1 sec
 
 Case #116
-destination not reachable
+minimum time = -1 sec
 
 Case #117
 destination not reachable
 
 Case #118
-destination not reachable
+minimum time = -1 sec
 
 Case #119
 destination not reachable
 
 Case #120
-destination not reachable
+minimum time = -1 sec
 
 Case #121
-destination not reachable
+minimum time = -1 sec
 
 Case #122
-destination not reachable
+minimum time = -1 sec
 
 Case #123
-destination not reachable
+minimum time = -1 sec
 
 Case #124
 destination not reachable
@@ -374,13 +374,13 @@ Case #125
 destination not reachable
 
 Case #126
-destination not reachable
+minimum time = -1 sec
 
 Case #127
 destination not reachable
 
 Case #128
-destination not reachable
+minimum time = -1 sec
 
 Case #129
 destination not reachable
@@ -389,25 +389,25 @@ Case #130
 destination not reachable
 
 Case #131
-destination not reachable
+minimum time = -1 sec
 
 Case #132
-destination not reachable
+minimum time = -1 sec
 
 Case #133
 destination not reachable
 
 Case #134
-destination not reachable
+minimum time = -1 sec
 
 Case #135
 destination not reachable
 
 Case #136
-destination not reachable
+minimum time = -1 sec
 
 Case #137
-destination not reachable
+minimum time = -1 sec
 
 Case #138
 destination not reachable
@@ -416,49 +416,49 @@ Case #139
 destination not reachable
 
 Case #140
-destination not reachable
+minimum time = -1 sec
 
 Case #141
 destination not reachable
 
 Case #142
-destination not reachable
+minimum time = -1 sec
 
 Case #143
 destination not reachable
 
 Case #144
-destination not reachable
+minimum time = -1 sec
 
 Case #145
 destination not reachable
 
 Case #146
-destination not reachable
+minimum time = -1 sec
 
 Case #147
-destination not reachable
+minimum time = -1 sec
 
 Case #148
 destination not reachable
 
 Case #149
-destination not reachable
+minimum time = -1 sec
 
 Case #150
-destination not reachable
+minimum time = -1 sec
 
 Case #151
-destination not reachable
+minimum time = -1 sec
 
 Case #152
 destination not reachable
 
 Case #153
-destination not reachable
+minimum time = -1 sec
 
 Case #154
-destination not reachable
+minimum time = -1 sec
 
 Case #155
 destination not reachable
@@ -467,31 +467,31 @@ Case #156
 destination not reachable
 
 Case #157
-destination not reachable
+minimum time = -1 sec
 
 Case #158
-destination not reachable
+minimum time = -1 sec
 
 Case #159
 destination not reachable
 
 Case #160
-destination not reachable
+minimum time = -1 sec
 
 Case #161
-destination not reachable
+minimum time = -1 sec
 
 Case #162
-destination not reachable
+minimum time = -1 sec
 
 Case #163
-destination not reachable
+minimum time = -1 sec
 
 Case #164
 destination not reachable
 
 Case #165
-destination not reachable
+minimum time = -1 sec
 
 Case #166
 destination not reachable
@@ -500,13 +500,13 @@ Case #167
 destination not reachable
 
 Case #168
-destination not reachable
+minimum time = -1 sec
 
 Case #169
 destination not reachable
 
 Case #170
-destination not reachable
+minimum time = -1 sec
 
 Case #171
 destination not reachable
@@ -515,16 +515,16 @@ Case #172
 destination not reachable
 
 Case #173
-destination not reachable
+minimum time = -1 sec
 
 Case #174
-destination not reachable
+minimum time = -1 sec
 
 Case #175
-destination not reachable
+minimum time = -1 sec
 
 Case #176
-destination not reachable
+minimum time = -1 sec
 
 Case #177
 destination not reachable
@@ -533,7 +533,7 @@ Case #178
 destination not reachable
 
 Case #179
-destination not reachable
+minimum time = -1 sec
 
 Case #180
 destination not reachable
@@ -542,64 +542,64 @@ Case #181
 destination not reachable
 
 Case #182
-destination not reachable
+minimum time = -1 sec
 
 Case #183
 destination not reachable
 
 Case #184
-destination not reachable
+minimum time = -1 sec
 
 Case #185
 destination not reachable
 
 Case #186
-destination not reachable
+minimum time = -1 sec
 
 Case #187
-destination not reachable
+minimum time = -1 sec
 
 Case #188
-destination not reachable
+minimum time = -1 sec
 
 Case #189
-destination not reachable
+minimum time = -1 sec
 
 Case #190
-destination not reachable
+minimum time = -1 sec
 
 Case #191
 destination not reachable
 
 Case #192
-destination not reachable
+minimum time = -1 sec
 
 Case #193
 destination not reachable
 
 Case #194
-destination not reachable
+minimum time = -1 sec
 
 Case #195
-destination not reachable
+minimum time = -1 sec
 
 Case #196
 destination not reachable
 
 Case #197
-destination not reachable
+minimum time = -1 sec
 
 Case #198
-destination not reachable
+minimum time = -1 sec
 
 Case #199
 destination not reachable
 
 Case #200
-destination not reachable
+minimum time = -1 sec
 
 Case #201
-destination not reachable
+minimum time = -1 sec
 
 Case #202
 destination not reachable
@@ -611,16 +611,16 @@ Case #204
 destination not reachable
 
 Case #205
-destination not reachable
+minimum time = -1 sec
 
 Case #206
 destination not reachable
 
 Case #207
-destination not reachable
+minimum time = -1 sec
 
 Case #208
-destination not reachable
+minimum time = -1 sec
 
 Case #209
 destination not reachable
@@ -635,31 +635,31 @@ Case #212
 destination not reachable
 
 Case #213
-destination not reachable
+minimum time = -1 sec
 
 Case #214
 destination not reachable
 
 Case #215
-destination not reachable
+minimum time = -1 sec
 
 Case #216
 destination not reachable
 
 Case #217
-destination not reachable
+minimum time = -1 sec
 
 Case #218
 destination not reachable
 
 Case #219
-destination not reachable
+minimum time = -1 sec
 
 Case #220
-destination not reachable
+minimum time = -1 sec
 
 Case #221
-destination not reachable
+minimum time = -1 sec
 
 Case #222
 destination not reachable
@@ -671,13 +671,13 @@ Case #224
 destination not reachable
 
 Case #225
-destination not reachable
+minimum time = -1 sec
 
 Case #226
 destination not reachable
 
 Case #227
-destination not reachable
+minimum time = -1 sec
 
 Case #228
 destination not reachable
@@ -686,28 +686,28 @@ Case #229
 destination not reachable
 
 Case #230
-destination not reachable
+minimum time = -1 sec
 
 Case #231
-destination not reachable
+minimum time = -1 sec
 
 Case #232
-destination not reachable
+minimum time = -1 sec
 
 Case #233
-destination not reachable
+minimum time = -1 sec
 
 Case #234
 destination not reachable
 
 Case #235
-destination not reachable
+minimum time = -1 sec
 
 Case #236
 destination not reachable
 
 Case #237
-destination not reachable
+minimum time = -1 sec
 
 Case #238
 destination not reachable
@@ -722,43 +722,43 @@ Case #241
 destination not reachable
 
 Case #242
-destination not reachable
+minimum time = -1 sec
 
 Case #243
 destination not reachable
 
 Case #244
-destination not reachable
+minimum time = -1 sec
 
 Case #245
-destination not reachable
+minimum time = -1 sec
 
 Case #246
-destination not reachable
+minimum time = -1 sec
 
 Case #247
 destination not reachable
 
 Case #248
-destination not reachable
+minimum time = -1 sec
 
 Case #249
-destination not reachable
+minimum time = -1 sec
 
 Case #250
-destination not reachable
+minimum time = -1 sec
 
 Case #251
 destination not reachable
 
 Case #252
-destination not reachable
+minimum time = -1 sec
 
 Case #253
-destination not reachable
+minimum time = -1 sec
 
 Case #254
-destination not reachable
+minimum time = -1 sec
 
 Case #255
 destination not reachable
@@ -770,22 +770,22 @@ Case #257
 destination not reachable
 
 Case #258
-destination not reachable
+minimum time = -1 sec
 
 Case #259
-destination not reachable
+minimum time = -1 sec
 
 Case #260
-destination not reachable
+minimum time = -1 sec
 
 Case #261
-destination not reachable
+minimum time = -1 sec
 
 Case #262
-destination not reachable
+minimum time = -1 sec
 
 Case #263
-destination not reachable
+minimum time = -1 sec
 
 Case #264
 destination not reachable
@@ -797,28 +797,28 @@ Case #266
 destination not reachable
 
 Case #267
-destination not reachable
+minimum time = -1 sec
 
 Case #268
-destination not reachable
+minimum time = -1 sec
 
 Case #269
-destination not reachable
+minimum time = -1 sec
 
 Case #270
-destination not reachable
+minimum time = -1 sec
 
 Case #271
 destination not reachable
 
 Case #272
-destination not reachable
+minimum time = -1 sec
 
 Case #273
-destination not reachable
+minimum time = -1 sec
 
 Case #274
-destination not reachable
+minimum time = -1 sec
 
 Case #275
 destination not reachable
@@ -827,16 +827,16 @@ Case #276
 destination not reachable
 
 Case #277
-destination not reachable
+minimum time = -1 sec
 
 Case #278
 destination not reachable
 
 Case #279
-destination not reachable
+minimum time = -1 sec
 
 Case #280
-destination not reachable
+minimum time = -1 sec
 
 Case #281
 destination not reachable
@@ -848,10 +848,10 @@ Case #283
 destination not reachable
 
 Case #284
-destination not reachable
+minimum time = -1 sec
 
 Case #285
-destination not reachable
+minimum time = -1 sec
 
 Case #286
 destination not reachable
@@ -863,7 +863,7 @@ Case #288
 destination not reachable
 
 Case #289
-destination not reachable
+minimum time = -1 sec
 
 Case #290
 destination not reachable
@@ -872,10 +872,10 @@ Case #291
 destination not reachable
 
 Case #292
-destination not reachable
+minimum time = -1 sec
 
 Case #293
-destination not reachable
+minimum time = -1 sec
 
 Case #294
 destination not reachable
@@ -887,52 +887,52 @@ Case #296
 destination not reachable
 
 Case #297
-destination not reachable
+minimum time = -1 sec
 
 Case #298
-destination not reachable
+minimum time = -1 sec
 
 Case #299
-destination not reachable
+minimum time = -1 sec
 
 Case #300
-destination not reachable
+minimum time = -1 sec
 
 Case #301
 destination not reachable
 
 Case #302
-destination not reachable
+minimum time = -1 sec
 
 Case #303
 destination not reachable
 
 Case #304
-destination not reachable
+minimum time = -1 sec
 
 Case #305
 destination not reachable
 
 Case #306
-destination not reachable
+minimum time = -1 sec
 
 Case #307
-destination not reachable
+minimum time = -1 sec
 
 Case #308
-destination not reachable
+minimum time = -1 sec
 
 Case #309
-destination not reachable
+minimum time = -1 sec
 
 Case #310
-destination not reachable
+minimum time = -1 sec
 
 Case #311
-destination not reachable
+minimum time = -1 sec
 
 Case #312
-destination not reachable
+minimum time = -1 sec
 
 Case #313
 destination not reachable
@@ -941,19 +941,19 @@ Case #314
 destination not reachable
 
 Case #315
-destination not reachable
+minimum time = -1 sec
 
 Case #316
-destination not reachable
+minimum time = -1 sec
 
 Case #317
 destination not reachable
 
 Case #318
-destination not reachable
+minimum time = -1 sec
 
 Case #319
-destination not reachable
+minimum time = -1 sec
 
 Case #320
 destination not reachable
@@ -962,7 +962,7 @@ Case #321
 destination not reachable
 
 Case #322
-destination not reachable
+minimum time = -1 sec
 
 Case #323
 destination not reachable
@@ -980,19 +980,19 @@ Case #327
 destination not reachable
 
 Case #328
-destination not reachable
+minimum time = -1 sec
 
 Case #329
 destination not reachable
 
 Case #330
-destination not reachable
+minimum time = -1 sec
 
 Case #331
-destination not reachable
+minimum time = -1 sec
 
 Case #332
-destination not reachable
+minimum time = -1 sec
 
 Case #333
 destination not reachable
@@ -1001,7 +1001,7 @@ Case #334
 destination not reachable
 
 Case #335
-destination not reachable
+minimum time = -1 sec
 
 Case #336
 destination not reachable
@@ -1010,19 +1010,19 @@ Case #337
 destination not reachable
 
 Case #338
-destination not reachable
+minimum time = -1 sec
 
 Case #339
 destination not reachable
 
 Case #340
-destination not reachable
+minimum time = -1 sec
 
 Case #341
-destination not reachable
+minimum time = -1 sec
 
 Case #342
-destination not reachable
+minimum time = -1 sec
 
 Case #343
 destination not reachable
@@ -1034,22 +1034,22 @@ Case #345
 destination not reachable
 
 Case #346
-destination not reachable
+minimum time = -1 sec
 
 Case #347
-destination not reachable
+minimum time = -1 sec
 
 Case #348
 destination not reachable
 
 Case #349
-destination not reachable
+minimum time = -1 sec
 
 Case #350
-destination not reachable
+minimum time = -1 sec
 
 Case #351
-destination not reachable
+minimum time = -1 sec
 
 Case #352
 destination not reachable
@@ -1058,7 +1058,7 @@ Case #353
 destination not reachable
 
 Case #354
-destination not reachable
+minimum time = -1 sec
 
 Case #355
 destination not reachable
@@ -1067,28 +1067,28 @@ Case #356
 destination not reachable
 
 Case #357
-destination not reachable
+minimum time = -1 sec
 
 Case #358
-destination not reachable
+minimum time = -1 sec
 
 Case #359
-destination not reachable
+minimum time = -1 sec
 
 Case #360
-destination not reachable
+minimum time = -1 sec
 
 Case #361
-destination not reachable
+minimum time = -1 sec
 
 Case #362
 destination not reachable
 
 Case #363
-destination not reachable
+minimum time = -1 sec
 
 Case #364
-destination not reachable
+minimum time = -1 sec
 
 Case #365
 destination not reachable
@@ -1100,7 +1100,7 @@ Case #367
 destination not reachable
 
 Case #368
-destination not reachable
+minimum time = -1 sec
 
 Case #369
 destination not reachable
@@ -1124,7 +1124,7 @@ Case #375
 destination not reachable
 
 Case #376
-destination not reachable
+minimum time = -1 sec
 
 Case #377
 destination not reachable
@@ -1136,7 +1136,7 @@ Case #379
 destination not reachable
 
 Case #380
-destination not reachable
+minimum time = -1 sec
 
 Case #381
 destination not reachable
@@ -1145,22 +1145,22 @@ Case #382
 destination not reachable
 
 Case #383
-destination not reachable
+minimum time = -1 sec
 
 Case #384
-destination not reachable
+minimum time = -1 sec
 
 Case #385
 destination not reachable
 
 Case #386
-destination not reachable
+minimum time = -1 sec
 
 Case #387
-destination not reachable
+minimum time = -1 sec
 
 Case #388
-destination not reachable
+minimum time = -1 sec
 
 Case #389
 destination not reachable
@@ -1172,13 +1172,13 @@ Case #391
 destination not reachable
 
 Case #392
-destination not reachable
+minimum time = -1 sec
 
 Case #393
 destination not reachable
 
 Case #394
-destination not reachable
+minimum time = -1 sec
 
 Case #395
 destination not reachable
@@ -1190,10 +1190,10 @@ Case #397
 destination not reachable
 
 Case #398
-destination not reachable
+minimum time = -1 sec
 
 Case #399
-destination not reachable
+minimum time = -1 sec
 
 Case #400
 destination not reachable
@@ -1208,34 +1208,34 @@ Case #403
 destination not reachable
 
 Case #404
-destination not reachable
+minimum time = -1 sec
 
 Case #405
-destination not reachable
+minimum time = -1 sec
 
 Case #406
-destination not reachable
+minimum time = -1 sec
 
 Case #407
-destination not reachable
+minimum time = -1 sec
 
 Case #408
-destination not reachable
+minimum time = -1 sec
 
 Case #409
-destination not reachable
+minimum time = -1 sec
 
 Case #410
-destination not reachable
+minimum time = -1 sec
 
 Case #411
-destination not reachable
+minimum time = -1 sec
 
 Case #412
-destination not reachable
+minimum time = -1 sec
 
 Case #413
-destination not reachable
+minimum time = -1 sec
 
 Case #414
 destination not reachable
@@ -1253,19 +1253,19 @@ Case #418
 destination not reachable
 
 Case #419
-destination not reachable
+minimum time = -1 sec
 
 Case #420
-destination not reachable
+minimum time = -1 sec
 
 Case #421
-destination not reachable
+minimum time = -1 sec
 
 Case #422
 destination not reachable
 
 Case #423
-destination not reachable
+minimum time = -1 sec
 
 Case #424
 destination not reachable
@@ -1274,10 +1274,10 @@ Case #425
 destination not reachable
 
 Case #426
-destination not reachable
+minimum time = -1 sec
 
 Case #427
-destination not reachable
+minimum time = -1 sec
 
 Case #428
 destination not reachable
@@ -1286,40 +1286,40 @@ Case #429
 destination not reachable
 
 Case #430
-destination not reachable
+minimum time = -1 sec
 
 Case #431
 destination not reachable
 
 Case #432
-destination not reachable
+minimum time = -1 sec
 
 Case #433
-destination not reachable
+minimum time = -1 sec
 
 Case #434
-destination not reachable
+minimum time = -1 sec
 
 Case #435
-destination not reachable
+minimum time = -1 sec
 
 Case #436
-destination not reachable
+minimum time = -1 sec
 
 Case #437
-destination not reachable
+minimum time = -1 sec
 
 Case #438
 destination not reachable
 
 Case #439
-destination not reachable
+minimum time = -1 sec
 
 Case #440
 destination not reachable
 
 Case #441
-destination not reachable
+minimum time = -1 sec
 
 Case #442
 destination not reachable
@@ -1328,34 +1328,34 @@ Case #443
 destination not reachable
 
 Case #444
-destination not reachable
+minimum time = -1 sec
 
 Case #445
 destination not reachable
 
 Case #446
-destination not reachable
+minimum time = -1 sec
 
 Case #447
-destination not reachable
+minimum time = -1 sec
 
 Case #448
-destination not reachable
+minimum time = -1 sec
 
 Case #449
 destination not reachable
 
 Case #450
-destination not reachable
+minimum time = -1 sec
 
 Case #451
 destination not reachable
 
 Case #452
-destination not reachable
+minimum time = -1 sec
 
 Case #453
-destination not reachable
+minimum time = -1 sec
 
 Case #454
 destination not reachable
@@ -1364,19 +1364,19 @@ Case #455
 destination not reachable
 
 Case #456
-destination not reachable
+minimum time = -1 sec
 
 Case #457
 destination not reachable
 
 Case #458
-destination not reachable
+minimum time = -1 sec
 
 Case #459
 destination not reachable
 
 Case #460
-destination not reachable
+minimum time = -1 sec
 
 Case #461
 destination not reachable
@@ -1385,13 +1385,13 @@ Case #462
 destination not reachable
 
 Case #463
-destination not reachable
+minimum time = -1 sec
 
 Case #464
-destination not reachable
+minimum time = -1 sec
 
 Case #465
-destination not reachable
+minimum time = -1 sec
 
 Case #466
 destination not reachable
@@ -1406,64 +1406,64 @@ Case #469
 destination not reachable
 
 Case #470
-destination not reachable
+minimum time = -1 sec
 
 Case #471
-destination not reachable
+minimum time = -1 sec
 
 Case #472
-destination not reachable
+minimum time = -1 sec
 
 Case #473
-destination not reachable
+minimum time = -1 sec
 
 Case #474
-destination not reachable
+minimum time = -1 sec
 
 Case #475
-destination not reachable
+minimum time = -1 sec
 
 Case #476
-destination not reachable
+minimum time = -1 sec
 
 Case #477
-destination not reachable
+minimum time = -1 sec
 
 Case #478
-destination not reachable
+minimum time = -1 sec
 
 Case #479
-destination not reachable
+minimum time = -1 sec
 
 Case #480
 destination not reachable
 
 Case #481
-destination not reachable
+minimum time = -1 sec
 
 Case #482
-destination not reachable
+minimum time = -1 sec
 
 Case #483
-destination not reachable
+minimum time = -1 sec
 
 Case #484
-destination not reachable
+minimum time = -1 sec
 
 Case #485
-destination not reachable
+minimum time = -1 sec
 
 Case #486
-destination not reachable
+minimum time = -1 sec
 
 Case #487
-destination not reachable
+minimum time = -1 sec
 
 Case #488
 destination not reachable
 
 Case #489
-destination not reachable
+minimum time = -1 sec
 
 Case #490
 destination not reachable
@@ -1475,16 +1475,16 @@ Case #492
 destination not reachable
 
 Case #493
-destination not reachable
+minimum time = -1 sec
 
 Case #494
 destination not reachable
 
 Case #495
-destination not reachable
+minimum time = -1 sec
 
 Case #496
-destination not reachable
+minimum time = -1 sec
 
 Case #497
 destination not reachable
@@ -1505,31 +1505,31 @@ Case #502
 destination not reachable
 
 Case #503
-destination not reachable
+minimum time = -1 sec
 
 Case #504
-destination not reachable
+minimum time = -1 sec
 
 Case #505
 destination not reachable
 
 Case #506
-destination not reachable
+minimum time = -1 sec
 
 Case #507
-destination not reachable
+minimum time = -1 sec
 
 Case #508
-destination not reachable
+minimum time = -1 sec
 
 Case #509
 destination not reachable
 
 Case #510
-destination not reachable
+minimum time = -1 sec
 
 Case #511
-destination not reachable
+minimum time = -1 sec
 
 Case #512
 destination not reachable
@@ -1538,19 +1538,19 @@ Case #513
 destination not reachable
 
 Case #514
-destination not reachable
+minimum time = -1 sec
 
 Case #515
-destination not reachable
+minimum time = -1 sec
 
 Case #516
-destination not reachable
+minimum time = -1 sec
 
 Case #517
 destination not reachable
 
 Case #518
-destination not reachable
+minimum time = -1 sec
 
 Case #519
 destination not reachable
@@ -1559,19 +1559,19 @@ Case #520
 destination not reachable
 
 Case #521
-destination not reachable
+minimum time = -1 sec
 
 Case #522
-destination not reachable
+minimum time = -1 sec
 
 Case #523
-destination not reachable
+minimum time = -1 sec
 
 Case #524
 destination not reachable
 
 Case #525
-destination not reachable
+minimum time = -1 sec
 
 Case #526
 destination not reachable
@@ -1583,31 +1583,31 @@ Case #528
 destination not reachable
 
 Case #529
-destination not reachable
+minimum time = -1 sec
 
 Case #530
 destination not reachable
 
 Case #531
-destination not reachable
+minimum time = -1 sec
 
 Case #532
-destination not reachable
+minimum time = -1 sec
 
 Case #533
 destination not reachable
 
 Case #534
-destination not reachable
+minimum time = -1 sec
 
 Case #535
-destination not reachable
+minimum time = -1 sec
 
 Case #536
-destination not reachable
+minimum time = -1 sec
 
 Case #537
-destination not reachable
+minimum time = -1 sec
 
 Case #538
 destination not reachable
@@ -1616,7 +1616,7 @@ Case #539
 destination not reachable
 
 Case #540
-destination not reachable
+minimum time = -1 sec
 
 Case #541
 destination not reachable
@@ -1625,7 +1625,7 @@ Case #542
 destination not reachable
 
 Case #543
-destination not reachable
+minimum time = -1 sec
 
 Case #544
 destination not reachable
@@ -1634,19 +1634,19 @@ Case #545
 destination not reachable
 
 Case #546
-destination not reachable
+minimum time = -1 sec
 
 Case #547
 destination not reachable
 
 Case #548
-destination not reachable
+minimum time = -1 sec
 
 Case #549
 destination not reachable
 
 Case #550
-destination not reachable
+minimum time = -1 sec
 
 Case #551
 destination not reachable
@@ -1655,7 +1655,7 @@ Case #552
 destination not reachable
 
 Case #553
-destination not reachable
+minimum time = -1 sec
 
 Case #554
 destination not reachable
@@ -1667,37 +1667,37 @@ Case #556
 destination not reachable
 
 Case #557
-destination not reachable
+minimum time = -1 sec
 
 Case #558
 destination not reachable
 
 Case #559
-destination not reachable
+minimum time = -1 sec
 
 Case #560
-destination not reachable
+minimum time = -1 sec
 
 Case #561
-destination not reachable
+minimum time = -1 sec
 
 Case #562
-destination not reachable
+minimum time = -1 sec
 
 Case #563
 destination not reachable
 
 Case #564
-destination not reachable
+minimum time = -1 sec
 
 Case #565
 destination not reachable
 
 Case #566
-destination not reachable
+minimum time = -1 sec
 
 Case #567
-destination not reachable
+minimum time = -1 sec
 
 Case #568
 destination not reachable
@@ -1706,7 +1706,7 @@ Case #569
 destination not reachable
 
 Case #570
-destination not reachable
+minimum time = -1 sec
 
 Case #571
 destination not reachable
@@ -1715,10 +1715,10 @@ Case #572
 destination not reachable
 
 Case #573
-destination not reachable
+minimum time = -1 sec
 
 Case #574
-destination not reachable
+minimum time = -1 sec
 
 Case #575
 destination not reachable
@@ -1730,37 +1730,37 @@ Case #577
 destination not reachable
 
 Case #578
-destination not reachable
+minimum time = -1 sec
 
 Case #579
-destination not reachable
+minimum time = -1 sec
 
 Case #580
 destination not reachable
 
 Case #581
-destination not reachable
+minimum time = -1 sec
 
 Case #582
-destination not reachable
+minimum time = -1 sec
 
 Case #583
 destination not reachable
 
 Case #584
-destination not reachable
+minimum time = -1 sec
 
 Case #585
-destination not reachable
+minimum time = -1 sec
 
 Case #586
-destination not reachable
+minimum time = -1 sec
 
 Case #587
 destination not reachable
 
 Case #588
-destination not reachable
+minimum time = -1 sec
 
 Case #589
 destination not reachable
@@ -1772,64 +1772,64 @@ Case #591
 destination not reachable
 
 Case #592
-destination not reachable
+minimum time = -1 sec
 
 Case #593
-destination not reachable
+minimum time = -1 sec
 
 Case #594
-destination not reachable
+minimum time = -1 sec
 
 Case #595
-destination not reachable
+minimum time = -1 sec
 
 Case #596
-destination not reachable
+minimum time = -1 sec
 
 Case #597
 destination not reachable
 
 Case #598
-destination not reachable
+minimum time = -1 sec
 
 Case #599
-destination not reachable
+minimum time = -1 sec
 
 Case #600
 destination not reachable
 
 Case #601
-destination not reachable
+minimum time = -1 sec
 
 Case #602
-destination not reachable
+minimum time = -1 sec
 
 Case #603
 destination not reachable
 
 Case #604
-destination not reachable
+minimum time = -1 sec
 
 Case #605
 destination not reachable
 
 Case #606
-destination not reachable
+minimum time = -1 sec
 
 Case #607
 destination not reachable
 
 Case #608
-destination not reachable
+minimum time = -1 sec
 
 Case #609
 destination not reachable
 
 Case #610
-destination not reachable
+minimum time = -1 sec
 
 Case #611
-destination not reachable
+minimum time = -1 sec
 
 Case #612
 destination not reachable
@@ -1847,13 +1847,13 @@ Case #616
 destination not reachable
 
 Case #617
-destination not reachable
+minimum time = -1 sec
 
 Case #618
-destination not reachable
+minimum time = -1 sec
 
 Case #619
-destination not reachable
+minimum time = -1 sec
 
 Case #620
 destination not reachable
@@ -1862,7 +1862,7 @@ Case #621
 destination not reachable
 
 Case #622
-destination not reachable
+minimum time = -1 sec
 
 Case #623
 destination not reachable
@@ -1874,10 +1874,10 @@ Case #625
 destination not reachable
 
 Case #626
-destination not reachable
+minimum time = -1 sec
 
 Case #627
-destination not reachable
+minimum time = -1 sec
 
 Case #628
 destination not reachable
@@ -1886,10 +1886,10 @@ Case #629
 destination not reachable
 
 Case #630
-destination not reachable
+minimum time = -1 sec
 
 Case #631
-destination not reachable
+minimum time = -1 sec
 
 Case #632
 destination not reachable
@@ -1910,10 +1910,10 @@ Case #637
 destination not reachable
 
 Case #638
-destination not reachable
+minimum time = -1 sec
 
 Case #639
-destination not reachable
+minimum time = -1 sec
 
 Case #640
 destination not reachable
@@ -1922,19 +1922,19 @@ Case #641
 destination not reachable
 
 Case #642
-destination not reachable
+minimum time = -1 sec
 
 Case #643
-destination not reachable
+minimum time = -1 sec
 
 Case #644
-destination not reachable
+minimum time = -1 sec
 
 Case #645
 destination not reachable
 
 Case #646
-destination not reachable
+minimum time = -1 sec
 
 Case #647
 destination not reachable
@@ -1943,22 +1943,22 @@ Case #648
 destination not reachable
 
 Case #649
-destination not reachable
+minimum time = -1 sec
 
 Case #650
 destination not reachable
 
 Case #651
-destination not reachable
+minimum time = -1 sec
 
 Case #652
 destination not reachable
 
 Case #653
-destination not reachable
+minimum time = -1 sec
 
 Case #654
-destination not reachable
+minimum time = -1 sec
 
 Case #655
 destination not reachable
@@ -1973,22 +1973,22 @@ Case #658
 destination not reachable
 
 Case #659
-destination not reachable
+minimum time = -1 sec
 
 Case #660
-destination not reachable
+minimum time = -1 sec
 
 Case #661
-destination not reachable
+minimum time = -1 sec
 
 Case #662
 destination not reachable
 
 Case #663
-destination not reachable
+minimum time = -1 sec
 
 Case #664
-destination not reachable
+minimum time = -1 sec
 
 Case #665
 destination not reachable
