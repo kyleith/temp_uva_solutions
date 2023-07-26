@@ -11,6 +11,8 @@ const int g_DIRECTIONS_COUNT = 4;
 const int g_DIRECTION_X[g_DIRECTIONS_COUNT] = {0, 1, 0, -1};
 const int g_DIRECTION_Y[g_DIRECTIONS_COUNT] = {-1, 0, 1, 0};
 
+const int g_INFINITY = 2000;
+
 class Graph
 {
 public:
@@ -23,6 +25,7 @@ private:
 	int m_startRow, m_startColumn;
 
 	void checkStartEndConnectivity (bool & areConnected);
+	int calculatePathTime ();
 };
 
 void Graph::readGraph (const int & rows, const int & columns)
@@ -53,7 +56,7 @@ void Graph::readGraph (const int & rows, const int & columns)
 
 void Graph::tryFindPath ()
 {
-	bool pathFound = !false;
+	bool pathFound = false;
 	int pathTime = -1;
 
 	if (
@@ -66,7 +69,8 @@ void Graph::tryFindPath ()
 
 		if (pathExists)
 		{
-			//TODO...
+			pathFound = true;
+			pathTime = calculatePathTime();
 		}
 		else
 		{
@@ -141,6 +145,15 @@ void Graph::checkStartEndConnectivity (bool & areConnected)
 	}
 
 	areConnected = false;
+}
+
+int Graph::calculatePathTime ()
+{
+	int time = g_INFINITY;
+
+	//TODO...
+
+	return time;
 }
 
 void processInput ();
