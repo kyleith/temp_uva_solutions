@@ -235,12 +235,18 @@ int Graph::calculatePathTime ()
 		nextState.m_color = bufferState.m_color;
 
 		nextState.m_direction = (bufferState.m_direction - 1 + g_DIRECTIONS_COUNT) % g_DIRECTIONS_COUNT;//ccw
-		pathTimes[nextState.m_row][nextState.m_column][nextState.m_direction][nextState.m_color] = currentTime + 1;
-		bufferQueue.push(nextState);
+		if (pathTimes[nextState.m_row][nextState.m_column][nextState.m_direction][nextState.m_color] >= g_INFINITY)
+		{
+			pathTimes[nextState.m_row][nextState.m_column][nextState.m_direction][nextState.m_color] = currentTime + 1;
+			bufferQueue.push(nextState);
+		}
 
 		nextState.m_direction = (bufferState.m_direction + 1) % g_DIRECTIONS_COUNT;//cw
-		pathTimes[nextState.m_row][nextState.m_column][nextState.m_direction][nextState.m_color] = currentTime + 1;
-		bufferQueue.push(nextState);
+		if (pathTimes[nextState.m_row][nextState.m_column][nextState.m_direction][nextState.m_color] >= g_INFINITY)
+		{
+			pathTimes[nextState.m_row][nextState.m_column][nextState.m_direction][nextState.m_color] = currentTime + 1;
+			bufferQueue.push(nextState);
+		}
 	}
 
 	return time;
