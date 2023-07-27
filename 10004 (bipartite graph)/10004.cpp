@@ -1,16 +1,39 @@
 #include <cstdio>
+#include <vector>
+#include <queue>
+
+#define vector std::vector
+#define queue std::queue
+
+const int g_MAX_NODES_COUNT = 200;
 
 class Graph
 {
 public:
-	Graph () {}
+	Graph () : m_nodesCount(0) {}
 	void readGraph (const int & nodesCount);
 	void testBipartiteGraph ();
 private:
+	int m_nodesCount;
+	int m_colors[g_MAX_NODES_COUNT];
+	vector<vector<int>> m_adjacencyList;
+
+	void runBfs (const int & startNode, bool & isColorError);
 };
 
 void Graph::readGraph (const int & nodesCount)
 {
+	m_nodesCount = nodesCount;
+	m_adjacencyList.clear();
+
+	for (int i = 0; i < m_nodesCount; i++)
+	{
+		vector<int> buffer;
+		m_adjacencyList.push_back(buffer);
+
+		m_colors[i] = -1;
+	}
+
 	int edgesCount;
 	scanf("%d\n", &edgesCount);
 
@@ -19,17 +42,17 @@ void Graph::readGraph (const int & nodesCount)
 		int u, v;
 		scanf("%d%d\n", &u, &v);
 
-		//TODO...
+		m_adjacencyList[u].push_back(v);
+		m_adjacencyList[v].push_back(u);
 	}
 }
 
 void Graph::testBipartiteGraph ()
 {
-	bool isBipartite = false;
+	bool isColorError = false;
+	runBfs(0, isColorError);
 
-	//TODO...
-
-	if (isBipartite)
+	if (!isColorError)
 	{
 		printf("BICOLORABLE.\n");
 	}
@@ -37,6 +60,38 @@ void Graph::testBipartiteGraph ()
 	{
 		printf("NOT BICOLORABLE.\n");
 	}
+}
+
+void Graph::runBfs (const int & startNode, bool & isColorError)
+{
+	m_colors[startNode] = 0;
+
+	queue<int> buffer;
+	buffer.push(startNode);
+
+	while (!buffer.empty())
+	{
+		int u = buffer.front();
+		buffer.pop();
+
+		int nextColor = (m_colors[u] + 1) % 2;
+		for (int i = 0; i < m_adjacencyList[u].size(); i++)
+		{
+			int v = m_adjacencyList[u][i];
+			if (m_colors[v] == -1)
+			{
+				m_colors[v] = nextColor;
+				buffer.push(v);
+			}
+			else if (m_colors[v] != nextColor)
+			{
+				isColorError = true;
+				return;
+			}
+		}
+	}
+
+	isColorError = false;
 }
 
 void processInput ();
