@@ -2,9 +2,11 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <stack>
 
 #define string std::string
 #define vector std::vector
+#define stack std::stack
 
 const int g_GRAPH_NODES_COUNT = 'z' - 'a' + 1;
 
@@ -154,7 +156,53 @@ void Graph::testVerticesDegrees (bool & isError, int & startNode)
 
 void Graph::testGraphConnectivity (const int & startNode, bool & isError)
 {
-	//TODO...
+	if (startNode < 0)
+	{
+		isError = true;
+		return;
+	}
+
+	bool isVisitedNode[g_GRAPH_NODES_COUNT];
+	for (int i = 0; i < g_GRAPH_NODES_COUNT; i++)
+	{
+		isVisitedNode[i] = false;
+	}
+
+	stack<int> buffer;
+	buffer.push(startNode);
+
+	isVisitedNode[startNode] = true;
+
+	while (!buffer.empty())
+	{
+		int u = buffer.top();
+		buffer.pop();
+
+		for (int i = 0; i < m_adjacencyList[u].size(); i++)
+		{
+			int v = m_adjacencyList[u][i];
+
+			if (!isVisitedNode[v])
+			{
+				isVisitedNode[v] = true;
+				buffer.push(v);
+			}
+		}
+	}
+
+	for (int u = 0; u < g_GRAPH_NODES_COUNT; u++)
+	{
+		if (
+			m_isActiveNode[u]
+			&& !isVisitedNode[u]
+		)
+		{
+			isError = true;
+			return;
+		}
+	}
+
+	isError = false;
 }
 
 void processInput ();
