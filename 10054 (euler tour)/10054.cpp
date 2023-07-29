@@ -5,11 +5,6 @@
 
 const int g_NODES_COUNT = 51;
 
-struct Edge
-{
-	int u, v;
-};
-
 class Graph
 {
 public:
@@ -21,7 +16,6 @@ private:
 	int m_dsuSetParent[g_NODES_COUNT];
 	int m_dsuSetSize[g_NODES_COUNT];
 	bool m_isActiveNode[g_NODES_COUNT];
-	Edge m_startEdge;
 
 	void testVertexDegrees (bool & isError);
 	void testConnectivity (bool & isError);
@@ -29,6 +23,8 @@ private:
 
 	void unionSets (const int & u, const int & v);
 	int findSetParent (int u);
+
+	void dfs (int parentNode);
 };
 
 void Graph::readGraph ()
@@ -61,9 +57,6 @@ void Graph::readGraph ()
 		m_adjacencyMatrix[v][u]++;
 
 		unionSets(u, v);
-
-		m_startEdge.u = u;
-		m_startEdge.v = v;
 	}
 }
 
@@ -165,34 +158,35 @@ int Graph::findSetParent (int u)
 
 void Graph::makeEulerTour ()
 {
-	stack<Edge> buffer;
-	buffer.push(m_startEdge);
+	int startNode = -1;
 
-	while (!buffer.empty())
+	for (int i = 1; i < g_NODES_COUNT; i++)
 	{
-		Edge currentEdge = buffer.top();
-		buffer.pop();
-
-		int u = currentEdge.u;
-		int v = currentEdge.v;
-
-		if (m_adjacencyMatrix[u][v] > 0)
+		if (m_isActiveNode[i])
 		{
-			m_adjacencyMatrix[u][v]--;
-			m_adjacencyMatrix[v][u]--;
+			startNode = i;
+			break;
+		}
+	}
 
-			printf("%d %d\n", currentEdge.u, currentEdge.v);
+	if (startNode > 0)
+	{
+		dfs(startNode);
+	}
+}
 
-			int u = currentEdge.v;
-			currentEdge.u = u;
-			for (int v = 1; v < g_NODES_COUNT; v++)
-			{
-				if (m_adjacencyMatrix[u][v] > 0)
-				{
-					currentEdge.v = v;
-					buffer.push(currentEdge);
-				}
-			}
+void Graph::dfs (int parentNode)
+{
+	for (int v = 1; v < g_NODES_COUNT; v++)
+	{
+		if (m_adjacencyMatrix[parentNode][v] > 0)
+		{
+			m_adjacencyMatrix[parentNode][v]--;
+			m_adjacencyMatrix[v][parentNode]--;
+
+			dfs(v);
+
+			printf("%d %d\n", v, parentNode);
 		}
 	}
 }
