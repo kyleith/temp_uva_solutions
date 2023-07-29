@@ -10,10 +10,16 @@ public:
 	void testEulerTour ();
 private:
 	int m_adjacencyMatrix[g_NODES_COUNT][g_NODES_COUNT];
+	int m_dsuSetParent[g_NODES_COUNT];
+	int m_dsuSetSize[g_NODES_COUNT];
+	bool m_isActiveNode[g_NODES_COUNT];
 
 	void testVertexDegrees (bool & isError);
 	void testConnectivity (bool & isError);
 	void makeEulerTour ();
+
+	void unionSets (const int & u, const int & v);
+	int findSetParent (int u);
 };
 
 void Graph::readGraph ()
@@ -24,6 +30,11 @@ void Graph::readGraph ()
 		{
 			m_adjacencyMatrix[i][j] = 0;
 		}
+
+		m_dsuSetParent[i] = i;
+		m_dsuSetSize[i] = 1;
+
+		m_isActiveNode[i] = false;
 	}
 
 	int edgesCount = -1;
@@ -34,8 +45,13 @@ void Graph::readGraph ()
 		int u = -1, v = -1;
 		scanf("%d%d", &u, &v);
 
+		m_isActiveNode[u] = true;
+		m_isActiveNode[v] = true;
+
 		m_adjacencyMatrix[u][v]++;
 		m_adjacencyMatrix[v][u]++;
+
+		unionSets(u, v);
 	}
 }
 
@@ -82,8 +98,57 @@ void Graph::testVertexDegrees (bool & isError)
 
 void Graph::testConnectivity (bool & isError)
 {
-	//isError = true;
-	//TODO...
+	for (int u = 1; u < g_NODES_COUNT; u++)
+	{
+		for (int v = 1; v < g_NODES_COUNT; v++)
+		{
+			if (
+				m_isActiveNode[u]
+				&& m_isActiveNode[v]
+				&& findSetParent(u) != findSetParent(v)
+			)
+			{
+				isError = true;
+				return;
+			}
+		}
+	}
+
+	isError = false;
+}
+
+void Graph::unionSets (const int & u, const int & v)
+{
+	int parentU = findSetParent(u);
+	int parentV = findSetParent(v);
+	if (parentU == parentV)
+	{
+		return;
+	}
+
+	if (m_dsuSetSize[parentU] > m_dsuSetSize[parentV])
+	{
+		m_dsuSetSize[parentU] += m_dsuSetSize[parentV];
+		m_dsuSetParent[parentV] = parentU;
+	}
+	else
+	{
+		m_dsuSetSize[parentV] += m_dsuSetSize[parentU];
+		m_dsuSetParent[parentU] = parentV;
+	}
+}
+
+int Graph::findSetParent (int u)
+{
+	if (m_dsuSetParent[u] == u)
+	{
+		return u;
+	}
+	else
+	{
+		m_dsuSetSize[u] = 1;
+		return m_dsuSetParent[u] = findSetParent(m_dsuSetParent[u]);
+	}
 }
 
 void Graph::makeEulerTour ()
