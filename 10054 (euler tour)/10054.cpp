@@ -13,6 +13,7 @@ private:
 	int m_dsuSetParent[g_NODES_COUNT];
 	int m_dsuSetSize[g_NODES_COUNT];
 	bool m_isActiveNode[g_NODES_COUNT];
+	int m_lastActiveNode;
 
 	void testVertexDegrees (bool & isError);
 	void testConnectivity (bool & isError);
@@ -52,6 +53,11 @@ void Graph::readGraph ()
 		m_adjacencyMatrix[v][u]++;
 
 		unionSets(u, v);
+
+		if (m_lastActiveNode == -1)
+		{
+			m_lastActiveNode = u;
+		}
 	}
 }
 
@@ -100,7 +106,7 @@ void Graph::testConnectivity (bool & isError)
 {
 	for (int u = 1; u < g_NODES_COUNT; u++)
 	{
-		for (int v = 1; v < g_NODES_COUNT; v++)
+		for (int v = u + 1; v < g_NODES_COUNT; v++)
 		{
 			if (
 				m_isActiveNode[u]
@@ -153,7 +159,27 @@ int Graph::findSetParent (int u)
 
 void Graph::makeEulerTour ()
 {
-	//TODO...
+	int currentNode = m_lastActiveNode;
+
+	while (currentNode != -1)
+	{
+		int nextNode = -1;
+		for (int i = 1; i < g_NODES_COUNT; i++)
+		{
+			if (m_adjacencyMatrix[currentNode][i] > 0)
+			{
+				m_adjacencyMatrix[currentNode][i]--;
+				m_adjacencyMatrix[i][currentNode]--;
+
+				printf("%d %d\n", currentNode, i);
+
+				nextNode = i;
+				break;
+			}
+		}
+
+		currentNode = nextNode;
+	}
 }
 
 void processInput ();
