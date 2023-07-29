@@ -1,6 +1,14 @@
 #include <cstdio>
+#include <stack>
+
+#define stack std::stack
 
 const int g_NODES_COUNT = 51;
+
+struct Edge
+{
+	int u, v;
+};
 
 class Graph
 {
@@ -13,7 +21,7 @@ private:
 	int m_dsuSetParent[g_NODES_COUNT];
 	int m_dsuSetSize[g_NODES_COUNT];
 	bool m_isActiveNode[g_NODES_COUNT];
-	int m_lastActiveNode;
+	Edge m_startEdge;
 
 	void testVertexDegrees (bool & isError);
 	void testConnectivity (bool & isError);
@@ -54,10 +62,8 @@ void Graph::readGraph ()
 
 		unionSets(u, v);
 
-		if (m_lastActiveNode == -1)
-		{
-			m_lastActiveNode = u;
-		}
+		m_startEdge.u = u;
+		m_startEdge.v = v;
 	}
 }
 
@@ -159,26 +165,35 @@ int Graph::findSetParent (int u)
 
 void Graph::makeEulerTour ()
 {
-	int currentNode = m_lastActiveNode;
+	stack<Edge> buffer;
+	buffer.push(m_startEdge);
 
-	while (currentNode != -1)
+	while (!buffer.empty())
 	{
-		int nextNode = -1;
-		for (int i = 1; i < g_NODES_COUNT; i++)
+		Edge currentEdge = buffer.top();
+		buffer.pop();
+
+		int u = currentEdge.u;
+		int v = currentEdge.v;
+
+		if (m_adjacencyMatrix[u][v] > 0)
 		{
-			if (m_adjacencyMatrix[currentNode][i] > 0)
+			m_adjacencyMatrix[u][v]--;
+			m_adjacencyMatrix[v][u]--;
+
+			printf("%d %d\n", currentEdge.u, currentEdge.v);
+
+			int u = currentEdge.v;
+			currentEdge.u = u;
+			for (int v = 1; v < g_NODES_COUNT; v++)
 			{
-				m_adjacencyMatrix[currentNode][i]--;
-				m_adjacencyMatrix[i][currentNode]--;
-
-				printf("%d %d\n", currentNode, i);
-
-				nextNode = i;
-				break;
+				if (m_adjacencyMatrix[u][v] > 0)
+				{
+					currentEdge.v = v;
+					buffer.push(currentEdge);
+				}
 			}
 		}
-
-		currentNode = nextNode;
 	}
 }
 
