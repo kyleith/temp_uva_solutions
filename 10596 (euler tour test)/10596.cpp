@@ -11,7 +11,9 @@ public:
 private:
 	int m_adjacencyMatrix[g_MAX_NODES_COUNT][g_MAX_NODES_COUNT];
 	int m_nodesCount;
-	int m_edgesCount;
+
+	void testVertexDegrees (bool & isError);
+	void testConnectivity (bool & isError);
 };
 
 void Graph::readGraph (const int & nodesCount, const int & edgesCount)
@@ -36,11 +38,41 @@ void Graph::readGraph (const int & nodesCount, const int & edgesCount)
 	}
 }
 
+void Graph::testVertexDegrees (bool & isError)
+{
+	for (int i = 0; i < m_nodesCount; i++)
+	{
+		int vertexDegree = 0;
+		for (int j = 0; j < m_nodesCount; j++)
+		{
+			vertexDegree += m_adjacencyMatrix[i][j];
+		}
+
+		if (vertexDegree & 1) //is odd
+		{
+			isError = true;
+			return;
+		}
+	}
+
+	isError = false;
+}
+
+void Graph::testConnectivity (bool & isError)
+{
+	//TODO...
+}
+
+
 void Graph::testEulerCircuit ()
 {
 	bool isError = false;
 
-	//TODO...
+	testVertexDegrees(isError);
+	if (!isError)
+	{
+		testConnectivity(isError);
+	}
 
 	bool isEulerCircuit = !isError;
 	if (isEulerCircuit)
