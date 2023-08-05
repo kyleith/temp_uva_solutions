@@ -1,4 +1,7 @@
 #include <cstdio>
+#include <stack>
+
+#define stack std::stack
 
 const int g_MAX_NODES_COUNT = 200;
 
@@ -10,6 +13,7 @@ public:
 	void testEulerCircuit ();
 private:
 	int m_adjacencyMatrix[g_MAX_NODES_COUNT][g_MAX_NODES_COUNT];
+	bool m_isActiveNode[g_MAX_NODES_COUNT];
 	int m_nodesCount;
 
 	void testVertexDegrees (bool & isError);
@@ -48,6 +52,8 @@ void Graph::testVertexDegrees (bool & isError)
 			vertexDegree += m_adjacencyMatrix[i][j];
 		}
 
+		m_isActiveNode[i] = (vertexDegree > 0);
+
 		if (vertexDegree & 1) //is odd
 		{
 			isError = true;
@@ -60,7 +66,63 @@ void Graph::testVertexDegrees (bool & isError)
 
 void Graph::testConnectivity (bool & isError)
 {
-	//TODO...
+	bool isVisited[g_MAX_NODES_COUNT];
+	for (int i = 0; i < m_nodesCount; i++)
+	{
+		isVisited[i] = false;
+	}
+
+	int start = -1;
+	for (int i = 0; i < m_nodesCount; i++)
+	{
+		if (m_isActiveNode[i])
+		{
+			start = i;
+			break;
+		}
+	}
+
+	if (start == -1)
+	{
+		isError = true;
+		return;
+	}
+
+	stack<int> buffer;
+	buffer.push(start);
+	isVisited[start] = true;
+
+	while (!buffer.empty())
+	{
+		int u = buffer.top();
+		buffer.pop();
+
+		for (int v = 0; v < m_nodesCount; v++)
+		{
+			if (
+					m_adjacencyMatrix[u][v] > 0
+					&& !isVisited[v]
+				)
+			{
+				isVisited[v] = true;
+				buffer.push(v);
+			}
+		}
+	}
+
+	for (int i = 0; i < m_nodesCount; i++)
+	{
+		if (
+			m_isActiveNode[i]
+			&& !isVisited[i]
+		)
+		{
+			isError = true;
+			return;
+		}
+	}
+
+	isError = false;
 }
 
 
@@ -81,7 +143,7 @@ void Graph::testEulerCircuit ()
 	}
 	else
 	{
-		printf("Not possible\n");
+		printf("Not Possible\n");
 	}
 }
 
