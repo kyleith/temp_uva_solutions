@@ -4,6 +4,12 @@
 
 #define string std::string
 
+const int g_MAX_ROWS = 1000;
+const int g_MAX_COLUMNS = 18500;
+
+string g_table[g_MAX_ROWS][g_MAX_COLUMNS];
+int g_values[g_MAX_ROWS][g_MAX_COLUMNS];
+
 void processInput ();
 void processTestCase ();
 
@@ -30,7 +36,8 @@ void Table::readTable (const int & rows, const int & columns)
 			string cellBuffer;
 			std::cin >> cellBuffer;
 
-			//TODO...
+			g_table[i][j] = cellBuffer;
+			g_values[i][j] = 0;
 		}
 	}
 }
@@ -42,8 +49,20 @@ void Table::processFormulas ()
 
 void Table::printTableValues ()
 {
-	//TODO...
-	printf("\n");
+	if (m_columns <= 0 || m_rows <= 0)
+	{
+		return;
+	}
+
+	for (int i = 0; i < m_rows; i++)
+	{
+		printf("%d", g_values[i][0]);
+		for (int j = 1; j < m_columns; j++)
+		{
+			printf(" %d", g_values[i][j]);
+		}
+		printf("\n");
+	}
 }
 
 int main ()
