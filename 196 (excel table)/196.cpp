@@ -46,7 +46,7 @@ void Table::readTable (const int & rows, const int & columns)
 
 			g_table[i][j] = cellBuffer;
 
-			if (std::isdigit(cellBuffer[0]))
+			if (cellBuffer[0] != '=')
 			{
 				g_values[i][j] = std::stoi(cellBuffer);
 			}
@@ -76,7 +76,7 @@ void Table::processFormulas ()
 int Table::calculateCellFormula (int row, int column)
 {
 	string currentCellString = g_table[row][column];
-	if (std::isdigit(currentCellString[0]))
+	if (currentCellString[0] != '=')
 	{
 		return g_values[row][column];
 	}
@@ -90,13 +90,13 @@ int Table::calculateCellFormula (int row, int column)
 		int nextRow = -1, nextColumn = -1;
 		parseCellCoordinate(cellNames[i], nextRow, nextColumn);
 
-		if (std::isdigit(g_table[nextRow][nextColumn][0]))
+		if (g_table[nextRow][nextColumn][0] == '=')
 		{
-			sum += g_values[nextRow][nextColumn];
+			sum += calculateCellFormula(nextRow, nextColumn);
 		}
 		else
 		{
-			sum += calculateCellFormula(nextRow, nextColumn);
+			sum += g_values[nextRow][nextColumn];
 		}
 	}
 
