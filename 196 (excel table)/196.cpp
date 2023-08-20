@@ -1,8 +1,12 @@
 #include <cstdio>
 #include <iostream>
 #include <string>
+#include <cctype>
+#include <vector>
+#include <sstream>
 
 #define string std::string
+#define vector std::vector
 
 const int g_MAX_ROWS = 1000;
 const int g_MAX_COLUMNS = 18500;
@@ -22,6 +26,10 @@ public:
 	void printTableValues ();
 private:
 	int m_rows, m_columns;
+
+	int calculateCellFormula (int row, int column);
+	vector<string> splitCellNames (const string & line);
+	void parseCellCoordinate (const string & cellName, int & row, int & column);
 };
 
 void Table::readTable (const int & rows, const int & columns)
@@ -37,14 +45,114 @@ void Table::readTable (const int & rows, const int & columns)
 			std::cin >> cellBuffer;
 
 			g_table[i][j] = cellBuffer;
-			g_values[i][j] = 0;
+
+			if (std::isdigit(cellBuffer[0]))
+			{
+				g_values[i][j] = std::stoi(cellBuffer);
+			}
+			else
+			{
+				g_values[i][j] = 0;
+			}
 		}
 	}
 }
 
 void Table::processFormulas ()
 {
-	//TODO...
+	for (int i = 0; i < m_rows; i++)
+	{
+		for (int j = 0; j < m_columns; j++)
+		{
+			string cellString = g_table[i][j];
+			if (cellString[0] == '=')
+			{
+				g_values[i][j] = calculateCellFormula(i, j);
+			}
+		}
+	}
+}
+
+int Table::calculateCellFormula (int row, int column)
+{
+	string currentCellString = g_table[row][column];
+	if (std::isdigit(currentCellString[0]))
+	{
+		return g_values[row][column];
+	}
+
+	vector<string> cellNames = splitCellNames(currentCellString);
+	int cellsCount = cellNames.size();
+
+	int sum = 0;
+	for (int i = 0; i < cellsCount; i++)
+	{
+		int nextRow = -1, nextColumn = -1;
+		parseCellCoordinate(cellNames[i], nextRow, nextColumn);
+
+		if (std::isdigit(g_table[nextRow][nextColumn][0]))
+		{
+			sum += g_values[nextRow][nextColumn];
+		}
+		else
+		{
+			sum += calculateCellFormula(nextRow, nextColumn);
+		}
+	}
+
+	g_table[row][column] = std::to_string(sum);
+	g_values[row][column] = sum;
+
+	return sum;
+}
+
+vector<string> Table::splitCellNames (const string & line)
+{
+	string buffer = line;
+	int length = buffer.length();
+	for (int i = 0; i < length; i++)
+	{
+		char symbol = buffer[i];
+		if (
+			symbol == '='
+			|| symbol == '+'
+		)
+		{
+			buffer[i] = ' ';
+		}
+	}
+
+	std::istringstream outStream(buffer);
+
+	vector<string> result;
+	string token;
+	while (outStream >> token)
+	{
+		result.push_back(token);
+	}
+
+	return result;
+}
+
+void Table::parseCellCoordinate (const string & cellName, int & row, int & column)
+{
+	int resultRow = 0, resultColumn = 0;
+
+	int lineLength = cellName.length();
+	for (int i = 0; i < lineLength; i++)
+	{
+		if (std::isdigit(cellName[i]))
+		{
+			resultRow = (resultRow * 10) + cellName[i] - '0';
+		}
+		else
+		{
+			resultColumn = (resultColumn * 26) + cellName[i] - 'A' + 1;
+		}
+	}
+
+	row = resultRow - 1;
+	column = resultColumn - 1;
 }
 
 void Table::printTableValues ()
