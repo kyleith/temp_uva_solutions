@@ -30,13 +30,64 @@ void Plane::readPoints (const int & n)
 	{
 		Point currentPoint;
 		scanf("%d%d", &currentPoint.x, &currentPoint.y);
+
+		m_points.push_back(currentPoint);
 	}
 }
 
 void Plane::findBeelineCoeffs ()
 {
 	int a = -501, b = -501;
-	//TODO...
+
+	int plusCounter = 0, minusCounter = 0;
+	bool isError = false, foundSolution = false;
+	for (a = 0; a <= 500; a++)
+	{
+		for (b = -500; b <= 500; b++)
+		{
+			plusCounter = 0;
+			minusCounter = 0;
+			isError = false;
+
+			for (int i = 0; i < m_totalPoints; i++)
+			{
+				int result = a * m_points[i].x + b * m_points[i].y;
+				if (result > 0)
+				{
+					plusCounter++;
+				}
+				else if (result < 0)
+				{
+					minusCounter++;
+				}
+
+				if (
+					plusCounter > m_halfPoints
+					|| minusCounter > m_halfPoints
+					|| result == 0
+				)
+				{
+					isError = true;
+					break;
+				}
+			}
+
+			if (
+				!isError
+				&& plusCounter == m_halfPoints
+				&& minusCounter == m_halfPoints
+			)
+			{
+				foundSolution = true;
+				break;
+			}
+		}
+
+		if (foundSolution)
+		{
+			break;
+		}
+	}
 
 	printf("%d %d\n", a, b);
 }
