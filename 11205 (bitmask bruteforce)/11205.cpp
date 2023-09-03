@@ -1,4 +1,7 @@
 #include <cstdio>
+#include <unordered_set>
+
+#define unordered_set std::unordered_set
 
 const int g_MAX_NUMBERS_COUNT = 100;
 
@@ -52,7 +55,7 @@ void Pedometer::findMinLEDsCombination (int & minMask, int & minMaskDigitsCount)
 	int bestMask = maxMaskValue;
 	int bestMaskDigitsCount = calculateBinaryOnes(bestMask);
 
-	for (int mask = 1; mask <= maxMaskValue; mask++)
+	for (int mask = 0; mask < maxMaskValue; mask++)
 	{
 		bool isError = false;
 
@@ -75,8 +78,24 @@ void Pedometer::findMinLEDsCombination (int & minMask, int & minMaskDigitsCount)
 
 void Pedometer::testMaskOnNumbers (const int & mask, bool & isError)
 {
-	//TODO...
-	isError = (mask != (1 << m_LEDsCount) - 1);
+	unordered_set<int> uniqueNumbers;
+	uniqueNumbers.clear();
+
+	isError = false;
+
+	for (int i = 0; i < m_numbersCount; i++)
+	{
+		int buffer = (m_numbers[i] & mask);
+		if (auto iter = uniqueNumbers.find(buffer); iter != uniqueNumbers.end())
+		{
+			isError = true;
+			return;
+		}
+		else
+		{
+			uniqueNumbers.insert(buffer);
+		}
+	}
 }
 
 int Pedometer::calculateBinaryOnes (const int & number)
