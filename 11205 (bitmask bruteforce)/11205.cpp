@@ -12,6 +12,9 @@ private:
 	int m_LEDsCount;
 	int m_numbersCount;
 	int m_numbers[g_MAX_NUMBERS_COUNT];
+
+	int findMinLEDsCombination();
+	int calculateBinaryOnes(const int & number);
 };
 
 void Pedometer::readDisplayParams ()
@@ -36,11 +39,35 @@ void Pedometer::readDisplayParams ()
 
 void Pedometer::calculateMinLEDsNumber ()
 {
-	int minLEDsCount = m_LEDsCount;
-
-	//TODO...
+	int minMask = findMinLEDsCombination();
+	int minLEDsCount = calculateBinaryOnes(minMask);
 
 	printf("%d\n", minLEDsCount);
+}
+
+int Pedometer::findMinLEDsCombination ()
+{
+	int maskValue = (1 << m_LEDsCount) - 1;
+	//TODO...
+
+	return maskValue;
+}
+
+int Pedometer::calculateBinaryOnes (const int & number)
+{
+	int buffer = number;
+	int digits = 0;
+
+	while (buffer > 0)
+	{
+		if (buffer & 1)
+		{
+			digits++;
+		}
+		buffer >>= 1;
+	}
+
+	return digits;
 }
 
 void processInput ();
