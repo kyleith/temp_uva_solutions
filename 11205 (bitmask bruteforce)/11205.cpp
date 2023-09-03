@@ -13,7 +13,8 @@ private:
 	int m_numbersCount;
 	int m_numbers[g_MAX_NUMBERS_COUNT];
 
-	int findMinLEDsCombination();
+	void findMinLEDsCombination (int & minMask, int & minMaskDigitsCount);
+	void testMaskOnNumbers(const int & mask, bool & isError);
 	int calculateBinaryOnes(const int & number);
 };
 
@@ -39,18 +40,43 @@ void Pedometer::readDisplayParams ()
 
 void Pedometer::calculateMinLEDsNumber ()
 {
-	int minMask = findMinLEDsCombination();
-	int minLEDsCount = calculateBinaryOnes(minMask);
+	int minMask = -1, minLEDsCount = -1;
+	findMinLEDsCombination(minMask, minLEDsCount);
 
 	printf("%d\n", minLEDsCount);
 }
 
-int Pedometer::findMinLEDsCombination ()
+void Pedometer::findMinLEDsCombination (int & minMask, int & minMaskDigitsCount)
 {
-	int maskValue = (1 << m_LEDsCount) - 1;
-	//TODO...
+	int maxMaskValue = (1 << m_LEDsCount) - 1;
+	int bestMask = maxMaskValue;
+	int bestMaskDigitsCount = calculateBinaryOnes(bestMask);
 
-	return maskValue;
+	for (int mask = 1; mask <= maxMaskValue; mask++)
+	{
+		bool isError = false;
+
+		testMaskOnNumbers(mask, isError);
+
+		if (!isError)
+		{
+			int currentMaskDigitsCount = calculateBinaryOnes(mask);
+			if (currentMaskDigitsCount < bestMaskDigitsCount)
+			{
+				bestMask = mask;
+				bestMaskDigitsCount = currentMaskDigitsCount;
+			}
+		}
+	}
+
+	minMask = bestMask;
+	minMaskDigitsCount = bestMaskDigitsCount;
+}
+
+void Pedometer::testMaskOnNumbers (const int & mask, bool & isError)
+{
+	//TODO...
+	isError = (mask != (1 << m_LEDsCount) - 1);
 }
 
 int Pedometer::calculateBinaryOnes (const int & number)
