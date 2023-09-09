@@ -9,6 +9,32 @@
 const int g_HAND_CARDS_COUNT = 5;
 const int g_DECK_CARDS_COUNT = 5;
 
+const int g_HAND_TYPES_COUNT = 9;
+string g_HAND_TYPES [g_HAND_TYPES_COUNT] = {
+	"straight-flush",
+	"four-of-a-kind",
+	"full-house",
+	"flush",
+	"straight",
+	"three-of-a-kind",
+	"two-pairs",
+	"one-pair",
+	"highest-card"
+};
+
+enum t_handType {
+	e_INVALID = -1,
+	e_STRAIGHT_FLUSH = 0,
+	e_FOUR_OF_A_KIND,
+	e_FULL_HOUSE,
+	e_FLUSH,
+	e_STRAIGHT,
+	e_THREE_OF_A_KIND,
+	e_TWO_PAIRS,
+	e_ONE_PAIR,
+	e_HIGHEST_CARD
+};
+
 struct Card
 {
 	char face, suite;
@@ -23,6 +49,8 @@ public:
 	void evaluateRound ();
 private:
 	vector<Card> m_hand, m_deck;
+
+	t_handType bruteforceHighestHand ();
 };
 
 void PokerRound::readRoundCards (const string & inputLine)
@@ -68,9 +96,18 @@ void PokerRound::evaluateRound ()
 	}
 
 	printf("Best hand: ");
-	//TODO...
+	t_handType highestHand = bruteforceHighestHand();
+	printf("%s", g_HAND_TYPES[highestHand].c_str());
 
 	printf("\n");
+}
+
+t_handType PokerRound::bruteforceHighestHand ()
+{
+	t_handType result = e_HIGHEST_CARD;
+	//TODO...
+
+	return result;
 }
 
 void processInput ();
