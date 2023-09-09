@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 #define string std::string
 #define vector std::vector
@@ -37,9 +38,50 @@ enum t_handType {
 
 struct Card
 {
+	static bool compareCards (Card card0, Card card1);
+
 	char face, suite;
 	int value;
+	void evaluateFace();
 };
+
+void Card::evaluateFace ()
+{
+	value = 0;
+
+	if (
+		('2' <= face)
+		&& (face <= '9')
+	)
+	{
+		value = face - '0';
+	}
+	else if (face == 'T')
+	{
+		value = 10;
+	}
+	else if (face == 'J')
+	{
+		value = 11;
+	}
+	else if (face == 'Q')
+	{
+		value = 12;
+	}
+	else if (face == 'K')
+	{
+		value = 13;
+	}
+	else if (face == 'A')
+	{
+		value = 14;
+	}
+}
+
+bool Card::compareCards (Card card0, Card card1)
+{
+	return card0.value > card1.value;
+}
 
 class PokerRound
 {
@@ -51,6 +93,16 @@ private:
 	vector<Card> m_hand, m_deck;
 
 	t_handType bruteforceHighestHand ();
+	t_handType evaluateHand (const vector<Card> & hand);
+
+	bool hasStraightFlush (const vector<Card> & hand);
+	bool hasFourOfAKind (const vector<Card> & hand);
+	bool hasFullHouse (const vector<Card> & hand);
+	bool hasFlush (const vector<Card> & hand);
+	bool hasStraight (const vector<Card> & hand);
+	bool hasThreeOfAKind (const vector<Card> & hand);
+	bool hasTwoPairs (const vector<Card> & hand);
+	bool hasOnePair (const vector<Card> & hand);
 };
 
 void PokerRound::readRoundCards (const string & inputLine)
@@ -65,6 +117,7 @@ void PokerRound::readRoundCards (const string & inputLine)
 		Card currentCard;
 		currentCard.face = inputLine[pos];
 		currentCard.suite = inputLine[pos + 1];
+		currentCard.evaluateFace();
 
 		m_hand.push_back(currentCard);
 	}
@@ -76,6 +129,7 @@ void PokerRound::readRoundCards (const string & inputLine)
 		Card currentCard;
 		currentCard.face = inputLine[pos];
 		currentCard.suite = inputLine[pos + 1];
+		currentCard.evaluateFace();
 
 		m_deck.push_back(currentCard);
 	}
@@ -104,10 +158,212 @@ void PokerRound::evaluateRound ()
 
 t_handType PokerRound::bruteforceHighestHand ()
 {
+	vector<Card> currentHand;
+	currentHand.clear();
+	for (int i = 0; i < g_HAND_CARDS_COUNT; i++)
+	{
+		currentHand.push_back(m_hand[i]);
+	}
+
+	std::sort(currentHand.begin(), currentHand.end(), Card::compareCards);
+	t_handType highestResult = evaluateHand(currentHand);
+
+	//TODO: bruteforce...
+
+	return highestResult;
+}
+
+t_handType PokerRound::evaluateHand (const vector<Card> & hand)
+{
 	t_handType result = e_HIGHEST_CARD;
-	//TODO...
+
+	if (hasStraightFlush(hand))
+	{
+		result = e_STRAIGHT_FLUSH;
+	}
+	else if (hasFourOfAKind(hand))
+	{
+		result = e_FOUR_OF_A_KIND;
+	}
+	else if (hasFullHouse(hand))
+	{
+		result = e_FULL_HOUSE;
+	}
+	else if (hasFlush(hand))
+	{
+		result = e_FLUSH;
+	}
+	else if (hasStraight(hand))
+	{
+		result = e_STRAIGHT;
+	}
+	else if (hasThreeOfAKind(hand))
+	{
+		result = e_THREE_OF_A_KIND;
+	}
+	else if (hasTwoPairs(hand))
+	{
+		result = e_TWO_PAIRS;
+	}
+	else if (hasOnePair(hand))
+	{
+		result = e_ONE_PAIR;
+	}
 
 	return result;
+}
+
+bool PokerRound::hasStraightFlush (const vector<Card> & hand)
+{
+	return hasStraight(hand)
+		&& hasFlush(hand);
+}
+
+bool PokerRound::hasFourOfAKind (const vector<Card> & hand)
+{
+	if (hand[0].face == hand[1].face)
+	{
+		return (hand[1].face == hand[2].face)
+			&& (hand[2].face == hand[3].face);
+	}
+	else if (hand[3].face == hand[4].face)
+	{
+		return (hand[3].face == hand[2].face)
+			&& (hand[2].face == hand[1].face);
+	}
+
+	return false;
+}
+
+bool PokerRound::hasFullHouse (const vector<Card> & hand)
+{
+	bool isFirstFullHouse =
+		(hand[0].face == hand[1].face)
+		&& (
+			hand[2].face == hand[3].face
+			&& hand[3].face == hand[4].face
+		);
+	if (isFirstFullHouse)
+	{
+		return true;
+	}
+
+	bool isSecondFullHouse =
+		(hand[3].face == hand[4].face)
+		&& (
+			hand[0].face == hand[1].face
+			&& hand[1].face == hand[2].face
+		);
+	return isSecondFullHouse;
+}
+
+bool PokerRound::hasFlush (const vector<Card> & hand)
+{
+	bool isFlush =
+		(hand[0].suite == hand[1].suite)
+		&& (hand[0].suite == hand[2].suite)
+		&& (hand[0].suite == hand[3].suite)
+		&& (hand[0].suite == hand[4].suite)
+	;
+	return isFlush;
+}
+
+bool PokerRound::hasStraight (const vector<Card> & hand)
+{
+	for (int i = 1; i < g_HAND_CARDS_COUNT - 1; i++)
+	{
+		if (hand[i].value != hand[i+1].value + 1)
+		{
+			return false;
+		}
+	}
+
+	if (hand[0].value == hand[1].value + 1)
+	{
+		return true;
+	}
+	else if (
+		hand[0].face == 'A'
+		&& hand[4].face == '2'
+	)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+bool PokerRound::hasThreeOfAKind (const vector<Card> & hand)
+{
+	bool isFirstCombination =
+		(hand[0].face == hand[1].face)
+		&& (hand[1].face == hand[2].face)
+	;
+	if (isFirstCombination)
+	{
+		return true;
+	}
+
+	bool isSecondCombination =
+		(hand[1].face == hand[2].face)
+		&& (hand[2].face == hand[3].face)
+	;
+	if (isSecondCombination)
+	{
+		return true;
+	}
+
+	bool isThirdCombination =
+		(hand[2].face == hand[3].face)
+		&& (hand[3].face == hand[4].face)
+	;
+	if (isThirdCombination)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+bool PokerRound::hasTwoPairs (const vector<Card> & hand)
+{
+	bool isFirstCombination =
+		(hand[0].face == hand[1].face)
+		&& (hand[2].face == hand[3].face)
+	;
+	if (isFirstCombination)
+	{
+		return true;
+	}
+
+	bool isSecondCombination =
+		(hand[0].face == hand[1].face)
+		&& (hand[3].face == hand[4].face)
+	;
+	if (isSecondCombination)
+	{
+		return true;
+	}
+
+	bool isThirdCombination =
+		(hand[1].face == hand[2].face)
+		&& (hand[3].face == hand[4].face)
+	;
+	if (isThirdCombination)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+bool PokerRound::hasOnePair (const vector<Card> & hand)
+{
+	return (hand[0].face == hand[1].face)
+		|| (hand[1].face == hand[2].face)
+		|| (hand[2].face == hand[3].face)
+		|| (hand[3].face == hand[4].face)
+	;
 }
 
 void processInput ();
