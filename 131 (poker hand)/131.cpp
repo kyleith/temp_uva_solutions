@@ -159,16 +159,39 @@ void PokerRound::evaluateRound ()
 t_handType PokerRound::bruteforceHighestHand ()
 {
 	vector<Card> currentHand;
+	t_handType highestResult = e_HIGHEST_CARD;
+
 	currentHand.clear();
 	for (int i = 0; i < g_HAND_CARDS_COUNT; i++)
 	{
-		currentHand.push_back(m_hand[i]);
+		Card buffer;
+		currentHand.push_back(buffer);
 	}
 
-	std::sort(currentHand.begin(), currentHand.end(), Card::compareCards);
-	t_handType highestResult = evaluateHand(currentHand);
+	int maxMaskValue = (1 << 5) - 1;
+	for (int mask = 0; mask <= maxMaskValue; mask++)
+	{
+		int deckCardIndex = 0;
+		for (int i = 0; i < g_HAND_CARDS_COUNT; i++)
+		{
+			if (mask & (1 << i))
+			{
+				currentHand[i] = m_deck[deckCardIndex];
+				deckCardIndex++;
+			}
+			else
+			{
+				currentHand[i] = m_hand[i];
+			}
+		}
+		std::sort(currentHand.begin(), currentHand.end(), Card::compareCards);
 
-	//TODO: bruteforce...
+		t_handType currentResult = evaluateHand(currentHand);
+		if (currentResult < highestResult)
+		{
+			highestResult = currentResult;
+		}
+	}
 
 	return highestResult;
 }
