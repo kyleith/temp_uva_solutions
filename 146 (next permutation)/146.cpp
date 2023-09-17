@@ -1,6 +1,7 @@
 #include <cstdio>
 #include <string>
 #include <iostream>
+#include <algorithm>
 
 #define string std::string
 
@@ -28,9 +29,17 @@ void PermutationGenerator::printNextPermutation (const string & inputLine)
 
 string PermutationGenerator::generateNextPermutation (const string & inputLine)
 {
-	//TODO...
+	string line = inputLine;
+	bool hasNextPermutation = std::next_permutation(line.begin(), line.end());
 
-	return "";
+	if (hasNextPermutation)
+	{
+		return line;
+	}
+	else
+	{
+		return "";
+	}
 }
 
 void processInput ();
