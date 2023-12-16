@@ -8,7 +8,7 @@
 
 const int g_ACTORS_COUNT = 5;
 const char g_ACTORS_NAMES[g_ACTORS_COUNT] = {'A', 'B', 'C', 'D', 'E'};
-const char g_ACTOR_MYSELF = 'I';
+const string g_ACTOR_MYSELF = "I";
 
 const int g_ACTORS_TYPES_COUNT = 3;
 const string g_DIVINE = "divine";
@@ -39,7 +39,7 @@ struct State
 
 struct Message
 {
-	string owner;
+	char owner;
 	string actor;
 	string value;
 	bool hasNotToken;
@@ -53,7 +53,7 @@ void testStatements (const vector<string> & statements, vector<string> & results
 
 void parseStatements (const vector<string> & statements, vector<Message> & messages);
 Message parseStatement (const string & statement);
-string parseStatementOwner (const string & statement);
+char parseStatementOwner (const string & statement);
 string parseStatementActor (const string & statement);
 string parseStatementValue (const string & statement);
 bool hasStatementTokenNot (const string & statement);
@@ -164,18 +164,9 @@ Message parseStatement (const string & statement)
 	return resultMessage;
 }
 
-string parseStatementOwner (const string & statement)
+char parseStatementOwner (const string & statement)
 {
-	string owner;
-	for (int i = 0; i < statement.size(); i++)
-	{
-		if (statement[i] == ':')
-		{
-			break;
-		}
-		owner.push_back(statement[i]);
-	}
-	return owner;
+	return statement[0];
 }
 
 string parseStatementActor (const string & statement)
@@ -274,8 +265,71 @@ void processState (State & inputState)
 
 bool isValidState (const vector<Message> & messages, const State & inputState)
 {
-	//TODO...
-	return !false;
+	bool isValidInputState = true;
+
+	for (int i = 0; i < messages.size(); i++)
+	{
+		bool isValidMessage = true;
+
+		Message currentMessage = messages[i];
+		int ownerIndex = currentMessage.owner - 'A';
+		bool isTruthfullOwner = inputState.isTruthfullActor[ownerIndex];
+
+		if (currentMessage.actor == g_ACTOR_IT)
+		{
+			if (currentMessage.hasNotToken)
+			{
+				isValidMessage = ((currentMessage.value != inputState.dayNight) == isTruthfullOwner);
+			}
+			else
+			{
+				isValidMessage = ((currentMessage.value == inputState.dayNight) == isTruthfullOwner);
+			}
+		}
+		else
+		{
+			int actorIndex = -1;
+			if (currentMessage.actor == g_ACTOR_MYSELF)
+			{
+				actorIndex = ownerIndex;
+			}
+			else
+			{
+				actorIndex = currentMessage.actor[0] - 'A';
+			}
+
+			if (currentMessage.hasLyingToken)
+			{
+				if (currentMessage.hasNotToken)
+				{
+					isValidMessage = ((inputState.isTruthfullActor[actorIndex] == true) == isTruthfullOwner);
+				}
+				else
+				{
+					isValidMessage = ((inputState.isTruthfullActor[actorIndex] == false) == isTruthfullOwner);
+				}
+			}
+			else
+			{
+				if (currentMessage.hasNotToken)
+				{
+					isValidMessage = ((currentMessage.value != inputState.actorsTypes[actorIndex]) == isTruthfullOwner);
+				}
+				else
+				{
+					isValidMessage = ((currentMessage.value == inputState.actorsTypes[actorIndex]) == isTruthfullOwner);
+				}
+			}
+		}
+
+		if (!isValidMessage)
+		{
+			isValidInputState = false;
+			break;
+		}
+	}
+
+	return isValidInputState;
 }
 
 void filterValidStates (const vector<State> & validStates, vector<string> & results)
@@ -299,7 +353,12 @@ void filterValidStates (const vector<State> & validStates, vector<string> & resu
 		}
 		if (actorType != g_TOKEN_UNKNOWN)
 		{
-			string resultActor = g_ACTORS_NAMES[actorIndex] + " is " + actorType + ".";
+			string resultActor;
+			resultActor.push_back(g_ACTORS_NAMES[actorIndex]);
+			resultActor.append(" is ");
+			resultActor.append(actorType);
+			resultActor.push_back('.');
+
 			results.push_back(resultActor);
 		}
 	}
@@ -315,7 +374,11 @@ void filterValidStates (const vector<State> & validStates, vector<string> & resu
 	}
 	if (dayNight != g_TOKEN_UNKNOWN)
 	{
-		string resultDayNight = "It is " + dayNight + ".";
+		string resultDayNight;
+		resultDayNight.append("It is ");
+		resultDayNight.append(dayNight);
+		resultDayNight.push_back('.');
+
 		results.push_back(resultDayNight);
 	}
 }

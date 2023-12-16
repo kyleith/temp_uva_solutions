@@ -1,33 +1,48 @@
 Conversation #1
-No facts are deducible.
+A is human.
+B is divine.
+C is evil.
+It is night.
 
 Conversation #2
-No facts are deducible.
+A is evil.
+B is human.
+It is day.
 
 Conversation #3
-No facts are deducible.
+It is day.
 
 Conversation #4
-No facts are deducible.
+This is impossible.
 
 Conversation #5
 No facts are deducible.
 
 Conversation #6
-No facts are deducible.
+A is evil.
+B is divine.
+C is evil.
+It is day.
 
 Conversation #7
-No facts are deducible.
+A is evil.
+B is divine.
+C is evil.
+It is day.
 
 Conversation #8
 No facts are deducible.
 
 Conversation #9
-No facts are deducible.
+This is impossible.
 
 Conversation #10
-No facts are deducible.
+E is human.
+It is night.
 
 Conversation #11
-No facts are deducible.
+A is evil.
+C is evil.
+E is evil.
+It is day.
 
