@@ -23,10 +23,20 @@ const string g_NIGHT = "night";
 const string g_RESULT_IMPOSSIBLE = "This is impossible.";
 const string g_RESULT_NOTHING_PROOVED = "No facts are deducible.";
 
+struct State
+{
+	string actorsTypes [g_ACTORS_COUNT];
+	string dayNight;
+};
+
 void processInput ();
 void processTestCase (const int & statementsCount);
 void readStatements (const int & statementsCount, vector<string> & statements);
+
 void testStatements (const vector<string> & statements, vector<string> & results);
+void bruteforceStates (const vector<string> & statements, vector<State> & validStates);
+void filterValidStates (const vector<State> & validStates, vector<string> & results);
+
 void printConversationResults (const vector<string> & results);
 
 int main ()
@@ -84,8 +94,34 @@ void testStatements (const vector<string> & statements, vector<string> & results
 {
 	results.clear();
 
+	vector<State> validStates;
+	bruteforceStates(statements, validStates);
+
+	if (validStates.size() == 0)
+	{
+		results.push_back(g_RESULT_IMPOSSIBLE);
+	}
+	else
+	{
+		filterValidStates(validStates, results);
+
+		if (results.size() == 0)
+		{
+			results.push_back(g_RESULT_NOTHING_PROOVED);
+		}
+	}
+}
+
+void bruteforceStates (const vector<string> & statements, vector<State> & validStates)
+{
+	validStates.clear();
+
 	//TODO...
-	results.push_back(g_RESULT_NOTHING_PROOVED);
+}
+
+void filterValidStates (const vector<State> & validStates, vector<string> & results)
+{
+	//TODO...
 }
 
 void printConversationResults (const vector<string> & results)
