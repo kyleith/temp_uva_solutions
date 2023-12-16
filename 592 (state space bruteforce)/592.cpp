@@ -33,13 +33,24 @@ struct State
 	string dayNight;
 };
 
+struct Message
+{
+	string owner;
+	string actor;
+	string value;
+	bool hasNotToken;
+	bool hasLyingToken;
+};
+
 void processInput ();
 void processTestCase (const int & statementsCount);
 void readStatements (const int & statementsCount, vector<string> & statements);
 
 void testStatements (const vector<string> & statements, vector<string> & results);
-void bruteforceStates (const vector<string> & statements, vector<State> & validStates);
-bool isValidState (const vector<string> & statements, const State & inputState);
+void parseStatements (const vector<string> & statements, vector<Message> & messages);
+Message parseStatement (const string & statement);
+void bruteforceStates (const vector<Message> & messages, vector<State> & validStates);
+bool isValidState (const vector<Message> & messages, const State & inputState);
 void filterValidStates (const vector<State> & validStates, vector<string> & results);
 
 void printConversationResults (const vector<string> & results);
@@ -99,8 +110,11 @@ void testStatements (const vector<string> & statements, vector<string> & results
 {
 	results.clear();
 
+	vector<Message> messages;
 	vector<State> validStates;
-	bruteforceStates(statements, validStates);
+
+	parseStatements(statements, messages);
+	bruteforceStates(messages, validStates);
 
 	if (validStates.size() == 0)
 	{
@@ -117,7 +131,27 @@ void testStatements (const vector<string> & statements, vector<string> & results
 	}
 }
 
-void bruteforceStates (const vector<string> & statements, vector<State> & validStates)
+void parseStatements (const vector<string> & statements, vector<Message> & messages)
+{
+	messages.clear();
+
+	int statementsCount = statements.size();
+	for (int i = 0; i < statementsCount; i++)
+	{
+		Message currentMessage = parseStatement(statements[i]);
+		messages.push_back(currentMessage);
+	}
+}
+
+Message parseStatement (const string & statement)
+{
+	Message result;
+	//TODO...
+
+	return result;
+}
+
+void bruteforceStates (const vector<Message> & messages, vector<State> & validStates)
 {
 	validStates.clear();
 
@@ -142,7 +176,7 @@ void bruteforceStates (const vector<string> & statements, vector<State> & validS
 							currentState.actorsTypes[4] = g_ACTORS_TYPES[actorETypeIndex];
 							currentState.dayNight = g_ACTOR_IT_TYPES[actorItTypeIndex];
 
-							if (isValidState(statements, currentState))
+							if (isValidState(messages, currentState))
 							{
 								validStates.push_back(currentState);
 							}
@@ -154,7 +188,7 @@ void bruteforceStates (const vector<string> & statements, vector<State> & validS
 	}
 }
 
-bool isValidState (const vector<string> & statements, const State & inputState)
+bool isValidState (const vector<Message> & messages, const State & inputState)
 {
 	//TODO...
 	return !false;
