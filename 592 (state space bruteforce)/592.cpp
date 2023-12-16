@@ -11,7 +11,10 @@ const char g_ACTORS_NAMES[g_ACTORS_COUNT] = {'A', 'B', 'C', 'D', 'E'};
 const char g_ACTOR_MYSELF = 'I';
 
 const int g_ACTORS_TYPES_COUNT = 3;
-const string g_ACTORS_TYPES[g_ACTORS_TYPES_COUNT] = {"divine", "human", "evil"};
+const string g_DIVINE = "divine";
+const string g_HUMAN = "human";
+const string g_EVIL = "evil";
+const string g_ACTORS_TYPES[g_ACTORS_TYPES_COUNT] = {g_DIVINE, g_HUMAN, g_EVIL};
 
 const string g_FLAG_NOT = "not";
 const string g_FLAG_LYING = "lying";
@@ -29,7 +32,8 @@ const string g_TOKEN_UNKNOWN = "unknown";
 
 struct State
 {
-	string actorsTypes [g_ACTORS_COUNT];
+	string actorsTypes[g_ACTORS_COUNT];
+	bool isTruthfullActor[g_ACTORS_COUNT];
 	string dayNight;
 };
 
@@ -55,6 +59,7 @@ string parseStatementValue (const string & statement);
 bool hasStatementTokenNot (const string & statement);
 
 void bruteforceStates (const vector<Message> & messages, vector<State> & validStates);
+void processState (State & inputState);
 bool isValidState (const vector<Message> & messages, const State & inputState);
 void filterValidStates (const vector<State> & validStates, vector<string> & results);
 
@@ -241,6 +246,8 @@ void bruteforceStates (const vector<Message> & messages, vector<State> & validSt
 							currentState.actorsTypes[4] = g_ACTORS_TYPES[actorETypeIndex];
 							currentState.dayNight = g_ACTOR_IT_TYPES[actorItTypeIndex];
 
+							processState(currentState);
+
 							if (isValidState(messages, currentState))
 							{
 								validStates.push_back(currentState);
@@ -250,6 +257,18 @@ void bruteforceStates (const vector<Message> & messages, vector<State> & validSt
 				}
 			}
 		}
+	}
+}
+
+void processState (State & inputState)
+{
+	for (int i = 0; i < g_ACTORS_COUNT; i++)
+	{
+		bool isDivine = (inputState.actorsTypes[i] == g_DIVINE);
+		bool isHuman = (inputState.actorsTypes[i] == g_HUMAN);
+		bool isDay = (inputState.dayNight == g_DAY);
+
+		inputState.isTruthfullActor[i] = isDivine || (isHuman && isDay);
 	}
 }
 
