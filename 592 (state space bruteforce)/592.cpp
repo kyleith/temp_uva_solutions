@@ -25,6 +25,8 @@ const string g_ACTOR_IT_TYPES[g_ACTOR_IT_TYPES_COUNT] = {g_DAY, g_NIGHT};
 const string g_RESULT_IMPOSSIBLE = "This is impossible.";
 const string g_RESULT_NOTHING_PROOVED = "No facts are deducible.";
 
+const string g_TOKEN_UNKNOWN = "unknown";
+
 struct State
 {
 	string actorsTypes [g_ACTORS_COUNT];
@@ -160,7 +162,44 @@ bool isValidState (const vector<string> & statements, const State & inputState)
 
 void filterValidStates (const vector<State> & validStates, vector<string> & results)
 {
-	//TODO...
+	int validStatesCount = validStates.size();
+	if (validStatesCount <= 0)
+	{
+		return;
+	}
+
+	for (int actorIndex = 0; actorIndex < g_ACTORS_COUNT; actorIndex++)
+	{
+		string actorType = validStates[0].actorsTypes[actorIndex];
+		for (int stateIndex = 1; stateIndex < validStatesCount; stateIndex++)
+		{
+			if (actorType != validStates[stateIndex].actorsTypes[actorIndex])
+			{
+				actorType = g_TOKEN_UNKNOWN;
+				break;
+			}
+		}
+		if (actorType != g_TOKEN_UNKNOWN)
+		{
+			string resultActor = g_ACTORS_NAMES[actorIndex] + " is " + actorType + ".";
+			results.push_back(resultActor);
+		}
+	}
+
+	string dayNight = validStates[0].dayNight;
+	for (int i = 1; i < validStatesCount; i++)
+	{
+		if (dayNight != validStates[i].dayNight)
+		{
+			dayNight = g_TOKEN_UNKNOWN;
+			break;
+		}
+	}
+	if (dayNight != g_TOKEN_UNKNOWN)
+	{
+		string resultDayNight = "It is " + dayNight + ".";
+		results.push_back(resultDayNight);
+	}
 }
 
 void printConversationResults (const vector<string> & results)
