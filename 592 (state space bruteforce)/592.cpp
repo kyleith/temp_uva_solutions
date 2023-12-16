@@ -1,11 +1,33 @@
 #include <cstdio>
 #include <string>
 #include <iostream>
+#include <vector>
 
 #define string std::string
+#define vector std::vector
+
+const int g_ACTORS_COUNT = 5;
+const char g_ACTORS_NAMES[g_ACTORS_COUNT] = {'A', 'B', 'C', 'D', 'E'};
+const char g_ACTOR_MYSELF = 'I';
+
+const int g_ACTORS_TYPES_COUNT = 3;
+const string g_ACTORS_TYPES[g_ACTORS_TYPES_COUNT] = {"divine", "human", "evil"};
+
+const string g_FLAG_NOT = "not";
+const string g_FLAG_LYING = "lying";
+
+const string g_ACTOR_IT = "It";
+const string g_DAY = "day";
+const string g_NIGHT = "night";
+
+const string g_RESULT_IMPOSSIBLE = "This is impossible.";
+const string g_RESULT_NOTHING_PROOVED = "No facts are deducible.";
 
 void processInput ();
 void processTestCase (const int & statementsCount);
+void readStatements (const int & statementsCount, vector<string> & statements);
+void testStatements (const vector<string> & statements, vector<string> & results);
+void printConversationResults (const vector<string> & results);
 
 int main ()
 {
@@ -38,11 +60,39 @@ void processInput ()
 
 void processTestCase (const int & statementsCount)
 {
-	string line;
+	vector<string> statements;
+	vector<string> conversationResults;
 
+	readStatements(statementsCount, statements);
+	testStatements(statements, conversationResults);
+	printConversationResults(conversationResults);
+}
+
+void readStatements (const int & statementsCount, vector<string> & statements)
+{
+	statements.clear();
+
+	string line;
 	for (int i = 0; i < statementsCount; i++)
 	{
 		std::getline(std::cin, line);
-		//TODO...
+		statements.push_back(line);
+	}
+}
+
+void testStatements (const vector<string> & statements, vector<string> & results)
+{
+	results.clear();
+
+	//TODO...
+	results.push_back(g_RESULT_NOTHING_PROOVED);
+}
+
+void printConversationResults (const vector<string> & results)
+{
+	int linesCount = results.size();
+	for (int i = 0; i < linesCount; i++)
+	{
+		printf("%s\n", results[i].c_str());
 	}
 }
