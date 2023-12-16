@@ -45,10 +45,15 @@ struct Message
 void processInput ();
 void processTestCase (const int & statementsCount);
 void readStatements (const int & statementsCount, vector<string> & statements);
-
 void testStatements (const vector<string> & statements, vector<string> & results);
+
 void parseStatements (const vector<string> & statements, vector<Message> & messages);
 Message parseStatement (const string & statement);
+string parseStatementOwner (const string & statement);
+string parseStatementActor (const string & statement);
+string parseStatementValue (const string & statement);
+bool hasStatementTokenNot (const string & statement);
+
 void bruteforceStates (const vector<Message> & messages, vector<State> & validStates);
 bool isValidState (const vector<Message> & messages, const State & inputState);
 void filterValidStates (const vector<State> & validStates, vector<string> & results);
@@ -145,10 +150,40 @@ void parseStatements (const vector<string> & statements, vector<Message> & messa
 
 Message parseStatement (const string & statement)
 {
-	Message result;
-	//TODO...
+	Message resultMessage;
+	resultMessage.owner = parseStatementOwner(statement);
+	resultMessage.actor = parseStatementActor(statement);
+	resultMessage.value = parseStatementValue(statement);
+	resultMessage.hasNotToken = hasStatementTokenNot(statement);
+	resultMessage.hasLyingToken = (resultMessage.value == g_FLAG_LYING);
+	return resultMessage;
+}
 
+string parseStatementOwner (const string & statement)
+{
+	string result;
+	//TODO...
 	return result;
+}
+
+string parseStatementActor (const string & statement)
+{
+	string result;
+	//TODO...
+	return result;
+}
+
+string parseStatementValue (const string & statement)
+{
+	string result;
+	//TODO...
+	return result;
+}
+
+bool hasStatementTokenNot (const string & statement)
+{
+	//TODO...
+	return false;
 }
 
 void bruteforceStates (const vector<Message> & messages, vector<State> & validStates)
