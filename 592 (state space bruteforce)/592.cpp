@@ -80,7 +80,7 @@ void processInput ()
 	while (statementsCount > 0)
 	{
 		++counter;
-		printf("Connversation #%d\n", counter);
+		printf("Conversation #%d\n", counter);
 
 		processTestCase(statementsCount);
 		scanf("%d\n", &statementsCount);
@@ -161,29 +161,59 @@ Message parseStatement (const string & statement)
 
 string parseStatementOwner (const string & statement)
 {
-	string result;
-	//TODO...
-	return result;
+	string owner;
+	for (int i = 0; i < statement.size(); i++)
+	{
+		if (statement[i] == ':')
+		{
+			break;
+		}
+		owner.push_back(statement[i]);
+	}
+	return owner;
 }
 
 string parseStatementActor (const string & statement)
 {
-	string result;
-	//TODO...
-	return result;
+	string actor;
+
+	int startingIndex = -1;
+	for (startingIndex = 0; startingIndex < statement.size() && statement[startingIndex] != ' '; startingIndex++);
+
+	for (int i = startingIndex + 1; i < statement.size(); i++)
+	{
+		if (statement[i] == ' ')
+		{
+			break;
+		}
+		actor.push_back(statement[i]);
+	}
+
+	return actor;
 }
 
 string parseStatementValue (const string & statement)
 {
-	string result;
-	//TODO...
-	return result;
+	string value;
+
+	int startingIndex = -1;
+	for (startingIndex = statement.size() - 2; startingIndex >= 0 && statement[startingIndex] != ' '; startingIndex--);
+
+	for (int i = startingIndex + 1; i < statement.size(); i++)
+	{
+		if (statement[i] == '.')
+		{
+			break;
+		}
+		value.push_back(statement[i]);
+	}
+
+	return value;
 }
 
 bool hasStatementTokenNot (const string & statement)
 {
-	//TODO...
-	return false;
+	return statement.find(g_FLAG_NOT) < statement.size();
 }
 
 void bruteforceStates (const vector<Message> & messages, vector<State> & validStates)
