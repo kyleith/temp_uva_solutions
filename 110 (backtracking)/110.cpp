@@ -51,9 +51,9 @@ void ProgramCode::writeProgram ()
 
 void ProgramCode::backtracking(string suffix, int currentLayerIndex)
 {
-	if (currentLayerIndex == m_variablesCount)
+	if (currentLayerIndex >= m_variablesCount)
 	{
-		for (int i = 0; i < m_variablesCount; i++)
+		for (int i = 0; i < currentLayerIndex; i++)
 		{
 			printf("  ");
 		}
@@ -72,7 +72,27 @@ void ProgramCode::backtracking(string suffix, int currentLayerIndex)
 		return;
 	}
 
-	//TODO...
+	char nextSymbol = 'a' + currentLayerIndex;
+
+	for (int i = suffix.length() - 1; i >= 0; i--)
+	{
+		for (int i = 0; i < currentLayerIndex; i++)
+		{
+			printf("  ");
+		}
+		printf("if %c < %c then\n", suffix[i], nextSymbol);
+
+		string buffer = suffix;
+		buffer.insert(i, 1, nextSymbol);
+		backtracking(buffer, currentLayerIndex + 1);
+	}
+
+	for (int i = 0; i < currentLayerIndex; i++)
+	{
+		printf("  ");
+	}
+	printf("else\n");
+	backtracking(nextSymbol + suffix, currentLayerIndex + 1);
 }
 
 int main ()

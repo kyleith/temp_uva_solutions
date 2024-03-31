@@ -11,6 +11,10 @@ var
 a,b : integer;
 begin
   readln(a,b);
+  if a < b then
+    writeln(b,a)
+  else
+    writeln(b,a)
 end.
 
 program sort(input,output);
@@ -18,6 +22,20 @@ var
 a,b,c : integer;
 begin
   readln(a,b,c);
+  if a < b then
+    if a < c then
+      writeln(b,c,a)
+    if b < c then
+      writeln(c,b,a)
+    else
+      writeln(c,b,a)
+  else
+    if a < c then
+      writeln(b,c,a)
+    if b < c then
+      writeln(c,b,a)
+    else
+      writeln(c,b,a)
 end.
 
 program sort(input,output);
@@ -25,4 +43,60 @@ var
 a,b,c,d : integer;
 begin
   readln(a,b,c,d);
+  if a < b then
+    if a < c then
+      if a < d then
+        writeln(b,c,d,a)
+      if c < d then
+        writeln(b,d,c,a)
+      if b < d then
+        writeln(d,b,c,a)
+      else
+        writeln(d,b,c,a)
+    if b < c then
+      if a < d then
+        writeln(c,b,d,a)
+      if b < d then
+        writeln(c,d,b,a)
+      if c < d then
+        writeln(d,c,b,a)
+      else
+        writeln(d,c,b,a)
+    else
+      if a < d then
+        writeln(c,b,d,a)
+      if b < d then
+        writeln(c,d,b,a)
+      if c < d then
+        writeln(d,c,b,a)
+      else
+        writeln(d,c,b,a)
+  else
+    if a < c then
+      if a < d then
+        writeln(b,c,d,a)
+      if c < d then
+        writeln(b,d,c,a)
+      if b < d then
+        writeln(d,b,c,a)
+      else
+        writeln(d,b,c,a)
+    if b < c then
+      if a < d then
+        writeln(c,b,d,a)
+      if b < d then
+        writeln(c,d,b,a)
+      if c < d then
+        writeln(d,c,b,a)
+      else
+        writeln(d,c,b,a)
+    else
+      if a < d then
+        writeln(c,b,d,a)
+      if b < d then
+        writeln(c,d,b,a)
+      if c < d then
+        writeln(d,c,b,a)
+      else
+        writeln(d,c,b,a)
 end.
