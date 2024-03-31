@@ -74,16 +74,23 @@ void ProgramCode::backtracking(string suffix, int currentLayerIndex)
 
 	char nextSymbol = 'a' + currentLayerIndex;
 
-	for (int i = suffix.length() - 1; i >= 0; i--)
+	for (int i = 0; i < currentLayerIndex; i++)
+	{
+		printf("  ");
+	}
+	printf("if %c < %c then\n", suffix[suffix.length() - 1], nextSymbol);
+	backtracking(suffix + nextSymbol, currentLayerIndex + 1);
+
+	for (int i = suffix.length() - 2; i >= 0; i--)
 	{
 		for (int i = 0; i < currentLayerIndex; i++)
 		{
 			printf("  ");
 		}
-		printf("if %c < %c then\n", suffix[i], nextSymbol);
+		printf("else if %c < %c then\n", suffix[i], nextSymbol);
 
 		string buffer = suffix;
-		buffer.insert(i, 1, nextSymbol);
+		buffer.insert(i + 1, 1, nextSymbol);
 		backtracking(buffer, currentLayerIndex + 1);
 	}
 
