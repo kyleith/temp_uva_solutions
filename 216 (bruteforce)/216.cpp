@@ -2,6 +2,7 @@
 #include <cmath>
 #include <vector>
 #include <string>
+#include <algorithm>
 
 #define vector std::vector
 #define string std::string
@@ -57,8 +58,6 @@ void Network::readNodes (const int & n)
 
 void Network::findShortestCableChain ()
 {
-	double totalLength = 0.0;
-
 	string currentChain = "";
 	for (int i = 0; i < m_nodesCount; i++)
 	{
@@ -67,12 +66,24 @@ void Network::findShortestCableChain ()
 	}
 
 	string bestChain = currentChain;
-	//TODO...
+	double bestLength = calculateChainCableLength(bestChain);
+
+	bool hasNextPermutation = std::next_permutation(currentChain.begin(), currentChain.end());
+	while (hasNextPermutation)
+	{
+		double currentLength = calculateChainCableLength(currentChain);
+		if (currentLength < bestLength)
+		{
+			bestChain = currentChain;
+			bestLength = currentLength;
+		}
+
+		hasNextPermutation = std::next_permutation(currentChain.begin(), currentChain.end());
+	}
 
 	printChainDescription(bestChain);
-	totalLength = calculateChainCableLength(bestChain);
 
-	printf("Number of feet of cable required is %.2lf.\n", totalLength);
+	printf("Number of feet of cable required is %.2lf.\n", bestLength);
 }
 
 double Network::calculateChainCableLength (const string & chain)
