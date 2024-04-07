@@ -1,0 +1,1998 @@
+**********************************************************
+Network #1
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #2
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #3
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #4
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #5
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #6
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #7
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #8
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #9
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #10
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #11
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #12
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #13
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #14
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #15
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #16
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #17
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #18
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #19
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #20
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #21
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #22
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #23
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #24
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #25
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #26
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #27
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #28
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #29
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #30
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #31
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #32
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #33
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #34
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #35
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #36
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #37
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #38
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #39
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #40
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #41
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #42
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #43
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #44
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #45
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #46
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #47
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #48
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #49
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #50
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #51
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #52
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #53
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #54
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #55
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #56
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #57
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #58
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #59
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #60
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #61
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #62
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #63
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #64
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #65
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #66
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #67
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #68
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #69
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #70
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #71
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #72
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #73
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #74
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #75
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #76
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #77
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #78
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #79
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #80
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #81
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #82
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #83
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #84
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #85
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #86
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #87
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #88
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #89
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #90
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #91
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #92
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #93
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #94
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #95
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #96
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #97
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #98
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #99
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #100
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #101
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #102
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #103
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #104
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #105
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #106
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #107
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #108
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #109
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #110
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #111
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #112
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #113
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #114
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #115
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #116
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #117
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #118
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #119
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #120
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #121
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #122
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #123
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #124
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #125
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #126
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #127
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #128
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #129
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #130
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #131
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #132
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #133
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #134
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #135
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #136
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #137
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #138
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #139
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #140
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #141
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #142
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #143
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #144
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #145
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #146
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #147
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #148
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #149
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #150
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #151
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #152
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #153
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #154
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #155
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #156
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #157
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #158
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #159
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #160
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #161
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #162
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #163
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #164
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #165
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #166
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #167
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #168
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #169
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #170
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #171
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #172
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #173
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #174
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #175
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #176
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #177
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #178
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #179
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #180
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #181
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #182
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #183
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #184
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #185
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #186
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #187
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #188
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #189
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #190
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #191
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #192
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #193
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #194
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #195
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #196
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #197
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #198
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #199
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #200
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #201
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #202
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #203
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #204
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #205
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #206
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #207
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #208
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #209
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #210
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #211
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #212
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #213
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #214
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #215
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #216
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #217
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #218
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #219
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #220
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #221
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #222
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #223
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #224
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #225
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #226
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #227
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #228
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #229
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #230
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #231
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #232
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #233
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #234
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #235
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #236
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #237
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #238
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #239
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #240
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #241
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #242
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #243
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #244
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #245
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #246
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #247
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #248
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #249
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #250
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #251
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #252
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #253
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #254
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #255
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #256
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #257
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #258
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #259
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #260
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #261
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #262
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #263
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #264
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #265
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #266
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #267
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #268
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #269
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #270
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #271
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #272
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #273
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #274
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #275
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #276
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #277
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #278
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #279
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #280
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #281
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #282
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #283
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #284
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #285
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #286
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #287
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #288
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #289
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #290
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #291
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #292
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #293
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #294
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #295
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #296
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #297
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #298
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #299
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #300
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #301
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #302
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #303
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #304
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #305
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #306
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #307
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #308
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #309
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #310
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #311
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #312
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #313
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #314
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #315
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #316
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #317
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #318
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #319
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #320
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #321
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #322
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #323
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #324
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #325
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #326
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #327
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #328
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #329
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #330
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #331
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #332
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #333
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #334
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #335
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #336
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #337
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #338
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #339
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #340
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #341
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #342
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #343
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #344
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #345
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #346
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #347
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #348
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #349
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #350
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #351
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #352
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #353
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #354
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #355
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #356
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #357
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #358
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #359
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #360
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #361
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #362
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #363
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #364
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #365
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #366
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #367
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #368
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #369
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #370
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #371
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #372
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #373
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #374
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #375
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #376
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #377
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #378
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #379
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #380
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #381
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #382
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #383
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #384
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #385
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #386
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #387
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #388
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #389
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #390
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #391
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #392
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #393
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #394
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #395
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #396
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #397
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #398
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #399
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #400
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #401
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #402
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #403
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #404
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #405
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #406
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #407
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #408
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #409
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #410
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #411
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #412
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #413
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #414
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #415
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #416
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #417
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #418
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #419
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #420
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #421
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #422
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #423
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #424
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #425
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #426
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #427
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #428
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #429
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #430
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #431
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #432
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #433
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #434
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #435
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #436
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #437
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #438
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #439
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #440
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #441
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #442
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #443
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #444
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #445
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #446
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #447
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #448
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #449
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #450
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #451
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #452
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #453
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #454
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #455
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #456
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #457
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #458
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #459
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #460
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #461
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #462
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #463
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #464
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #465
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #466
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #467
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #468
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #469
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #470
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #471
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #472
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #473
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #474
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #475
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #476
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #477
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #478
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #479
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #480
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #481
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #482
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #483
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #484
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #485
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #486
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #487
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #488
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #489
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #490
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #491
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #492
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #493
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #494
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #495
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #496
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #497
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #498
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #499
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #500
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #501
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #502
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #503
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #504
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #505
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #506
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #507
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #508
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #509
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #510
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #511
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #512
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #513
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #514
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #515
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #516
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #517
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #518
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #519
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #520
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #521
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #522
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #523
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #524
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #525
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #526
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #527
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #528
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #529
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #530
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #531
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #532
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #533
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #534
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #535
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #536
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #537
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #538
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #539
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #540
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #541
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #542
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #543
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #544
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #545
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #546
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #547
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #548
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #549
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #550
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #551
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #552
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #553
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #554
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #555
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #556
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #557
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #558
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #559
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #560
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #561
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #562
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #563
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #564
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #565
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #566
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #567
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #568
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #569
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #570
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #571
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #572
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #573
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #574
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #575
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #576
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #577
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #578
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #579
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #580
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #581
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #582
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #583
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #584
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #585
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #586
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #587
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #588
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #589
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #590
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #591
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #592
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #593
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #594
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #595
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #596
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #597
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #598
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #599
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #600
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #601
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #602
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #603
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #604
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #605
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #606
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #607
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #608
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #609
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #610
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #611
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #612
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #613
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #614
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #615
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #616
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #617
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #618
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #619
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #620
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #621
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #622
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #623
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #624
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #625
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #626
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #627
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #628
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #629
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #630
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #631
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #632
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #633
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #634
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #635
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #636
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #637
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #638
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #639
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #640
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #641
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #642
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #643
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #644
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #645
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #646
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #647
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #648
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #649
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #650
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #651
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #652
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #653
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #654
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #655
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #656
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #657
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #658
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #659
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #660
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #661
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #662
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #663
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #664
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #665
+Number of feet of cable required is 0.00.
+**********************************************************
+Network #666
+Number of feet of cable required is 0.00.
