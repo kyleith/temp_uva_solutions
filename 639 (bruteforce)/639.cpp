@@ -67,8 +67,22 @@ void Board::findMaxRooksNumber()
 
 bool Board::isValidBruteforceNumber(const int & number)
 {
-	//TODO...
-	return false;
+	int cellsCount = m_n * m_n;
+	for (int i = 0; i < cellsCount; i++)
+	{
+		bool isRook = ((number >> i) & 1);
+		if (!isRook)
+		{
+			continue;
+		}
+
+		bool isWall = (m_board[i / m_n][i % m_n] == 'X');
+		if (isRook && isWall)
+		{
+			return false;
+		}
+	}
+	return true;
 }
 
 bool Board::areRooksPositionsValid(const int & number)
@@ -79,9 +93,17 @@ bool Board::areRooksPositionsValid(const int & number)
 
 int Board::getRooksCount(const int & number)
 {
-	int count = 0;
-	//TODO...
-	return count;
+	int rooksCount = 0;
+	int cellsCount = m_n * m_n;
+	for (int i = 0; i < cellsCount; i++)
+	{
+		bool isRook = ((number >> i) & 1);
+		if (isRook)
+		{
+			rooksCount++;
+		}
+	}
+	return rooksCount;
 }
 
 int main ()
