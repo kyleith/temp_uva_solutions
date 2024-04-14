@@ -1,8 +1,10 @@
 #include <cstdio>
 #include <string>
 #include <iostream>
+#include <vector>
 
 #define string std::string
+#define vector std::vector
 
 void processInput ();
 void processTestCase (const int & n);
@@ -15,10 +17,17 @@ public:
 	void findMaxRooksNumber();
 private:
 	int m_n;
+	vector<string> m_board;
+
+	bool isValidBruteforceNumber(const int & number);
+	bool areRooksPositionsValid(const int & number);
+	int getRooksCount(const int & number);
 };
 
 void Board::readBoard(const int & n)
 {
+	m_board.clear();
+
 	m_n = n;
 
 	string buffer;
@@ -27,16 +36,52 @@ void Board::readBoard(const int & n)
 	for (int i = 0; i < m_n; i++)
 	{
 		std::getline(std::cin, buffer);
-		//TODO...
+		m_board.push_back(buffer);
 	}
 }
 
 void Board::findMaxRooksNumber()
 {
-	int maxRooksNumber = 0;
-	//TODO...
+	int maxRooksCount = 0;
 
-	printf("%d\n", maxRooksNumber);
+	int maxBruteforceNumber = (1 << (m_n * m_n)) - 1;
+	for (int currentNumber = 0; currentNumber <= maxBruteforceNumber; currentNumber++)
+	{
+		if (
+				!isValidBruteforceNumber(currentNumber)
+				|| !areRooksPositionsValid(currentNumber)
+			)
+		{
+			continue;
+		}
+
+		int currentRooksCount = getRooksCount(currentNumber);
+		if (maxRooksCount < currentRooksCount)
+		{
+			maxRooksCount = currentRooksCount;
+		}
+	}
+
+	printf("%d\n", maxRooksCount);
+}
+
+bool Board::isValidBruteforceNumber(const int & number)
+{
+	//TODO...
+	return false;
+}
+
+bool Board::areRooksPositionsValid(const int & number)
+{
+	//TODO...
+	return false;
+}
+
+int Board::getRooksCount(const int & number)
+{
+	int count = 0;
+	//TODO...
+	return count;
 }
 
 int main ()
