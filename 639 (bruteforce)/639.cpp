@@ -21,6 +21,7 @@ private:
 
 	bool isValidBruteforceNumber(const int & number);
 	bool areRooksPositionsValid(const int & number);
+	bool isValidRook(const int & row, const int & column, const int & number);
 	int getRooksCount(const int & number);
 };
 
@@ -87,8 +88,93 @@ bool Board::isValidBruteforceNumber(const int & number)
 
 bool Board::areRooksPositionsValid(const int & number)
 {
-	//TODO...
-	return false;
+	int cellsCount = m_n * m_n;
+	for (int i = 0; i < cellsCount; i++)
+	{
+		bool isRook = ((number >> i) & 1);
+		if (!isRook)
+		{
+			continue;
+		}
+
+		int row = i / m_n;
+		int column = i % m_n;
+		if (!isValidRook(row, column, number))
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
+bool Board::isValidRook(const int & row, const int & column, const int & number)
+{
+	for (int i = row - 1; i >= 0; i--)
+	{
+		bool index = i * m_n + column;
+		bool isAnotherRook = ((number >> index) & 1);
+		if (isAnotherRook)
+		{
+			return false;
+		}
+
+		bool isWall = (m_board[i][column] == 'X');
+		if (isWall)
+		{
+			break;
+		}
+	}
+
+	for (int i = row + 1; i < m_n; i++)
+	{
+		bool index = i * m_n + column;
+		bool isAnotherRook = ((number >> index) & 1);
+		if (isAnotherRook)
+		{
+			return false;
+		}
+
+		bool isWall = (m_board[i][column] == 'X');
+		if (isWall)
+		{
+			break;
+		}
+	}
+
+	for (int j = column - 1; j >= 0; j--)
+	{
+		bool index = row * m_n + j;
+		bool isAnotherRook = ((number >> index) & 1);
+		if (isAnotherRook)
+		{
+			return false;
+		}
+
+		bool isWall = (m_board[row][j] == 'X');
+		if (isWall)
+		{
+			break;
+		}
+	}
+
+	for (int j = column + 1; j < m_n; j++)
+	{
+		bool index = row * m_n + j;
+		bool isAnotherRook = ((number >> index) & 1);
+		if (isAnotherRook)
+		{
+			return false;
+		}
+
+		bool isWall = (m_board[row][j] == 'X');
+		if (isWall)
+		{
+			break;
+		}
+	}
+
+	return true;
 }
 
 int Board::getRooksCount(const int & number)
