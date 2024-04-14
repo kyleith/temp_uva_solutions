@@ -44,6 +44,7 @@ void Board::readBoard(const int & n)
 void Board::findMaxRooksNumber()
 {
 	int maxRooksCount = 0;
+	int savedRooks = 0;
 
 	int maxBruteforceNumber = (1 << (m_n * m_n)) - 1;
 	for (int currentNumber = 0; currentNumber <= maxBruteforceNumber; currentNumber++)
@@ -60,9 +61,11 @@ void Board::findMaxRooksNumber()
 		if (maxRooksCount < currentRooksCount)
 		{
 			maxRooksCount = currentRooksCount;
+			savedRooks = currentNumber;
 		}
 	}
 
+	//printf("%d %d\n", maxRooksCount, savedRooks);
 	printf("%d\n", maxRooksCount);
 }
 
@@ -103,6 +106,8 @@ bool Board::areRooksPositionsValid(const int & number)
 		{
 			return false;
 		}
+
+		//printf("%d %d %d\n", row, column, number);
 	}
 
 	return true;
@@ -112,7 +117,7 @@ bool Board::isValidRook(const int & row, const int & column, const int & number)
 {
 	for (int i = row - 1; i >= 0; i--)
 	{
-		bool index = i * m_n + column;
+		int index = i * m_n + column;
 		bool isAnotherRook = ((number >> index) & 1);
 		if (isAnotherRook)
 		{
@@ -128,7 +133,7 @@ bool Board::isValidRook(const int & row, const int & column, const int & number)
 
 	for (int i = row + 1; i < m_n; i++)
 	{
-		bool index = i * m_n + column;
+		int index = i * m_n + column;
 		bool isAnotherRook = ((number >> index) & 1);
 		if (isAnotherRook)
 		{
@@ -144,7 +149,7 @@ bool Board::isValidRook(const int & row, const int & column, const int & number)
 
 	for (int j = column - 1; j >= 0; j--)
 	{
-		bool index = row * m_n + j;
+		int index = row * m_n + j;
 		bool isAnotherRook = ((number >> index) & 1);
 		if (isAnotherRook)
 		{
@@ -160,7 +165,7 @@ bool Board::isValidRook(const int & row, const int & column, const int & number)
 
 	for (int j = column + 1; j < m_n; j++)
 	{
-		bool index = row * m_n + j;
+		int index = row * m_n + j;
 		bool isAnotherRook = ((number >> index) & 1);
 		if (isAnotherRook)
 		{
