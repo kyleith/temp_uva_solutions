@@ -10,7 +10,6 @@ struct Edge
 	int u, v, pow;
 };
 
-
 class Graph
 {
 public:
@@ -21,6 +20,8 @@ private:
 	int m_nodes, m_edges;
 	vector<vector<Edge>> m_adjacencyList;
 	int m_visitedMatrix[g_MAX_NODES_COUNT][g_MAX_NODES_COUNT];
+
+	int findLongestPathFromNode (const int & node);
 };
 
 void Graph::readGraph (const int & nodes, const int & edges)
@@ -72,10 +73,27 @@ void Graph::readGraph (const int & nodes, const int & edges)
 
 void Graph::findLongestPath ()
 {
-	int maxLength = 0;
-	//TODO...
+	int maxLength = -1;
+
+	for (int i = 0; i < m_nodes; i++)
+	{
+		int currentLength = findLongestPathFromNode(i);
+
+		if (maxLength < currentLength)
+		{
+			maxLength = currentLength;
+		}
+	}
 
 	printf("%d\n", maxLength);
+}
+
+int Graph::findLongestPathFromNode (const int & node)
+{
+	int length = 0;
+	//TODO...
+
+	return 0;
 }
 
 void processInput ();
