@@ -21,6 +21,7 @@ private:
 	vector<vector<Edge>> m_adjacencyList;
 	int m_visitedMatrix[g_MAX_NODES_COUNT][g_MAX_NODES_COUNT];
 	int m_nodesPow[g_MAX_NODES_COUNT];
+	int m_savedPathLength;
 
 	int findLongestPathFromNode (const int & node);
 	void dfs (int node);
@@ -103,22 +104,43 @@ int Graph::findLongestPathFromNode (const int & node)
 		m_nodesPow[i] = 0;
 	}
 
+	m_savedPathLength = -1;
 	dfs(node);
-
-	int maxLength = -1;
-	for (int i = 0; i < m_nodes; i++)
-	{
-		if (maxLength < m_nodesPow[i])
-		{
-			maxLength = m_nodesPow[i];
-		}
-	}
-	return maxLength;
+	return m_savedPathLength;
 }
 
 void Graph::dfs (int node)
 {
-	//TODO...
+	bool hasNewEdge = false;
+	for (int j = 0; j < m_adjacencyList[node].size(); j++)
+	{
+		Edge currentEdge = m_adjacencyList[node][j];
+		int u = currentEdge.u;
+		int v = currentEdge.v;
+
+		if (m_visitedMatrix[u][v] > 0)
+		{
+			hasNewEdge = true;
+			m_visitedMatrix[u][v]--;
+			m_visitedMatrix[v][u]--;
+			m_nodesPow[v]++;
+
+			dfs(v);
+
+			m_visitedMatrix[u][v]++;
+			m_visitedMatrix[v][u]++;
+			m_nodesPow[v]--;
+		}
+	}
+
+	if (!hasNewEdge)
+	{
+		int pathLength = m_nodesPow[node];
+		if (m_savedPathLength < pathLength)
+		{
+			m_savedPathLength = pathLength;
+		}
+	}
 }
 
 void processInput ();
