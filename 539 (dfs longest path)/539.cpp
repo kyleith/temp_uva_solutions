@@ -1,4 +1,15 @@
 #include <cstdio>
+#include <vector>
+
+#define vector std::vector
+
+const int g_MAX_NODES_COUNT = 25;
+
+struct Edge
+{
+	int u, v, pow;
+};
+
 
 class Graph
 {
@@ -8,19 +19,54 @@ public:
 	void findLongestPath ();
 private:
 	int m_nodes, m_edges;
+	vector<vector<Edge>> m_adjacencyList;
+	int m_visitedMatrix[g_MAX_NODES_COUNT][g_MAX_NODES_COUNT];
 };
 
 void Graph::readGraph (const int & nodes, const int & edges)
 {
+	m_adjacencyList.clear();
+
 	m_nodes = nodes;
 	m_edges = edges;
+
+	for (int i = 0; i < m_nodes; i++)
+	{
+		for (int j = 0; j < m_nodes; j++)
+		{
+			m_visitedMatrix[i][j] = 0;
+		}
+	}
 
 	for (int i = 0; i < m_edges; i++)
 	{
 		int u, v;
 		scanf("%d%d", &u, &v);
 
-		//TODO...
+		m_visitedMatrix[u][v]++;
+		m_visitedMatrix[v][u]++;
+	}
+
+	for (int i = 0; i < m_nodes; i++)
+	{
+		vector<Edge> buffer;
+		m_adjacencyList.push_back(buffer);
+	}
+
+	for (int i = 0; i < m_nodes; i++)
+	{
+		for (int j = 0; j < m_nodes; j++)
+		{
+			if (m_visitedMatrix[i][j] > 0)
+			{
+				Edge currentEdge;
+				currentEdge.u = i;
+				currentEdge.v = j;
+				currentEdge.pow = m_visitedMatrix[i][j];
+
+				m_adjacencyList[i].push_back(currentEdge);
+			}
+		}
 	}
 }
 
