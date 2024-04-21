@@ -123,13 +123,15 @@ void Graph::dfs (int node)
 			hasNewEdge = true;
 			m_visitedMatrix[u][v]--;
 			m_visitedMatrix[v][u]--;
-			m_nodesPow[v]++;
+
+			int savedPow = m_nodesPow[v];
+			m_nodesPow[v] = m_nodesPow[u] + 1;
 
 			dfs(v);
 
 			m_visitedMatrix[u][v]++;
 			m_visitedMatrix[v][u]++;
-			m_nodesPow[v]--;
+			m_nodesPow[v] = savedPow;
 		}
 	}
 
