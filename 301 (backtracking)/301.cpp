@@ -1,4 +1,12 @@
 #include <cstdio>
+#include <vector>
+
+#define vector std::vector
+
+struct Ticket
+{
+	int from, to, passengers, price;
+};
 
 class TrainSimulation
 {
@@ -9,6 +17,7 @@ public:
 	void findMaxEarning ();
 private:
 	int m_passengersLimit, m_cityB, m_ticketsCount;
+	vector<Ticket> m_tickets;
 };
 
 void TrainSimulation::setRouteParams (const int & passengersLimit, const int & cityB)
@@ -19,6 +28,8 @@ void TrainSimulation::setRouteParams (const int & passengersLimit, const int & c
 
 void TrainSimulation::readTickets (const int & ticketsCount)
 {
+	m_tickets.clear();
+
 	m_ticketsCount = ticketsCount;
 
 	for (int i = 0; i < m_ticketsCount; i++)
@@ -26,7 +37,13 @@ void TrainSimulation::readTickets (const int & ticketsCount)
 		int from, to, passengers;
 		scanf("%d%d%d", &from, &to, &passengers);
 
-		//TODO...
+		Ticket currentTicket;
+		currentTicket.from = from;
+		currentTicket.to = to;
+		currentTicket.passengers = passengers;
+		currentTicket.price = (to - from) * passengers;
+
+		m_tickets.push_back(currentTicket);
 	}
 }
 
