@@ -177,12 +177,6 @@ void processInput ()
 
 void processTestCase (const int & passengersLimit, const int & cityB, const int & ticketsCount)
 {
-	if (passengersLimit <= 0 || cityB <= 0 || ticketsCount <= 0)
-	{
-		printf("0\n");
-		return;
-	}
-
 	TrainSimulation currentTrain;
 	currentTrain.setRouteParams(passengersLimit, cityB);
 	currentTrain.readTickets(ticketsCount);
