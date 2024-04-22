@@ -1,7 +1,12 @@
 #include <cstdio>
 #include <vector>
+#include <string>
 
 #define vector std::vector
+#define string std::string
+
+const int g_MAX_TICKETS_COUNT = 22;
+const int g_MAX_CITY_B = 7;
 
 struct Ticket
 {
@@ -18,6 +23,12 @@ public:
 private:
 	int m_passengersLimit, m_cityB, m_ticketsCount;
 	vector<Ticket> m_tickets;
+	string m_usedTicket;
+	int m_savedTrainStates[g_MAX_CITY_B];
+	int m_savedMaxEarning, m_savedCurrentEarning;
+	string m_savedMaxTickets;
+
+	void backtracking (int ticketIndex, bool isUsed);
 };
 
 void TrainSimulation::setRouteParams (const int & passengersLimit, const int & cityB)
@@ -44,15 +55,61 @@ void TrainSimulation::readTickets (const int & ticketsCount)
 		currentTicket.price = (to - from) * passengers;
 
 		m_tickets.push_back(currentTicket);
+		m_usedTicket.push_back('0');
 	}
 }
 
 void TrainSimulation::findMaxEarning ()
 {
-	int maxValue = 0;
-	//TODO...
+	m_savedMaxEarning = 0;
+	m_savedCurrentEarning = 0;
+	m_savedMaxTickets = m_usedTicket;
 
-	printf("%d\n", maxValue);
+	for (int i = 0; i < g_MAX_CITY_B; i++)
+	{
+		m_savedTrainStates[i] = 0;
+	}
+
+	backtracking(0, true);
+	backtracking(0, false);
+
+	printf("%d\n", m_savedMaxEarning);
+	//printf("%d %s\n", m_savedMaxEarning, m_savedMaxTickets.c_str());
+}
+
+void TrainSimulation::backtracking (int ticketIndex, bool isUsed)
+{
+	if (ticketIndex >= m_ticketsCount)
+	{
+		if (m_savedMaxEarning < m_savedCurrentEarning)
+		{
+			m_savedMaxEarning = m_savedCurrentEarning;
+			m_savedMaxTickets = m_usedTicket;
+		}
+		return;
+	}
+
+	if (isUsed)
+	{
+		//apply ticket...
+		m_usedTicket[ticketIndex] = '1';
+		m_savedCurrentEarning += m_tickets[ticketIndex].price;
+
+		bool isLimitExceeded = false;//TODO: check passengers...
+		if (isLimitExceeded)
+		{
+			m_savedCurrentEarning -= m_tickets[ticketIndex].price;
+			return;
+		}
+	}
+
+	backtracking(ticketIndex + 1, true);
+	backtracking(ticketIndex + 1, false);
+
+	if (isUsed)
+	{
+		m_savedCurrentEarning -= m_tickets[ticketIndex].price;
+	}
 }
 
 void processInput ();
@@ -84,7 +141,7 @@ void processInput ()
 
 void processTestCase (const int & passengersLimit, const int & cityB, const int & ticketsCount)
 {
-	if (passengersLimit == 0 || cityB == 0 || ticketsCount == 0)
+	if (passengersLimit <= 0 || cityB <= 0 || ticketsCount <= 0)
 	{
 		printf("0\n");
 		return;
