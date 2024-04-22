@@ -23,7 +23,7 @@ public:
 private:
 	int m_passengersLimit, m_cityB, m_ticketsCount;
 	vector<Ticket> m_tickets;
-	string m_usedTicket;
+	string m_usedTickets;
 	int m_savedTrainStates[g_MAX_CITY_B];
 	int m_savedMaxEarning, m_savedCurrentEarning;
 	string m_savedMaxTickets;
@@ -55,7 +55,7 @@ void TrainSimulation::readTickets (const int & ticketsCount)
 		currentTicket.price = (to - from) * passengers;
 
 		m_tickets.push_back(currentTicket);
-		m_usedTicket.push_back('0');
+		m_usedTickets.push_back('0');
 	}
 }
 
@@ -63,7 +63,7 @@ void TrainSimulation::findMaxEarning ()
 {
 	m_savedMaxEarning = 0;
 	m_savedCurrentEarning = 0;
-	m_savedMaxTickets = m_usedTicket;
+	m_savedMaxTickets = m_usedTickets;
 
 	for (int i = 0; i < g_MAX_CITY_B; i++)
 	{
@@ -84,7 +84,7 @@ void TrainSimulation::backtracking (int ticketIndex, bool isUsed)
 		if (m_savedMaxEarning < m_savedCurrentEarning)
 		{
 			m_savedMaxEarning = m_savedCurrentEarning;
-			m_savedMaxTickets = m_usedTicket;
+			m_savedMaxTickets = m_usedTickets;
 		}
 		return;
 	}
@@ -92,7 +92,7 @@ void TrainSimulation::backtracking (int ticketIndex, bool isUsed)
 	if (isUsed)
 	{
 		//apply ticket...
-		m_usedTicket[ticketIndex] = '1';
+		m_usedTickets[ticketIndex] = '1';
 		m_savedCurrentEarning += m_tickets[ticketIndex].price;
 
 		bool isLimitExceeded = false;//TODO: check passengers...
@@ -108,6 +108,7 @@ void TrainSimulation::backtracking (int ticketIndex, bool isUsed)
 
 	if (isUsed)
 	{
+		m_usedTickets[ticketIndex] = '0';
 		m_savedCurrentEarning -= m_tickets[ticketIndex].price;
 	}
 }
