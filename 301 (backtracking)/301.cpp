@@ -91,13 +91,40 @@ void TrainSimulation::backtracking (int ticketIndex, bool isUsed)
 
 	if (isUsed)
 	{
-		//apply ticket...
+		if (m_tickets[ticketIndex].price == 0)
+		{
+			return;
+		}
+
+		bool isLimitExceeded = false;
+
+		int from = m_tickets[ticketIndex].from;
+		int to = m_tickets[ticketIndex].to;
+		int passengers = m_tickets[ticketIndex].passengers;
+		for (int i = from; i < to; i++)
+		{
+			m_savedTrainStates[i] += passengers;
+
+			if (m_passengersLimit < m_savedTrainStates[i])
+			{
+				isLimitExceeded = true;
+			}
+		}
+
 		m_usedTickets[ticketIndex] = '1';
 		m_savedCurrentEarning += m_tickets[ticketIndex].price;
 
-		bool isLimitExceeded = false;//TODO: check passengers...
 		if (isLimitExceeded)
 		{
+			int from = m_tickets[ticketIndex].from;
+			int to = m_tickets[ticketIndex].to;
+			int passengers = m_tickets[ticketIndex].passengers;
+			for (int i = from; i < to; i++)
+			{
+				m_savedTrainStates[i] -= passengers;
+			}
+
+			m_usedTickets[ticketIndex] = '0';
 			m_savedCurrentEarning -= m_tickets[ticketIndex].price;
 			return;
 		}
@@ -108,6 +135,14 @@ void TrainSimulation::backtracking (int ticketIndex, bool isUsed)
 
 	if (isUsed)
 	{
+		int from = m_tickets[ticketIndex].from;
+		int to = m_tickets[ticketIndex].to;
+		int passengers = m_tickets[ticketIndex].passengers;
+		for (int i = from; i < to; i++)
+		{
+			m_savedTrainStates[i] -= passengers;
+		}
+
 		m_usedTickets[ticketIndex] = '0';
 		m_savedCurrentEarning -= m_tickets[ticketIndex].price;
 	}
