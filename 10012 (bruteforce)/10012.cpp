@@ -1,6 +1,7 @@
 #include <cstdio>
 #include <vector>
 #include <algorithm>
+#include <cmath>
 
 #define vector std::vector
 
@@ -12,7 +13,10 @@ public:
 	void findMinRectangleSide ();
 private:
 	int m_circlesCount;
-	vector<int> m_circles;
+	vector<double> m_circles;
+
+	double calculateCurrentRectangleSide ();
+	double calculateCircleCentersDistance (const double & r1, const double & r2);
 };
 
 void BruteforceSimulator::readCircles (const int & m)
@@ -23,18 +27,48 @@ void BruteforceSimulator::readCircles (const int & m)
 
 	for (int i = 0; i < m_circlesCount; i++)
 	{
-		int r;
-		scanf("%d", &r);
+		double r;
+		scanf("%lf", &r);
 		m_circles.push_back(r);
 	}
 }
 
 void BruteforceSimulator::findMinRectangleSide ()
 {
-	double minSide = 0;
+	if (m_circlesCount <= 0)
+	{
+		printf("0.000\n");
+		return;
+	}
+
+	std::sort(m_circles.begin(), m_circles.end());
+
+	double minSide = calculateCurrentRectangleSide();
 	//TODO...
 
 	printf("%.3f\n", minSide);
+}
+
+double BruteforceSimulator::calculateCurrentRectangleSide ()
+{
+	double result = 0.0;
+	result += m_circles[0];
+	result += m_circles[m_circlesCount - 1];
+
+	for (int i = 0; i < m_circlesCount - 1; i++)
+	{
+		double r1 = m_circles[i];
+		double r2 = m_circles[i + 1];
+		double centersDistance = calculateCircleCentersDistance(r1, r2);
+		result += std::max(r1, std::max(r2, centersDistance));
+	}
+
+	return result;
+}
+
+double BruteforceSimulator::calculateCircleCentersDistance (const double & r1, const double & r2)
+{
+	return std::sqrt((r1 + r2)*(r1 + r2) - (r1 - r2)*(r1 - r2));
 }
 
 void processInput ();
