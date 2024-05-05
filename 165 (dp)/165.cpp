@@ -1,6 +1,7 @@
 #include <cstdio>
 
 void processInput ();
+void processTestCase (const int & h, const int & k);
 
 int main ()
 {
@@ -14,6 +15,18 @@ int main ()
 }
 
 void processInput ()
+{
+	int h, k;
+	scanf("%d%d", &h, &k);
+
+	while (!(h == 0 && k == 0))
+	{
+		processTestCase(h, k);
+		scanf("%d%d", &h, &k);
+	}
+}
+
+void processTestCase (const int & h, const int & k)
 {
 	//TODO...
 }
