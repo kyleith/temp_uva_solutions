@@ -28,6 +28,24 @@ Result & Result::operator = (const Result & copy)
 	return *this;
 }
 
+class Backtracking
+{
+public:
+	Backtracking () {}
+	Result runBacktracking (const int & positionsCount, const int & nominalsCount);
+private:
+};
+
+Result Backtracking::runBacktracking (const int & positionsCount, const int & nominalsCount)
+{
+	Result currentResult;
+	//TODO...
+	currentResult.finalNumber = 1;
+	currentResult.coinNominals.push_back(1);
+
+	return currentResult;
+}
+
 void processInput ();
 void processTestCase (const int & h, const int & k, Result & savedResult);
 void printResult (const Result & result);
@@ -73,9 +91,8 @@ void processInput ()
 
 void processTestCase (const int & h, const int & k, Result & savedResult)
 {
-	//TODO...
-	savedResult.finalNumber = 1;
-	savedResult.coinNominals.push_back(1);
+	Backtracking simulator;
+	savedResult = simulator.runBacktracking(h, k);
 }
 
 void printResult (const Result & result)
