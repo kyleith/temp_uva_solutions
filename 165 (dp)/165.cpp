@@ -31,19 +31,29 @@ Result & Result::operator = (const Result & copy)
 class Backtracking
 {
 public:
-	Backtracking () {}
+	Backtracking () : m_positionsCount(0), m_nominalsCount(0) {}
 	Result runBacktracking (const int & positionsCount, const int & nominalsCount);
 private:
+	int m_positionsCount, m_nominalsCount;
+	Result m_savedResult;
+
+	void dfs (int positionIndex, int lastCoinValue, int lastCountValue);
 };
 
 Result Backtracking::runBacktracking (const int & positionsCount, const int & nominalsCount)
 {
-	Result currentResult;
 	//TODO...
-	currentResult.finalNumber = 1;
-	currentResult.coinNominals.push_back(1);
+	m_savedResult.finalNumber = 1;
+	m_savedResult.coinNominals.push_back(1);
 
-	return currentResult;
+	dfs(0, 0, 0);
+
+	return m_savedResult;
+}
+
+void Backtracking::dfs (int positionIndex, int lastCoinValue, int lastCountValue)
+{
+	//TODO...
 }
 
 void processInput ();
