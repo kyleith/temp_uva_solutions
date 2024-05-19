@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <vector>
+#include <cstring>
 
 #define vector std::vector
 
@@ -36,24 +37,88 @@ public:
 private:
 	int m_positionsCount, m_nominalsCount;
 	Result m_savedResult;
+	int m_usedCoins[10], m_dp[200][10];
 
-	void dfs (int positionIndex, int lastCoinValue, int lastCountValue);
+	void dfs (int currentNominalIndex, int lastCoinValue, int lastCountValue);
 };
 
 Result Backtracking::runBacktracking (const int & positionsCount, const int & nominalsCount)
 {
-	//TODO...
-	m_savedResult.finalNumber = 1;
-	m_savedResult.coinNominals.push_back(1);
+	m_positionsCount = positionsCount;
+	m_nominalsCount = nominalsCount;
+
+	memset(m_dp, 0, sizeof(m_dp));
+	memset(m_usedCoins, 0, sizeof(m_usedCoins));
+
+	m_dp[0][0] = 1;
+	m_savedResult.finalNumber = 0;
 
 	dfs(0, 0, 0);
 
 	return m_savedResult;
 }
 
-void Backtracking::dfs (int positionIndex, int lastCoinValue, int lastCountValue)
+void Backtracking::dfs (int currentNominalIndex, int lastCoinValue, int lastCountValue)
 {
-	//TODO...
+	int savedCountValue = 0;
+
+	for (int currentCount = lastCountValue; ; currentCount++)
+	{
+		int position;
+		for (position = 0; position <= m_positionsCount; position++)
+		{
+			bool isVisitedNode = (m_dp[currentCount][position] != 0);
+			if (isVisitedNode)
+			{
+				break;
+			}
+		}
+		if (position == m_positionsCount + 1)
+		{
+			savedCountValue = currentCount - 1;
+			break;
+		}
+	}
+
+	if (currentNominalIndex == m_nominalsCount)
+	{
+		if (savedCountValue >= m_savedResult.finalNumber)
+		{
+			m_savedResult.finalNumber = savedCountValue;
+
+			m_savedResult.coinNominals.clear();
+			for (int nominalPosition = 0; nominalPosition < m_nominalsCount; nominalPosition++)
+			{
+				m_savedResult.coinNominals.push_back(m_usedCoins[nominalPosition]);
+			}
+		}
+		return;
+	}
+
+	int step[10000][2], stepsCount;
+	for (int coin = lastCoinValue; coin <= savedCountValue + 1; coin++)
+	{
+		stepsCount = 0;
+		for (int offset = 0; offset <= 100; offset++)
+		{
+			for (int nominalPosition = 0; nominalPosition <= m_nominalsCount; nominalPosition++)
+			{
+				if (m_dp[coin + offset][nominalPosition + 1] == 0 && m_dp[offset][nominalPosition] != 0)
+				{
+					step[stepsCount][0] = coin + offset;
+					step[stepsCount][1] = nominalPosition + 1;
+					stepsCount++;
+					m_dp[coin + offset][nominalPosition + 1] = 1;
+				}
+			}
+		}
+		m_usedCoins[currentNominalIndex] = coin;
+		dfs(currentNominalIndex + 1, coin, savedCountValue);
+		for (int index = 0; index < stepsCount; index++)
+		{
+			m_dp[step[index][0]][step[index][1]] = 0;
+		}
+	}
 }
 
 void processInput ();
