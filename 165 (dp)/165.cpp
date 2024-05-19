@@ -62,28 +62,31 @@ void Backtracking::dfs (int currentNominalIndex, int lastCoinValue, int lastCoun
 {
 	int savedCountValue = 0;
 
-	for (int currentCount = lastCountValue; ; currentCount++)
+	int currentCount = lastCountValue;
+	bool hasDPNode = true;
+	while (hasDPNode)
 	{
-		int position;
-		bool hasVisitedNode = false;
-		for (position = 0; position <= m_positionsCount; position++)
+		hasDPNode = false;
+		for (int position = 0; position <= m_positionsCount; position++)
 		{
-			hasVisitedNode = (m_dp[currentCount][position] != 0);
-			if (hasVisitedNode)
+			hasDPNode = (m_dp[currentCount][position] != 0);
+			if (hasDPNode)
 			{
 				break;
 			}
 		}
-		if (!hasVisitedNode)
+		if (!hasDPNode)
 		{
 			savedCountValue = currentCount - 1;
-			break;
 		}
+		currentCount++;
 	}
 
-	if (currentNominalIndex == m_nominalsCount)
+	bool areAllNominalsPlaced = (currentNominalIndex == m_nominalsCount);
+	if (areAllNominalsPlaced)
 	{
-		if (savedCountValue > m_savedResult.finalNumber)
+		bool isCurrentSolutionBetter = (savedCountValue > m_savedResult.finalNumber);
+		if (isCurrentSolutionBetter)
 		{
 			m_savedResult.finalNumber = savedCountValue;
 
