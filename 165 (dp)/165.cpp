@@ -88,7 +88,9 @@ void Backtracking::dfs (int currentNominalIndex, int lastCoinValue, int lastCoun
 		{
 			for (int coinPosition = 0; coinPosition < m_positionsCount; coinPosition++)
 			{
-				if (m_dp[coin + offset][coinPosition + 1] == 0 && m_dp[offset][coinPosition] != 0)
+				bool isOffsetCachedInDP = (m_dp[offset][coinPosition] != 0);
+				bool isCoinUsedInDP = (m_dp[coin + offset][coinPosition + 1] != 0);
+				if (isOffsetCachedInDP && !isCoinUsedInDP)
 				{
 					step[stepsCount][0] = coin + offset;
 					step[stepsCount][1] = coinPosition + 1;
