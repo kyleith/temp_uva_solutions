@@ -65,15 +65,16 @@ void Backtracking::dfs (int currentNominalIndex, int lastCoinValue, int lastCoun
 	for (int currentCount = lastCountValue; ; currentCount++)
 	{
 		int position;
+		bool hasVisitedNode = false;
 		for (position = 0; position <= m_positionsCount; position++)
 		{
-			bool isVisitedNode = (m_dp[currentCount][position] != 0);
-			if (isVisitedNode)
+			hasVisitedNode = (m_dp[currentCount][position] != 0);
+			if (hasVisitedNode)
 			{
 				break;
 			}
 		}
-		if (position == m_positionsCount + 1)
+		if (!hasVisitedNode)
 		{
 			savedCountValue = currentCount - 1;
 			break;
@@ -96,12 +97,12 @@ void Backtracking::dfs (int currentNominalIndex, int lastCoinValue, int lastCoun
 	}
 
 	int step[10000][2], stepsCount;
-	for (int coin = lastCoinValue; coin <= savedCountValue + 1; coin++)
+	for (int coin = lastCoinValue + 1; coin <= savedCountValue + 1; coin++)
 	{
 		stepsCount = 0;
 		for (int offset = 0; offset <= 100; offset++)
 		{
-			for (int nominalPosition = 0; nominalPosition <= m_nominalsCount; nominalPosition++)
+			for (int nominalPosition = 0; nominalPosition < m_nominalsCount; nominalPosition++)
 			{
 				if (m_dp[coin + offset][nominalPosition + 1] == 0 && m_dp[offset][nominalPosition] != 0)
 				{
