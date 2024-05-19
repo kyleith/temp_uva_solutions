@@ -83,7 +83,7 @@ void Backtracking::dfs (int currentNominalIndex, int lastCoinValue, int lastCoun
 
 	if (currentNominalIndex == m_nominalsCount)
 	{
-		if (savedCountValue >= m_savedResult.finalNumber)
+		if (savedCountValue > m_savedResult.finalNumber)
 		{
 			m_savedResult.finalNumber = savedCountValue;
 
@@ -102,14 +102,14 @@ void Backtracking::dfs (int currentNominalIndex, int lastCoinValue, int lastCoun
 		stepsCount = 0;
 		for (int offset = 0; offset <= 100; offset++)
 		{
-			for (int nominalPosition = 0; nominalPosition < m_nominalsCount; nominalPosition++)
+			for (int coinPosition = 0; coinPosition < m_positionsCount; coinPosition++)
 			{
-				if (m_dp[coin + offset][nominalPosition + 1] == 0 && m_dp[offset][nominalPosition] != 0)
+				if (m_dp[coin + offset][coinPosition + 1] == 0 && m_dp[offset][coinPosition] != 0)
 				{
 					step[stepsCount][0] = coin + offset;
-					step[stepsCount][1] = nominalPosition + 1;
+					step[stepsCount][1] = coinPosition + 1;
 					stepsCount++;
-					m_dp[coin + offset][nominalPosition + 1] = 1;
+					m_dp[coin + offset][coinPosition + 1] = 1;
 				}
 			}
 		}
