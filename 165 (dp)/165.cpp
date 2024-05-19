@@ -40,6 +40,7 @@ private:
 	int m_usedCoins[10], m_dp[200][10];
 
 	void dfs (int currentNominalIndex, int lastCoinValue, int lastCountValue);
+	int findDPCurrentMaxCountValue (int lastCountValue);
 };
 
 Result Backtracking::runBacktracking (const int & positionsCount, const int & nominalsCount)
@@ -60,35 +61,15 @@ Result Backtracking::runBacktracking (const int & positionsCount, const int & no
 
 void Backtracking::dfs (int currentNominalIndex, int lastCoinValue, int lastCountValue)
 {
-	int savedCountValue = 0;
+	int currentMaxCountValue = findDPCurrentMaxCountValue(lastCountValue);
 
-	int currentCount = lastCountValue;
-	bool hasDPNode = true;
-	while (hasDPNode)
-	{
-		hasDPNode = false;
-		for (int position = 0; position <= m_positionsCount; position++)
-		{
-			hasDPNode = (m_dp[currentCount][position] != 0);
-			if (hasDPNode)
-			{
-				break;
-			}
-		}
-		if (!hasDPNode)
-		{
-			savedCountValue = currentCount - 1;
-		}
-		currentCount++;
-	}
-
-	bool areAllNominalsPlaced = (currentNominalIndex == m_nominalsCount);
+	bool areAllNominalsPlaced = (currentNominalIndex >= m_nominalsCount);
 	if (areAllNominalsPlaced)
 	{
-		bool isCurrentSolutionBetter = (savedCountValue > m_savedResult.finalNumber);
+		bool isCurrentSolutionBetter = (currentMaxCountValue > m_savedResult.finalNumber);
 		if (isCurrentSolutionBetter)
 		{
-			m_savedResult.finalNumber = savedCountValue;
+			m_savedResult.finalNumber = currentMaxCountValue;
 
 			m_savedResult.coinNominals.clear();
 			for (int nominalPosition = 0; nominalPosition < m_nominalsCount; nominalPosition++)
@@ -100,7 +81,7 @@ void Backtracking::dfs (int currentNominalIndex, int lastCoinValue, int lastCoun
 	}
 
 	int step[10000][2], stepsCount;
-	for (int coin = lastCoinValue + 1; coin <= savedCountValue + 1; coin++)
+	for (int coin = lastCoinValue + 1; coin <= currentMaxCountValue + 1; coin++)
 	{
 		stepsCount = 0;
 		for (int offset = 0; offset <= 100; offset++)
@@ -117,12 +98,37 @@ void Backtracking::dfs (int currentNominalIndex, int lastCoinValue, int lastCoun
 			}
 		}
 		m_usedCoins[currentNominalIndex] = coin;
-		dfs(currentNominalIndex + 1, coin, savedCountValue);
+		dfs(currentNominalIndex + 1, coin, currentMaxCountValue);
 		for (int index = 0; index < stepsCount; index++)
 		{
 			m_dp[step[index][0]][step[index][1]] = 0;
 		}
 	}
+}
+
+int Backtracking::findDPCurrentMaxCountValue (int lastCountValue)
+{
+	int result = 0;
+	int currentCount = lastCountValue;
+	bool hasDPNode = true;
+	while (hasDPNode)
+	{
+		hasDPNode = false;
+		for (int position = 0; position <= m_positionsCount; position++)
+		{
+			hasDPNode = (m_dp[currentCount][position] != 0);
+			if (hasDPNode)
+			{
+				break;
+			}
+		}
+		if (!hasDPNode)
+		{
+			result = currentCount - 1;
+		}
+		currentCount++;
+	}
+	return result;
 }
 
 void processInput ();
