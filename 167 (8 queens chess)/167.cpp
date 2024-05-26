@@ -1,4 +1,9 @@
 #include <cstdio>
+#include <string>
+#include <unordered_map>
+
+#define string std::string
+#define map std::unordered_map
 
 const int g_BOARD_SIDE_SIZE = 8;
 
@@ -10,6 +15,10 @@ public:
 	void findBestSolutionScore ();
 private:
 	int m_weights[g_BOARD_SIDE_SIZE][g_BOARD_SIDE_SIZE];
+	map<string,int> m_solutions;
+
+	void findAllSolutions ();
+	void evaluateSolutions ();
 };
 
 void Board::readBoardWeights ()
@@ -28,14 +37,37 @@ void Board::readBoardWeights ()
 
 void Board::findBestSolutionScore ()
 {
-	int score = 0;
-	//TODO...
+	if (m_solutions.size() == 0)
+	{
+		findAllSolutions();
+	}
 
-	printf("%5d\n", score);
+	evaluateSolutions();
+
+	int bestScore = 0;
+	for (auto iter = m_solutions.begin(); iter != m_solutions.end(); iter++)
+	{
+		int solutionScore = iter->second;
+		if (bestScore < solutionScore)
+		{
+			bestScore = solutionScore;
+		}
+	}
+
+	printf("%5d\n", bestScore);
+}
+
+void Board::findAllSolutions ()
+{
+	//TODO...
+}
+
+void Board::evaluateSolutions ()
+{
+	//TODO...
 }
 
 void processInput ();
-void processTestCase ();
 
 int main ()
 {
@@ -53,15 +85,10 @@ void processInput ()
 	int k;
 	scanf("%d", &k);
 
+	Board currentBoard;
 	for (int i = 0; i < k; i++)
 	{
-		processTestCase();
+		currentBoard.readBoardWeights();
+		currentBoard.findBestSolutionScore();
 	}
-}
-
-void processTestCase ()
-{
-	Board currentBoard;
-	currentBoard.readBoardWeights();
-	currentBoard.findBestSolutionScore();
 }
