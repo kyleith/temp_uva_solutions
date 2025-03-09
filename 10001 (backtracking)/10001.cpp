@@ -13,24 +13,56 @@ public:
 	void testCellularAutomaton (const int & automationId, const int & cellsNumber, const string & state);
 private:
 	int m_table [g_TABLE_SIZE];
+	int m_cellsCount;
+	unsigned long int m_testingState;
 
-	void fill_table (const int & automationId);
+	void fillTable (const int & automationId);
+	void parseTestingState (const int & cellsNumber, const string & state);
+	bool testDFS (unsigned long int state);
 };
 
 void CellularAutomaton::testCellularAutomaton (const int & automationId, const int & cellsNumber, const string & state)
 {
-	fill_table(automationId);
+	fillTable(automationId);
+	parseTestingState(cellsNumber, state);
 
-	//TODO...
-	printf("GARDEN OF EDEN\n");
+	if (testDFS(m_testingState))
+	{
+		printf("REACHABLE\n");
+	}
+	else
+	{
+		printf("GARDEN OF EDEN\n");
+	}
 }
 
-void CellularAutomaton::fill_table (const int & automationId)
+void CellularAutomaton::fillTable (const int & automationId)
 {
 	for (int i = 0; i < g_TABLE_SIZE; i++)
 	{
 		m_table[i] = ((automationId >> i) & 1);
 	}
+}
+
+void CellularAutomaton::parseTestingState (const int & cellsNumber, const string & state)
+{
+	m_cellsCount = cellsNumber;
+
+	m_testingState = 0;
+	for (int i = 0; i < m_cellsCount; i++)
+	{
+		if (state[i] == '1')
+		{
+			m_testingState |= (1 << i);
+		}
+	}
+}
+
+bool CellularAutomaton::testDFS (unsigned long int state)
+{
+	//TODO: implement...
+
+	return false;
 }
 
 void processInput ();
