@@ -90,7 +90,8 @@ void CellularAutomaton::markAllStatesUnvisited ()
 
 bool CellularAutomaton::dfs (int cellsTested, int lastTableIndex)
 {
-	if (cellsTested == m_cellsCount - 1) {
+	if (cellsTested == m_cellsCount - 1)
+	{
 		return (
 			((lastTableIndex >> 1) & 1) == ((m_startingTableIndex >> 2) & 1)
 			&& (lastTableIndex & 1) == ((m_startingTableIndex >> 1) & 1)
@@ -99,7 +100,24 @@ bool CellularAutomaton::dfs (int cellsTested, int lastTableIndex)
 
 	m_visited[cellsTested][lastTableIndex] = true;
 
-	//TODO: implement next iteration...
+	for (int i = 0; i < g_TABLE_SIZE; i++)
+	{
+		if (
+				(m_table[i] == (m_testingState >> (cellsTested + 1)) & 1)
+				&& ((lastTableIndex >> 1) & 1) == ((i >> 2) & 1)
+				&& (lastTableIndex & 1) == ((i >> 1) & 1)
+			)
+		{
+			if (
+					cellsTested + 1 < m_cellsCount
+					&& !m_visited[cellsTested + 1][i]
+					&& dfs(cellsTested + 1, i)
+				)
+			{
+				return true;
+			}
+		}
+	}
 
 	return false;
 }
