@@ -4,18 +4,33 @@
 
 #define string std::string
 
+const int g_TABLE_SIZE = 8;
+
 class CellularAutomaton
 {
 public:
 	CellularAutomaton () {}
 	void testCellularAutomaton (const int & automationId, const int & cellsNumber, const string & state);
 private:
+	int m_table [g_TABLE_SIZE];
+
+	void fill_table (const int & automationId);
 };
 
 void CellularAutomaton::testCellularAutomaton (const int & automationId, const int & cellsNumber, const string & state)
 {
+	fill_table(automationId);
+
 	//TODO...
 	printf("GARDEN OF EDEN\n");
+}
+
+void CellularAutomaton::fill_table (const int & automationId)
+{
+	for (int i = 0; i < g_TABLE_SIZE; i++)
+	{
+		m_table[i] = ((automationId >> i) & 1);
+	}
 }
 
 void processInput ();
