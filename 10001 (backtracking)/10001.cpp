@@ -5,6 +5,7 @@
 #define string std::string
 
 const int g_TABLE_SIZE = 8;
+const int g_MAX_CELLS_INDEX = 35;
 
 class CellularAutomaton
 {
@@ -12,13 +13,14 @@ public:
 	CellularAutomaton () {}
 	void testCellularAutomaton (const int & automationId, const int & cellsNumber, const string & state);
 private:
-	int m_table [g_TABLE_SIZE];
+	int m_table[g_TABLE_SIZE];
 	int m_cellsCount;
 	unsigned long int m_testingState;
+	bool visited[g_MAX_CELLS_INDEX][g_TABLE_SIZE];
 
 	void fillTable (const int & automationId);
 	void parseTestingState (const int & cellsNumber, const string & state);
-	bool testDFS (unsigned long int state);
+	bool testAncestor (unsigned long int state);
 };
 
 void CellularAutomaton::testCellularAutomaton (const int & automationId, const int & cellsNumber, const string & state)
@@ -26,7 +28,7 @@ void CellularAutomaton::testCellularAutomaton (const int & automationId, const i
 	fillTable(automationId);
 	parseTestingState(cellsNumber, state);
 
-	if (testDFS(m_testingState))
+	if (testAncestor(m_testingState))
 	{
 		printf("REACHABLE\n");
 	}
@@ -58,7 +60,7 @@ void CellularAutomaton::parseTestingState (const int & cellsNumber, const string
 	}
 }
 
-bool CellularAutomaton::testDFS (unsigned long int state)
+bool CellularAutomaton::testAncestor (unsigned long int state)
 {
 	//TODO: implement...
 
