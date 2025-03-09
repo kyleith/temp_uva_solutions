@@ -141,7 +141,7 @@ void processInput ()
 	int automationId, cellsNumber;
 	string state;
 
-	while (scanf("%d%d", &automationId, &cellsNumber) == 2)
+	while (scanf("%d%d ", &automationId, &cellsNumber) == 2)
 	{
 		std::getline(std::cin, state);
 
