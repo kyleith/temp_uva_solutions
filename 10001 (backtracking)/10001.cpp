@@ -102,8 +102,9 @@ bool CellularAutomaton::dfs (int cellsTested, int lastTableIndex)
 
 	for (int i = 0; i < g_TABLE_SIZE; i++)
 	{
+		bool isTableMatched = (m_table[i] == ((m_testingState >> (cellsTested + 1)) & 1));
 		if (
-				(m_table[i] == (m_testingState >> (cellsTested + 1)) & 1)
+				isTableMatched
 				&& ((lastTableIndex >> 1) & 1) == ((i >> 2) & 1)
 				&& (lastTableIndex & 1) == ((i >> 1) & 1)
 			)
