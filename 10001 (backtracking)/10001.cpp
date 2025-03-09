@@ -1,6 +1,7 @@
 #include <cstdio>
 #include <string>
 #include <iostream>
+#include <cstring>
 
 #define string std::string
 
@@ -16,11 +17,12 @@ private:
 	int m_table[g_TABLE_SIZE];
 	int m_cellsCount, m_startingTableIndex;
 	unsigned long int m_testingState;
-	bool visited[g_MAX_CELLS_INDEX][g_TABLE_SIZE];
+	bool m_visited[g_MAX_CELLS_INDEX][g_TABLE_SIZE];
 
 	void fillTable (const int & automationId);
 	void parseTestingState (const int & cellsNumber, const string & state);
 	bool testAncestor ();
+	void markAllStatesUnvisited ();
 	bool dfs (int cellsTested, int lastTableIndex);
 };
 
@@ -69,6 +71,7 @@ bool CellularAutomaton::testAncestor ()
 	{
 		if (m_table[i] == (m_testingState & 1))
 		{
+			markAllStatesUnvisited();
 			m_startingTableIndex = i;
 			found = dfs(0, m_startingTableIndex);
 		}
@@ -77,9 +80,27 @@ bool CellularAutomaton::testAncestor ()
 	return found;
 }
 
+void CellularAutomaton::markAllStatesUnvisited ()
+{
+	for (int i = 0; i < g_MAX_CELLS_INDEX; i++)
+	{
+		std::memset(m_visited[i], false, g_TABLE_SIZE);
+	}
+}
+
 bool CellularAutomaton::dfs (int cellsTested, int lastTableIndex)
 {
-	//TODO...
+	if (cellsTested == m_cellsCount - 1) {
+		return (
+			((lastTableIndex >> 1) & 1) == ((m_startingTableIndex >> 2) & 1)
+			&& (lastTableIndex & 1) == ((m_startingTableIndex >> 1) & 1)
+		);
+	}
+
+	m_visited[cellsTested][lastTableIndex] = true;
+
+	//TODO: implement next iteration...
+
 	return false;
 }
 
