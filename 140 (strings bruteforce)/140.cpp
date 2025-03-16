@@ -1,8 +1,10 @@
 #include <cstdio>
 #include <string>
 #include <iostream>
+#include <unordered_map>
 
 #define string std::string
+#define map std::unordered_map
 
 const char g_INPUT_ENDING = '#';
 const char g_NODE_SEPARATOR = ';';
@@ -15,6 +17,8 @@ public:
 	void readGraph (const string & line);
 	void findGraphWithMinBandwidth ();
 private:
+	map <char, string> m_graph;
+
 	bool isNodeName (const char & symbol);
 };
 
@@ -43,11 +47,17 @@ void StringsGraph::readGraph (const string & line)
 			if (!isCurrentNodeDefined)
 			{
 				currentNode = currentSymbol;
+
+				auto iter = m_graph.find(currentNode);
+				if (iter == m_graph.end())
+				{
+					m_graph[currentNode] = "";
+				}
 			}
 			else
 			{
 				currentNeighbour = currentSymbol;
-				//TODO: save neighbour...
+				m_graph[currentNode].push_back(currentNeighbour);
 			}
 		}
 
