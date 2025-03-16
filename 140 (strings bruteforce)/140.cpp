@@ -3,6 +3,7 @@
 #include <iostream>
 #include <unordered_map>
 #include <algorithm>
+#include <cmath>
 
 #define string std::string
 #define map std::unordered_map
@@ -19,10 +20,11 @@ public:
 	void findGraphWithMinBandwidth ();
 private:
 	map <char, string> m_graph;
+	map <char, int> m_nodes;
 
 	bool isNodeName (const char & symbol);
 	int calculateGraphBandwidth (const string & line);
-	int calculateNodeBandwidth (const char & node, const string & line);
+	int calculateNodeBandwidth (const char & node, const map <char, int> & nodesPositions);
 };
 
 void StringsGraph::readGraph (const string & line)
@@ -117,9 +119,14 @@ int StringsGraph::calculateGraphBandwidth (const string & line)
 	int nodesCount = line.size();
 	int graphBandwidth = 0;
 
-	for (int i = 0; i < line.size(); i++)
+	for (int i = 0; i < nodesCount; i++)
 	{
-		int currentNodeBandwidth = calculateNodeBandwidth(line[i], line);
+		m_nodes[line[i]] = i;
+	}
+
+	for (int i = 0; i < nodesCount; i++)
+	{
+		int currentNodeBandwidth = calculateNodeBandwidth(line[i], m_nodes);
 		if (graphBandwidth < currentNodeBandwidth)
 		{
 			graphBandwidth = currentNodeBandwidth;
@@ -129,10 +136,22 @@ int StringsGraph::calculateGraphBandwidth (const string & line)
 	return graphBandwidth;
 }
 
-int StringsGraph::calculateNodeBandwidth (const char & node, const string & line)
+int StringsGraph::calculateNodeBandwidth (const char & node, const map <char, int> & nodesPositions)
 {
-	//TODO...
-	return line.size();
+	int nodeBandwidth = 0;
+
+	for (int i = 0; i < m_graph[node].size(); i++)
+	{
+		char currentNeighbour = m_graph[node][i];
+		int distance = std::abs(nodesPositions.at(node) - nodesPositions.at(currentNeighbour));
+
+		if (nodeBandwidth < distance)
+		{
+			nodeBandwidth = distance;
+		}
+	}
+
+	return nodeBandwidth;
 }
 
 void processInput ();
