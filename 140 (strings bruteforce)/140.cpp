@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <unordered_map>
+#include <algorithm>
 
 #define string std::string
 #define map std::unordered_map
@@ -20,6 +21,7 @@ private:
 	map <char, string> m_graph;
 
 	bool isNodeName (const char & symbol);
+	int calculateBandwidth (const string & line);
 };
 
 void StringsGraph::readGraph (const string & line)
@@ -58,6 +60,12 @@ void StringsGraph::readGraph (const string & line)
 			{
 				currentNeighbour = currentSymbol;
 				m_graph[currentNode].push_back(currentNeighbour);
+
+				auto iter = m_graph.find(currentNeighbour);
+				if (iter == m_graph.end())
+				{
+					m_graph[currentNeighbour] = "";
+				}
 			}
 		}
 
@@ -67,12 +75,38 @@ void StringsGraph::readGraph (const string & line)
 
 void StringsGraph::findGraphWithMinBandwidth ()
 {
-	//TODO...
+	string currentPermutation = "", bestPermutation = "";
+	int currentBandwidth = -1, bestBandwidth = -1;
+
+	for (auto it = m_graph.begin(); it != m_graph.end(); it++)
+	{
+		currentPermutation.push_back(it -> first);
+	}
+	std::sort(currentPermutation.begin(), currentPermutation.end());
+	currentBandwidth = calculateBandwidth(currentPermutation);
+
+	bestPermutation = currentPermutation;
+	bestBandwidth = currentBandwidth;
+
+	//TODO: iterate permutations and check bandwidth...
+
+	//TODO: print result...
+	for (int i = 0; i < bestPermutation.size(); i++)
+	{
+		printf("%c ", bestPermutation[i]);
+	}
+	printf("-> %d\n", bestBandwidth);
 }
 
 bool StringsGraph::isNodeName (const char & symbol)
 {
 	return ('A' <= symbol) && (symbol <= 'Z');
+}
+
+int StringsGraph::calculateBandwidth (const string & line)
+{
+	//TODO...
+	return m_graph.size();
 }
 
 void processInput ();
