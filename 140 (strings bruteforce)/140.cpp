@@ -4,6 +4,10 @@
 
 #define string std::string
 
+const char g_INPUT_ENDING = '#';
+const char g_NODE_SEPARATOR = ';';
+const char g_EDGES_SEPARATOR = ':';
+
 class StringsGraph
 {
 public:
@@ -11,16 +15,54 @@ public:
 	void readGraph (const string & line);
 	void findGraphWithMinBandwidth ();
 private:
+	bool isNodeName (const char & symbol);
 };
 
 void StringsGraph::readGraph (const string & line)
 {
-	//TODO...
+	int index = 0;
+	char currentNode = '\0', currentNeighbour = '\0';
+	char currentSymbol = '\0';
+
+	while (index < line.size())
+	{
+		currentSymbol = line[index];
+
+		if (currentSymbol == g_NODE_SEPARATOR)
+		{
+			currentNode = '\0';
+			currentNeighbour = '\0';
+		}
+		else if (currentSymbol == g_EDGES_SEPARATOR)
+		{
+			currentNeighbour = '\0';
+		}
+		else if (isNodeName(currentSymbol))
+		{
+			bool isCurrentNodeDefined = isNodeName(currentNode);
+			if (!isCurrentNodeDefined)
+			{
+				currentNode = currentSymbol;
+			}
+			else
+			{
+				currentNeighbour = currentSymbol;
+				//TODO: save neighbour...
+			}
+		}
+
+		index++;
+	}
 }
 
 void StringsGraph::findGraphWithMinBandwidth ()
 {
 	//TODO...
+}
+
+bool StringsGraph::isNodeName (const char & symbol)
+{
+	return ('A' <= symbol) && (symbol <= 'Z');
 }
 
 void processInput ();
@@ -43,7 +85,7 @@ void processInput ()
 
 	while (std::getline(std::cin, inputLine))
 	{
-		if (inputLine[0] == '#')
+		if (inputLine[0] == g_INPUT_ENDING)
 		{
 			break;
 		}
