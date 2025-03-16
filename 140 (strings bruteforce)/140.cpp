@@ -21,7 +21,8 @@ private:
 	map <char, string> m_graph;
 
 	bool isNodeName (const char & symbol);
-	int calculateBandwidth (const string & line);
+	int calculateGraphBandwidth (const string & line);
+	int calculateNodeBandwidth (const char & node, const string & line);
 };
 
 void StringsGraph::readGraph (const string & line)
@@ -83,14 +84,14 @@ void StringsGraph::findGraphWithMinBandwidth ()
 		currentPermutation.push_back(it -> first);
 	}
 	std::sort(currentPermutation.begin(), currentPermutation.end());
-	currentBandwidth = calculateBandwidth(currentPermutation);
+	currentBandwidth = calculateGraphBandwidth(currentPermutation);
 
 	bestPermutation = currentPermutation;
 	bestBandwidth = currentBandwidth;
 
 	while (std::next_permutation(currentPermutation.begin(), currentPermutation.end()))
 	{
-		currentBandwidth = calculateBandwidth(currentPermutation);
+		currentBandwidth = calculateGraphBandwidth(currentPermutation);
 
 		if (currentBandwidth < bestBandwidth)
 		{
@@ -111,10 +112,27 @@ bool StringsGraph::isNodeName (const char & symbol)
 	return ('A' <= symbol) && (symbol <= 'Z');
 }
 
-int StringsGraph::calculateBandwidth (const string & line)
+int StringsGraph::calculateGraphBandwidth (const string & line)
+{
+	int nodesCount = line.size();
+	int graphBandwidth = 0;
+
+	for (int i = 0; i < line.size(); i++)
+	{
+		int currentNodeBandwidth = calculateNodeBandwidth(line[i], line);
+		if (graphBandwidth < currentNodeBandwidth)
+		{
+			graphBandwidth = currentNodeBandwidth;
+		}
+	}
+
+	return graphBandwidth;
+}
+
+int StringsGraph::calculateNodeBandwidth (const char & node, const string & line)
 {
 	//TODO...
-	return m_graph.size();
+	return line.size();
 }
 
 void processInput ();
