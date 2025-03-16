@@ -88,9 +88,17 @@ void StringsGraph::findGraphWithMinBandwidth ()
 	bestPermutation = currentPermutation;
 	bestBandwidth = currentBandwidth;
 
-	//TODO: iterate permutations and check bandwidth...
+	while (std::next_permutation(currentPermutation.begin(), currentPermutation.end()))
+	{
+		currentBandwidth = calculateBandwidth(currentPermutation);
 
-	//TODO: print result...
+		if (currentBandwidth < bestBandwidth)
+		{
+			bestBandwidth = currentBandwidth;
+			bestPermutation = currentPermutation;
+		}
+	}
+
 	for (int i = 0; i < bestPermutation.size(); i++)
 	{
 		printf("%c ", bestPermutation[i]);
