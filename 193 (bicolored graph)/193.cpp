@@ -28,7 +28,6 @@ struct NodesList
 
 	void clear ();
 	void estimate ();
-	void reverseColoring ();
 };
 
 void NodesList::clear ()
@@ -58,25 +57,6 @@ void NodesList::estimate ()
 			whiteNodesCount;
 		}
 	}
-}
-
-void NodesList::reverseColoring ()
-{
-	totalNodesCount = nodes.size();
-
-	for (int i = 0; i < totalNodesCount; i++)
-	{
-		if (nodes[i].color == g_COLOR_BLACK)
-		{
-			nodes[i].color = g_COLOR_WHITE;
-		}
-		else if (nodes[i].color == g_COLOR_WHITE)
-		{
-			nodes[i].color = g_COLOR_BLACK;
-		}
-	}
-
-	estimate();
 }
 
 class Graph
@@ -146,23 +126,13 @@ NodesList Graph::findMaxBlackNodesSet ()
 
 	for (int i = 1; i <= m_nodesCount; i++)
 	{
-		if (m_colors[i] == g_COLOR_UNDEFINED)
+		if (m_colors[i] == g_COLOR_UNDEFINED)//TODO: check visited...
 		{
 			m_bufferNodes.clear();
 
 			runDfs(i, g_COLOR_BLACK);
 
 			m_bufferNodes.estimate();
-
-			if (m_bufferNodes.blackNodesCount < m_bufferNodes.whiteNodesCount)
-			{
-				m_bufferNodes.reverseColoring();
-
-				for (int j = 0; j < m_bufferNodes.totalNodesCount; j++)
-				{
-					m_colors[m_bufferNodes.nodes[j].index] = m_bufferNodes.nodes[j].color;
-				}
-			}
 		}
 	}
 
@@ -199,6 +169,7 @@ void Graph::runDfs (int nodeIndex, t_color nodeColor)
 	}
 	else if (nodeColor == g_COLOR_WHITE)
 	{
+		//TODO: test color
 		nextColor = g_COLOR_BLACK;
 	}
 
