@@ -3,7 +3,7 @@
 
 #define vector std::vector
 
-enum t_colors
+enum t_color
 {
 	g_COLOR_BLACK = 'b',
 	g_COLOR_WHITE = 'w',
@@ -11,6 +11,20 @@ enum t_colors
 };
 
 const int g_MAX_NODES_COUNT = 101;
+
+struct Node
+{
+	int index = -1;
+	t_color color = g_COLOR_UNDEFINED;
+};
+
+struct NodesList
+{
+	int totalNodesCount = -1;
+	int blackNodesCount = -1;
+	int whiteNodesCount = -1;
+	vector <Node> nodes;
+};
 
 class Graph
 {
@@ -21,7 +35,9 @@ public:
 private:
 	int m_nodesCount;/*1..100*/
 	vector<vector<int>> m_adjacencyList;
-	t_colors m_colors [g_MAX_NODES_COUNT];
+	t_color m_colors [g_MAX_NODES_COUNT];
+
+	NodesList findMaxBlackNodesSet ();
 };
 
 void Graph::readGraph ()
@@ -50,16 +66,31 @@ void Graph::readGraph ()
 
 void Graph::findMaxSetOfBlackNodes ()
 {
-	//TODO...
-	int blackNodesCount = -1;
+	NodesList resultNodes = findMaxBlackNodesSet();
+
+	int blackNodesCount = resultNodes.nodes.size();
 	printf("%d\n", blackNodesCount);
 
-	for (int i = 0; i < blackNodesCount; i++)
+	if (resultNodes.nodes.size() > 0)
 	{
-		//TODO...
+		printf("%d", resultNodes.nodes[0].index);
+	}
+
+	for (int i = 1; i < resultNodes.nodes.size(); i++)
+	{
+		printf(" %d", resultNodes.nodes[i].index);
 	}
 
 	printf("\n");
+}
+
+NodesList Graph::findMaxBlackNodesSet ()
+{
+	NodesList nodes;
+
+	//TODO...
+
+	return nodes;
 }
 
 void processTestCase ();
