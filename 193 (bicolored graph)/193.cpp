@@ -21,56 +21,20 @@ struct Node
 
 struct NodesList
 {
-	int totalNodesCount = -1;
-	int blackNodesCount = -1;
-	int whiteNodesCount = -1;
 	vector <Node> nodes;
 
 	void clear ();
-	void estimate ();
-
-	NodesList & operator= (const NodesList & copyFrom);
+	int totalNodesCount ();
 };
 
 void NodesList::clear ()
 {
-	int totalNodesCount = -1;
-	int blackNodesCount = -1;
-	int whiteNodesCount = -1;
-
 	nodes.clear();
 }
 
-void NodesList::estimate ()
+int NodesList::totalNodesCount ()
 {
-	totalNodesCount = nodes.size();
-
-	blackNodesCount = 0;
-	whiteNodesCount = 0;
-
-	for (int i = 0; i < totalNodesCount; i++)
-	{
-		if (nodes[i].color == g_COLOR_BLACK)
-		{
-			blackNodesCount++;
-		}
-		else if (nodes[i].color == g_COLOR_WHITE)
-		{
-			whiteNodesCount;
-		}
-	}
-}
-
-NodesList & NodesList::operator= (const NodesList & copyFrom)
-{
-	clear();
-	for (int i = 0; i < copyFrom.nodes.size(); i++)
-	{
-		nodes.push_back(copyFrom.nodes[i]);
-	}
-	estimate();
-
-	return *this;
+	return nodes.size();
 }
 
 class Graph
@@ -82,13 +46,15 @@ public:
 private:
 	int m_nodesCount;/*1..100*/
 	vector<vector<int>> m_adjacencyList;
+
 	t_color m_colors [g_MAX_NODES_COUNT];
 	bool m_visited [g_MAX_NODES_COUNT];
 
-	NodesList m_bufferNodes;
+	t_color m_bestSolutionColors [g_MAX_NODES_COUNT];
+	int m_bestBlackNodesCount;
 
 	NodesList findMaxBlackNodesSet ();
-	void tryColoring (int nodeIndex, t_color nodeColor);
+	void backtrackSolution (int u);
 };
 
 void Graph::readGraph ()
@@ -97,13 +63,15 @@ void Graph::readGraph ()
 	scanf("%d%d", &nodesCount, &edgesCount);
 
 	m_nodesCount = nodesCount;
+	m_bestBlackNodesCount = 0;
+
 	for (int i = 0; i < m_nodesCount + 1; i++)
 	{
 		vector <int> buffer;
 		m_adjacencyList.push_back(buffer);
 
 		m_colors[i] = g_COLOR_WHITE;
-		m_visited[i] = false;
+		m_bestSolutionColors[i] = g_COLOR_WHITE;
 	}
 
 	for (int i = 0; i < edgesCount; i++)
@@ -120,15 +88,15 @@ void Graph::findMaxSetOfBlackNodes ()
 {
 	NodesList resultNodes = findMaxBlackNodesSet();
 
-	int blackNodesCount = resultNodes.totalNodesCount;
+	int blackNodesCount = resultNodes.totalNodesCount();
 	printf("%d\n", blackNodesCount);
 
-	if (resultNodes.totalNodesCount > 0)
+	if (blackNodesCount > 0)
 	{
 		printf("%d", resultNodes.nodes[0].index);
 	}
 
-	for (int i = 1; i < resultNodes.totalNodesCount; i++)
+	for (int i = 1; i < blackNodesCount; i++)
 	{
 		printf(" %d", resultNodes.nodes[i].index);
 	}
@@ -140,43 +108,11 @@ NodesList Graph::findMaxBlackNodesSet ()
 {
 	NodesList resultNodes;
 
-	for (int i = 1; i <= m_nodesCount; i++)
-	{
-		if (!m_visited[i])
-		{
-			NodesList nodesWithBlack;
-			NodesList nodesWithWhite;
-
-			m_bufferNodes.clear();
-			tryColoring(i, g_COLOR_BLACK);
-			nodesWithBlack = m_bufferNodes;
-
-			for (int j = 0; j < nodesWithBlack.totalNodesCount; j++)
-			{
-				int nodeIndex = nodesWithBlack.nodes[j].index;
-				m_visited[nodeIndex] = false;
-				m_colors[nodeIndex] = g_COLOR_WHITE;
-			}
-
-			m_bufferNodes.clear();
-			tryColoring(i, g_COLOR_WHITE);
-			nodesWithWhite = m_bufferNodes;
-
-			if (nodesWithBlack.blackNodesCount > nodesWithWhite.blackNodesCount)
-			{
-				//apply nodesWithBlack coloring, otherwise keep nodesWithWhite coloring...
-				for (int j = 0; j < nodesWithBlack.totalNodesCount; j++)
-				{
-					int nodeIndex = nodesWithBlack.nodes[j].index;
-					m_colors[nodeIndex] = nodesWithBlack.nodes[j].color;
-				}
-			}
-		}
-	}
+	backtrackSolution(1);
 
 	for (int i = 1; i <= m_nodesCount; i++)
 	{
-		if (m_colors[i] == g_COLOR_BLACK)
+		if (m_bestSolutionColors[i] == g_COLOR_BLACK)
 		{
 			Node currentNode;
 			currentNode.index = i;
@@ -186,49 +122,60 @@ NodesList Graph::findMaxBlackNodesSet ()
 		}
 	}
 
-	resultNodes.estimate();
-
 	return resultNodes;
 }
 
-void Graph::tryColoring (int nodeIndex, t_color nodeColor)
+void Graph::backtrackSolution (int u)
 {
-	m_visited[nodeIndex] = true;
-	m_colors[nodeIndex] = nodeColor;
-
-	Node currentNode;
-	currentNode.index = nodeIndex;
-	currentNode.color = nodeColor;
-	m_bufferNodes.nodes.push_back(currentNode);
-
-	t_color nextColor = g_COLOR_WHITE;
-	if (nodeColor == g_COLOR_WHITE)
+	if (u == m_nodesCount + 1)
 	{
-		bool canBeBlack = true;
-
-		for (int i = 0; i < m_adjacencyList[nodeIndex].size(); i++)
+		int currentBlackCount = 0;
+		for (int i = 1; i <= m_nodesCount; i++)
 		{
-			int nextNode = m_adjacencyList[nodeIndex][i];
-			if (m_colors[nextNode] == g_COLOR_BLACK)
+			if (m_colors[i] == g_COLOR_BLACK)
 			{
-				canBeBlack = false;
+				currentBlackCount++;
 			}
 		}
 
-		if (canBeBlack)
+		if (currentBlackCount > m_bestBlackNodesCount)
 		{
-			nextColor = g_COLOR_BLACK;
+			m_bestBlackNodesCount = currentBlackCount;
+
+			for (int i = 1; i <= m_nodesCount; i++)
+			{
+				m_bestSolutionColors[i] = m_colors[i];
+			}
+		}
+
+		return;
+	}
+
+	bool canBeBlack = true;
+	for (int i = 0; i < m_adjacencyList[u].size(); i++)
+	{
+		int nextNode = m_adjacencyList[u][i];
+		if (
+				m_visited[nextNode]
+				&& m_colors[nextNode] == g_COLOR_BLACK
+			)
+		{
+			canBeBlack = false;
 		}
 	}
 
-	for (int i = 0; i < m_adjacencyList[nodeIndex].size(); i++)
+	m_visited[u] = true;
+
+	if (canBeBlack)
 	{
-		int nextNode = m_adjacencyList[nodeIndex][i];
-		if (!m_visited[nextNode])
-		{
-			tryColoring(nextNode, nextColor);
-		}
+		m_colors[u] = g_COLOR_BLACK;
+		backtrackSolution(u + 1);
 	}
+
+	m_colors[u] = g_COLOR_WHITE;
+	backtrackSolution(u + 1);
+
+	m_visited[u] = false;
 }
 
 void processTestCase ();
