@@ -5,6 +5,7 @@
 
 enum t_color
 {
+	g_COLOR_INIT = '-',
 	g_COLOR_BLACK = 'b',
 	g_COLOR_WHITE = 'w',
 	g_COLOR_UNDEFINED = 'u'
@@ -24,7 +25,59 @@ struct NodesList
 	int blackNodesCount = -1;
 	int whiteNodesCount = -1;
 	vector <Node> nodes;
+
+	void clear ();
+	void estimate ();
+	void reverseColoring ();
 };
+
+void NodesList::clear ()
+{
+	int totalNodesCount = -1;
+	int blackNodesCount = -1;
+	int whiteNodesCount = -1;
+
+	nodes.clear();
+}
+
+void NodesList::estimate ()
+{
+	totalNodesCount = nodes.size();
+
+	blackNodesCount = 0;
+	whiteNodesCount = 0;
+
+	for (int i = 0; i < totalNodesCount; i++)
+	{
+		if (nodes[i].color == g_COLOR_BLACK)
+		{
+			blackNodesCount++;
+		}
+		else if (nodes[i].color == g_COLOR_WHITE)
+		{
+			whiteNodesCount;
+		}
+	}
+}
+
+void NodesList::reverseColoring ()
+{
+	totalNodesCount = nodes.size();
+
+	for (int i = 0; i < totalNodesCount; i++)
+	{
+		if (nodes[i].color == g_COLOR_BLACK)
+		{
+			nodes[i].color = g_COLOR_WHITE;
+		}
+		else if (nodes[i].color == g_COLOR_WHITE)
+		{
+			nodes[i].color = g_COLOR_BLACK;
+		}
+	}
+
+	estimate();
+}
 
 class Graph
 {
@@ -37,7 +90,10 @@ private:
 	vector<vector<int>> m_adjacencyList;
 	t_color m_colors [g_MAX_NODES_COUNT];
 
+	NodesList m_bufferNodes;
+
 	NodesList findMaxBlackNodesSet ();
+	void runDfs (int nodeIndex, t_color nodeColor);
 };
 
 void Graph::readGraph ()
@@ -68,15 +124,15 @@ void Graph::findMaxSetOfBlackNodes ()
 {
 	NodesList resultNodes = findMaxBlackNodesSet();
 
-	int blackNodesCount = resultNodes.nodes.size();
+	int blackNodesCount = resultNodes.totalNodesCount;
 	printf("%d\n", blackNodesCount);
 
-	if (resultNodes.nodes.size() > 0)
+	if (resultNodes.totalNodesCount > 0)
 	{
 		printf("%d", resultNodes.nodes[0].index);
 	}
 
-	for (int i = 1; i < resultNodes.nodes.size(); i++)
+	for (int i = 1; i < resultNodes.totalNodesCount; i++)
 	{
 		printf(" %d", resultNodes.nodes[i].index);
 	}
@@ -86,11 +142,74 @@ void Graph::findMaxSetOfBlackNodes ()
 
 NodesList Graph::findMaxBlackNodesSet ()
 {
-	NodesList nodes;
+	NodesList resultNodes;
 
-	//TODO...
+	for (int i = 1; i <= m_nodesCount; i++)
+	{
+		if (m_colors[i] == g_COLOR_UNDEFINED)
+		{
+			m_bufferNodes.clear();
 
-	return nodes;
+			runDfs(i, g_COLOR_BLACK);
+
+			m_bufferNodes.estimate();
+
+			if (m_bufferNodes.blackNodesCount < m_bufferNodes.whiteNodesCount)
+			{
+				m_bufferNodes.reverseColoring();
+
+				for (int j = 0; j < m_bufferNodes.totalNodesCount; j++)
+				{
+					m_colors[m_bufferNodes.nodes[j].index] = m_bufferNodes.nodes[j].color;
+				}
+			}
+		}
+	}
+
+	for (int i = 1; i <= m_nodesCount; i++)
+	{
+		if (m_colors[i] == g_COLOR_BLACK)
+		{
+			Node currentNode;
+			currentNode.index = i;
+			currentNode.color = g_COLOR_BLACK;
+
+			resultNodes.nodes.push_back(currentNode);
+		}
+	}
+
+	resultNodes.estimate();
+
+	return resultNodes;
+}
+
+void Graph::runDfs (int nodeIndex, t_color nodeColor)
+{
+	m_colors[nodeIndex] = nodeColor;
+
+	Node currentNode;
+	currentNode.index = nodeIndex;
+	currentNode.color = nodeColor;
+	m_bufferNodes.nodes.push_back(currentNode);
+
+	t_color nextColor;
+	if (nodeColor == g_COLOR_BLACK)
+	{
+		nextColor = g_COLOR_WHITE;
+	}
+	else if (nodeColor == g_COLOR_WHITE)
+	{
+		nextColor = g_COLOR_BLACK;
+	}
+
+	for (int i = 0; i < m_adjacencyList[nodeIndex].size(); i++)
+	{
+		int nextNode = m_adjacencyList[nodeIndex][i];
+		if (m_colors[nextNode] == g_COLOR_UNDEFINED)
+		{
+			runDfs(nextNode, nextColor);
+		}
+	}
 }
 
 void processTestCase ();
