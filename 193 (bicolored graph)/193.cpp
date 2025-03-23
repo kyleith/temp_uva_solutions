@@ -69,11 +69,12 @@ private:
 	int m_nodesCount;/*1..100*/
 	vector<vector<int>> m_adjacencyList;
 	t_color m_colors [g_MAX_NODES_COUNT];
+	bool m_visited [g_MAX_NODES_COUNT];
 
 	NodesList m_bufferNodes;
 
 	NodesList findMaxBlackNodesSet ();
-	void runDfs (int nodeIndex, t_color nodeColor);
+	void tryColoring (int nodeIndex, t_color nodeColor);
 };
 
 void Graph::readGraph ()
@@ -87,7 +88,8 @@ void Graph::readGraph ()
 		vector <int> buffer;
 		m_adjacencyList.push_back(buffer);
 
-		m_colors[i] = g_COLOR_UNDEFINED;
+		m_colors[i] = g_COLOR_WHITE;
+		m_visited[i] = false;
 	}
 
 	for (int i = 0; i < edgesCount; i++)
@@ -126,11 +128,12 @@ NodesList Graph::findMaxBlackNodesSet ()
 
 	for (int i = 1; i <= m_nodesCount; i++)
 	{
-		if (m_colors[i] == g_COLOR_UNDEFINED)//TODO: check visited...
+		if (!m_visited[i])
 		{
 			m_bufferNodes.clear();
 
-			runDfs(i, g_COLOR_BLACK);
+			tryColoring(i, g_COLOR_BLACK);
+			//TODO: backtrack with white...
 
 			m_bufferNodes.estimate();
 		}
@@ -153,8 +156,9 @@ NodesList Graph::findMaxBlackNodesSet ()
 	return resultNodes;
 }
 
-void Graph::runDfs (int nodeIndex, t_color nodeColor)
+void Graph::tryColoring (int nodeIndex, t_color nodeColor)
 {
+	m_visited[nodeIndex] = true;
 	m_colors[nodeIndex] = nodeColor;
 
 	Node currentNode;
@@ -162,23 +166,32 @@ void Graph::runDfs (int nodeIndex, t_color nodeColor)
 	currentNode.color = nodeColor;
 	m_bufferNodes.nodes.push_back(currentNode);
 
-	t_color nextColor;
-	if (nodeColor == g_COLOR_BLACK)
+	t_color nextColor = g_COLOR_WHITE;
+	if (nodeColor == g_COLOR_WHITE)
 	{
-		nextColor = g_COLOR_WHITE;
-	}
-	else if (nodeColor == g_COLOR_WHITE)
-	{
-		//TODO: test color
-		nextColor = g_COLOR_BLACK;
+		bool canBeBlack = true;
+
+		for (int i = 0; i < m_adjacencyList[nodeIndex].size(); i++)
+		{
+			int nextNode = m_adjacencyList[nodeIndex][i];
+			if (m_colors[nextNode] == g_COLOR_BLACK)
+			{
+				canBeBlack = false;
+			}
+		}
+
+		if (canBeBlack)
+		{
+			nextColor = g_COLOR_BLACK;
+		}
 	}
 
 	for (int i = 0; i < m_adjacencyList[nodeIndex].size(); i++)
 	{
 		int nextNode = m_adjacencyList[nodeIndex][i];
-		if (m_colors[nextNode] == g_COLOR_UNDEFINED)
+		if (!m_visited[nextNode])
 		{
-			runDfs(nextNode, nextColor);
+			tryColoring(nextNode, nextColor);
 		}
 	}
 }
