@@ -28,6 +28,8 @@ struct NodesList
 
 	void clear ();
 	void estimate ();
+
+	NodesList & operator= (const NodesList & copyFrom);
 };
 
 void NodesList::clear ()
@@ -57,6 +59,18 @@ void NodesList::estimate ()
 			whiteNodesCount;
 		}
 	}
+}
+
+NodesList & NodesList::operator= (const NodesList & copyFrom)
+{
+	clear();
+	for (int i = 0; i < copyFrom.nodes.size(); i++)
+	{
+		nodes.push_back(copyFrom.nodes[i]);
+	}
+	estimate();
+
+	return *this;
 }
 
 class Graph
@@ -130,12 +144,33 @@ NodesList Graph::findMaxBlackNodesSet ()
 	{
 		if (!m_visited[i])
 		{
+			NodesList nodesWithBlack;
+			NodesList nodesWithWhite;
+
 			m_bufferNodes.clear();
-
 			tryColoring(i, g_COLOR_BLACK);
-			//TODO: backtrack with white...
+			nodesWithBlack = m_bufferNodes;
 
-			m_bufferNodes.estimate();
+			for (int j = 0; j < nodesWithBlack.totalNodesCount; j++)
+			{
+				int nodeIndex = nodesWithBlack.nodes[j].index;
+				m_visited[nodeIndex] = false;
+				m_colors[nodeIndex] = g_COLOR_WHITE;
+			}
+
+			m_bufferNodes.clear();
+			tryColoring(i, g_COLOR_WHITE);
+			nodesWithWhite = m_bufferNodes;
+
+			if (nodesWithBlack.blackNodesCount > nodesWithWhite.blackNodesCount)
+			{
+				//apply nodesWithBlack coloring, otherwise keep nodesWithWhite coloring...
+				for (int j = 0; j < nodesWithBlack.totalNodesCount; j++)
+				{
+					int nodeIndex = nodesWithBlack.nodes[j].index;
+					m_colors[nodeIndex] = nodesWithBlack.nodes[j].color;
+				}
+			}
 		}
 	}
 
