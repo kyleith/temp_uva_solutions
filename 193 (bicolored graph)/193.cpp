@@ -7,12 +7,15 @@ public:
 	void readGraph ();
 	void findMaxSetOfBlackNodes ();
 private:
+	int m_nodesCount;/*1..100*/
 };
 
 void Graph::readGraph ()
 {
 	int nodesCount = -1, edgesCount = -1;
 	scanf("%d%d", &nodesCount, &edgesCount);
+
+	m_nodesCount = nodesCount;
 
 	for (int i = 0; i < edgesCount; i++)
 	{
@@ -26,6 +29,15 @@ void Graph::readGraph ()
 void Graph::findMaxSetOfBlackNodes ()
 {
 	//TODO...
+	int blackNodesCount = -1;
+	printf("%d\n", blackNodesCount);
+
+	for (int i = 0; i < blackNodesCount; i++)
+	{
+		//TODO...
+	}
+
+	printf("\n");
 }
 
 void processTestCase ();
