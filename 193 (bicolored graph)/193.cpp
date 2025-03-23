@@ -1,5 +1,33 @@
 #include <cstdio>
 
+class Graph
+{
+public:
+	Graph () {}
+	void readGraph ();
+	void findMaxSetOfBlackNodes ();
+private:
+};
+
+void Graph::readGraph ()
+{
+	int nodesCount = -1, edgesCount = -1;
+	scanf("%d%d", &nodesCount, &edgesCount);
+
+	for (int i = 0; i < edgesCount; i++)
+	{
+		int nodeA = -1, nodeB = -1;
+		scanf("%d%d", &nodeA, &nodeB);
+
+		//TODO: save edges...
+	}
+}
+
+void Graph::findMaxSetOfBlackNodes ()
+{
+	//TODO...
+}
+
 void processTestCase ();
 
 int main ()
@@ -22,5 +50,7 @@ int main ()
 
 void processTestCase ()
 {
-	//TODO...
+	Graph currentGraph;
+	currentGraph.readGraph();
+	currentGraph.findMaxSetOfBlackNodes();
 }
