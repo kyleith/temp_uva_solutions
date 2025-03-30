@@ -19,6 +19,7 @@ private:
 	vector<vector<int>> m_graph;
 	vector<bool> m_visited;
 	vector<bool> m_backtrackVisited;
+	vector<int> m_currentPath;
 
 	bool isReachableFinalNode ();
 	void dfsConnectedComponent (int v);
@@ -61,6 +62,7 @@ void Graph::findRoutes ()
 		sortGraphNodes();
 
 		m_pathsCounter = 0;
+		m_currentPath.clear();
 		backtrackGraphPaths(g_STARTING_NODE);
 
 		result = m_pathsCounter;
@@ -100,11 +102,18 @@ void Graph::sortGraphNodes ()
 void Graph::backtrackGraphPaths (int v)
 {
 	m_backtrackVisited[v] = true;
+	m_currentPath.push_back(v);
 
 	if (v == m_finalNode)
 	{
 		m_pathsCounter++;
-		//TODO: print path...
+
+		printf("%d", m_currentPath[0]);
+		for (int i = 1; i < m_currentPath.size(); i++)
+		{
+			printf(" %d", m_currentPath[i]);
+		}
+		printf("\n");
 	}
 	else
 	{
@@ -119,6 +128,7 @@ void Graph::backtrackGraphPaths (int v)
 	}
 
 	m_backtrackVisited[v] = false;
+	m_currentPath.pop_back();
 }
 
 void processInput ();
