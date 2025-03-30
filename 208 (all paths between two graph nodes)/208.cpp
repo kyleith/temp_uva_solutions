@@ -15,12 +15,15 @@ public:
 	void findRoutes ();
 private:
 	int m_finalNode;
+	int m_pathsCounter;
 	vector<vector<int>> m_graph;
 	vector<bool> m_visited;
+	vector<bool> m_backtrackVisited;
 
 	bool isReachableFinalNode ();
 	void dfsConnectedComponent (int v);
 	void sortGraphNodes ();
+	void backtrackGraphPaths (int v);
 };
 
 void Graph::readGraph (const int & finalNode)
@@ -29,11 +32,13 @@ void Graph::readGraph (const int & finalNode)
 
 	m_graph.clear();
 	m_visited.clear();
+	m_backtrackVisited.clear();
 	for (int i = 0; i < g_MAX_NODES_COUNT; i++)
 	{
 		vector<int> buf;
 		m_graph.push_back(buf);
 		m_visited.push_back(false);
+		m_backtrackVisited.push_back(false);
 	}
 
 	int nodeA = -1, nodeB = -1;
@@ -55,8 +60,10 @@ void Graph::findRoutes ()
 	{
 		sortGraphNodes();
 
-		//TODO...
-		result = 1;
+		m_pathsCounter = 0;
+		backtrackGraphPaths(g_STARTING_NODE);
+
+		result = m_pathsCounter;
 	}
 
 	printf("There are %d routes from the firestation to streetcorner %d.\n", result, m_finalNode);
@@ -88,6 +95,30 @@ void Graph::sortGraphNodes ()
 	{
 		std::sort(m_graph[i].begin(), m_graph[i].end());
 	}
+}
+
+void Graph::backtrackGraphPaths (int v)
+{
+	m_backtrackVisited[v] = true;
+
+	if (v == m_finalNode)
+	{
+		m_pathsCounter++;
+		//TODO: print path...
+	}
+	else
+	{
+		for (int i = 0; i < m_graph[v].size(); i++)
+		{
+			int nextNode = m_graph[v][i];
+			if (!m_backtrackVisited[nextNode])
+			{
+				backtrackGraphPaths(nextNode);
+			}
+		}
+	}
+
+	m_backtrackVisited[v] = false;
 }
 
 void processInput ();
