@@ -1,199 +1,199 @@
 CASE 1:
 There are 0 routes from the firestation to streetcorner 15.
 CASE 2:
-There are 0 routes from the firestation to streetcorner 7.
+There are 1 routes from the firestation to streetcorner 7.
 CASE 3:
-There are 0 routes from the firestation to streetcorner 6.
+There are 1 routes from the firestation to streetcorner 6.
 CASE 4:
 There are 0 routes from the firestation to streetcorner 2.
 CASE 5:
 There are 0 routes from the firestation to streetcorner 3.
 CASE 6:
-There are 0 routes from the firestation to streetcorner 3.
+There are 1 routes from the firestation to streetcorner 3.
 CASE 7:
-There are 0 routes from the firestation to streetcorner 5.
+There are 1 routes from the firestation to streetcorner 5.
 CASE 8:
 There are 0 routes from the firestation to streetcorner 16.
 CASE 9:
-There are 0 routes from the firestation to streetcorner 15.
+There are 1 routes from the firestation to streetcorner 15.
 CASE 10:
 There are 0 routes from the firestation to streetcorner 2.
 CASE 11:
-There are 0 routes from the firestation to streetcorner 1.
+There are 1 routes from the firestation to streetcorner 1.
 CASE 12:
 There are 0 routes from the firestation to streetcorner 12.
 CASE 13:
 There are 0 routes from the firestation to streetcorner 8.
 CASE 14:
-There are 0 routes from the firestation to streetcorner 2.
+There are 1 routes from the firestation to streetcorner 2.
 CASE 15:
-There are 0 routes from the firestation to streetcorner 3.
+There are 1 routes from the firestation to streetcorner 3.
 CASE 16:
-There are 0 routes from the firestation to streetcorner 4.
+There are 1 routes from the firestation to streetcorner 4.
 CASE 17:
-There are 0 routes from the firestation to streetcorner 2.
+There are 1 routes from the firestation to streetcorner 2.
 CASE 18:
-There are 0 routes from the firestation to streetcorner 3.
+There are 1 routes from the firestation to streetcorner 3.
 CASE 19:
-There are 0 routes from the firestation to streetcorner 2.
+There are 1 routes from the firestation to streetcorner 2.
 CASE 20:
-There are 0 routes from the firestation to streetcorner 2.
+There are 1 routes from the firestation to streetcorner 2.
 CASE 21:
-There are 0 routes from the firestation to streetcorner 1.
+There are 1 routes from the firestation to streetcorner 1.
 CASE 22:
-There are 0 routes from the firestation to streetcorner 2.
+There are 1 routes from the firestation to streetcorner 2.
 CASE 23:
-There are 0 routes from the firestation to streetcorner 4.
+There are 1 routes from the firestation to streetcorner 4.
 CASE 24:
-There are 0 routes from the firestation to streetcorner 1.
+There are 1 routes from the firestation to streetcorner 1.
 CASE 25:
-There are 0 routes from the firestation to streetcorner 8.
+There are 1 routes from the firestation to streetcorner 8.
 CASE 26:
 There are 0 routes from the firestation to streetcorner 8.
 CASE 27:
-There are 0 routes from the firestation to streetcorner 1.
+There are 1 routes from the firestation to streetcorner 1.
 CASE 28:
-There are 0 routes from the firestation to streetcorner 7.
+There are 1 routes from the firestation to streetcorner 7.
 CASE 29:
-There are 0 routes from the firestation to streetcorner 1.
+There are 1 routes from the firestation to streetcorner 1.
 CASE 30:
-There are 0 routes from the firestation to streetcorner 1.
+There are 1 routes from the firestation to streetcorner 1.
 CASE 31:
-There are 0 routes from the firestation to streetcorner 2.
+There are 1 routes from the firestation to streetcorner 2.
 CASE 32:
-There are 0 routes from the firestation to streetcorner 1.
+There are 1 routes from the firestation to streetcorner 1.
 CASE 33:
-There are 0 routes from the firestation to streetcorner 1.
+There are 1 routes from the firestation to streetcorner 1.
 CASE 34:
 There are 0 routes from the firestation to streetcorner 6.
 CASE 35:
-There are 0 routes from the firestation to streetcorner 4.
+There are 1 routes from the firestation to streetcorner 4.
 CASE 36:
 There are 0 routes from the firestation to streetcorner 5.
 CASE 37:
-There are 0 routes from the firestation to streetcorner 1.
+There are 1 routes from the firestation to streetcorner 1.
 CASE 38:
-There are 0 routes from the firestation to streetcorner 1.
+There are 1 routes from the firestation to streetcorner 1.
 CASE 39:
 There are 0 routes from the firestation to streetcorner 9.
 CASE 40:
-There are 0 routes from the firestation to streetcorner 10.
+There are 1 routes from the firestation to streetcorner 10.
 CASE 41:
 There are 0 routes from the firestation to streetcorner 7.
 CASE 42:
-There are 0 routes from the firestation to streetcorner 3.
+There are 1 routes from the firestation to streetcorner 3.
 CASE 43:
-There are 0 routes from the firestation to streetcorner 5.
+There are 1 routes from the firestation to streetcorner 5.
 CASE 44:
-There are 0 routes from the firestation to streetcorner 1.
+There are 1 routes from the firestation to streetcorner 1.
 CASE 45:
-There are 0 routes from the firestation to streetcorner 2.
+There are 1 routes from the firestation to streetcorner 2.
 CASE 46:
-There are 0 routes from the firestation to streetcorner 10.
+There are 1 routes from the firestation to streetcorner 10.
 CASE 47:
-There are 0 routes from the firestation to streetcorner 6.
+There are 1 routes from the firestation to streetcorner 6.
 CASE 48:
-There are 0 routes from the firestation to streetcorner 11.
+There are 1 routes from the firestation to streetcorner 11.
 CASE 49:
-There are 0 routes from the firestation to streetcorner 1.
+There are 1 routes from the firestation to streetcorner 1.
 CASE 50:
-There are 0 routes from the firestation to streetcorner 3.
+There are 1 routes from the firestation to streetcorner 3.
 CASE 51:
-There are 0 routes from the firestation to streetcorner 1.
+There are 1 routes from the firestation to streetcorner 1.
 CASE 52:
 There are 0 routes from the firestation to streetcorner 2.
 CASE 53:
-There are 0 routes from the firestation to streetcorner 3.
+There are 1 routes from the firestation to streetcorner 3.
 CASE 54:
-There are 0 routes from the firestation to streetcorner 2.
+There are 1 routes from the firestation to streetcorner 2.
 CASE 55:
-There are 0 routes from the firestation to streetcorner 3.
+There are 1 routes from the firestation to streetcorner 3.
 CASE 56:
-There are 0 routes from the firestation to streetcorner 1.
+There are 1 routes from the firestation to streetcorner 1.
 CASE 57:
-There are 0 routes from the firestation to streetcorner 11.
+There are 1 routes from the firestation to streetcorner 11.
 CASE 58:
-There are 0 routes from the firestation to streetcorner 3.
+There are 1 routes from the firestation to streetcorner 3.
 CASE 59:
 There are 0 routes from the firestation to streetcorner 6.
 CASE 60:
 There are 0 routes from the firestation to streetcorner 2.
 CASE 61:
-There are 0 routes from the firestation to streetcorner 3.
+There are 1 routes from the firestation to streetcorner 3.
 CASE 62:
-There are 0 routes from the firestation to streetcorner 2.
+There are 1 routes from the firestation to streetcorner 2.
 CASE 63:
-There are 0 routes from the firestation to streetcorner 1.
+There are 1 routes from the firestation to streetcorner 1.
 CASE 64:
 There are 0 routes from the firestation to streetcorner 13.
 CASE 65:
-There are 0 routes from the firestation to streetcorner 4.
+There are 1 routes from the firestation to streetcorner 4.
 CASE 66:
 There are 0 routes from the firestation to streetcorner 4.
 CASE 67:
-There are 0 routes from the firestation to streetcorner 14.
+There are 1 routes from the firestation to streetcorner 14.
 CASE 68:
 There are 0 routes from the firestation to streetcorner 13.
 CASE 69:
-There are 0 routes from the firestation to streetcorner 3.
+There are 1 routes from the firestation to streetcorner 3.
 CASE 70:
 There are 0 routes from the firestation to streetcorner 3.
 CASE 71:
-There are 0 routes from the firestation to streetcorner 10.
+There are 1 routes from the firestation to streetcorner 10.
 CASE 72:
-There are 0 routes from the firestation to streetcorner 5.
+There are 1 routes from the firestation to streetcorner 5.
 CASE 73:
-There are 0 routes from the firestation to streetcorner 2.
+There are 1 routes from the firestation to streetcorner 2.
 CASE 74:
-There are 0 routes from the firestation to streetcorner 5.
+There are 1 routes from the firestation to streetcorner 5.
 CASE 75:
 There are 0 routes from the firestation to streetcorner 12.
 CASE 76:
-There are 0 routes from the firestation to streetcorner 4.
+There are 1 routes from the firestation to streetcorner 4.
 CASE 77:
-There are 0 routes from the firestation to streetcorner 3.
+There are 1 routes from the firestation to streetcorner 3.
 CASE 78:
 There are 0 routes from the firestation to streetcorner 3.
 CASE 79:
 There are 0 routes from the firestation to streetcorner 4.
 CASE 80:
-There are 0 routes from the firestation to streetcorner 9.
+There are 1 routes from the firestation to streetcorner 9.
 CASE 81:
 There are 0 routes from the firestation to streetcorner 8.
 CASE 82:
 There are 0 routes from the firestation to streetcorner 9.
 CASE 83:
-There are 0 routes from the firestation to streetcorner 5.
+There are 1 routes from the firestation to streetcorner 5.
 CASE 84:
-There are 0 routes from the firestation to streetcorner 6.
+There are 1 routes from the firestation to streetcorner 6.
 CASE 85:
-There are 0 routes from the firestation to streetcorner 7.
+There are 1 routes from the firestation to streetcorner 7.
 CASE 86:
 There are 0 routes from the firestation to streetcorner 2.
 CASE 87:
-There are 0 routes from the firestation to streetcorner 5.
+There are 1 routes from the firestation to streetcorner 5.
 CASE 88:
-There are 0 routes from the firestation to streetcorner 7.
+There are 1 routes from the firestation to streetcorner 7.
 CASE 89:
 There are 0 routes from the firestation to streetcorner 6.
 CASE 90:
 There are 0 routes from the firestation to streetcorner 20.
 CASE 91:
-There are 0 routes from the firestation to streetcorner 4.
+There are 1 routes from the firestation to streetcorner 4.
 CASE 92:
-There are 0 routes from the firestation to streetcorner 1.
+There are 1 routes from the firestation to streetcorner 1.
 CASE 93:
 There are 0 routes from the firestation to streetcorner 2.
 CASE 94:
-There are 0 routes from the firestation to streetcorner 8.
+There are 1 routes from the firestation to streetcorner 8.
 CASE 95:
 There are 0 routes from the firestation to streetcorner 9.
 CASE 96:
-There are 0 routes from the firestation to streetcorner 3.
+There are 1 routes from the firestation to streetcorner 3.
 CASE 97:
-There are 0 routes from the firestation to streetcorner 6.
+There are 1 routes from the firestation to streetcorner 6.
 CASE 98:
-There are 0 routes from the firestation to streetcorner 1.
+There are 1 routes from the firestation to streetcorner 1.
 CASE 99:
 There are 0 routes from the firestation to streetcorner 6.
 CASE 100:
