@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <vector>
+#include <algorithm>
 
 #define vector std::vector
 
@@ -19,6 +20,7 @@ private:
 
 	bool isReachableFinalNode ();
 	void dfsConnectedComponent (int v);
+	void sortGraphNodes ();
 };
 
 void Graph::readGraph (const int & finalNode)
@@ -51,6 +53,8 @@ void Graph::findRoutes ()
 
 	if (isReachableFinalNode())
 	{
+		sortGraphNodes();
+
 		//TODO...
 		result = 1;
 	}
@@ -75,6 +79,14 @@ void Graph::dfsConnectedComponent (int v)
 		{
 			dfsConnectedComponent(nextNode);
 		}
+	}
+}
+
+void Graph::sortGraphNodes ()
+{
+	for (int i = 0; i < m_graph.size(); i++)
+	{
+		std::sort(m_graph[i].begin(), m_graph[i].end());
 	}
 }
 
