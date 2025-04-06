@@ -1,9 +1,5 @@
 #include <cstdio>
-#include <vector>
 #include <cmath>
-#include <algorithm>
-
-#define vector std::vector
 
 const int g_MAX_PACKAGES_COUNT = 20;
 const long double g_LEFT_FULCRUM_POSITION = -1.5;
@@ -62,19 +58,18 @@ Package & Package::operator= (const Package & copy)
 class Board
 {
 public:
-	Board () { m_allPackages.reserve(g_MAX_PACKAGES_COUNT); }
+	Board () {}
 	void readBoard (const int & boardLength, const int & boardWeight, const int & packagesCount);
 	void findTippingSolution ();
 private:
 	long double m_boardLength, m_boardWeight;
 	long double m_F1LL, m_F1LR, m_F2LL, m_F2LR;
 	int m_packagesCount;
-	vector<Package> m_allPackages;
+	Package m_allPackages [g_MAX_PACKAGES_COUNT];
 	int m_currentSolution [g_MAX_PACKAGES_COUNT];
 	int m_bestSolution [g_MAX_PACKAGES_COUNT];
 	bool m_solutionFound;
 
-	bool isBoardBalanced ();
 	bool isBoardBalanced (const long double & totalLFF, const long double & totalRFF);
 	long double calculateTotalLFF ();
 	long double calculateTotalRFF ();
@@ -92,8 +87,6 @@ void Board::readBoard (const int & boardLength, const int & boardWeight, const i
 	m_F1LR = (halfBoard - g_LEFT_FULCRUM_POSITION) * (m_boardWeight / m_boardLength) * (halfBoard - g_LEFT_FULCRUM_POSITION);
 	m_F2LL = (halfBoard + g_RIGHT_FULCRUM_POSITION) * (m_boardWeight / m_boardLength) * (-halfBoard - g_RIGHT_FULCRUM_POSITION);
 	m_F2LR = (halfBoard - g_RIGHT_FULCRUM_POSITION) * (m_boardWeight / m_boardLength) * (halfBoard - g_RIGHT_FULCRUM_POSITION);
-
-	m_allPackages.clear();
 
 	for (int i = 0; i < packagesCount; i++)
 	{
@@ -124,10 +117,8 @@ void Board::readBoard (const int & boardLength, const int & boardWeight, const i
 		currentPackage.LFF = currentPackage.getPositionFromLeftFulcrum() * currentPackage.weight;
 		currentPackage.RFF = currentPackage.getPositionFromRightFulcrum() * currentPackage.weight;
 
-		m_allPackages.push_back(currentPackage);
+		m_allPackages[i] = currentPackage;
 	}
-
-	std::sort(m_allPackages.begin(), m_allPackages.end(), comparePackages);
 
 	for (int i = 0; i < packagesCount; i++)
 	{
@@ -137,7 +128,10 @@ void Board::readBoard (const int & boardLength, const int & boardWeight, const i
 
 void Board::findTippingSolution ()
 {
-	if (!isBoardBalanced())
+	long double totalLFF = calculateTotalLFF();
+	long double totalRFF = calculateTotalRFF();
+
+	if (!isBoardBalanced(totalLFF, totalRFF))
 	{
 		printf("Impossible\n");
 		return;
@@ -145,7 +139,7 @@ void Board::findTippingSolution ()
 
 	m_solutionFound = false;
 
-	backtrackSolution(calculateTotalLFF(), calculateTotalRFF(), 0);
+	backtrackSolution(totalLFF, totalRFF, 0);
 
 	if (m_solutionFound)
 	{
@@ -159,14 +153,6 @@ void Board::findTippingSolution ()
 	{
 		printf("Impossible\n");
 	}
-}
-
-bool Board::isBoardBalanced ()
-{
-	bool isF1Balanced = !(calculateTotalLFF() < 0);
-	bool isF2Balanced = !(calculateTotalRFF() > 0);
-
-	return isF1Balanced && isF2Balanced;
 }
 
 bool Board::isBoardBalanced (const long double & totalLFF, const long double & totalRFF)
@@ -183,15 +169,16 @@ long double Board::calculateTotalLFF ()
 
 	for (int i = 0; i < m_packagesCount; i++)
 	{
+		const Package & currentPackage = m_allPackages[i];
 		if (
-			!m_allPackages[i].isValidPosition
-			|| !m_allPackages[i].isActive
+			!currentPackage.isValidPosition
+			|| !currentPackage.isActive
 		)
 		{
 			continue;
 		}
 
-		M1 += m_allPackages[i].LFF;
+		M1 += currentPackage.LFF;
 	}
 
 	return M1;
@@ -203,15 +190,16 @@ long double Board::calculateTotalRFF ()
 
 	for (int i = 0; i < m_packagesCount; i++)
 	{
+		const Package & currentPackage = m_allPackages[i];
 		if (
-			!m_allPackages[i].isValidPosition
-			|| !m_allPackages[i].isActive
+			!currentPackage.isValidPosition
+			|| !currentPackage.isActive
 		)
 		{
 			continue;
 		}
 
-		M2 += m_allPackages[i].RFF;
+		M2 += currentPackage.RFF;
 	}
 
 	return M2;
