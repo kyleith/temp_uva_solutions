@@ -16,6 +16,7 @@ struct Package
 
 	long double position, weight;
 	long double leverAbsForce;
+	long double LFF, RFF;
 	bool isActive, isValidPosition;
 	int index;
 
@@ -40,6 +41,8 @@ Package::Package (const Package & copy)
 	isValidPosition = copy.isValidPosition;
 	leverAbsForce = copy.leverAbsForce;
 	index = copy.index;
+	LFF = copy.LFF;
+	RFF = copy.RFF;
 }
 
 Package & Package::operator= (const Package & copy)
@@ -50,6 +53,8 @@ Package & Package::operator= (const Package & copy)
 	isValidPosition = copy.isValidPosition;
 	leverAbsForce = copy.leverAbsForce;
 	index = copy.index;
+	LFF = copy.LFF;
+	RFF = copy.RFF;
 
 	return *this;
 }
@@ -65,11 +70,11 @@ private:
 	long double m_F1LL, m_F1LR, m_F2LL, m_F2LR;
 	int m_packagesCount;
 	vector<Package> m_allPackages;
-	vector<Package> m_currentSolution, m_bestSolution;
+	vector<int> m_currentSolution, m_bestSolution;
 	bool m_solutionFound;
 
 	bool isBoardBalanced ();
-	bool isCurrentSolutionValid (const vector <Package> & solution);
+	bool isCurrentSolutionValid (const vector <int> & solution);
 	void backtrackSolution (int n);
 };
 
@@ -113,6 +118,9 @@ void Board::readBoard (const int & boardLength, const int & boardWeight, const i
 			currentPackage.leverAbsForce = 0.0;
 		}
 
+		currentPackage.LFF = currentPackage.getPositionFromLeftFulcrum() * currentPackage.weight;
+		currentPackage.RFF = currentPackage.getPositionFromRightFulcrum() * currentPackage.weight;
+
 		m_allPackages.push_back(currentPackage);
 	}
 
@@ -145,7 +153,8 @@ void Board::findTippingSolution ()
 	{
 		for (int i = 0; i < m_bestSolution.size(); i++)
 		{
-			printf("%d %d\n", m_bestSolution[i].getPosition(), m_bestSolution[i].getWeight());
+			int index = m_bestSolution[i];
+			printf("%d %d\n", m_allPackages[index].getPosition(), m_allPackages[index].getWeight());
 		}
 	}
 	else
@@ -169,8 +178,8 @@ bool Board::isBoardBalanced ()
 			continue;
 		}
 
-		M1 += (m_allPackages[i].getPositionFromLeftFulcrum() * m_allPackages[i].weight);
-		M2 += (m_allPackages[i].getPositionFromRightFulcrum() * m_allPackages[i].weight);
+		M1 += m_allPackages[i].LFF;
+		M2 += m_allPackages[i].RFF;
 	}
 
 	bool isF1Balanced = !(M1 < 0);
@@ -205,7 +214,7 @@ void Board::backtrackSolution (int n)
 
 			if (isBoardBalanced())
 			{
-				m_currentSolution.push_back(m_allPackages[i]);
+				m_currentSolution.push_back(m_allPackages[i].index);
 				backtrackSolution(n + 1);
 				m_currentSolution.pop_back();
 			}
@@ -215,7 +224,7 @@ void Board::backtrackSolution (int n)
 	}
 }
 
-bool Board::isCurrentSolutionValid (const vector <Package> & solution)
+bool Board::isCurrentSolutionValid (const vector <int> & solution)
 {
 	for (int i = 0; i < m_packagesCount; i++)
 	{
@@ -229,7 +238,7 @@ bool Board::isCurrentSolutionValid (const vector <Package> & solution)
 
 	for (int i = 0; i < solution.size() - 1; i++)
 	{
-		m_allPackages[solution[i].index].isActive = false;
+		m_allPackages[solution[i]].isActive = false;
 		if (!isBoardBalanced())
 		{
 			return false;
