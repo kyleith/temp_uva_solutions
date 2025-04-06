@@ -74,6 +74,9 @@ private:
 	bool m_solutionFound;
 
 	bool isBoardBalanced ();
+	bool isBoardBalanced (const long double & totalLFF, const long double & totalRFF);
+	long double calculateTotalLFF ();
+	long double calculateTotalRFF ();
 	bool isCurrentSolutionValid (const vector <int> & solution);
 	void backtrackSolution (int n);
 };
@@ -165,8 +168,23 @@ void Board::findTippingSolution ()
 
 bool Board::isBoardBalanced ()
 {
+	bool isF1Balanced = !(calculateTotalLFF() < 0);
+	bool isF2Balanced = !(calculateTotalRFF() > 0);
+
+	return isF1Balanced && isF2Balanced;
+}
+
+bool Board::isBoardBalanced (const long double & totalLFF, const long double & totalRFF)
+{
+	bool isF1Balanced = !(totalLFF < 0);
+	bool isF2Balanced = !(totalRFF > 0);
+
+	return isF1Balanced && isF2Balanced;
+}
+
+long double Board::calculateTotalLFF ()
+{
 	long double M1 = m_F1LL + m_F1LR;
-	long double M2 = m_F2LL + m_F2LR;
 
 	for (int i = 0; i < m_packagesCount; i++)
 	{
@@ -179,13 +197,29 @@ bool Board::isBoardBalanced ()
 		}
 
 		M1 += m_allPackages[i].LFF;
+	}
+
+	return M1;
+}
+
+long double Board::calculateTotalRFF ()
+{
+	long double M2 = m_F2LL + m_F2LR;
+
+	for (int i = 0; i < m_packagesCount; i++)
+	{
+		if (
+			!m_allPackages[i].isValidPosition
+			|| !m_allPackages[i].isActive
+		)
+		{
+			continue;
+		}
+
 		M2 += m_allPackages[i].RFF;
 	}
 
-	bool isF1Balanced = !(M1 < 0);
-	bool isF2Balanced = !(M2 > 0);
-
-	return isF1Balanced && isF2Balanced;
+	return M2;
 }
 
 void Board::backtrackSolution (int n)
