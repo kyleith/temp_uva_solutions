@@ -62,7 +62,7 @@ Package & Package::operator= (const Package & copy)
 class Board
 {
 public:
-	Board () { m_allPackages.reserve(g_MAX_PACKAGES_COUNT); m_currentSolution.reserve(g_MAX_PACKAGES_COUNT); m_bestSolution.reserve(g_MAX_PACKAGES_COUNT); }
+	Board () { m_allPackages.reserve(g_MAX_PACKAGES_COUNT); }
 	void readBoard (const int & boardLength, const int & boardWeight, const int & packagesCount);
 	void findTippingSolution ();
 private:
@@ -70,15 +70,14 @@ private:
 	long double m_F1LL, m_F1LR, m_F2LL, m_F2LR;
 	int m_packagesCount;
 	vector<Package> m_allPackages;
-	vector<int> m_currentSolution, m_bestSolution;
+	int m_currentSolution [g_MAX_PACKAGES_COUNT];
+	int m_bestSolution [g_MAX_PACKAGES_COUNT];
 	bool m_solutionFound;
 
 	bool isBoardBalanced ();
 	bool isBoardBalanced (const long double & totalLFF, const long double & totalRFF);
 	long double calculateTotalLFF ();
 	long double calculateTotalRFF ();
-	bool isCurrentSolutionValid (const vector <int> & solution);
-	void backtrackSolution (int n);
 	void backtrackSolution (long double totalLFF, long double totalRFF, int n);
 };
 
@@ -144,18 +143,13 @@ void Board::findTippingSolution ()
 		return;
 	}
 
-	m_currentSolution.clear();
-	m_bestSolution.clear();
 	m_solutionFound = false;
 
 	backtrackSolution(calculateTotalLFF(), calculateTotalRFF(), 0);
 
-	if (
-		m_solutionFound
-		//&& isCurrentSolutionValid(m_bestSolution)
-	)
+	if (m_solutionFound)
 	{
-		for (int i = 0; i < m_bestSolution.size(); i++)
+		for (int i = 0; i < m_packagesCount; i++)
 		{
 			int index = m_bestSolution[i];
 			printf("%d %d\n", m_allPackages[index].getPosition(), m_allPackages[index].getWeight());
@@ -223,50 +217,13 @@ long double Board::calculateTotalRFF ()
 	return M2;
 }
 
-void Board::backtrackSolution (int n)
-{
-	if (n == m_packagesCount)
-	{
-		m_bestSolution.clear();
-		for (int i = 0; i < m_currentSolution.size(); i++)
-		{
-			m_bestSolution.push_back(m_currentSolution[i]);
-		}
-		m_solutionFound = true;
-		return;
-	}
-
-	for (int i = 0; i < m_packagesCount; i++)
-	{
-		if (m_solutionFound)
-		{
-			break;
-		}
-
-		if (m_allPackages[i].isActive)
-		{
-			m_allPackages[i].isActive = false;
-
-			if (isBoardBalanced())
-			{
-				m_currentSolution.push_back(m_allPackages[i].index);
-				backtrackSolution(n + 1);
-				m_currentSolution.pop_back();
-			}
-
-			m_allPackages[i].isActive = true;
-		}
-	}
-}
-
 void Board::backtrackSolution (long double totalLFF, long double totalRFF, int n)
 {
 	if (n == m_packagesCount)
 	{
-		m_bestSolution.clear();
-		for (int i = 0; i < m_currentSolution.size(); i++)
+		for (int i = 0; i < m_packagesCount; i++)
 		{
-			m_bestSolution.push_back(m_currentSolution[i]);
+			m_bestSolution[i] = m_currentSolution[i];
 		}
 		m_solutionFound = true;
 		return;
@@ -274,53 +231,28 @@ void Board::backtrackSolution (long double totalLFF, long double totalRFF, int n
 
 	for (int i = 0; i < m_packagesCount; i++)
 	{
-		if (m_solutionFound)
+		const Package & currentPackage = m_allPackages[i];
+		if (currentPackage.isActive)
 		{
-			break;
-		}
-
-		if (m_allPackages[i].isActive)
-		{
-			m_allPackages[i].isActive = false;
-
-			if (isBoardBalanced(totalLFF - m_allPackages[i].LFF, totalRFF - m_allPackages[i].RFF))
+			if (isBoardBalanced(totalLFF - currentPackage.LFF, totalRFF - currentPackage.RFF))
 			{
-				m_currentSolution.push_back(m_allPackages[i].index);
-				backtrackSolution(totalLFF - m_allPackages[i].LFF, totalRFF - m_allPackages[i].RFF, n + 1);
-				m_currentSolution.pop_back();
+				m_allPackages[i].isActive = false;
+				m_currentSolution[n] = currentPackage.index;
+
+				backtrackSolution(totalLFF - currentPackage.LFF, totalRFF - currentPackage.RFF, n + 1);
+				if (m_solutionFound)
+				{
+					break;
+				}
+
+				m_allPackages[i].isActive = true;
+				m_currentSolution[n] = -1;
 			}
-
-			m_allPackages[i].isActive = true;
 		}
 	}
-}
-
-bool Board::isCurrentSolutionValid (const vector <int> & solution)
-{
-	for (int i = 0; i < m_packagesCount; i++)
-	{
-		m_allPackages[i].isActive = true;
-	}
-
-	if (!isBoardBalanced())
-	{
-		return false;
-	}
-
-	for (int i = 0; i < solution.size() - 1; i++)
-	{
-		m_allPackages[solution[i]].isActive = false;
-		if (!isBoardBalanced())
-		{
-			return false;
-		}
-	}
-
-	return true;
 }
 
 void processInput ();
-void processTestCase (const int & boardLength, const int & boardWeight, const int & packagesCount);
 
 int main ()
 {
@@ -338,6 +270,7 @@ void processInput ()
 {
 	int length = -1, weight = -1, packagesCount = -1;
 	int caseIndex = 0;
+	Board currentBoard;
 
 	while (
 		(scanf("%d%d%d", &length, &weight, &packagesCount) == 3)
@@ -347,13 +280,7 @@ void processInput ()
 		caseIndex++;
 		printf("Case %d:\n", caseIndex);
 
-		processTestCase(length, weight, packagesCount);
+		currentBoard.readBoard(length, weight, packagesCount);
+		currentBoard.findTippingSolution();
 	}
-}
-
-void processTestCase (const int & boardLength, const int & boardWeight, const int & packagesCount)
-{
-	Board currentBoard;
-	currentBoard.readBoard(boardLength, boardWeight, packagesCount);
-	currentBoard.findTippingSolution();
 }
