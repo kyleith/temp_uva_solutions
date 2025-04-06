@@ -79,6 +79,7 @@ private:
 	long double calculateTotalRFF ();
 	bool isCurrentSolutionValid (const vector <int> & solution);
 	void backtrackSolution (int n);
+	void backtrackSolution (long double totalLFF, long double totalRFF, int n);
 };
 
 void Board::readBoard (const int & boardLength, const int & boardWeight, const int & packagesCount)
@@ -147,7 +148,7 @@ void Board::findTippingSolution ()
 	m_bestSolution.clear();
 	m_solutionFound = false;
 
-	backtrackSolution(0);
+	backtrackSolution(calculateTotalLFF(), calculateTotalRFF(), 0);
 
 	if (
 		m_solutionFound
@@ -250,6 +251,42 @@ void Board::backtrackSolution (int n)
 			{
 				m_currentSolution.push_back(m_allPackages[i].index);
 				backtrackSolution(n + 1);
+				m_currentSolution.pop_back();
+			}
+
+			m_allPackages[i].isActive = true;
+		}
+	}
+}
+
+void Board::backtrackSolution (long double totalLFF, long double totalRFF, int n)
+{
+	if (n == m_packagesCount)
+	{
+		m_bestSolution.clear();
+		for (int i = 0; i < m_currentSolution.size(); i++)
+		{
+			m_bestSolution.push_back(m_currentSolution[i]);
+		}
+		m_solutionFound = true;
+		return;
+	}
+
+	for (int i = 0; i < m_packagesCount; i++)
+	{
+		if (m_solutionFound)
+		{
+			break;
+		}
+
+		if (m_allPackages[i].isActive)
+		{
+			m_allPackages[i].isActive = false;
+
+			if (isBoardBalanced(totalLFF - m_allPackages[i].LFF, totalRFF - m_allPackages[i].RFF))
+			{
+				m_currentSolution.push_back(m_allPackages[i].index);
+				backtrackSolution(totalLFF - m_allPackages[i].LFF, totalRFF - m_allPackages[i].RFF, n + 1);
 				m_currentSolution.pop_back();
 			}
 
