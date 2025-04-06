@@ -119,7 +119,8 @@ void Board::findTippingSolution ()
 
 bool Board::isBoardBalanced ()
 {
-	double M1 = 0.0, M2 = 0.0;
+	double M1 = -m_F1LL + m_F1LR;
+	double M2 = -m_F2LL + m_F2LR;
 
 	for (int i = 0; i < m_packagesCount; i++)
 	{
