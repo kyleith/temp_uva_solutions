@@ -5,21 +5,21 @@
 #define vector std::vector
 
 const int g_MAX_PACKAGES_COUNT = 20;
-const double g_LEFT_FULCRUM_POSITION = -1.5;
-const double g_RIGHT_FULCRUM_POSITION = 1.5;
+const long double g_LEFT_FULCRUM_POSITION = -1.5;
+const long double g_RIGHT_FULCRUM_POSITION = 1.5;
 
 struct Package
 {
 	Package () : position(0.0), weight(0.0), isActive(false), isValidPosition(false) {}
 	Package (const Package & copy);
 
-	double position, weight;
+	long double position, weight;
 	bool isActive, isValidPosition;
 
 	int getPosition () { return (int) position; }
 	int getWeight () { return (int) weight; }
-	double getPositionFromLeftFulcrum () { return position - g_LEFT_FULCRUM_POSITION; }
-	double getPositionFromRightFulcrum () { return position - g_RIGHT_FULCRUM_POSITION; }
+	long double getPositionFromLeftFulcrum () { return position - g_LEFT_FULCRUM_POSITION; }
+	long double getPositionFromRightFulcrum () { return position - g_RIGHT_FULCRUM_POSITION; }
 
 	Package & operator= (const Package & copy);
 };
@@ -62,23 +62,24 @@ private:
 
 void Board::readBoard (const int & boardLength, const int & boardWeight, const int & packagesCount)
 {
-	m_boardLength = (double)boardLength;
-	m_boardWeight = (double)boardWeight;
+	m_boardLength = (long double)boardLength;
+	m_boardWeight = (long double)boardWeight;
 	m_packagesCount = packagesCount;
 
-	m_F1LL = (m_boardLength / 2.0 + g_LEFT_FULCRUM_POSITION) * (m_boardWeight / m_boardLength);
-	m_F1LR = (m_boardLength / 2.0 - g_LEFT_FULCRUM_POSITION) * (m_boardWeight / m_boardLength);
-	m_F2LL = (m_boardLength / 2.0 + g_RIGHT_FULCRUM_POSITION) * (m_boardWeight / m_boardLength);
-	m_F2LR = (m_boardLength / 2.0 - g_RIGHT_FULCRUM_POSITION) * (m_boardWeight / m_boardLength);
+	long double halfBoard = m_boardLength / 2.0;
+	m_F1LL = (halfBoard + g_LEFT_FULCRUM_POSITION) * (m_boardWeight / m_boardLength) * (-halfBoard - g_LEFT_FULCRUM_POSITION);
+	m_F1LR = (halfBoard - g_LEFT_FULCRUM_POSITION) * (m_boardWeight / m_boardLength) * (halfBoard - g_LEFT_FULCRUM_POSITION);
+	m_F2LL = (halfBoard + g_RIGHT_FULCRUM_POSITION) * (m_boardWeight / m_boardLength) * (-halfBoard - g_RIGHT_FULCRUM_POSITION);
+	m_F2LR = (halfBoard - g_RIGHT_FULCRUM_POSITION) * (m_boardWeight / m_boardLength) * (halfBoard - g_RIGHT_FULCRUM_POSITION);
 
 	m_allPackages.clear();
 
 	for (int i = 0; i < packagesCount; i++)
 	{
-		double position, weight;
-		scanf("%llf%llf", &position, &weight);
+		long double position, weight;
+		scanf("%llf %llf", &position, &weight);
 
-		bool isValidPosition = !(abs(position) > (m_boardLength / 2.0));
+		bool isValidPosition = !(fabsl(position) > (m_boardLength / 2.0));
 
 		Package currentPackage;
 		currentPackage.position = position;
@@ -119,8 +120,8 @@ void Board::findTippingSolution ()
 
 bool Board::isBoardBalanced ()
 {
-	long double M1 = -m_F1LL + m_F1LR;
-	long double M2 = -m_F2LL + m_F2LR;
+	long double M1 = m_F1LL + m_F1LR;
+	long double M2 = m_F2LL + m_F2LR;
 
 	for (int i = 0; i < m_packagesCount; i++)
 	{
