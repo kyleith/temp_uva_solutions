@@ -5,8 +5,8 @@
 #define vector std::vector
 
 const int g_MAX_PACKAGES_COUNT = 20;
-const int g_LEFT_FULCRUM_POSITION = -1.5;
-const int g_RIGHT_FULCRUM_POSITION = 1.5;
+const double g_LEFT_FULCRUM_POSITION = -1.5;
+const double g_RIGHT_FULCRUM_POSITION = 1.5;
 
 struct Package
 {
@@ -14,6 +14,8 @@ struct Package
 	bool isActive = false, isValidPosition = false;
 	int getPosition () { return (int) position; }
 	int getWeight () { return (int) weight; }
+	double getPositionFromLeftFulcrum () { return position - g_LEFT_FULCRUM_POSITION; }
+	double getPositionFromRightFulcrum () { return position - g_RIGHT_FULCRUM_POSITION; }
 };
 
 class Board
@@ -24,6 +26,7 @@ public:
 	void findTippingSolution ();
 private:
 	double m_boardLength, m_boardWeight;
+	double m_F1LL, m_F1LR, m_F2LL, m_F2LR;
 	int m_packagesCount;
 	vector<Package> m_allPackages;
 
@@ -35,6 +38,11 @@ void Board::readBoard (const int & boardLength, const int & boardWeight, const i
 	m_boardLength = (double)boardLength;
 	m_boardWeight = (double)boardWeight;
 	m_packagesCount = packagesCount;
+
+	m_F1LL = (m_boardLength / 2 + g_LEFT_FULCRUM_POSITION) * (m_boardWeight / m_boardLength);
+	m_F1LR = (m_boardLength / 2 - g_LEFT_FULCRUM_POSITION) * (m_boardWeight / m_boardLength);
+	m_F2LL = (m_boardLength / 2 + g_RIGHT_FULCRUM_POSITION) * (m_boardWeight / m_boardLength);
+	m_F2LR = (m_boardLength / 2 - g_RIGHT_FULCRUM_POSITION) * (m_boardWeight / m_boardLength);
 
 	m_allPackages.clear();
 
@@ -57,13 +65,37 @@ void Board::readBoard (const int & boardLength, const int & boardWeight, const i
 
 void Board::findTippingSolution ()
 {
+	if (!isBoardBalanced())
+	{
+		printf("Impossible\n");
+		return;
+	}
+
 	//TODO...
 }
 
 bool Board::isBoardBalanced ()
 {
-	//TODO...
-	return false;
+	double M1 = 0.0, M2 = 0.0;
+
+	for (int i = 0; i < m_packagesCount; i++)
+	{
+		if (
+			!m_allPackages[i].isValidPosition
+			|| !m_allPackages[i].isActive
+		)
+		{
+			continue;
+		}
+
+		M1 += (m_allPackages[i].getPositionFromLeftFulcrum() * m_allPackages[i].weight);
+		M2 += (m_allPackages[i].getPositionFromRightFulcrum() * m_allPackages[i].weight);
+	}
+
+	bool isF1Balanced = !(M1 < 0);
+	bool isF2Balanced = !(M2 > 0);
+
+	return isF1Balanced && isF2Balanced;
 }
 
 void processInput ();
