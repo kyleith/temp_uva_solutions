@@ -49,8 +49,8 @@ public:
 	void readBoard (const int & boardLength, const int & boardWeight, const int & packagesCount);
 	void findTippingSolution ();
 private:
-	double m_boardLength, m_boardWeight;
-	double m_F1LL, m_F1LR, m_F2LL, m_F2LR;
+	long double m_boardLength, m_boardWeight;
+	long double m_F1LL, m_F1LR, m_F2LL, m_F2LR;
 	int m_packagesCount;
 	vector<Package> m_allPackages;
 	vector<Package> m_currentSolution, m_bestSolution;
@@ -66,17 +66,17 @@ void Board::readBoard (const int & boardLength, const int & boardWeight, const i
 	m_boardWeight = (double)boardWeight;
 	m_packagesCount = packagesCount;
 
-	m_F1LL = (m_boardLength / 2 + g_LEFT_FULCRUM_POSITION) * (m_boardWeight / m_boardLength);
-	m_F1LR = (m_boardLength / 2 - g_LEFT_FULCRUM_POSITION) * (m_boardWeight / m_boardLength);
-	m_F2LL = (m_boardLength / 2 + g_RIGHT_FULCRUM_POSITION) * (m_boardWeight / m_boardLength);
-	m_F2LR = (m_boardLength / 2 - g_RIGHT_FULCRUM_POSITION) * (m_boardWeight / m_boardLength);
+	m_F1LL = (m_boardLength / 2.0 + g_LEFT_FULCRUM_POSITION) * (m_boardWeight / m_boardLength);
+	m_F1LR = (m_boardLength / 2.0 - g_LEFT_FULCRUM_POSITION) * (m_boardWeight / m_boardLength);
+	m_F2LL = (m_boardLength / 2.0 + g_RIGHT_FULCRUM_POSITION) * (m_boardWeight / m_boardLength);
+	m_F2LR = (m_boardLength / 2.0 - g_RIGHT_FULCRUM_POSITION) * (m_boardWeight / m_boardLength);
 
 	m_allPackages.clear();
 
 	for (int i = 0; i < packagesCount; i++)
 	{
 		double position, weight;
-		scanf("%lf%lf", &position, &weight);
+		scanf("%llf%llf", &position, &weight);
 
 		bool isValidPosition = !(abs(position) > (m_boardLength / 2.0));
 
@@ -119,8 +119,8 @@ void Board::findTippingSolution ()
 
 bool Board::isBoardBalanced ()
 {
-	double M1 = -m_F1LL + m_F1LR;
-	double M2 = -m_F2LL + m_F2LR;
+	long double M1 = -m_F1LL + m_F1LR;
+	long double M2 = -m_F2LL + m_F2LR;
 
 	for (int i = 0; i < m_packagesCount; i++)
 	{
