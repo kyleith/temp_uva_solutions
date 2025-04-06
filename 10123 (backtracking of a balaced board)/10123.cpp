@@ -1,6 +1,7 @@
 #include <cstdio>
 #include <vector>
 #include <cmath>
+#include <algorithm>
 
 #define vector std::vector
 
@@ -14,7 +15,9 @@ struct Package
 	Package (const Package & copy);
 
 	long double position, weight;
+	long double leverAbsForce;
 	bool isActive, isValidPosition;
+	int index;
 
 	int getPosition () { return (int) position; }
 	int getWeight () { return (int) weight; }
@@ -24,12 +27,19 @@ struct Package
 	Package & operator= (const Package & copy);
 };
 
+bool comparePackages (const Package & A, const Package & B)
+{
+	return A.leverAbsForce > B.leverAbsForce;
+}
+
 Package::Package (const Package & copy)
 {
 	position = copy.position;
 	weight = copy.weight;
 	isActive = copy.isActive;
 	isValidPosition = copy.isValidPosition;
+	leverAbsForce = copy.leverAbsForce;
+	index = copy.index;
 }
 
 Package & Package::operator= (const Package & copy)
@@ -38,6 +48,8 @@ Package & Package::operator= (const Package & copy)
 	weight = copy.weight;
 	isActive = copy.isActive;
 	isValidPosition = copy.isValidPosition;
+	leverAbsForce = copy.leverAbsForce;
+	index = copy.index;
 
 	return *this;
 }
@@ -57,6 +69,7 @@ private:
 	bool m_solutionFound;
 
 	bool isBoardBalanced ();
+	bool isCurrentSolutionValid (const vector <Package> & solution);
 	void backtrackSolution (int n);
 };
 
@@ -87,7 +100,27 @@ void Board::readBoard (const int & boardLength, const int & boardWeight, const i
 		currentPackage.isActive = true;
 		currentPackage.isValidPosition = isValidPosition;
 
+		if (currentPackage.getPositionFromLeftFulcrum() < 0.0)
+		{
+			currentPackage.leverAbsForce = fabsl(currentPackage.getPositionFromLeftFulcrum()) * currentPackage.weight;
+		}
+		else if (currentPackage.getPositionFromRightFulcrum() > 0.0)
+		{
+			currentPackage.leverAbsForce = fabsl(currentPackage.getPositionFromRightFulcrum()) * currentPackage.weight;
+		}
+		else
+		{
+			currentPackage.leverAbsForce = 0.0;
+		}
+
 		m_allPackages.push_back(currentPackage);
+	}
+
+	std::sort(m_allPackages.begin(), m_allPackages.end(), comparePackages);
+
+	for (int i = 0; i < packagesCount; i++)
+	{
+		m_allPackages[i].index = i;
 	}
 }
 
@@ -105,16 +138,19 @@ void Board::findTippingSolution ()
 
 	backtrackSolution(0);
 
-	if (!m_solutionFound)
-	{
-		printf("Impossible\n");
-	}
-	else
+	if (
+		m_solutionFound
+		//&& isCurrentSolutionValid(m_bestSolution)
+	)
 	{
 		for (int i = 0; i < m_bestSolution.size(); i++)
 		{
 			printf("%d %d\n", m_bestSolution[i].getPosition(), m_bestSolution[i].getWeight());
 		}
+	}
+	else
+	{
+		printf("Impossible\n");
 	}
 }
 
@@ -177,6 +213,30 @@ void Board::backtrackSolution (int n)
 			m_allPackages[i].isActive = true;
 		}
 	}
+}
+
+bool Board::isCurrentSolutionValid (const vector <Package> & solution)
+{
+	for (int i = 0; i < m_packagesCount; i++)
+	{
+		m_allPackages[i].isActive = true;
+	}
+
+	if (!isBoardBalanced())
+	{
+		return false;
+	}
+
+	for (int i = 0; i < solution.size() - 1; i++)
+	{
+		m_allPackages[solution[i].index].isActive = false;
+		if (!isBoardBalanced())
+		{
+			return false;
+		}
+	}
+
+	return true;
 }
 
 void processInput ();
