@@ -7,13 +7,14 @@ const long double g_RIGHT_FULCRUM_POSITION = 1.5;
 
 struct Package
 {
-	Package () : position(0.0), weight(0.0), isActive(false), isValidPosition(false) {}
+	Package () : position(0.0), weight(0.0), isActive(false), isValidPosition(false), isCenterPosition(false) {}
 	Package (const Package & copy);
 
 	long double position, weight;
 	long double leverAbsForce;
 	long double LFF, RFF;
 	bool isActive, isValidPosition;
+	bool isCenterPosition;
 	int index;
 
 	int getPosition () { return (int) position; }
@@ -39,6 +40,7 @@ Package::Package (const Package & copy)
 	index = copy.index;
 	LFF = copy.LFF;
 	RFF = copy.RFF;
+	isCenterPosition = copy.isCenterPosition;
 }
 
 Package & Package::operator= (const Package & copy)
@@ -51,6 +53,7 @@ Package & Package::operator= (const Package & copy)
 	index = copy.index;
 	LFF = copy.LFF;
 	RFF = copy.RFF;
+	isCenterPosition = copy.isCenterPosition;
 
 	return *this;
 }
@@ -64,7 +67,7 @@ public:
 private:
 	long double m_boardLength, m_boardWeight;
 	long double m_F1LL, m_F1LR, m_F2LL, m_F2LR;
-	int m_packagesCount;
+	int m_packagesCount, m_unbalancedPackagesCount;
 	Package m_allPackages [g_MAX_PACKAGES_COUNT];
 	int m_currentSolution [g_MAX_PACKAGES_COUNT];
 	int m_bestSolution [g_MAX_PACKAGES_COUNT];
@@ -81,6 +84,7 @@ void Board::readBoard (const int & boardLength, const int & boardWeight, const i
 	m_boardLength = (long double)boardLength;
 	m_boardWeight = (long double)boardWeight;
 	m_packagesCount = packagesCount;
+	m_unbalancedPackagesCount = 0;
 
 	long double halfBoard = m_boardLength / 2.0;
 	m_F1LL = (halfBoard + g_LEFT_FULCRUM_POSITION) * (m_boardWeight / m_boardLength) * (-halfBoard - g_LEFT_FULCRUM_POSITION);
@@ -94,12 +98,19 @@ void Board::readBoard (const int & boardLength, const int & boardWeight, const i
 		scanf("%llf %llf", &position, &weight);
 
 		bool isValidPosition = !(fabsl(position) > (m_boardLength / 2.0));
+		bool isCenterPosition = (g_LEFT_FULCRUM_POSITION <= position && position <= g_RIGHT_FULCRUM_POSITION);
+
+		if (!isCenterPosition)
+		{
+			m_unbalancedPackagesCount++;
+		}
 
 		Package currentPackage;
 		currentPackage.position = position;
 		currentPackage.weight = weight;
 		currentPackage.isActive = true;
 		currentPackage.isValidPosition = isValidPosition;
+		currentPackage.isCenterPosition = isCenterPosition;
 
 		if (currentPackage.getPositionFromLeftFulcrum() < 0.0)
 		{
@@ -123,6 +134,20 @@ void Board::readBoard (const int & boardLength, const int & boardWeight, const i
 	for (int i = 0; i < packagesCount; i++)
 	{
 		m_allPackages[i].index = i;
+	}
+
+	int lastPackageIndex = 0;
+	for (int i = m_unbalancedPackagesCount; i < packagesCount; i++)
+	{
+		for (int j = lastPackageIndex; j < packagesCount; j++)
+		{
+			if (m_allPackages[j].isCenterPosition)
+			{
+				lastPackageIndex = j;
+				break;//for j
+			}
+		}
+		m_bestSolution[i] = lastPackageIndex;
 	}
 }
 
@@ -207,9 +232,9 @@ long double Board::calculateTotalRFF ()
 
 void Board::backtrackSolution (long double totalLFF, long double totalRFF, int n)
 {
-	if (n == m_packagesCount)
+	if (n == m_unbalancedPackagesCount)
 	{
-		for (int i = 0; i < m_packagesCount; i++)
+		for (int i = 0; i < m_unbalancedPackagesCount; i++)
 		{
 			m_bestSolution[i] = m_currentSolution[i];
 		}
@@ -222,7 +247,10 @@ void Board::backtrackSolution (long double totalLFF, long double totalRFF, int n
 		const Package & currentPackage = m_allPackages[i];
 		if (currentPackage.isActive)
 		{
-			if (isBoardBalanced(totalLFF - currentPackage.LFF, totalRFF - currentPackage.RFF))
+			if (
+				!currentPackage.isCenterPosition
+				&& isBoardBalanced(totalLFF - currentPackage.LFF, totalRFF - currentPackage.RFF)
+			)
 			{
 				m_allPackages[i].isActive = false;
 				m_currentSolution[n] = currentPackage.index;
