@@ -1,20 +1,25 @@
 #include <cstdio>
 #include <bits/stdc++.h>
 
-const int MAXD = 30;
+const int g_MAX_PACKAGES_COUNT = 30;
 
 const int g_EVEN_NUMBER_MULTIPLIER = 2;
 const int g_FLAG_SOLUTION_FOUND = 2;
+const int g_FLAG_SOLUTION_ERROR_LEFT_MOMENT = -1;
+const int g_FLAG_SOLUTION_ERROR_RIGHT_MOMENT = 1;
 
 const int g_FLAG_VISITED = 1;
 const int g_FLAG_NOT_VISITED = 0;
 
 const int g_FULCRUM_DISTANCE = 3;
 
+const int g_FLAG_MOMENT_BALANCED = 0;
+const int g_FLAG_MOMENT_NOT_BALANCED = 1;
+
 int g_boardLength, g_totalPackagesCount, g_boardWeight;
-int g_packagesPositionsX[MAXD], g_packagesWeights[MAXD];
-int g_visited[MAXD], g_stack[MAXD];
-int g_leftPackagesIndexes[MAXD], g_rightPackagesIndexes[MAXD];
+int g_packagesPositionsX[g_MAX_PACKAGES_COUNT], g_packagesWeights[g_MAX_PACKAGES_COUNT];
+int g_visited[g_MAX_PACKAGES_COUNT], g_stack[g_MAX_PACKAGES_COUNT];
+int g_leftPackagesIndexes[g_MAX_PACKAGES_COUNT], g_rightPackagesIndexes[g_MAX_PACKAGES_COUNT];
 int g_leftPackagesCount, g_rightPackagesCount;
 
 int cmp(const void *_p, const void *_q)
@@ -46,9 +51,11 @@ void readPackages()
 	}
 }
 
-int dfs(int left, int right, int placedPackagesCount)
+int dfs(int previousLeftMoment, int previousRightMoment, int placedPackagesCount)
 {
-	int i, j, currentIndex, t, flag, mleft, mright, tleft = 1, tright = 1;
+	int i, currentIndex, flag;
+	int tleft = g_FLAG_MOMENT_NOT_BALANCED, tright = g_FLAG_MOMENT_NOT_BALANCED;
+	int leftMoment, rightMoment;
 
 	if (placedPackagesCount == g_totalPackagesCount)
 		return g_FLAG_SOLUTION_FOUND;
@@ -59,19 +66,20 @@ int dfs(int left, int right, int placedPackagesCount)
 		if (!g_visited[currentIndex])
 		{
 			g_visited[currentIndex] = g_FLAG_VISITED;
-			mleft = left + (g_packagesPositionsX[currentIndex] + g_FULCRUM_DISTANCE) * g_packagesWeights[currentIndex];
-			mright = right + (g_FULCRUM_DISTANCE - g_packagesPositionsX[currentIndex]) * g_packagesWeights[currentIndex];
+			leftMoment = previousLeftMoment + (g_packagesPositionsX[currentIndex] + g_FULCRUM_DISTANCE) * g_packagesWeights[currentIndex];
+			rightMoment = previousRightMoment + (g_FULCRUM_DISTANCE - g_packagesPositionsX[currentIndex]) * g_packagesWeights[currentIndex];
 			g_stack[placedPackagesCount] = currentIndex;
-			if (mleft >= 0)
-				tleft = 0;
-			if (mleft >= 0 && mright >= 0)
+
+			if (leftMoment >= 0)
+				tleft = g_FLAG_MOMENT_BALANCED;
+			if (leftMoment >= 0 && rightMoment >= 0)
 			{
-				flag = dfs(mleft, mright, placedPackagesCount + 1);
+				flag = dfs(leftMoment, rightMoment, placedPackagesCount + 1);
 				if (flag == g_FLAG_SOLUTION_FOUND)
 					return g_FLAG_SOLUTION_FOUND;
-				if (flag == -1)
+				if (flag == g_FLAG_SOLUTION_ERROR_LEFT_MOMENT)
 					break;
-				tleft = 0;
+				tleft = g_FLAG_MOMENT_BALANCED;
 			}
 			g_visited[currentIndex] = g_FLAG_NOT_VISITED;
 		}
@@ -82,40 +90,42 @@ int dfs(int left, int right, int placedPackagesCount)
 		if (!g_visited[currentIndex])
 		{
 			g_visited[currentIndex] = g_FLAG_VISITED;
-			mleft = left + (g_packagesPositionsX[currentIndex] + g_FULCRUM_DISTANCE) * g_packagesWeights[currentIndex];
-			mright = right + (g_FULCRUM_DISTANCE - g_packagesPositionsX[currentIndex]) * g_packagesWeights[currentIndex];
+			leftMoment = previousLeftMoment + (g_packagesPositionsX[currentIndex] + g_FULCRUM_DISTANCE) * g_packagesWeights[currentIndex];
+			rightMoment = previousRightMoment + (g_FULCRUM_DISTANCE - g_packagesPositionsX[currentIndex]) * g_packagesWeights[currentIndex];
 			g_stack[placedPackagesCount] = currentIndex;
-			if (mright >= 0)
-				tright = 0;
-			if (mleft >= 0 && mright >= 0)
+
+			if (rightMoment >= 0)
+				tright = g_FLAG_MOMENT_BALANCED;
+			if (leftMoment >= 0 && rightMoment >= 0)
 			{
-				flag = dfs(mleft, mright, placedPackagesCount + 1);
+				flag = dfs(leftMoment, rightMoment, placedPackagesCount + 1);
 				if (flag == g_FLAG_SOLUTION_FOUND)
 					return g_FLAG_SOLUTION_FOUND;
-				if (flag == 1)
+				if (flag == g_FLAG_SOLUTION_ERROR_RIGHT_MOMENT)
 					break;
-				tright = 0;
+				tright = g_FLAG_MOMENT_BALANCED;
 			}
 			g_visited[currentIndex] = g_FLAG_NOT_VISITED;
 		}
 	}
 	return tright - tleft;
 }
+
 void findSolution()
 {
-	int i, j, left, right, placedPackagesCount;
+	int i, previousLeftMoment, previousRightMoment, placedPackagesCount;
 
 	memset(g_visited, g_FLAG_NOT_VISITED, sizeof(g_visited));
 	placedPackagesCount = 0;
-	left = right = g_FULCRUM_DISTANCE * g_boardWeight;
+	previousLeftMoment = previousRightMoment = g_FULCRUM_DISTANCE * g_boardWeight;
 
 	for (i = 0; i < g_totalPackagesCount; i++)
 		if (g_packagesPositionsX[i] >= -g_FULCRUM_DISTANCE && g_packagesPositionsX[i] <= g_FULCRUM_DISTANCE)
 		{
 			g_stack[placedPackagesCount++] = i;
-			g_visited[i] = 1;
-			left = left + (g_packagesPositionsX[i] + g_FULCRUM_DISTANCE) * g_packagesWeights[i];
-			right = right + (g_FULCRUM_DISTANCE - g_packagesPositionsX[i]) * g_packagesWeights[i];
+			g_visited[i] = g_FLAG_VISITED;
+			previousLeftMoment = previousLeftMoment + (g_packagesPositionsX[i] + g_FULCRUM_DISTANCE) * g_packagesWeights[i];
+			previousRightMoment = previousRightMoment + (g_FULCRUM_DISTANCE - g_packagesPositionsX[i]) * g_packagesWeights[i];
 		}
 
 	g_leftPackagesCount = g_rightPackagesCount = 0;
@@ -132,7 +142,7 @@ void findSolution()
 	qsort(g_leftPackagesIndexes, g_leftPackagesCount, sizeof(g_leftPackagesIndexes[0]), cmp);
 	qsort(g_rightPackagesIndexes, g_rightPackagesCount, sizeof(g_rightPackagesIndexes[0]), cmp);
 
-	if (dfs(left, right, placedPackagesCount) != g_FLAG_SOLUTION_FOUND)
+	if (dfs(previousLeftMoment, previousRightMoment, placedPackagesCount) != g_FLAG_SOLUTION_FOUND)
 		printf("Impossible\n");
 	else
 	{
