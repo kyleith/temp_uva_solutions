@@ -56,6 +56,15 @@ Package & Package::operator= (const Package & copy)
 	return *this;
 }
 
+struct SortPackage
+{
+	int index;
+	long double LFF, RFF;
+};
+
+bool compareLFFPackages (const SortPackage & A, const SortPackage & B);
+bool compareRFFPackages (const SortPackage & A, const SortPackage & B);
+
 class Board
 {
 public:
@@ -68,7 +77,7 @@ private:
 	int m_packagesCount, m_unbalancedPackagesCount;
 	Package m_allPackages [g_MAX_PACKAGES_COUNT];
 
-	vector<int> m_leftPackagesIndexes, m_rightPackagesIndexes;
+	vector<SortPackage> m_leftPackagesIndexes, m_rightPackagesIndexes;
 
 	int m_bestSolution [g_MAX_PACKAGES_COUNT];
 	int m_currentSolution [g_MAX_PACKAGES_COUNT];
@@ -147,15 +156,24 @@ void Board::readBoard (const int & boardLength, const int & boardWeight, const i
 		{
 			continue;
 		}
-		else if (m_allPackages[i].isLeftFulcrumPackage())
+
+		SortPackage currentSortPackage;
+		currentSortPackage.index = i;
+		currentSortPackage.LFF = m_allPackages[i].LFF;
+		currentSortPackage.RFF = m_allPackages[i].RFF;
+
+		if (m_allPackages[i].isLeftFulcrumPackage())
 		{
-			m_leftPackagesIndexes.push_back(i);
+			m_leftPackagesIndexes.push_back(currentSortPackage);
 		}
 		else if (m_allPackages[i].isRightFulcrumPackage())
 		{
-			m_rightPackagesIndexes.push_back(i);
+			m_rightPackagesIndexes.push_back(currentSortPackage);
 		}
 	}
+
+	std::sort(m_leftPackagesIndexes.begin(), m_leftPackagesIndexes.end(), compareLFFPackages);
+	std::sort(m_rightPackagesIndexes.begin(), m_rightPackagesIndexes.end(), compareRFFPackages);
 }
 
 void Board::findTippingSolution ()
@@ -251,13 +269,20 @@ void Board::backtrackSolution (long double totalLFF, long double totalRFF, int n
 
 	for (int i = 0; i < m_leftPackagesIndexes.size(); i++)
 	{
-		int index = m_leftPackagesIndexes[i];
+		int index = m_leftPackagesIndexes[i].index;
 		const Package & currentPackage = m_allPackages[index];
 		if (currentPackage.isActive)
 		{
+			bool isNextBoardBalanced = isBoardBalanced(totalLFF - currentPackage.LFF, totalRFF - currentPackage.RFF);
+
+			if (!isNextBoardBalanced)
+			{
+				break;
+			}
+
 			if (
 				!currentPackage.isCenterPosition
-				&& isBoardBalanced(totalLFF - currentPackage.LFF, totalRFF - currentPackage.RFF)
+				&& isNextBoardBalanced
 			)
 			{
 				m_allPackages[index].isActive = false;
@@ -279,13 +304,20 @@ void Board::backtrackSolution (long double totalLFF, long double totalRFF, int n
 
 	for (int i = 0; i < m_rightPackagesIndexes.size(); i++)
 	{
-		int index = m_rightPackagesIndexes[i];
+		int index = m_rightPackagesIndexes[i].index;
 		const Package & currentPackage = m_allPackages[index];
 		if (currentPackage.isActive)
 		{
+			bool isNextBoardBalanced = isBoardBalanced(totalLFF - currentPackage.LFF, totalRFF - currentPackage.RFF);
+
+			if (!isNextBoardBalanced)
+			{
+				break;
+			}
+
 			if (
 				!currentPackage.isCenterPosition
-				&& isBoardBalanced(totalLFF - currentPackage.LFF, totalRFF - currentPackage.RFF)
+				&& isNextBoardBalanced
 			)
 			{
 				m_allPackages[index].isActive = false;
@@ -304,6 +336,16 @@ void Board::backtrackSolution (long double totalLFF, long double totalRFF, int n
 			}
 		}
 	}
+}
+
+bool compareLFFPackages (const SortPackage & A, const SortPackage & B)
+{
+	return A.LFF > B.LFF;
+}
+
+bool compareRFFPackages (const SortPackage & A, const SortPackage & B)
+{
+	return A.RFF < B.RFF;
 }
 
 void processInput ();
