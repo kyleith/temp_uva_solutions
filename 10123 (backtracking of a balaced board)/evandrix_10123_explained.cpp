@@ -3,7 +3,14 @@
 
 const int MAXD = 30;
 
-int L, N, W, s[MAXD], r1[MAXD], r2[MAXD], N1, N2, x[MAXD], w[MAXD], vis[MAXD];
+const int g_EVEN_NUMBER_MULTIPLIER = 2;
+const int g_FLAG_SOLUTION_FOUND = 2;
+
+const int g_FLAG_VISITED = 1;
+const int g_FLAG_NOT_VISITED = 0;
+
+int g_boardLength, g_totalPackagesCount, g_boardWeight;
+int s[MAXD], r1[MAXD], r2[MAXD], N1, N2, x[MAXD], w[MAXD], vis[MAXD];
 
 int cmp(const void *_p, const void *_q)
 {
@@ -21,27 +28,27 @@ int cmp(const void *_p, const void *_q)
 	return x1 - x2;
 }
 
-void init()
+void readPackages()
 {
 	int i;
-	for (i = 0; i < N; i++)
+	for (i = 0; i < g_totalPackagesCount; i++)
 	{
 		scanf("%d%d", &x[i], &w[i]);
-		x[i] *= 2;
+		x[i] *= g_EVEN_NUMBER_MULTIPLIER;
 	}
 }
 
 int dfs(int left, int right, int num)
 {
 	int i, j, k, t, flag, mleft, mright, tleft = 1, tright = 1;
-	if (num == N)
-		return 2;
+	if (num == g_totalPackagesCount)
+		return g_FLAG_SOLUTION_FOUND;
 	for (i = 0; i < N1; i++)
 	{
 		k = r1[i];
 		if (!vis[k])
 		{
-			vis[k] = 1;
+			vis[k] = g_FLAG_VISITED;
 			mleft = left + (x[k] + 3) * w[k], mright = right + (3 - x[k]) * w[k];
 			s[num] = k;
 			if (mleft >= 0)
@@ -49,13 +56,13 @@ int dfs(int left, int right, int num)
 			if (mleft >= 0 && mright >= 0)
 			{
 				flag = dfs(mleft, mright, num + 1);
-				if (flag == 2)
-					return 2;
+				if (flag == g_FLAG_SOLUTION_FOUND)
+					return g_FLAG_SOLUTION_FOUND;
 				if (flag == -1)
 					break;
 				tleft = 0;
 			}
-			vis[k] = 0;
+			vis[k] = g_FLAG_NOT_VISITED;
 		}
 	}
 	for (i = 0; i < N2; i++)
@@ -63,7 +70,7 @@ int dfs(int left, int right, int num)
 		k = r2[i];
 		if (!vis[k])
 		{
-			vis[k] = 1;
+			vis[k] = g_FLAG_VISITED;
 			mleft = left + (x[k] + 3) * w[k], mright = right + (3 - x[k]) * w[k];
 			s[num] = k;
 			if (mright >= 0)
@@ -71,24 +78,24 @@ int dfs(int left, int right, int num)
 			if (mleft >= 0 && mright >= 0)
 			{
 				flag = dfs(mleft, mright, num + 1);
-				if (flag == 2)
-					return 2;
+				if (flag == g_FLAG_SOLUTION_FOUND)
+					return g_FLAG_SOLUTION_FOUND;
 				if (flag == 1)
 					break;
 				tright = 0;
 			}
-			vis[k] = 0;
+			vis[k] = g_FLAG_NOT_VISITED;
 		}
 	}
 	return tright - tleft;
 }
-void solve()
+void findSolution()
 {
 	int i, j, k, left, right, num;
-	memset(vis, 0, sizeof(vis));
+	memset(vis, g_FLAG_NOT_VISITED, sizeof(vis));
 	num = 0;
-	left = right = 3 * W;
-	for (i = 0; i < N; i++)
+	left = right = 3 * g_boardWeight;
+	for (i = 0; i < g_totalPackagesCount; i++)
 		if (x[i] >= -3 && x[i] <= 3)
 		{
 			s[num++] = i;
@@ -96,7 +103,7 @@ void solve()
 			left = left + (x[i] + 3) * w[i], right = right + (3 - x[i]) * w[i];
 		}
 	N1 = N2 = 0;
-	for (i = 0; i < N; i++)
+	for (i = 0; i < g_totalPackagesCount; i++)
 		if (!vis[i])
 		{
 			if (x[i] < 0)
@@ -106,12 +113,12 @@ void solve()
 		}
 	qsort(r1, N1, sizeof(r1[0]), cmp);
 	qsort(r2, N2, sizeof(r2[0]), cmp);
-	if (dfs(left, right, num) != 2)
+	if (dfs(left, right, num) != g_FLAG_SOLUTION_FOUND)
 		printf("Impossible\n");
 	else
 	{
-		for (i = N - 1; i >= 0; i--)
-			printf("%d %d\n", x[s[i]] / 2, w[s[i]]);
+		for (i = g_totalPackagesCount - 1; i >= 0; i--)
+			printf("%d %d\n", x[s[i]] / g_EVEN_NUMBER_MULTIPLIER, w[s[i]]);
 	}
 }
 
@@ -122,17 +129,17 @@ int main()
 	freopen("output.txt", "wt", stdout);
 #endif
 
-	int t = 0;
+	int testCaseIndex = 0;
 	for (;;)
 	{
-		scanf("%d%d%d", &L, &W, &N);
-		if (!L)
+		scanf("%d%d%d", &g_boardLength, &g_boardWeight, &g_totalPackagesCount);
+		if (!g_boardLength)
 		{
 			break;
 		}
-		init();
-		printf("Case %d:\n", ++t);
-		solve();
+		readPackages();
+		printf("Case %d:\n", ++testCaseIndex);
+		findSolution();
 	}
 	return 0;
 }
