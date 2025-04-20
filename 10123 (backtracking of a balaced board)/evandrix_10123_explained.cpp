@@ -9,6 +9,8 @@ const int g_FLAG_SOLUTION_FOUND = 2;
 const int g_FLAG_VISITED = 1;
 const int g_FLAG_NOT_VISITED = 0;
 
+const int g_FULCRUM_DISTANCE = 3;
+
 int g_boardLength, g_totalPackagesCount, g_boardWeight;
 int g_packagesPositionsX[MAXD], g_packagesWeights[MAXD];
 int g_visited[MAXD], g_stack[MAXD];
@@ -20,14 +22,17 @@ int cmp(const void *_p, const void *_q)
 	int *p = (int *)_p;
 	int *q = (int *)_q;
 	int x1, x2;
+
 	if (g_packagesPositionsX[*p] < 0)
-		x1 = (-3 - g_packagesPositionsX[*p]) * g_packagesWeights[*p];
+		x1 = (-g_FULCRUM_DISTANCE - g_packagesPositionsX[*p]) * g_packagesWeights[*p];
 	else
-		x1 = (g_packagesPositionsX[*p] - 3) * g_packagesWeights[*p];
+		x1 = (g_packagesPositionsX[*p] - g_FULCRUM_DISTANCE) * g_packagesWeights[*p];
+
 	if (g_packagesPositionsX[*q] < 0)
-		x2 = (-3 - g_packagesPositionsX[*q]) * g_packagesWeights[*q];
+		x2 = (-g_FULCRUM_DISTANCE - g_packagesPositionsX[*q]) * g_packagesWeights[*q];
 	else
-		x2 = (g_packagesPositionsX[*q] - 3) * g_packagesWeights[*q];
+		x2 = (g_packagesPositionsX[*q] - g_FULCRUM_DISTANCE) * g_packagesWeights[*q];
+
 	return x1 - x2;
 }
 
@@ -43,19 +48,20 @@ void readPackages()
 
 int dfs(int left, int right, int placedPackagesCount)
 {
-	int i, j, k, t, flag, mleft, mright, tleft = 1, tright = 1;
+	int i, j, currentIndex, t, flag, mleft, mright, tleft = 1, tright = 1;
 
 	if (placedPackagesCount == g_totalPackagesCount)
 		return g_FLAG_SOLUTION_FOUND;
 
 	for (i = 0; i < g_leftPackagesCount; i++)
 	{
-		k = g_leftPackagesIndexes[i];
-		if (!g_visited[k])
+		currentIndex = g_leftPackagesIndexes[i];
+		if (!g_visited[currentIndex])
 		{
-			g_visited[k] = g_FLAG_VISITED;
-			mleft = left + (g_packagesPositionsX[k] + 3) * g_packagesWeights[k], mright = right + (3 - g_packagesPositionsX[k]) * g_packagesWeights[k];
-			g_stack[placedPackagesCount] = k;
+			g_visited[currentIndex] = g_FLAG_VISITED;
+			mleft = left + (g_packagesPositionsX[currentIndex] + g_FULCRUM_DISTANCE) * g_packagesWeights[currentIndex];
+			mright = right + (g_FULCRUM_DISTANCE - g_packagesPositionsX[currentIndex]) * g_packagesWeights[currentIndex];
+			g_stack[placedPackagesCount] = currentIndex;
 			if (mleft >= 0)
 				tleft = 0;
 			if (mleft >= 0 && mright >= 0)
@@ -67,17 +73,18 @@ int dfs(int left, int right, int placedPackagesCount)
 					break;
 				tleft = 0;
 			}
-			g_visited[k] = g_FLAG_NOT_VISITED;
+			g_visited[currentIndex] = g_FLAG_NOT_VISITED;
 		}
 	}
 	for (i = 0; i < g_rightPackagesCount; i++)
 	{
-		k = g_rightPackagesIndexes[i];
-		if (!g_visited[k])
+		currentIndex = g_rightPackagesIndexes[i];
+		if (!g_visited[currentIndex])
 		{
-			g_visited[k] = g_FLAG_VISITED;
-			mleft = left + (g_packagesPositionsX[k] + 3) * g_packagesWeights[k], mright = right + (3 - g_packagesPositionsX[k]) * g_packagesWeights[k];
-			g_stack[placedPackagesCount] = k;
+			g_visited[currentIndex] = g_FLAG_VISITED;
+			mleft = left + (g_packagesPositionsX[currentIndex] + g_FULCRUM_DISTANCE) * g_packagesWeights[currentIndex];
+			mright = right + (g_FULCRUM_DISTANCE - g_packagesPositionsX[currentIndex]) * g_packagesWeights[currentIndex];
+			g_stack[placedPackagesCount] = currentIndex;
 			if (mright >= 0)
 				tright = 0;
 			if (mleft >= 0 && mright >= 0)
@@ -89,25 +96,30 @@ int dfs(int left, int right, int placedPackagesCount)
 					break;
 				tright = 0;
 			}
-			g_visited[k] = g_FLAG_NOT_VISITED;
+			g_visited[currentIndex] = g_FLAG_NOT_VISITED;
 		}
 	}
 	return tright - tleft;
 }
 void findSolution()
 {
-	int i, j, k, left, right, placedPackagesCount;
+	int i, j, left, right, placedPackagesCount;
+
 	memset(g_visited, g_FLAG_NOT_VISITED, sizeof(g_visited));
 	placedPackagesCount = 0;
-	left = right = 3 * g_boardWeight;
+	left = right = g_FULCRUM_DISTANCE * g_boardWeight;
+
 	for (i = 0; i < g_totalPackagesCount; i++)
-		if (g_packagesPositionsX[i] >= -3 && g_packagesPositionsX[i] <= 3)
+		if (g_packagesPositionsX[i] >= -g_FULCRUM_DISTANCE && g_packagesPositionsX[i] <= g_FULCRUM_DISTANCE)
 		{
 			g_stack[placedPackagesCount++] = i;
 			g_visited[i] = 1;
-			left = left + (g_packagesPositionsX[i] + 3) * g_packagesWeights[i], right = right + (3 - g_packagesPositionsX[i]) * g_packagesWeights[i];
+			left = left + (g_packagesPositionsX[i] + g_FULCRUM_DISTANCE) * g_packagesWeights[i];
+			right = right + (g_FULCRUM_DISTANCE - g_packagesPositionsX[i]) * g_packagesWeights[i];
 		}
+
 	g_leftPackagesCount = g_rightPackagesCount = 0;
+
 	for (i = 0; i < g_totalPackagesCount; i++)
 		if (!g_visited[i])
 		{
