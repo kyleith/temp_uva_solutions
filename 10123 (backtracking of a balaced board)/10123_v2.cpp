@@ -15,7 +15,6 @@ struct Package
 	Package (const Package & copy);
 
 	long double position, weight;
-	long double leverAbsForce;
 	long double LFF, RFF;
 	bool isActive, isValidPosition;
 	bool isCenterPosition;
@@ -31,18 +30,12 @@ struct Package
 	Package & operator= (const Package & copy);
 };
 
-bool comparePackages (const Package & A, const Package & B)
-{
-	return A.leverAbsForce < B.leverAbsForce;
-}
-
 Package::Package (const Package & copy)
 {
 	position = copy.position;
 	weight = copy.weight;
 	isActive = copy.isActive;
 	isValidPosition = copy.isValidPosition;
-	leverAbsForce = copy.leverAbsForce;
 	index = copy.index;
 	LFF = copy.LFF;
 	RFF = copy.RFF;
@@ -55,7 +48,6 @@ Package & Package::operator= (const Package & copy)
 	weight = copy.weight;
 	isActive = copy.isActive;
 	isValidPosition = copy.isValidPosition;
-	leverAbsForce = copy.leverAbsForce;
 	index = copy.index;
 	LFF = copy.LFF;
 	RFF = copy.RFF;
@@ -120,19 +112,6 @@ void Board::readBoard (const int & boardLength, const int & boardWeight, const i
 		currentPackage.isActive = true;
 		currentPackage.isValidPosition = isValidPosition;
 		currentPackage.isCenterPosition = isCenterPosition;
-
-		if (currentPackage.getPositionFromLeftFulcrum() < 0.0)
-		{
-			currentPackage.leverAbsForce = fabsl(currentPackage.getPositionFromLeftFulcrum()) * currentPackage.weight;
-		}
-		else if (currentPackage.getPositionFromRightFulcrum() > 0.0)
-		{
-			currentPackage.leverAbsForce = fabsl(currentPackage.getPositionFromRightFulcrum()) * currentPackage.weight;
-		}
-		else
-		{
-			currentPackage.leverAbsForce = 0.0;
-		}
 
 		currentPackage.LFF = currentPackage.getPositionFromLeftFulcrum() * currentPackage.weight;
 		currentPackage.RFF = currentPackage.getPositionFromRightFulcrum() * currentPackage.weight;
