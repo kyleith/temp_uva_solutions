@@ -1,5 +1,9 @@
 #include <cstdio>
 #include <cmath>
+#include <vector>
+#include <algorithm>
+
+#define vector std::vector
 
 const int g_MAX_PACKAGES_COUNT = 20;
 const long double g_LEFT_FULCRUM_POSITION = -1.5;
@@ -21,6 +25,8 @@ struct Package
 	int getWeight () { return (int) weight; }
 	long double getPositionFromLeftFulcrum () { return position - g_LEFT_FULCRUM_POSITION; }
 	long double getPositionFromRightFulcrum () { return position - g_RIGHT_FULCRUM_POSITION; }
+	bool isLeftFulcrumPackage () { return getPositionFromLeftFulcrum() < 0.0;}
+	bool isRightFulcrumPackage () { return getPositionFromRightFulcrum() > 0.0;}
 
 	Package & operator= (const Package & copy);
 };
@@ -61,7 +67,7 @@ Package & Package::operator= (const Package & copy)
 class Board
 {
 public:
-	Board () {}
+	Board () { m_leftPackagesIndexes.reserve(g_MAX_PACKAGES_COUNT); m_rightPackagesIndexes.reserve(g_MAX_PACKAGES_COUNT); }
 	void readBoard (const int & boardLength, const int & boardWeight, const int & packagesCount);
 	void findTippingSolution ();
 private:
@@ -69,6 +75,9 @@ private:
 	long double m_F1LL, m_F1LR, m_F2LL, m_F2LR;
 	int m_packagesCount, m_unbalancedPackagesCount;
 	Package m_allPackages [g_MAX_PACKAGES_COUNT];
+
+	vector<int> m_leftPackagesIndexes, m_rightPackagesIndexes;
+
 	int m_bestSolution [g_MAX_PACKAGES_COUNT];
 	int m_currentSolution [g_MAX_PACKAGES_COUNT];
 	bool m_solutionFound;
@@ -148,6 +157,25 @@ void Board::readBoard (const int & boardLength, const int & boardWeight, const i
 			}
 		}
 		m_bestSolution[i] = lastPackageIndex;
+	}
+
+	m_leftPackagesIndexes.clear();
+	m_rightPackagesIndexes.clear();
+
+	for (int i = 0; i < packagesCount; i++)
+	{
+		if (m_allPackages[i].isCenterPosition)
+		{
+			continue;
+		}
+		else if (m_allPackages[i].isLeftFulcrumPackage())
+		{
+			m_leftPackagesIndexes.push_back(i);
+		}
+		else if (m_allPackages[i].isRightFulcrumPackage())
+		{
+			m_rightPackagesIndexes.push_back(i);
+		}
 	}
 }
 
@@ -242,13 +270,10 @@ void Board::backtrackSolution (long double totalLFF, long double totalRFF, int n
 		return;
 	}
 
-	//TODO: test sorted left packages...
-
-	//TODO: test sorted right packages...
-
-	for (int i = 0; i < m_packagesCount; i++)
+	for (int i = 0; i < m_leftPackagesIndexes.size(); i++)
 	{
-		const Package & currentPackage = m_allPackages[i];
+		int index = m_leftPackagesIndexes[i];
+		const Package & currentPackage = m_allPackages[index];
 		if (currentPackage.isActive)
 		{
 			if (
@@ -256,18 +281,46 @@ void Board::backtrackSolution (long double totalLFF, long double totalRFF, int n
 				&& isBoardBalanced(totalLFF - currentPackage.LFF, totalRFF - currentPackage.RFF)
 			)
 			{
-				m_allPackages[i].isActive = false;
+				m_allPackages[index].isActive = false;
 				m_currentSolution[n] = currentPackage.index;
 
 				backtrackSolution(totalLFF - currentPackage.LFF, totalRFF - currentPackage.RFF, n + 1);
 				if (m_solutionFound)
 				{
-					break;
+					return;
 				}
 
-				//TODO: break if solution cannot be found...
+				//TODO: break if solution cannot be found (left packages)...
 
-				m_allPackages[i].isActive = true;
+				m_allPackages[index].isActive = true;
+				m_currentSolution[n] = -1;
+			}
+		}
+	}
+
+	for (int i = 0; i < m_rightPackagesIndexes.size(); i++)
+	{
+		int index = m_rightPackagesIndexes[i];
+		const Package & currentPackage = m_allPackages[index];
+		if (currentPackage.isActive)
+		{
+			if (
+				!currentPackage.isCenterPosition
+				&& isBoardBalanced(totalLFF - currentPackage.LFF, totalRFF - currentPackage.RFF)
+			)
+			{
+				m_allPackages[index].isActive = false;
+				m_currentSolution[n] = currentPackage.index;
+
+				backtrackSolution(totalLFF - currentPackage.LFF, totalRFF - currentPackage.RFF, n + 1);
+				if (m_solutionFound)
+				{
+					return;
+				}
+
+				//TODO: break if solution cannot be found (right packges)...
+
+				m_allPackages[index].isActive = true;
 				m_currentSolution[n] = -1;
 			}
 		}
