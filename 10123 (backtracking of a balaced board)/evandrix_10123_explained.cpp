@@ -12,7 +12,8 @@ const int g_FLAG_NOT_VISITED = 0;
 int g_boardLength, g_totalPackagesCount, g_boardWeight;
 int g_packagesPositionsX[MAXD], g_packagesWeights[MAXD];
 int g_visited[MAXD], g_stack[MAXD];
-int r1[MAXD], r2[MAXD], N1, N2;
+int g_leftPackagesIndexes[MAXD], g_rightPackagesIndexes[MAXD];
+int g_leftPackagesCount, g_rightPackagesCount;
 
 int cmp(const void *_p, const void *_q)
 {
@@ -43,11 +44,13 @@ void readPackages()
 int dfs(int left, int right, int placedPackagesCount)
 {
 	int i, j, k, t, flag, mleft, mright, tleft = 1, tright = 1;
+
 	if (placedPackagesCount == g_totalPackagesCount)
 		return g_FLAG_SOLUTION_FOUND;
-	for (i = 0; i < N1; i++)
+
+	for (i = 0; i < g_leftPackagesCount; i++)
 	{
-		k = r1[i];
+		k = g_leftPackagesIndexes[i];
 		if (!g_visited[k])
 		{
 			g_visited[k] = g_FLAG_VISITED;
@@ -67,9 +70,9 @@ int dfs(int left, int right, int placedPackagesCount)
 			g_visited[k] = g_FLAG_NOT_VISITED;
 		}
 	}
-	for (i = 0; i < N2; i++)
+	for (i = 0; i < g_rightPackagesCount; i++)
 	{
-		k = r2[i];
+		k = g_rightPackagesIndexes[i];
 		if (!g_visited[k])
 		{
 			g_visited[k] = g_FLAG_VISITED;
@@ -104,18 +107,18 @@ void findSolution()
 			g_visited[i] = 1;
 			left = left + (g_packagesPositionsX[i] + 3) * g_packagesWeights[i], right = right + (3 - g_packagesPositionsX[i]) * g_packagesWeights[i];
 		}
-	N1 = N2 = 0;
+	g_leftPackagesCount = g_rightPackagesCount = 0;
 	for (i = 0; i < g_totalPackagesCount; i++)
 		if (!g_visited[i])
 		{
 			if (g_packagesPositionsX[i] < 0)
-				r1[N1++] = i;
+				g_leftPackagesIndexes[g_leftPackagesCount++] = i;
 			else
-				r2[N2++] = i;
+				g_rightPackagesIndexes[g_rightPackagesCount++] = i;
 		}
 
-	qsort(r1, N1, sizeof(r1[0]), cmp);
-	qsort(r2, N2, sizeof(r2[0]), cmp);
+	qsort(g_leftPackagesIndexes, g_leftPackagesCount, sizeof(g_leftPackagesIndexes[0]), cmp);
+	qsort(g_rightPackagesIndexes, g_rightPackagesCount, sizeof(g_rightPackagesIndexes[0]), cmp);
 
 	if (dfs(left, right, placedPackagesCount) != g_FLAG_SOLUTION_FOUND)
 		printf("Impossible\n");
