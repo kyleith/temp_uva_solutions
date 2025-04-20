@@ -70,11 +70,13 @@ private:
 	int m_packagesCount, m_unbalancedPackagesCount;
 	Package m_allPackages [g_MAX_PACKAGES_COUNT];
 	int m_bestSolution [g_MAX_PACKAGES_COUNT];
+	int m_currentSolution [g_MAX_PACKAGES_COUNT];
 	bool m_solutionFound;
 
 	bool isBoardBalanced (const long double & totalLFF, const long double & totalRFF);
 	long double calculateTotalLFF ();
 	long double calculateTotalRFF ();
+	void backtrackSolution (long double totalLFF, long double totalRFF, int n);
 };
 
 void Board::readBoard (const int & boardLength, const int & boardWeight, const int & packagesCount)
@@ -151,9 +153,18 @@ void Board::readBoard (const int & boardLength, const int & boardWeight, const i
 
 void Board::findTippingSolution ()
 {
-	//TODO...
+	long double totalLFF = calculateTotalLFF();
+	long double totalRFF = calculateTotalRFF();
+
+	if (!isBoardBalanced(totalLFF, totalRFF))
+	{
+		printf("Impossible\n");
+		return;
+	}
 
 	m_solutionFound = false;
+
+	backtrackSolution(totalLFF, totalRFF, 0);
 
 	if (m_solutionFound)
 	{
@@ -217,6 +228,50 @@ long double Board::calculateTotalRFF ()
 	}
 
 	return M2;
+}
+
+void Board::backtrackSolution (long double totalLFF, long double totalRFF, int n)
+{
+	if (n == m_unbalancedPackagesCount)
+	{
+		for (int i = 0; i < m_unbalancedPackagesCount; i++)
+		{
+			m_bestSolution[i] = m_currentSolution[i];
+		}
+		m_solutionFound = true;
+		return;
+	}
+
+	//TODO: test sorted left packages...
+
+	//TODO: test sorted right packages...
+
+	for (int i = 0; i < m_packagesCount; i++)
+	{
+		const Package & currentPackage = m_allPackages[i];
+		if (currentPackage.isActive)
+		{
+			if (
+				!currentPackage.isCenterPosition
+				&& isBoardBalanced(totalLFF - currentPackage.LFF, totalRFF - currentPackage.RFF)
+			)
+			{
+				m_allPackages[i].isActive = false;
+				m_currentSolution[n] = currentPackage.index;
+
+				backtrackSolution(totalLFF - currentPackage.LFF, totalRFF - currentPackage.RFF, n + 1);
+				if (m_solutionFound)
+				{
+					break;
+				}
+
+				//TODO: break if solution cannot be found...
+
+				m_allPackages[i].isActive = true;
+				m_currentSolution[n] = -1;
+			}
+		}
+	}
 }
 
 void processInput ();
