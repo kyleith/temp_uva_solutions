@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <cstdlib>
 
 const int g_MAX_PACKAGES_COUNT = 20;
 const double g_LEFT_FULCRUM_POSITION = -1.5;
@@ -27,6 +28,9 @@ double calculateTotalLFF ();
 double calculateTotalRFF ();
 bool isBoardBalanced (const long double & totalLFF, const long double & totalRFF);
 void backtrackSolution (double totalLFF, double totalRFF, int n);
+
+int cmpLeft(const void *_p, const void *_q);
+int cmpRight(const void *_p, const void *_q);
 
 int main ()
 {
@@ -129,6 +133,9 @@ void readBoard(const int & boardLength, const int & boardWeight, const int & pac
 			g_rightCount++;
 		}
 	}
+
+	qsort(g_leftIndexes, g_leftCount, sizeof(g_leftIndexes[0]), cmpLeft);
+	qsort(g_rightIndexes, g_rightCount, sizeof(g_rightIndexes[0]), cmpRight);
 }
 
 void findTippingSolution()
@@ -211,28 +218,22 @@ void backtrackSolution (double totalLFF, double totalRFF, int n)
 		{
 			bool isNextBoardBalanced = isBoardBalanced(totalLFF - g_LFF[index], totalRFF - g_RFF[index]);
 
-			/*if (!isNextBoardBalanced)
+			if (!isNextBoardBalanced)
 			{
-				break;//TODO: sort packages...
-			}*/
-
-			if (
-				!g_isCenterPosition[index]
-				&& isNextBoardBalanced
-			)
-			{
-				g_isActive[index] = false;
-				g_currentSolution[n] = index;
-
-				backtrackSolution(totalLFF - g_LFF[index], totalRFF - g_RFF[index], n + 1);
-				if (g_solutionFound)
-				{
-					return;
-				}
-
-				g_isActive[index] = true;
-				g_currentSolution[n] = -1;
+				break;
 			}
+
+			g_isActive[index] = false;
+			g_currentSolution[n] = index;
+
+			backtrackSolution(totalLFF - g_LFF[index], totalRFF - g_RFF[index], n + 1);
+			if (g_solutionFound)
+			{
+				return;
+			}
+
+			g_isActive[index] = true;
+			g_currentSolution[n] = -1;
 		}
 	}
 
@@ -243,28 +244,60 @@ void backtrackSolution (double totalLFF, double totalRFF, int n)
 		{
 			bool isNextBoardBalanced = isBoardBalanced(totalLFF - g_LFF[index], totalRFF - g_RFF[index]);
 
-			/*if (!isNextBoardBalanced)
+			if (!isNextBoardBalanced)
 			{
-				break;//TODO: sort packages...
-			}*/
-
-			if (
-				!g_isCenterPosition[index]
-				&& isNextBoardBalanced
-			)
-			{
-				g_isActive[index] = false;
-				g_currentSolution[n] = index;
-
-				backtrackSolution(totalLFF - g_LFF[index], totalRFF - g_RFF[index], n + 1);
-				if (g_solutionFound)
-				{
-					return;
-				}
-
-				g_isActive[index] = true;
-				g_currentSolution[n] = -1;
+				break;
 			}
+
+			g_isActive[index] = false;
+			g_currentSolution[n] = index;
+
+			backtrackSolution(totalLFF - g_LFF[index], totalRFF - g_RFF[index], n + 1);
+			if (g_solutionFound)
+			{
+				return;
+			}
+
+			g_isActive[index] = true;
+			g_currentSolution[n] = -1;
 		}
+	}
+}
+
+int cmpLeft(const void *_p, const void *_q)
+{
+	int *p = (int *)_p;
+	int *q = (int *)_q;
+
+	if (g_LFF[*p] == g_LFF[*q])
+	{
+		return 0;
+	}
+	else if (g_LFF[*p] > g_LFF[*q])
+	{
+		return -1;
+	}
+	else
+	{
+		return 1;
+	}
+}
+
+int cmpRight(const void *_p, const void *_q)
+{
+	int *p = (int *)_p;
+	int *q = (int *)_q;
+
+	if (g_RFF[*p] == g_RFF[*q])
+	{
+		return 0;
+	}
+	else if (g_RFF[*p] < g_RFF[*q])
+	{
+		return -1;
+	}
+	else
+	{
+		return 1;
 	}
 }
