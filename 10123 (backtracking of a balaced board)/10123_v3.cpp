@@ -26,7 +26,7 @@ void findTippingSolution();
 
 double calculateTotalLFF ();
 double calculateTotalRFF ();
-bool isBoardBalanced (const long double & totalLFF, const long double & totalRFF);
+bool isBoardBalanced (const double & totalLFF, const double & totalRFF);
 void backtrackSolution (double totalLFF, double totalRFF, int n);
 
 int cmpLeft(const void *_p, const void *_q);
@@ -191,7 +191,7 @@ double calculateTotalRFF ()
 	return M2;
 }
 
-bool isBoardBalanced (const long double & totalLFF, const long double & totalRFF)
+bool isBoardBalanced (const double & totalLFF, const double & totalRFF)
 {
 	bool isF1Balanced = !(totalLFF < 0);
 	bool isF2Balanced = !(totalRFF > 0);
