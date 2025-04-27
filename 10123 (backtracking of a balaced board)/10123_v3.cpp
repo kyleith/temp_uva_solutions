@@ -12,9 +12,20 @@ double g_positionsX [g_MAX_PACKAGES_COUNT], g_weights [g_MAX_PACKAGES_COUNT];
 double g_LFF [g_MAX_PACKAGES_COUNT], g_RFF [g_MAX_PACKAGES_COUNT];
 bool g_isActive [g_MAX_PACKAGES_COUNT], g_isCenterPosition [g_MAX_PACKAGES_COUNT];
 
+int g_bestSolution [g_MAX_PACKAGES_COUNT];
+int g_currentSolution [g_MAX_PACKAGES_COUNT];
+bool g_solutionFound;
+
+int g_leftIndexes [g_MAX_PACKAGES_COUNT], g_rightIndexes [g_MAX_PACKAGES_COUNT];
+int g_leftCount, g_rightCount;
+
 void processInput();
 void readBoard(const int & boardLength, const int & boardWeight, const int & packagesCount);
 void findTippingSolution();
+
+double calculateTotalLFF ();
+double calculateTotalRFF ();
+bool isBoardBalanced (const long double & totalLFF, const long double & totalRFF);
 
 int main ()
 {
@@ -79,9 +90,103 @@ void readBoard(const int & boardLength, const int & boardWeight, const int & pac
 		g_LFF[i] = (position - g_LEFT_FULCRUM_POSITION) * weight;
 		g_RFF[i] = (position - g_RIGHT_FULCRUM_POSITION) * weight;
 	}
+
+	int lastPackageIndex = 0;
+	for (int i = g_unbalancedPackagesCount; i < packagesCount; i++)
+	{
+		for (int j = lastPackageIndex; j < packagesCount; j++)
+		{
+			if (g_isCenterPosition[j])
+			{
+				lastPackageIndex = j;
+				break;//for j
+			}
+		}
+		g_bestSolution[i] = lastPackageIndex;
+	}
+
+	g_leftCount = 0;
+	g_rightCount = 0;
+	for (int i = 0; i < packagesCount; i++)
+	{
+		if (g_isCenterPosition[i])
+		{
+			continue;
+		}
+
+		bool isLeftPackage = (g_positionsX[i] < g_LEFT_FULCRUM_POSITION);
+		bool isRightPackage = (g_RIGHT_FULCRUM_POSITION < g_positionsX[i]);
+
+		if (isLeftPackage)
+		{
+			g_leftIndexes[g_leftCount] = i;
+			g_leftCount++;
+		}
+		else if (isRightPackage)
+		{
+			g_rightIndexes[g_rightCount] = i;
+			g_rightCount++;
+		}
+	}
 }
 
 void findTippingSolution()
 {
-	//TODO...
+	double totalLFF = calculateTotalLFF();
+	double totalRFF = calculateTotalRFF();
+
+	if (!isBoardBalanced(totalLFF, totalRFF))
+	{
+		printf("Impossible\n");
+		return;
+	}
+
+	g_solutionFound = false;
+
+	//backtrackSolution(totalLFF, totalRFF, 0);
+
+	if (g_solutionFound)
+	{
+		for (int i = 0; i < g_packagesCount; i++)
+		{
+			int index = g_bestSolution[i];
+			printf("%d %d\n", (int)g_positionsX[i], (int)g_weights[i]);
+		}
+	}
+	else
+	{
+		printf("Impossible\n");
+	}
+}
+
+double calculateTotalLFF ()
+{
+	double M1 = g_F1LL + g_F1LR;
+
+	for (int i = 0; i < g_packagesCount; i++)
+	{
+		M1 += g_LFF[i];
+	}
+
+	return M1;
+}
+
+double calculateTotalRFF ()
+{
+	double M2 = g_F2LL + g_F2LR;
+
+	for (int i = 0; i < g_packagesCount; i++)
+	{
+		M2 += g_RFF[i];
+	}
+
+	return M2;
+}
+
+bool isBoardBalanced (const long double & totalLFF, const long double & totalRFF)
+{
+	bool isF1Balanced = !(totalLFF < 0);
+	bool isF2Balanced = !(totalRFF > 0);
+
+	return isF1Balanced && isF2Balanced;
 }
