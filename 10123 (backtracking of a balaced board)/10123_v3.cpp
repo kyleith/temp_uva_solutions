@@ -26,6 +26,7 @@ void findTippingSolution();
 double calculateTotalLFF ();
 double calculateTotalRFF ();
 bool isBoardBalanced (const long double & totalLFF, const long double & totalRFF);
+void backtrackSolution (double totalLFF, double totalRFF, int n);
 
 int main ()
 {
@@ -143,7 +144,7 @@ void findTippingSolution()
 
 	g_solutionFound = false;
 
-	//backtrackSolution(totalLFF, totalRFF, 0);
+	backtrackSolution(totalLFF, totalRFF, 0);
 
 	if (g_solutionFound)
 	{
@@ -189,4 +190,81 @@ bool isBoardBalanced (const long double & totalLFF, const long double & totalRFF
 	bool isF2Balanced = !(totalRFF > 0);
 
 	return isF1Balanced && isF2Balanced;
+}
+
+void backtrackSolution (double totalLFF, double totalRFF, int n)
+{
+	if (n == g_unbalancedPackagesCount)
+	{
+		for (int i = 0; i < g_unbalancedPackagesCount; i++)
+		{
+			g_bestSolution[i] = g_currentSolution[i];
+		}
+		g_solutionFound = true;
+		return;
+	}
+
+	for (int i = 0; i < g_leftCount; i++)
+	{
+		int index = g_leftIndexes[i];
+		if (g_isActive[index])
+		{
+			bool isNextBoardBalanced = isBoardBalanced(totalLFF - g_LFF[index], totalRFF - g_RFF[index]);
+
+			/*if (!isNextBoardBalanced)
+			{
+				break;//TODO: sort packages...
+			}*/
+
+			if (
+				!g_isCenterPosition[index]
+				&& isNextBoardBalanced
+			)
+			{
+				g_isActive[index] = false;
+				g_currentSolution[n] = index;
+
+				backtrackSolution(totalLFF - g_LFF[index], totalRFF - g_RFF[index], n + 1);
+				if (g_solutionFound)
+				{
+					return;
+				}
+
+				g_isActive[index] = true;
+				g_currentSolution[n] = -1;
+			}
+		}
+	}
+
+	for (int i = 0; i < g_rightCount; i++)
+	{
+		int index = g_rightIndexes[i];
+		if (g_isActive[index])
+		{
+			bool isNextBoardBalanced = isBoardBalanced(totalLFF - g_LFF[index], totalRFF - g_RFF[index]);
+
+			/*if (!isNextBoardBalanced)
+			{
+				break;//TODO: sort packages...
+			}*/
+
+			if (
+				!g_isCenterPosition[index]
+				&& isNextBoardBalanced
+			)
+			{
+				g_isActive[index] = false;
+				g_currentSolution[n] = index;
+
+				backtrackSolution(totalLFF - g_LFF[index], totalRFF - g_RFF[index], n + 1);
+				if (g_solutionFound)
+				{
+					return;
+				}
+
+				g_isActive[index] = true;
+				g_currentSolution[n] = -1;
+			}
+		}
+	}
 }
